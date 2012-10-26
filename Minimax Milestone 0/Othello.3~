@@ -1,0 +1,124 @@
+-- 23.) showMove Tests
+
+showMove
+enterMove [0, 00]
+showMove
+enterMove [0000000000000000000000, 0000000000000000000]
+enterMove [8, 8]
+showMove asdfasdfiauspoifadu
+showMove [3,2]
+enterMove [0, 1]
+showMove
+
+enterMove [-1, -1]
+showMove
+enterMove Pass
+showMove
+enterMove Passs
+showMove
+enterMove Pass sdf
+showMove
+
+-- 24.) ApplyMove does not clear the current move.  A showMove call after ApplyMove still shows the move.
+
+undoLastMove 200
+
+enterMove [0,0]
+applyMove
+showBoard
+showMove
+
+enterMove [2,3]
+applyMove
+showMove
+showBoard
+
+undoLastMove 200
+showMove
+showBoard
+
+-- 25.) compareKeys tests.  
+undoLastMove 200
+testPlay 88 38
+saveBoard OthelloBoardIbssa4
+compareKeys OthelloBoardIbssa4
+enterMove [0,0]
+compareKeys OthelloBoardIbssa4
+setOptions
+y
+4
+4
+4
+4
+compareKeys OthelloBoardIbssa4
+
+testPlay 8 34
+compareKeys OthelloBoardIbssa4
+setOptions
+y
+6
+7
+8
+7
+compareKeys OthelloBoardIbssa4
+undoLastMove 34
+compareKeys OthelloBoardIbssa4
+loadBoard OthelloBoardIbssa4
+compareKeys OthelloBoardIbssa4
+
+-- 26.) Whenever the static weights are changed all existing boards of the current board class must automatically reflect the change in the return of GetValue
+
+undoLastMove 100
+testPlay 34 39
+showVal
+
+setOptions
+y
+76
+7
+5
+65
+
+showVal
+
+-- 27.) [During testPlay,] end the loop early and without complaint if the game reaches its end.
+testPlay 54 1000
+
+***  NEW TESTS ***
+
+-- 28.) Can you flank two different rows at the same time?
+undoLastMove 1000
+doMove [2,3]
+doMove [2,4]
+doMove [1,5]
+doMove [5,2]
+doMove [5,3]
+doMove [1,4]
+doMove [3,5]
+doMove [5,4]
+doMove [5,5]
+showBoard
+
+-- 29.) Note that since [compareKeys] requires loading a board, the command has the side effect of changing board options to those stored in the boardFile.
+
+-- 30.) I need more "GUI" input sanity checks on the strings that have been inputted.
+do Move [2, 3]
+
+-- 31.) END GAME tests
+undoLastMove 1000
+testPlay 29 50
+doMove [7,0]
+doMove [7,2]
+doMove [3,0]
+doMove [0,2]
+
+
+showBoard
+
+
+
+
+
+
+
+quit

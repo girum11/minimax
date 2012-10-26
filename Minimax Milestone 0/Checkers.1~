@@ -1,0 +1,35 @@
+showBoard
+showMove
+showVal
+showMoveHist
+keyMoveCount
+doMove c3->d4
+doMove f6->e5
+doMove d4->e3
+doMove d4->f6
+doMove f4->e3
+testPlay 2 60
+undoLastMove 100
+testPlay 11 30
+doMove a1->b2
+doMove a7->b6
+doMove b8->c7
+doMove d6->b8
+doMove b2->c1
+doMove h2->g3
+doMove c1->d2
+doMove b6->a7
+doMove d2->e1
+doMove a7->b6
+doMove b1->g3
+saveBoard IbssaTestBoard2.sup
+doMove b1->g3
+undoLastMove 10
+doMove a1->b2
+loadBoard IbssaTestBoard2.sup
+doMove b1->g3
+keyMoveCount
+showVal
+showMove
+showMoveHist
+quit

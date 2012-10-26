@@ -1,0 +1,185 @@
+-- 36.) As a special case, if the game is over then GetValue returns winVal if first player has won and -winVal if the second player has won.
+showVal
+showBoard
+testPlay 56 200
+showVal
+showBoard
+
+undoLastMove 10000
+testPlay 57 200
+showVal
+showBoard
+
+-- 37.) Two PylosBoard::Keys are equal if all squares on their represented boards have the same contents, and it's the same player's turn to move.
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [1,3]
+doMove Play at [0,1]
+doMove Play at [2,3]
+doMove Play at [0,2]
+doMove Play at [3,3]
+doMove Play at [0,3]
+undoLastMove 1
+doMove Play at [0,3] taking [0,0] and [0,3]
+undoLastMove 1
+doMove Play at [1,1]
+undoLastMove 1
+doMove Play at [2,1]
+saveBoard PylosBoardIbssa0
+compareKeys PylosBoardIbssa0
+doMove Play at [0,3] taking [0,3]
+compareKeys PylosBoardIbssa0
+doMove Play at [0,3] taking [0,3]
+compareKeys PylosBoardIbssa0
+doMove Play at [0,3] taking [0,3]
+compareKeys PylosBoardIbssa0
+doMove Play at [0,3] taking [0,3]
+compareKeys PylosBoardIbssa0
+
+testPlay 8 10
+compareKeys PylosBoardIbssa0
+
+-- 38.) Key A is "less" than Key B if
+-- A next player is lower than B's next player (black is "lower" than white")
+undoLastMove 1000
+saveBoard PylosBoardIbssa1
+doMove Play at [0,0]
+compareKeys PylosBoardIbssa1
+saveBoard PylosBoardIbssa2
+doMove Play at [0,1]
+compareKeys PylosBoardIbssa2
+
+
+-- 40.) Key A is "less" than Key B if
+-- If all white cells are the same, then: In the last cell, in level-major, row-submajor, column-minor order, at which one has a black cell and the other does not, then the one with a black cell is larger.
+
+*** See test 39 ***
+
+-- 41.) Moves are equal if they are the same type and have exactly the same squares.
+enterMove Play at [1,1]
+compareMove Play at [1,1]
+compareMove Play at [0,1]
+compareMove Play at [1,1,1]
+compareMove Play at [    1   ,      1 			]
+compareMove Play at [1,1] taking [1,1]
+compareMove Play at [1,1] taking [1,1] and [1,1]
+compareMove Promote from [1,1] to [1,1]
+compareMove Promote from [1,1] to [2,2] taking [1,1] and [2,2]
+
+enterMove Promote from [1,1] to [2,2] taking [1,1] and [2,2]
+compareMove Promote from [1,1] to [2,2] taking [2,2] and [1,1]
+compareMove Promote from [1,1] to [2,2] taking [1,1]
+
+enterMove Play at [1,1] taking [1,1]
+compareMove Play at [1,1]
+compareMove Play at [1,1] taking[1,1]
+
+-- 42.) Move A is less than Move B if A would fall before B in the order described under Board::GetAllMoves above
+
+*** See test 41 ***
+
+-- 43.) (showMove tests) Print the string conversion of the default move.
+showMove
+enterMove Play at [0,  00 ]
+showMove
+enterMove Play at [0000000000000000000000, 0000000000000000000]
+enterMove Play at [8, 8]
+showMove asdfasdfiauspoifadu
+showMove Play at [3,2]
+enterMove Play at [0, 1]
+showMove
+
+enterMove Play at [-1, -1]
+showMove
+enterMove Pass
+showMove
+enterMove Passs
+showMove
+enterMove Pass sdf
+showMove
+
+-- 44.) Tests of the operator=(string &) sanity checks
+
+*** See test 20 ***
+
+-- 45.) ApplyMove should not clear the current move.  A showMove call after applyMove still shows the move.
+undoLastMove 200
+
+enterMove Play at [4,0]
+applyMove
+showMove
+
+enterMove Play at [2,3]
+applyMove
+showMove
+
+undoLastMove 200
+showMove
+
+-- 46.) compareKeys tests: Note that since compareKeys requires loading a board, the command has the side effect of changing board options to those stored in boardFile.
+undoLastMove 200
+testPlay 88 38
+saveBoard PylosBoardIbssa5
+compareKeys PylosBoardIbssa5
+enterMove Play at [1,0]
+compareKeys PylosBoardIbssa5
+setOptions
+y
+4
+4
+4
+2
+compareKeys PylosBoardIbssa5
+
+testPlay 8 34
+compareKeys PylosBoardIbssa5
+setOptions
+y
+6
+7
+8
+2
+compareKeys PylosBoardIbssa5
+undoLastMove 34
+compareKeys PylosBoardIbssa5
+loadBoard PylosBoardIbssa4
+compareKeys PylosBoardIbssa5
+
+-- 47.) setOptions tests: Whenever the static weights are changed all existing boards of the current board class must automatically reflect the change in the return of GetValue.
+undoLastMove 100
+testPlay 34 39
+showVal
+
+setOptions
+y
+50
+20
+4
+
+showVal
+
+
+
+-- 48.) testPlay test: End the loop early and without complaint if the game reaches its end.
+undoLastMove 1000
+testPlay 54 1000
+
+-- 49.) Additional Pylos string sanity checks
+undoLastMove 1000                
+-- Invalid format sanity checks
+doMove Prom0te from [0,2] to [1,1]
+doMove Play at [0,2] to [2,0]
+doMove Promote at [1,2]
+doMove Play at [1,0] to [1,2]
+doMove Promote to [2,2]
+doMove Play from [1,1] to [1,2] taking [2,3] and [1,2]
+doMove Promote to [1,2] from [2,3] taking [3,2] and [3,2]
+doMove Play at [3,2] taking [2,2] and [1,0]
+
+
+quit
+
+
+-- What if I try to continue the game after "quit"?
+undoLastMove 1000
+testPlay 7 20

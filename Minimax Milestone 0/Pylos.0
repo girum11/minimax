@@ -1,0 +1,479 @@
+-- 1.) Players lose when they no longer have any spheres.
+undoLastMove 1000
+showBoard
+testPlay 88 110
+showBoard
+showVal
+testPlay 88 5
+showVal
+showBoard
+showVal
+testPlay 88 5
+showVal
+showBoard
+
+undoLastMove 1000
+
+-- 2.) When one or more squares of spheres are formed on the board or at higher levels, a player can choose to stack one of his spheres on it; when it is his turn to play, he then has a choice between:
+-- Taking a sphere from his reserve and placing it on the board
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [0,0]
+
+undoLastMove 1
+doMove Play at [2,0]
+doMove Play at [0,2]
+doMove Play at [3,0]
+doMove Play at [1,2]
+
+doMove Play at [3,3]
+undoLastMove 1
+
+-- 3.) When one or more squares of spheres are formed on the board or at higher levels, a player can choose to stack one of his spheres on it; when it is his turn to play, he then has a choice between:
+-- Placing a sphere from his reserve on one of the squares of the spheres
+doMove Play at [0,0]
+undoLastMove 1
+
+-- 4.) When one or more squares of spheres are formed on the board or at higher levels, a player can choose to stack one of his spheres on it; when it is his turn to play, he then has a choice between:
+-- Moving one of his spheres already on the board and putting it on a square of spheres, but only if this move raises his sphere by one or more levels.
+doMove Promote from [0,0] to [0,1]
+undoLastMove 1
+
+-- (fill up the rest of the bottom level to ensure that I can't move from one square to a different square)
+doMove Play at [0,3]
+doMove Play at [1,3]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,1]
+doMove Play at [3,2]
+doMove Play at [3,3]
+
+doMove Play at [0,0]
+doMove Play at [2,0]
+doMove Promote from [0,0] to [2,2]
+
+-- 5.) A sphere on the board cannot be moved if it is already supporting another sphere.
+doMove Promote from [0,0] to [2,2]
+
+-- 6.) A player who makes a square of spheres in his own colour can immediately take back NONE of his spheres and put them back in his reserve.
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [2,2]
+doMove Play at [0,1]
+doMove Play at [2,3]
+doMove Play at [1,0]
+doMove Play at [3,2]
+
+doMove Play at [1,1]
+undoLastMove 1
+
+-- 7.) A player who makes a square of spheres in his own colour can immediately take back ONE of his spheres and put them back in his reserve.
+doMove Play at [1,1] taking [0,0]
+undoLastMove 1
+doMove Play at [1,1] taking [0,1]
+undoLastMove 1
+doMove Play at [1,1] taking [1,0]
+undoLastMove 1
+doMove Play at [1,1] taking [1,1]
+undoLastMove 1
+
+-- 8.) A player who makes a square of spheres in his own colour can immediately take back TWO of his spheres and put them back in his reserve.
+doMove Play at [1,1] taking [0,0] and [0,1]
+undoLastMove 1
+doMove Play at [1,1] taking [0,0] and [1,0]
+undoLastMove 1
+doMove Play at [1,1] taking [0,0] and [1,1]
+undoLastMove 1
+
+doMove Play at [1,1] taking [0,1] and [1,0]
+undoLastMove 1
+doMove Play at [1,1] taking [0,1] and [1,1]
+undoLastMove 1
+doMove Play at [1,1] taking [1,0] and [1,1]
+undoLastMove 1
+
+-- 9.) What if a player completes an alignment, but the alignment runs off of the edge?
+undoLastMove 1000
+doMove Play at [0,1]
+doMove Play at [3,1]
+doMove Play at [0,2]
+doMove Play at [3,2]
+doMove Play at [0,3]
+doMove Play at [3,3]
+
+showBoard
+
+doMove Play at [0,4] taking [0,1] and [0,2]
+doMove Play at [3,4] taking [3,1] and [3,2]
+
+-- 10.) A diagonal line is not an alignment.
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,3]
+doMove Play at [1,1]
+doMove Play at [1,3]
+doMove Play at [2,2]
+doMove Play at [2,3]
+
+showBoard
+doMove Play at [3,3] taking [0,0]
+
+-- 11a.) What if you have two alignments going into each other at the same time?
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [1,3]
+doMove Play at [0,1]
+doMove Play at [2,3]
+doMove Play at [0,2]
+doMove Play at [3,3]
+
+showBoard
+
+doMove Play at [0,3]
+undoLastMove 1
+doMove Play at [0,3] taking [0,0] and [0,3]
+undoLastMove 1
+doMove Play at [1,1]
+undoLastMove 1
+
+doMove Play at [2,1]
+-- 11b.) (this part also tests if you play and remove a piece in the same turn) He may recover any sphere belonging to him by picking them up from any level of the pyramid - including the one which he has just placed.
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [1,3] and [2,3]
+
+-- 12.) Alignment of WW_W shouldn't work.
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [3,0]
+doMove Play at [0,1]
+doMove Play at [3,1]
+doMove Play at [0,3] taking [0,0]
+doMove Play at [3,3] taking [0,3]
+
+-- 13.) An alignment shouldn't allow you to take the other player's pieces.
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [2,2]
+doMove Play at [0,1]
+doMove Play at [2,3]
+doMove Play at [1,0]
+doMove Play at [3,2]
+
+showBoard
+doMove Play at [1,1] taking [2,2]
+doMove Play at [1,1] taking [2,3]
+doMove Play at [1,1] taking [3,2]
+doMove Play at [1,1] taking [3,3]
+
+-- 14.) An alignment doesn't allow you to remove a piece that supports another piece.
+doMove Play at [1,1]
+doMove Play at [3,3]
+doMove Play at [0,2]
+doMove Play at [2,1]
+doMove Play at [0,0]
+doMove Play at [2,2]
+
+showBoard
+doMove Play at [1,2] taking [0,0]
+undoLastMove 1
+doMove Play at [0,3]
+doMove Play at [3,2] taking [0,0] 
+showBoard
+undoLastMove 1
+
+doMove Play at [0, 3]                          
+undoLastMove 1
+doMove Play at [0, 3] taking [0, 0]           
+undoLastMove 1
+doMove Play at [0, 3] taking [0, 0] and [0, 0] 
+undoLastMove 1
+doMove Play at [0, 3] taking [0, 0] and [0, 1]
+undoLastMove 1
+doMove Play at [0, 3] taking [0, 0] and [0, 2] 
+undoLastMove 1
+doMove Play at [0, 3] taking [0, 0] and [0, 3]
+undoLastMove 1
+doMove Play at [0, 3] taking [0, 0] and [1, 0] 
+undoLastMove 1
+doMove Play at [0, 3] taking [0, 0] and [1, 1]
+undoLastMove 1
+doMove Play at [0, 3] taking [0, 2]            
+undoLastMove 1
+doMove Play at [0, 3] taking [0, 2] and [0, 3]
+undoLastMove 1
+doMove Play at [0, 3] taking [0, 3]            
+undoLastMove 1
+doMove Play at [1, 2]                         
+undoLastMove 1
+doMove Play at [1, 2] taking [0, 0]            
+undoLastMove 1
+doMove Play at [1, 2] taking [0, 0] and [0, 0]
+undoLastMove 1
+doMove Play at [1, 2] taking [0, 0] and [0, 1] 
+undoLastMove 1
+doMove Play at [1, 2] taking [0, 0] and [0, 2]
+undoLastMove 1
+doMove Play at [1, 2] taking [0, 0] and [1, 0] 
+undoLastMove 1
+doMove Play at [1, 2] taking [0, 0] and [1, 1]
+undoLastMove 1
+doMove Play at [1, 2] taking [0, 0] and [1, 2] 
+undoLastMove 1
+doMove Play at [1, 2] taking [0, 2]           
+undoLastMove 1
+doMove Play at [1, 2] taking [0, 2] and [1, 2] 
+undoLastMove 1
+doMove Play at [1, 2] taking [1, 2]           
+undoLastMove 1
+doMove Play at [1, 3]                          
+undoLastMove 1
+doMove Play at [2, 0]                         
+undoLastMove 1
+doMove Play at [3, 0]                          
+undoLastMove 1
+doMove Play at [3, 1]   
+
+-- 15.) Making several squares of spheres his own colour by putting on one sphere only allows the player to withdraw one or two of his spheres.
+undoLastMove 1000
+doMove Play at [0,1]
+doMove Play at [1,2]
+doMove Play at [0,2]
+doMove Play at [1,3]
+doMove Play at [0,3]
+doMove Play at [2,3]
+doMove Play at [1,0]
+doMove Play at [3,2]
+doMove Play at [2,0]
+doMove Play at [3,3]
+doMove Play at [3,0]
+
+doMove Play at [2,2] taking [1,2] and [2,2] and [2,3]
+doMove Play at [2,2] taking [1,2] and [3,3]
+doMove Play at [0,0] taking [0,0] and [0,1] and [1,0]
+doMove Play at [0,0] taking [3,0] and [0,3]
+undoLastMove 1
+
+showBoard
+doMove Play at [0, 0]                          
+undoLastMove 1
+doMove Play at [0, 2]                         
+undoLastMove 1
+doMove Promote from [2, 3] to [0, 2]           
+undoLastMove 1
+doMove Promote from [3, 2] to [0, 2]          
+undoLastMove 1
+doMove Promote from [3, 3] to [0, 2]           
+undoLastMove 1
+doMove Play at [1, 1]                         
+undoLastMove 1
+doMove Play at [2, 1]                          
+undoLastMove 1
+doMove Play at [2, 2]                         
+undoLastMove 1
+doMove Play at [2, 2] taking [1, 2]            
+undoLastMove 1
+doMove Play at [2, 2] taking [1, 2] and [1, 3]
+undoLastMove 1
+doMove Play at [2, 2] taking [1, 2] and [2, 2] 
+undoLastMove 1
+doMove Play at [2, 2] taking [1, 2] and [2, 3]
+undoLastMove 1
+doMove Play at [2, 2] taking [1, 2] and [3, 2] 
+undoLastMove 1
+doMove Play at [2, 2] taking [1, 2] and [3, 3]
+undoLastMove 1
+doMove Play at [2, 2] taking [1, 3]            
+undoLastMove 1
+doMove Play at [2, 2] taking [1, 3] and [2, 2]
+undoLastMove 1
+doMove Play at [2, 2] taking [1, 3] and [2, 3] 
+undoLastMove 1
+doMove Play at [2, 2] taking [1, 3] and [3, 2]
+undoLastMove 1
+doMove Play at [2, 2] taking [1, 3] and [3, 3] 
+undoLastMove 1
+doMove Play at [2, 2] taking [2, 2]           
+undoLastMove 1
+doMove Play at [2, 2] taking [2, 2] and [2, 3] 
+undoLastMove 1
+doMove Play at [2, 2] taking [2, 2] and [3, 2]
+undoLastMove 1
+doMove Play at [2, 2] taking [2, 2] and [3, 3] 
+undoLastMove 1
+doMove Play at [2, 2] taking [2, 3]           
+undoLastMove 1
+doMove Play at [2, 2] taking [2, 3] and [3, 2] 
+undoLastMove 1
+doMove Play at [2, 2] taking [2, 3] and [3, 3]
+undoLastMove 1
+doMove Play at [2, 2] taking [3, 2]            
+undoLastMove 1
+doMove Play at [2, 2] taking [3, 2] and [3, 3]
+undoLastMove 1
+doMove Play at [2, 2] taking [3, 3]            
+undoLastMove 1
+doMove Play at [3, 1]   
+showBoard
+
+doMove Play at [0, 0]                          
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 0]           
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 0] and [0, 1] 
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 0] and [0, 2]
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 0] and [0, 3] 
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 0] and [1, 0]
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 0] and [2, 0] 
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 0] and [3, 0]
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 1]            
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 1] and [0, 2]
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 1] and [0, 3] 
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 1] and [1, 0]
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 1] and [2, 0] 
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 1] and [3, 0]
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 2]            
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 2] and [0, 3]
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 2] and [1, 0] 
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 2] and [2, 0]
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 2] and [3, 0] 
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 3]           
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 3] and [1, 0] 
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 3] and [2, 0]
+undoLastMove 1
+doMove Play at [0, 0] taking [0, 3] and [3, 0] 
+undoLastMove 1
+doMove Play at [0, 0] taking [1, 0]           
+undoLastMove 1
+doMove Play at [0, 0] taking [1, 0] and [2, 0] 
+undoLastMove 1
+doMove Play at [0, 0] taking [1, 0] and [3, 0]
+undoLastMove 1
+doMove Play at [0, 0] taking [2, 0]            
+undoLastMove 1
+doMove Play at [0, 0] taking [2, 0] and [3, 0]
+undoLastMove 1
+doMove Play at [0, 0] taking [3, 0]            
+undoLastMove 1
+doMove Play at [0, 2]                         
+undoLastMove 1
+doMove Promote from [0, 1] to [0, 2]           
+undoLastMove 1
+doMove Promote from [1, 0] to [0, 2]          
+undoLastMove 1
+doMove Promote from [2, 0] to [0, 2]           
+undoLastMove 1
+doMove Promote from [3, 0] to [0, 2]          
+undoLastMove 1
+doMove Play at [1, 1]                          
+undoLastMove 1
+doMove Play at [2, 1]                         
+undoLastMove 1
+doMove Play at [2, 2]                         
+undoLastMove 1
+
+-- 16.) A valid alignment can be:
+-- 4 spheres of the same colour in line on the first level
+
+*** See test 11a. ***
+
+-- 17.) A valid alignment can be:
+-- 3 spheres of the same colour in line on the second level
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [1,3]
+doMove Play at [2,0]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,0]
+doMove Play at [3,1]
+doMove Play at [3,2]
+doMove Play at [3,3]
+
+doMove Play at [0,0]
+doMove Play at [2,0]
+doMove Play at [0,1]
+doMove Play at [2,1]
+
+showBoard
+
+doMove Play at [0, 2]                          
+undoLastMove 1
+doMove Play at [0, 2] taking [0, 0]           
+undoLastMove 1
+doMove Play at [0, 2] taking [0, 0] and [0, 0] 
+undoLastMove 1
+doMove Play at [0, 2] taking [0, 0] and [0, 1]
+undoLastMove 1
+doMove Play at [0, 2] taking [0, 0] and [0, 2] 
+undoLastMove 1
+doMove Play at [0, 2] taking [0, 0] and [1, 0]
+undoLastMove 1
+doMove Play at [0, 2] taking [0, 1]            
+undoLastMove 1
+doMove Play at [0, 2] taking [0, 1] and [0, 2]
+undoLastMove 1
+doMove Play at [0, 2] taking [0, 2]            
+undoLastMove 1
+doMove Play at [1, 0]                         
+undoLastMove 1
+doMove Play at [1, 1]                          
+undoLastMove 1
+doMove Play at [1, 2]                         
+undoLastMove 1
+doMove Play at [2, 2]              
+undoLastMove 1
+
+showBoard
+
+doMove Play at [0,2] taking [0,2]
+showBoard
+doMove Play at [2,2] taking [0,0]
+doMove Play at [2,2] taking [0,3] and [2,2]
+doMove Play at [2,2] taking [2,2] and [0,3]
+undoLastMove 1
+doMove Play at [2,2] taking [2,3]
+
+
+
+-- This test will be the test case where I ensure that a lack of "quit" doesn't blow up the program.
+

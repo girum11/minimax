@@ -1,0 +1,135 @@
+--50.) What if you try to promote a piece onto a square that uses its own (old) position as a base?
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Promote from [1,1] to [1,1]
+doMove Promote from [2,1] to [1,1]
+showBoard
+
+--51.) What if I try and promote a piece *down* a level instead of *up* a level?
+undoLastMove 1000
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [2,0]
+doMove Play at [0,3]
+doMove Play at [2,1]
+doMove Play at [0,1]
+doMove Promote from [0,1] to [3,3]
+
+--52.) What if I try and promote a piece, but promote it parallel?
+undoLastMove 1000
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [2,0]
+doMove Play at [0,3]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Promote from [0,2] to [0,1]
+doMove Play at [3,3]
+doMove Promote from [0,1] to [1,1]
+showBoard
+
+--53.) Can you remove a sphere out of the square that is used to get the square bonus?
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [2,2]
+doMove Play at [0,1]
+doMove Play at [2,3]
+doMove Play at [1,0]
+doMove Play at [3,2]
+showBoard
+doMove Play at [0, 2]                          
+undoLastMove 1
+doMove Play at [0, 3]                         
+undoLastMove 1
+doMove Play at [1, 1]                          
+undoLastMove 1
+doMove Play at [1, 1] taking [0, 0]           
+undoLastMove 1
+doMove Play at [1, 1] taking [0, 0] and [0, 1] 
+undoLastMove 1
+doMove Play at [1, 1] taking [0, 0] and [1, 0]
+undoLastMove 1
+doMove Play at [1, 1] taking [1, 1]
+undoLastMove 1
+
+--54.) Can you remove a sphere out of the square that is used to get the square bonus, even if it's supporting another sphere?
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,2]
+doMove Play at [0,1]
+doMove Play at [1,2]
+doMove Play at [1,1]
+doMove Play at [0,1]
+doMove Play at [1,0] taking [0,0]
+doMove Play at [1,0] taking [1,0]
+doMove Play at [1,0] taking [0,0] and [0,1]
+doMove Play at [1,0] taking [0,0] and [1,1]
+doMove Play at [1,0] taking [1,1]
+
+--55.) Make sure you can't promote onto a partially complete square.
+showBoard
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [1,3]
+doMove Play at [2,0]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,0]
+doMove Play at [3,1]
+doMove Play at [3,2]
+doMove Play at [2,2]
+showBoard
+doMove Play at [3,3]
+doMove Play at [2,2]
+showBoard
+
+--56.) If you yank a sphere from the bottom row to move it up to the top, can you place a sphere on the square of spheres that it used to help create?
+doMove Play at [0,0]
+doMove Play at [1,0]
+doMove Play at [1,1]
+showBoard
+doMove Promote from [0,3] to [0,0]
+doMove Play at [0,2]
+showBoard
+
+--57.) Make sure that you can't make an alignment over different levels.  E.g. WWBW, but the [0,2] on the second row is W, making [0,0], [0,1], [0,2] and [0,3] White.
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [1,0]
+doMove Play at [0,1]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [0,0]
+doMove Play at [3,3]
+doMove Play at [1,3]
+doMove Play at [0,2] taking [3,3]
+doMove Play at [0,2] taking [0,2] and [3,3]
+
+
+
+showBoard
+
+
+
+
+
+
+
+
+
+
+quit

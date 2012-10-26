@@ -1,0 +1,207 @@
+-- 11.) Modification of rules (or "options" as the BoardTest language calls them) is done via the CheckersDlg and PylosDlg classes, which engage the user in a dialog to adjust parameters used by teh boards to determine their value (See GetValue).
+
+setOptions
+n
+setOptions
+noooooooooooooooooooo
+setOptions
+Y
+setOptions maybe?
+yesplease
+
+-- 12.) The user must enter a valid integer falling within the inclusive ranges given when you run the model program.
+
+setOptions aspdfioausp dfioasu fpaiosu dfpoasiu df
+y
+23894723
+-1
+brokencode
+101
+0.3
+0
+
+23894723
+-1
+brokencode
+101
+0.3
+0
+
+23894723
+-1
+brokencode
+101
+0.3
+0
+
+23894723
+-1
+brokencode
+101
+0.3
+0
+
+setOptions nyuka
+y
+
+23894723
+-1
+brokencode
+101
+0.3
+100
+
+23894723
+-1
+brokencode
+101
+0.3
+100
+
+23894723
+-1
+brokencode
+101
+0.3
+100
+
+23894723
+-1
+brokencode
+101
+0.3
+100
+
+-- 13.) The integer must be on a line by itself.
+setOptions
+y
+4 4
+4
+4
+4
+
+setOptions
+y
+4
+4
+4
+4 4
+4
+
+setOptions
+y
+4 4 4 4
+
+
+-- 14.) Trailing nonwhitespace garbage is unacceptable and generates an error indicating there is extra garbage on the line.
+setOptions
+y
+4 aspdoifuapsodifuasiopdfu
+4
+4
+4
+4
+
+-- 15.) A "y" is the only acceptable "yes" answer.  It may be followed by arbitrary garbage on teh reply line without error.
+
+setOptions 
+yes Please
+4
+4
+4
+4
+
+saveBoard OthelloIbssa
+
+setOptions
+y Please
+4
+4
+4
+4
+
+testPlay 98 500
+compareKeys OthelloIbssa
+undoLastMove 500
+compareKeys OthelloIbssa
+
+-- 16.) A cell like [0,1] that is both on an edge an one away from an edge counts as "one away from an edge."
+
+doMove [2,3]
+doMove [2,2]
+doMove [2,1]
+doMove [1,1]
+doMove [0,1]
+
+showBoard
+showMove
+showVal
+showMoveHist
+keyMoveCount
+
+undoLastMove 500
+
+-- 17.) For Othello, the rule [for GetAllMoves] is the same as for Checkers, except that "Pass" is less than all other moves.
+
+*** See the file Othello.2 for this test case.
+
+-- 18.) As a special case, if the game is over then GetValue returns winVal if first player has won, -winVal if the second player has won, and 0 in the case of a draw.
+
+showVal
+testPlay 39 80
+showVal
+
+undoLastMove 100
+testPlay 40 80
+showVal
+undoLastMove 100
+
+-- 19.) Two OthelloBoard::Keys are equal if all squares have same color of piece (or are both empty) and if the next player to move is the same.
+
+testPlay 7 62
+saveBoard OthelloBoardIbssa2
+compareKeys OthelloBoardIbssa2
+doMove Pass
+compareKeys OthelloBoardIbssa2
+undoLastMove 100
+
+-- 20.) OthelloBoard::Key A is "less" than OthelloBoard::Key B if in the first square taht they differ, reading in row-major order, A's value is "less" than B's if we give teh following values to squares:
+
+saveBoard OthelloBoardIbssa3
+compareKeys OthelloBoardIbssa3
+doMove [5,4]
+compareKeys OthelloBoardIbssa3
+doMove [3,5]
+
+-- 21.) Two OthelloMoves are equal if their row and col are equal.
+
+undoLastMove 100
+enterMove [0,0]
+compareMove [0,0]
+compareMove [0.0, 0]
+compareMove [0, 0.0]
+compareMove [0, 0, 1]
+compareMove [1,2]
+enterMove [-1, 0]
+compareMove [0,0]
+
+-- 22.) OthelloMove A is "less" than OthelloMove B if its row is less, or if the rows are equal and its col is less.  A "Pass" move is less than any other move.
+
+enterMove Pass
+compareMove [0,0]
+compareMove [23, 23]
+compareMove [-1,-1]
+
+enterMove [4,4]
+compareMove [4,3]
+compareMove [4,4]
+compareMove [3,4]
+compareMove [3,3]
+compareMove Pass
+
+enterMove Pass
+compareMove Pass
+
+
+quit
+

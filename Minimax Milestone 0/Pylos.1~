@@ -1,0 +1,244 @@
+-- 18a.) What if you make an alignment on the second level, and then remove two blocks, but removing the first one makes it so that the second block's isn't supporting the first block?
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [1,3]
+doMove Play at [2,0]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,0]
+doMove Play at [3,1]
+doMove Play at [3,2]
+doMove Play at [3,3]
+
+showBoard
+doMove Play at [0,0]
+doMove Play at [2,0]
+doMove Play at [0,1]
+doMove Play at [2,1]
+
+-- 18b.) What if you "take" two blocks that have the same "name"?
+doMove Play at [0,2] taking [0,0] and [0,0]
+doMove Play at [2,2] taking [2,2] and [3,3]
+showBoard
+
+-- 19.) Play is over when one player has no marbles in his reserve after his move is complete.
+undoLastMove 1000
+testPlay 77 75
+showBoard
+testPlay 77 25
+showBoard
+testPlay 77 25
+showBoard
+testPlay 77 25
+showBoard
+testPlay 77 15
+showBoard
+testPlay 77 25
+showBoard
+undoLastMove 1000
+
+-- 20.) A *badly formed* move is one that disobeys string formats, or that has obvious errors such as out-of-range number values.  The operator=(const std::string &) method detects badly formed moves and throws an exception when it is passed one.
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [1,3]
+doMove Play at [2,0]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,0]
+doMove Play at [3,1]
+doMove Play at [3,2]
+doMove Play at [3,3]
+
+showBoard
+doMove Play at someRandomBadInputString
+doMove Play at [7,8]
+doMove Play at [8,7]
+doMove Play at [23049238047239847239847, 2]
+doMove Play at [1, 239084289034729384723984723]
+doMove Play at [2384723984729384723984, 29348723984729384723]
+doMove Play at [-1, 2]
+doMove Play at [1, -2]
+doMove Play at [1.2, 2]
+doMove Play at [1, 2.3]
+doMove Play at [,]
+doMove Play at [1,]
+doMove Play at [,2]
+domove Play at [1,2]
+doMove Play at (1,2]
+doMove Play at [1,2)
+doMove Play at (1,2)
+doMove Play at {1,2]
+doMove Play at [1,2}
+doMove Play at {1,2}
+doMove Play at [1,@]
+
+-- 21.) Whitespace must appear between adjacent words (e.g. "Play at") but is not required elsewhere.  
+doMove Playat [1,2]
+doMove Play at[1,2]
+undoLastMove 1
+
+-- 22.) Additional arbitrary whitespace may appear anywhere within the string or at its ends except inside of the words Promote, Play, from, taking, to at and and.
+doMove    		  Play   					  at 		   [ 		 1  , 		 2			] 	
+undoLastMove 1
+showBoard
+doMove Pl ay at [0, 2]      
+doMove Pro mote from [0, 0] to [0, 2]
+doMove Promote fr om [0, 0] to [0, 2]
+doMove Promote fro		m [0, 0] to [0, 2]
+doMove Promote from [0, 0] t		o [0, 2]
+doMove Pro   mote from [0, 0] to [0, 2]
+
+doMove Play at [0,0]
+doMove Play at [2,0]
+doMove Play at [0,1]
+doMove Play at [2,1]
+doMove Play at [0,2] tak	ing [0,0] and [0,1]
+doMove Play at [0,2] taking [0,0] a		nd [0,1]
+doMove Play at [0,2] taking [0,1] and [0,0]
+
+
+-- 23.) Moves with two takeback squares always list the takeback squares in increasing order, first by row, second by column.
+showBoard
+doMove Play at [0,2] taking [0,1] and [0,0]
+doMove Play at [0,2] taking [0,2] and [0,0]
+doMove Play at [0,2] taking [0,0] and [0,0]
+undoLastMove 1
+doMove Play at [0,2] taking [1,0] and [0,0]
+doMove Play at [0,2] taking [0,2] and [0,1]
+
+-- 24.) The operator=(string) method for all games must check for incorrect format including garbage after the end of the move, and for out-of-bounds numerical values.
+showBoard
+doMove Play at [0,2] taking [0,0] and [0,2] 					
+undoLastMove 1
+doMove Play at [0,2] taking [0,0] and [0,2.0]
+doMove Play at [0,2] taking [0,0] and [0,2] asdfiouas
+doMove Play at [0,2] taking [0,0] and [0,2] sdf
+doMove Play at [0,] taking [0,0] and [0,2] doMove Play at [0,] taking [0,0] and [0,2] 
+
+*** For out-of-bounds tests, see test 20. ***
+
+
+-- 25.) Check for logical errors: taking back marbles when not permitted.
+showBoard
+doMove Play at [0,2] taking [0,0] and [2,2]
+doMove Play at [0,2] taking [0,0] and [3,3]
+doMove Play at [0,2] taking [0,0] and [2,0]
+
+-- 26.) You may find it useful is your test main to do a quick check that each movey ou enter is in the GetAllMoves list.
+
+*** This test case is in Pylos.2
+
+-- 27.) If a badly formatted Move string is presented to the operator= method, the method throws a BaseException with one of the contents below where X is the name of the game and M is the full move string.  If this happens, the method does not modify the move at all.  In other words, it either modifies the move, or throws an exception indicating a bad move string, but not both.
+showMove
+enterMove Play at [0,2] taking [0,0] and [0,0]
+showMove
+enterMove Play at [0,2] taking [0,0] and [4,4]
+showMove
+
+-- 28.) Modification of rules (or "options" as the BoardTest language calls them) is done via the CheckersDlg and PylosDlg classes, which engage the user in a dialog to adjust the parameters used by the boards to determine their value.
+setOptions
+n
+setOptions
+noooooooooooooooooooo
+setOptions
+Y
+setOptions maybe?
+nah
+
+-- 29.) A "y" is the only acceptable "yes" answer.  It may be followed by arbitrary garbage on the reply line without error.
+setOptions pretty please????
+yeah, sure
+
+-- 30.) The user must enter a valid integer falling within the inclusive ranges given when you run the model program.  The integer must be on a line by itself -- trailing nonwhitespace garbage is unacceptable and geenerates an error indicating there is extra garbage on the line.
+100
+20 6
+20
+6
+
+setOptions
+y
+100
+20
+6 asdf
+6
+
+setOptions
+y
+100 20 6
+100
+20
+6
+
+-- 31.) Pylos rules (options) comprise a weight for each marble in reserve, a weight for each step above the lowest level each a played marble rises, and a weight for each played marble that is not pinned down by other marbles.  
+undoLastMove 1000
+testPlay 99 50
+showVal
+testPlay 99 50
+showVal
+
+setOptions
+y
+50
+10
+2
+
+undoLastMove 1000
+testPlay 99 50
+showVal
+testPlay 99 50
+showVal
+
+-- 32.) Marble weight must be between 1 and 1000 inclusive.  
+setOptions
+y
+0
+1.1
+1001
+-1
+23984723947823894
+100
+
+
+
+-- 33.) Level weight must be nonnegative and less than marble weight.  
+1.1
+1001
+-1
+23984723947823894
+200
+0
+
+-- 34.) Free weight must be nonnegative, less than marble weight, and even (does 0 count as even?)
+1.1
+1001
+-1
+23984723947823894
+200
+51
+2
+
+-- 35.) Pylos weight rules test
+
+*** See Pylos.2 for this test.
+
+-- 36.) 
+
+
+
+
+
+quit

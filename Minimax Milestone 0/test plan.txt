@@ -1,0 +1,131 @@
+					 *** TEST PLAN ***
+					*** MILESTONE 0 ***
+					*** GIRUM IBSSA ***
+ 					
+(numbers correspond to actual test case numbers from
+my test files)
+					
+*** Othello-specific tests ****************************
+
+--5.) A disc may outflank any number of discs in one or more rows in any number of directions at the same time: What if the piece that you're trying to outflank is outside of the board's range?
+
+--2.) Test the case where ALL pieces on the board are white pieces (special special case found on a math email thread on the internet).
+
+--3.) Test to ensure that you cannot count your own blocks as part of the pieces that you're outflanking.  Also test that "flanks" are the direct result of a move (as opposed to happening to be a "flank" after an unrelated move is played).
+
+--4.) Ensure that the game is over IFF *both* players cannot move (i.e., both players play Pass two turns in a row).
+
+
+
+*** Pylos-specific tests ******************************
+
+ --50.) What if you try to promote a piece onto a square that uses its own (old) position as a base?
+ 
+ --51.) What if I try and promote a piece *down* a level instead of *up* a level?
+ 
+ --52.) What if I try and promote a piece, but promote it parallel?
+ 
+ --53.) Can you remove a sphere out of the square that is used to get the square bonus?
+
+ --54.) Can you remove a sphere out of the square that is used to get the square bonus, even if it's supporting another sphere?
+ 
+ --55.) Make sure you can't promote onto a partially complete square.
+ 
+ --56.) If you yank a sphere from the bottom row to move it up to the top, can you place a sphere on the square of spheres that it used to help create?
+ 
+ --57.) Make sure that you can't make an alignment over different levels.  E.g. WWBW, but the [0,2] on the second row is W, making [0,0], [0,1], [0,2] and [0,3] White.
+ 
+
+
+*** Checkers-specific tests ***************************
+
+--1.) Checking for the case where a King jumps around and lands back into the same spot.
+
+--2.) Checking to ensure that pieces can change directions in the middle of a multiple jump.
+
+--15.) You cannot jump the same piece twice in the same move
+
+--13.) (when jumping pieces, you remove the jumped pieces from the board).				
+
+--3.) Check to ensure that players alternate moves in Checkers (can't move twice)
+
+--4a.) Test the win values in the event that a player has pieces, but cannot move any of them.
+
+-- Various tests for the circumstances under which you may legally move in Checkers
+-- 5.) A piece which is not a king can move one square, diagonally, forward, as in the diagram at the right.
+-- 6.) A king can move one square diagonally, forward or backward.
+-- 7a.) A piece (piece) can only move to a vacant square.
+-- 7b.) A piece (king) can only move to a vacant square.
+-- 8a.) You can capture an opopnent's piece by jumping over it, diagonally, to the adjacent vacant square beyond it.  The three squares must be lined up (diagonally adjacent) as in the diagram at the left: your jumping piece (piece), opponent's piece (piece), empty square.
+-- 9.) A king can jump diagonally, forward or backward.
+-- 10.) A piece which is not a king, can only jump diagonally forward.
+
+-- 11.) Check to make sure that you cannot stop a jump midway through it.
+
+--8e.) Ensure that you can't jump over a player over the board, or into a non-empty square.
+
+--12.) Check that you can only jump one piece with any given jump.
+
+--13.) Make sure that "jumped" pieces actually are removed from the board
+					
+-- 14.) Ensure that you cannot jump your own piece (tested with King trying to jump own piece backwards).
+					
+-- 15.) Test that if you can jump, you must.
+
+-- 16.) A piece that has just kinged, cannot continue jumping pieces, until the next move.		
+
+-- 17.) If you have a choice of jumps, you can choose among them, regardless of whether some of them are multiple, or not.  Make sure all choices work.
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+					
+					
+*** Rules shared across all games (and the tests that cover them) ******
+"Shared tests" are the tests are that are business-logic
+agnostic.  Tests I've written include:
+
+ - What if I try to continue the game after "quit"?
+
+ - If you can't move, you lose.  Check showVals to ensure
+ the game thinks you lost.  (This is possible in all 3 games)
+ [Othello: 1,2,4; Pylos: 1, 5; Checkers: 4a, 4b]
+ 
+ - Check against badly formed string inputs as moves.
+ This can include out-of-bound values, garbage after input,
+ spaces inside keywords, invalid formats, etc.
+ [Othello: 6a, 7, 8, 10, 14; Pylos: 20, 21, 22, 23, 24, 27, 49; Checkers: 21, 22, 23, 25, 28, 29]
+ 
+ - SetOptions and dialogs tests [Othello: 11, 12, 13, 14, 15; Pylos: 28, 29, 30, 31, 32, 33, 34, 35, 47; Checkers: 26, 27, 28, 29, 30]
+ 
+ - Confirm that GetAllMoves works correct [Othello: 17; Pylos: 26; Checkers: 24]
+ 
+ - Test that the Board's values are correct, specific to weight options set by SetOptions.  Check the special cases for showVal in end-game (i.e. ties) [Othello: 3, 4, 5, 8, 16, 18, 26; Pylos: 1, 31, 32, 36, 47; Checkers: 13, 4a, 4b, 31, 39]
+ 
+ - Move comparison tests / sanity check tests [Othello: 21, 22; Pylos: 41; Checkers: 34, 35, 36]
+ 
+ - Make sure showMove prints the right data depending on enterMove input [Othello: 8, 10, 16, 23, 24; Pylos: 27, 43, 45; Checkers: 13, 25, 37]
+ 
+ - Board key comparison tests, as well as tests on the side-effects of boardLoading on SetOptions options [Othello: 19, 20, 25, 29!!, Pylos: 46; Checkers: 38]
+ 
+ - Also, each game has a quick check to ensure that the game ends gracefully without the "quit" keyword at the end.  It also tries to continue the game after the "quit" statement.
+ 
