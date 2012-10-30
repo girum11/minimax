@@ -5,7 +5,7 @@
  *      Author: girum
  */
 
-#include "Board.h";
+#include "Board.h"
 
 const long Board::kWinVal = LONG_MAX / 4;
 long Board::Move::mOutstanding = 0;

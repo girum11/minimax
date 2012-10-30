@@ -29,3 +29,8 @@ bool OthelloDlg::Run(istream &in, ostream &out, void *data) {
    }
    return resp == 'y';
 }
+
+// TODO: Implement reflection
+const Class *OthelloDlg::GetClass() const {
+	return 0;
+}

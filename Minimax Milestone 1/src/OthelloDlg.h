@@ -7,6 +7,7 @@ class OthelloDlg : public Dialog {
 public:
    bool Run(std::istream &in, std::ostream &out, void *data);
 
+   const Class *GetClass() const;
 };
 
 #endif

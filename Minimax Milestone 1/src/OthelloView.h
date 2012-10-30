@@ -6,6 +6,7 @@
 class OthelloView : public View {
 public:
    void Draw(std::ostream &out);
+   const Class *GetClass() const;
 
 };
 

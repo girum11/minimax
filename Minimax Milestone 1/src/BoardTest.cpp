@@ -6,7 +6,11 @@
 #include "Board.h"
 #include "View.h"
 #include "Dialog.h"
+
 // Add more includes, possibly, but not board-specific ones
+#include "OthelloBoard.h"
+#include "OthelloDlg.h"
+#include "OthelloView.h"
 
 using namespace std;
 
@@ -18,12 +22,19 @@ int main(int argc, char **argv) {
 	// Many more locals needed
 
 	// Sample of some Class code
-	const Class *viewCls, *dlgCls;
-	const BoardClass *brdCls;
+	// const Class *viewCls, *dlgCls;
+	// const BoardClass *brdCls;
 
 	// Set up Class objects based on commandline args, with appropriate
 	// error handling, so that this works...
 	// board = dynamic_cast<Board *>(brdCls->NewInstance());
+
+	/// TODO: Hack for now - I'm avoiding reflection
+//	Dialog *dialog = new OthelloDlg();
+	OthelloView *view = new OthelloView();
+	board = new OthelloBoard();
+	list<Board::Move *> listOfMoves;
+
 
 	// Just a sampling of the main scaffold-loop.  You'll make yours a lot longer,
 	// will need to use a try/catch block, and are welcome to violate the function
@@ -46,6 +57,18 @@ int main(int argc, char **argv) {
 			out << *board;
 		} else if (command.compare("showVal") == 0) {
 			cout << "Value: " << board->GetValue() << endl;
+		} else if (command.compare("showBoard") == 0) {
+			// Show the board
+			view->SetModel(board);
+			view->Draw(cout);
+
+			// TODO: List all possible moves
+			board->GetAllMoves(&listOfMoves);
+			list<Board::Move *>::const_iterator listIter;
+			for (listIter = listOfMoves.begin(); listIter != listOfMoves.end(); ++listIter) {
+				cout << (*listIter) << " ";
+			}
+
 		} else if (command.compare("quit") == 0)
 			break;
 		else

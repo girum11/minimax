@@ -340,6 +340,7 @@ void OthelloBoard::SetOptions(const void *data)
       (*itr)->RecalcWeight();
 }
 
+// TODO: Implement reflection
 const Class *OthelloBoard::GetClass() const {
 	return 0;
 }
