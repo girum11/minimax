@@ -8,9 +8,15 @@
 #include "Dialog.h"
 
 // Add more includes, possibly, but not board-specific ones
+// TODO: Remove these includes once you get reflection working
 #include "OthelloBoard.h"
+#include "OthelloMove.h"
 #include "OthelloDlg.h"
 #include "OthelloView.h"
+#include "PylosBoard.h"
+#include "PylosMove.h"
+#include "PylosDlg.h"
+#include "PylosView.h"
 
 using namespace std;
 
@@ -30,11 +36,10 @@ int main(int argc, char **argv) {
 	// board = dynamic_cast<Board *>(brdCls->NewInstance());
 
 	/// TODO: Hack for now - I'm avoiding reflection
-//	Dialog *dialog = new OthelloDlg();
 	OthelloView *view = new OthelloView();
 	board = new OthelloBoard();
 	list<Board::Move *> listOfMoves;
-
+	move = new OthelloMove();
 
 	// Just a sampling of the main scaffold-loop.  You'll make yours a lot longer,
 	// will need to use a try/catch block, and are welcome to violate the function
@@ -49,6 +54,7 @@ int main(int argc, char **argv) {
 			while (count-- > 0)
 				board->UndoLastMove();
 		} else if (command.compare("enterMove") == 0) {
+			// FIXME: Why doesn't enterMove work?
 			getline(cin, cArg);
 			*move = cArg.c_str();
 		} else if (command.compare("saveBoard") == 0) {
@@ -62,7 +68,7 @@ int main(int argc, char **argv) {
 			view->SetModel(board);
 			view->Draw(cout);
 
-			// TODO: List all possible moves
+			// TODO: List all possible moves isn't working correctly
 			board->GetAllMoves(&listOfMoves);
 			list<Board::Move *>::const_iterator listIter;
 			for (listIter = listOfMoves.begin(); listIter != listOfMoves.end(); ++listIter) {

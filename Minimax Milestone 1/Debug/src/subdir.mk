@@ -10,7 +10,10 @@ CPP_SRCS += \
 ../src/OthelloBoard.cpp \
 ../src/OthelloDlg.cpp \
 ../src/OthelloMove.cpp \
-../src/OthelloView.cpp 
+../src/OthelloView.cpp \
+../src/PylosBoard.cpp \
+../src/PylosMove.cpp \
+../src/PylosView.cpp 
 
 OBJS += \
 ./src/Board.o \
@@ -19,7 +22,10 @@ OBJS += \
 ./src/OthelloBoard.o \
 ./src/OthelloDlg.o \
 ./src/OthelloMove.o \
-./src/OthelloView.o 
+./src/OthelloView.o \
+./src/PylosBoard.o \
+./src/PylosMove.o \
+./src/PylosView.o 
 
 CPP_DEPS += \
 ./src/Board.d \
@@ -28,7 +34,10 @@ CPP_DEPS += \
 ./src/OthelloBoard.d \
 ./src/OthelloDlg.d \
 ./src/OthelloMove.d \
-./src/OthelloView.d 
+./src/OthelloView.d \
+./src/PylosBoard.d \
+./src/PylosMove.d \
+./src/PylosView.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
