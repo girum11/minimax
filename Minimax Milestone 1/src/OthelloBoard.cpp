@@ -5,7 +5,7 @@
 #include "OthelloBoard.h"
 #include "OthelloMove.h"
 #include "MyLib.h"
-//#include "BasicKey.h"
+#include "BasicKey.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 using namespace std;
@@ -192,18 +192,17 @@ Board *OthelloBoard::Clone() const
 }
 
 Board::Key *OthelloBoard::GetKey() const {
-//   BasicKey<5> *rtn = new BasicKey<5>();
-//   int row, col;
-//   ulong *vals = rtn->vals;
-//
-//   for (row = 0; row < dim; row++)
-//      for (col = 0; col < dim; col++)
-//         vals[row/2] = vals[row/2] << sqrShift | mBoard[row][col] + 1;
-//
-//   vals[row/2] = mNextMove + 1;
-//
-//   return rtn;
-	return 0;
+   BasicKey<5> *rtn = new BasicKey<5>();
+   int row, col;
+   ulong *vals = rtn->vals;
+
+   for (row = 0; row < dim; row++)
+      for (col = 0; col < dim; col++)
+         vals[row/2] = vals[row/2] << sqrShift | mBoard[row][col] + 1;
+
+   vals[row/2] = mNextMove + 1;
+
+   return rtn;
 }
 
 istream &OthelloBoard::Read(istream &is)

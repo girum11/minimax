@@ -36,10 +36,10 @@ int main(int argc, char **argv) {
 	// board = dynamic_cast<Board *>(brdCls->NewInstance());
 
 	/// TODO: Hack for now - I'm avoiding reflection
-	OthelloView *view = new OthelloView();
 	board = new OthelloBoard();
+	OthelloView *view = new OthelloView();
+	move = board->CreateMove();
 	list<Board::Move *> listOfMoves;
-	move = new OthelloMove();
 
 	// Just a sampling of the main scaffold-loop.  You'll make yours a lot longer,
 	// will need to use a try/catch block, and are welcome to violate the function
@@ -53,10 +53,6 @@ int main(int argc, char **argv) {
 
 			while (count-- > 0)
 				board->UndoLastMove();
-		} else if (command.compare("enterMove") == 0) {
-			// FIXME: Why doesn't enterMove work?
-			getline(cin, cArg);
-			*move = cArg.c_str();
 		} else if (command.compare("saveBoard") == 0) {
 			cin >> cArg;
 			ofstream out(cArg.c_str());
@@ -68,12 +64,20 @@ int main(int argc, char **argv) {
 			view->SetModel(board);
 			view->Draw(cout);
 
-			// TODO: List all possible moves isn't working correctly
+			// FIXME: List all possible moves isn't working correctly
 			board->GetAllMoves(&listOfMoves);
 			list<Board::Move *>::const_iterator listIter;
 			for (listIter = listOfMoves.begin(); listIter != listOfMoves.end(); ++listIter) {
 				cout << (*listIter) << " ";
 			}
+		} else if (command.compare("enterMove") == 0) {
+			// FIXME: Why doesn't enterMove work?
+			// FIXME: G++ header files -- autocomplete not working?
+			getline(cin, cArg);
+			*move = cArg.c_str();
+		} else if (command.compare("showMove") == 0) {
+
+		} else if (command.compare("doMove") == 0) {
 
 		} else if (command.compare("quit") == 0)
 			break;
