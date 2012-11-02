@@ -38,53 +38,64 @@ int main(int argc, char **argv) {
 	/// TODO: Hack for now - I'm avoiding reflection
 	board = new OthelloBoard();
 	OthelloView *view = new OthelloView();
+
+	// enterMove issue is probably here... but I have no clue why
 	move = board->CreateMove();
+//	move = new OthelloMove();
+
 	list<Board::Move *> listOfMoves;
 
 	// Just a sampling of the main scaffold-loop.  You'll make yours a lot longer,
 	// will need to use a try/catch block, and are welcome to violate the function
 	// line limit rule for this one method.
 	while (cin >> command) {
-		if (command.compare("undoLastMove") == 0) {
-			cin >> count;
 
-			if (count > board->GetMoveHist().size())
-				count = board->GetMoveHist().size();
+		try {
+			if (command.compare("undoLastMove") == 0) {
+				cin >> count;
 
-			while (count-- > 0)
-				board->UndoLastMove();
-		} else if (command.compare("saveBoard") == 0) {
-			cin >> cArg;
-			ofstream out(cArg.c_str());
-			out << *board;
-		} else if (command.compare("showVal") == 0) {
-			cout << "Value: " << board->GetValue() << endl;
-		} else if (command.compare("showBoard") == 0) {
-			// Show the board
-			view->SetModel(board);
-			view->Draw(cout);
+				if (count > board->GetMoveHist().size())
+					count = board->GetMoveHist().size();
 
-			// FIXME: List all possible moves isn't working correctly
-			board->GetAllMoves(&listOfMoves);
-			list<Board::Move *>::const_iterator listIter;
-			for (listIter = listOfMoves.begin(); listIter != listOfMoves.end(); ++listIter) {
-				cout << (*listIter) << " ";
-			}
-		} else if (command.compare("enterMove") == 0) {
-			// FIXME: Why doesn't enterMove work?
-			// FIXME: G++ header files -- autocomplete not working?
-			getline(cin, cArg);
-			*move = cArg.c_str();
-		} else if (command.compare("showMove") == 0) {
+				while (count-- > 0)
+					board->UndoLastMove();
+			} else if (command.compare("saveBoard") == 0) {
+				cin >> cArg;
+				ofstream out(cArg.c_str());
+				out << *board;
+			} else if (command.compare("showVal") == 0) {
+				cout << "Value: " << board->GetValue() << endl;
+			} else if (command.compare("showBoard") == 0) {
+				// Show the board
+				view->SetModel(board);
+				view->Draw(cout);
 
-		} else if (command.compare("doMove") == 0) {
+				// Print out all possible moves
+				cout << "All Moves: ";
+				board->GetAllMoves(&listOfMoves);
+				list<Board::Move *>::const_iterator listIter;
+				for (listIter = listOfMoves.begin(); listIter != listOfMoves.end(); ++listIter) {
+					cout << (string) **listIter << " ";
+				}
+			} else if (command.compare("enterMove") == 0) {
+				// The exception is the exception that's thrown in the Board::Move member function.
+				// It's this reason why we need to wrap this test scaffold up in a try-catch block.
+				getline(cin, cArg);
+				*move = cArg.c_str();
+			} else if (command.compare("showMove") == 0) {
+				cout << (string) *move << endl;
+			} else if (command.compare("doMove") == 0) {
 
-		} else if (command.compare("quit") == 0)
-			break;
-		else
-			cout << "Unknown command: " << command << endl;
+			} else if (command.compare("quit") == 0)
+				break;
+			else
+				cout << "Unknown command: " << command << endl;
 
-		cout << endl;
+			cout << endl;
+		} catch (BaseException e) {
+			cout << "Got exception..." << endl;
+		}
+
 	}
 
 	delete board;
