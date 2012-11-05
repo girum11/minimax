@@ -85,6 +85,12 @@ int main(int argc, char **argv) {
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
 			} else if (command.compare("doMove") == 0) {
+				// enterMove code (can abstract out if you want)
+				getline(cin, cArg);
+				*move = cArg.c_str();
+
+				// applyMove code
+				board->ApplyMove(move);
 
 			} else if (command.compare("quit") == 0)
 				break;
@@ -102,3 +108,4 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
+
