@@ -200,6 +200,7 @@ Board *PylosBoard::Clone() const
 {
    // Think carefully about this one.  You should be able to do it in just
    // 5-10 lines.  Don't do needless work
+	return 0;
 }
 
 Board::Key *PylosBoard::GetKey() const
@@ -215,6 +216,7 @@ Board::Key *PylosBoard::GetKey() const
 
 istream &PylosBoard::Read(istream &is)
 {
+	return is;
 }
 
 // Don't change this.  Make Read conform to it.

@@ -7,6 +7,7 @@ using namespace std;
 void *PylosMove::operator new(size_t sz)
 {
    // Return next node from freelist, or allocate one
+	return 0;
 }
 
 void PylosMove::operator delete(void *p)
@@ -26,6 +27,7 @@ bool PylosMove::operator==(const Board::Move &rhs) const
 // by lexicographic sort
 bool PylosMove::operator<(const Board::Move &rhs) const
 {
+	return false;
 }
 
 PylosMove::operator string() const
@@ -84,6 +86,7 @@ void PylosMove::operator=(const string &src)
 Board::Move *PylosMove::Clone() const
 {
    // Make this just one line long, a single relatively short "return" statement.
+	return 0;
 }
 
 

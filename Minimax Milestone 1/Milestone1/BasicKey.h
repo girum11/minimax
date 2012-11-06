@@ -69,7 +69,7 @@ bool BasicKey<X>::operator<(const Board::Key &key) const {
 
 // TODO: Test BasicKey operator new() [template code isn't emitted until it runs]
 template <unsigned int X>
-static void *BasicKey<X>::operator new(size_t size) {
+void *BasicKey<X>::operator new(size_t size) {
 	void *temp;
 
 	if (mFreeList.size()) {
@@ -85,7 +85,7 @@ static void *BasicKey<X>::operator new(size_t size) {
 
 // TODO: Test BasicKey operator delete() [template code isn't emitted until it runs]
 template <unsigned int X>
-static void BasicKey<X>::operator delete(void *p) {
+void BasicKey<X>::operator delete(void *p) {
 
 	mFreeList.push_back((BasicKey *)p);
 

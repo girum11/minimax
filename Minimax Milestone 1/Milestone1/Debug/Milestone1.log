@@ -1,22 +1,22 @@
-﻿Build started 11/5/2012 5:13:31 PM.
+﻿Build started 11/5/2012 5:31:16 PM.
      1>Project "C:\Users\Girum\Documents\GitHub\Physics---Minimax--CPE-305-\Minimax Milestone 1\Milestone1\Milestone1.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Board.cpp BoardTest.cpp Dialog.cpp OthelloBoard.cpp OthelloDlg.cpp OthelloMove.cpp OthelloView.cpp
-         OthelloView.cpp
-         OthelloMove.cpp
-         OthelloDlg.cpp
-         OthelloBoard.cpp
-     1>c:\users\girum\documents\github\physics---minimax--cpe-305-\minimax milestone 1\milestone1\othelloboard.cpp(8): fatal error C1083: Cannot open include file: 'BasicKey.h': No such file or directory
-         Dialog.cpp
-         BoardTest.cpp
-     1>c:\users\girum\documents\github\physics---minimax--cpe-305-\minimax milestone 1\milestone1\boardtest.cpp(57): warning C4018: '>' : signed/unsigned mismatch
-     1>c:\users\girum\documents\github\physics---minimax--cpe-305-\minimax milestone 1\milestone1\boardtest.cpp(24): warning C4101: 'cmpBoard' : unreferenced local variable
-     1>c:\users\girum\documents\github\physics---minimax--cpe-305-\minimax milestone 1\milestone1\boardtest.cpp(25): warning C4101: 'cmpMove' : unreferenced local variable
-     1>c:\users\girum\documents\github\physics---minimax--cpe-305-\minimax milestone 1\milestone1\boardtest.cpp(26): warning C4101: 'argLen' : unreferenced local variable
-         Board.cpp
-         Generating Code...
-     1>Done Building Project "C:\Users\Girum\Documents\GitHub\Physics---Minimax--CPE-305-\Minimax Milestone 1\Milestone1\Milestone1.vcxproj" (Build target(s)) -- FAILED.
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt PylosBoard.cpp
+         PylosBoard.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Girum\Documents\GitHub\Physics---Minimax--CPE-305-\Minimax Milestone 1\Milestone1\Debug\Milestone1.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Girum\Documents\GitHub\Physics---Minimax--CPE-305-\Minimax Milestone 1\Milestone1\Debug\Milestone1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Girum\Documents\GitHub\Physics---Minimax--CPE-305-\Minimax Milestone 1\Milestone1\Debug\Milestone1.lib" /MACHINE:X86 Debug\Board.obj
+         Debug\BoardTest.obj
+         Debug\Dialog.obj
+         Debug\OthelloBoard.obj
+         Debug\OthelloDlg.obj
+         Debug\OthelloMove.obj
+         Debug\OthelloView.obj
+         Debug\PylosBoard.obj
+         Debug\PylosMove.obj
+         Debug\PylosView.obj
+         Milestone1.vcxproj -> C:\Users\Girum\Documents\GitHub\Physics---Minimax--CPE-305-\Minimax Milestone 1\Milestone1\Debug\Milestone1.exe
+     1>Done Building Project "C:\Users\Girum\Documents\GitHub\Physics---Minimax--CPE-305-\Minimax Milestone 1\Milestone1\Milestone1.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:05.70
+Time Elapsed 00:00:02.19

@@ -13,10 +13,10 @@
 #include "OthelloMove.h"
 #include "OthelloDlg.h"
 #include "OthelloView.h"
-//#include "PylosBoard.h"
-//#include "PylosMove.h"
-//#include "PylosDlg.h"
-//#include "PylosView.h"
+#include "PylosBoard.h"
+#include "PylosMove.h"
+#include "PylosDlg.h"
+#include "PylosView.h"
 
 using namespace std;
 

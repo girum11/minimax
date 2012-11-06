@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BasicKey.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Class.h" />
     <ClInclude Include="Dialog.h" />
@@ -84,6 +85,10 @@
     <ClInclude Include="OthelloDlg.h" />
     <ClInclude Include="OthelloMove.h" />
     <ClInclude Include="OthelloView.h" />
+    <ClInclude Include="PylosBoard.h" />
+    <ClInclude Include="PylosDlg.h" />
+    <ClInclude Include="PylosMove.h" />
+    <ClInclude Include="PylosView.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +99,9 @@
     <ClCompile Include="OthelloDlg.cpp" />
     <ClCompile Include="OthelloMove.cpp" />
     <ClCompile Include="OthelloView.cpp" />
+    <ClCompile Include="PylosBoard.cpp" />
+    <ClCompile Include="PylosMove.cpp" />
+    <ClCompile Include="PylosView.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
