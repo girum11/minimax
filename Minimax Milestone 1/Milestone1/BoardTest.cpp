@@ -43,8 +43,6 @@ int main(int argc, char **argv) {
 	move = board->CreateMove();
 //	move = new OthelloMove();
 
-	list<Board::Move *> listOfMoves;
-
 	// Just a sampling of the main scaffold-loop.  You'll make yours a lot longer,
 	// will need to use a try/catch block, and are welcome to violate the function
 	// line limit rule for this one method.
@@ -72,6 +70,8 @@ int main(int argc, char **argv) {
 
 				// Print out all possible moves
 				cout << "All Moves: ";
+				
+				list<Board::Move *> listOfMoves;
 				board->GetAllMoves(&listOfMoves);
 				list<Board::Move *>::const_iterator listIter;
 				for (listIter = listOfMoves.begin(); listIter != listOfMoves.end(); ++listIter) {
@@ -84,6 +84,9 @@ int main(int argc, char **argv) {
 				*move = cArg.c_str();
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
+			} else if (command.compare("applyMove") == 0) {
+				// applyMove code
+				board->ApplyMove(move);
 			} else if (command.compare("doMove") == 0) {
 				// enterMove code (can abstract out if you want)
 				getline(cin, cArg);
@@ -91,7 +94,6 @@ int main(int argc, char **argv) {
 
 				// applyMove code
 				board->ApplyMove(move);
-
 			} else if (command.compare("quit") == 0)
 				break;
 			else
@@ -108,4 +110,3 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
-
