@@ -6,6 +6,7 @@
 #include "Board.h"
 #include "View.h"
 #include "Dialog.h"
+#include <exception>
 
 // Add more includes, possibly, but not board-specific ones
 // TODO: Remove these includes once you get reflection working
@@ -36,12 +37,11 @@ int main(int argc, char **argv) {
 	// board = dynamic_cast<Board *>(brdCls->NewInstance());
 
 	/// TODO: Hack for now - I'm avoiding reflection
-	board = new OthelloBoard();
-	OthelloView *view = new OthelloView();
+	board = new PylosBoard();
+	PylosView *view = new PylosView();
 
 	// enterMove issue is probably here... but I have no clue why
 	move = board->CreateMove();
-//	move = new OthelloMove();
 
 	// Just a sampling of the main scaffold-loop.  You'll make yours a lot longer,
 	// will need to use a try/catch block, and are welcome to violate the function
@@ -100,8 +100,8 @@ int main(int argc, char **argv) {
 				cout << "Unknown command: " << command << endl;
 
 			cout << endl;
-		} catch (BaseException e) {
-			cout << "Got exception..." << endl;
+		} catch (exception e) {
+			cout << "Got exception... " << e.what() << endl;
 		}
 
 	}
