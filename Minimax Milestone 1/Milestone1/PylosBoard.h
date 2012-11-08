@@ -150,13 +150,29 @@ protected:
          mBlack |= spot->top->mask;
    }
    
-   // [*Staley] Like HalfPut, but in reverse
+   // [Staley] Like HalfPut, but in reverse
    inline void HalfTake(Spot *spot) const {
-      // [*Staley] Fill in
+      // [Staley] Fill in
+      // Change over the Spots
+      spot->empty = spot->top;
+      spot->top = spot->empty->below[kNW];
 
+      // Clear out the corresponding bits
+      if (mWhoseMove == kWhite)
+         mWhite &= ~spot->empty->mask;
+      else
+         mBlack &= ~spot->empty->mask;
    }
-   
+
    // [*Staley] Add possible nested class and member datum to force StaticInit call.
+   struct PylosBoardInitializer {
+      PylosBoardInitializer() {
+         std::cout << "Called PylosBoardInitializer()..." << std::endl;
+      }
+   };
+
+   static PylosBoardInitializer init;
+
 
    // [Staley] Rules object for PylosBoard
    static Rules mRules;
