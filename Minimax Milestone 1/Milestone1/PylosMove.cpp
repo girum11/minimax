@@ -6,13 +6,13 @@ using namespace std;
 
 void *PylosMove::operator new(size_t sz)
 {
-   // Return next node from freelist, or allocate one
+   // [Staley] Return next node from freelist, or allocate one
 	return 0;
 }
 
 void PylosMove::operator delete(void *p)
 {
-   // release node pointed to by p to the freelist
+   // [Staley] release node pointed to by p to the freelist
 }
 
 bool PylosMove::operator==(const Board::Move &rhs) const
@@ -20,11 +20,11 @@ bool PylosMove::operator==(const Board::Move &rhs) const
    const PylosMove &oRhs = dynamic_cast<const PylosMove &>(rhs);
 
    return mType == oRhs.mType && mLocs.size() == oRhs.mLocs.size();
-//   Finish on this one line.  Use STL "equal" function template.
+// [Staley]   Finish on this one line.  Use STL "equal" function template.
 }
 
-// Sort by target loc, then by move type, then source locs
-// by lexicographic sort
+// [Staley] Sort by target loc, then by move type, then source locs
+// [Staley] by lexicographic sort
 bool PylosMove::operator<(const Board::Move &rhs) const
 {
 	return false;
@@ -40,13 +40,13 @@ PylosMove::operator string() const
       itr = mLocs.begin() + 1;
    }
    else {
-      // Fill in
+      // [Staley] Fill in
    }
    
    if (itr != mLocs.end()) {
       str += FString(" taking [%d, %d]", (*itr).first, (*itr).second);
       itr++;
-      // Another couple lines here
+      // [Staley] Another couple lines here
    }
    
    return str;
@@ -65,32 +65,32 @@ void PylosMove::operator=(const string &src)
       type = kReserve;
       res = sscanf(src.c_str(), " Play at [ %hd , %hd %c %6s [ %hd , %hd %c %3s "
        "[ %hd , %hd %c %1s", &p1.first, &p1.second, &brack1, wd1, &p2.first);
-       // Fill in rest of sscanf.  Just one more line here is all that's needed.
+       // [Staley] Fill in rest of sscanf.  Just one more line here is all that's needed.
       
-      // Test result of scanf for good format.  Had a total of 7 terms in this test.
+      // [Staley] Test result of scanf for good format.  Had a total of 7 terms in this test.
       //if () {
-      //    Fill in temp
+      // [Staley]    Fill in temp
       //}
       //else
-      //   throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
+      // [Staley]   throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
    }
    else if (!strcmp(wd1, "Promote")) {
-      // Similar logic for Promote
+      // [Staley] Similar logic for Promote
    }
    else
       throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
 
-   // About 5 lines of wrapup logic and final error checks needed here.
+   // [Staley] About 5 lines of wrapup logic and final error checks needed here.
 }
 
 Board::Move *PylosMove::Clone() const
 {
-   // Make this just one line long, a single relatively short "return" statement.
+   // [Staley] Make this just one line long, a single relatively short "return" statement.
 	return 0;
 }
 
 
-// release node pointed to by p to the freelist
+// [Staley] release node pointed to by p to the freelist
 ostream &PylosMove::Write(ostream &os) const
 {
    char size = mLocs.size();
@@ -108,7 +108,7 @@ ostream &PylosMove::Write(ostream &os) const
    return os;
 }
 
-// Make this work with the (unchanged) Write method above.
+// [Staley] Make this work with the (unchanged) Write method above.
 istream &PylosMove::Read(istream &is)
 {
    return is;

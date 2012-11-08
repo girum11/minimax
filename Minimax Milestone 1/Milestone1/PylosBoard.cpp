@@ -16,20 +16,24 @@ PylosBoard::Cell PylosBoard::mCells[kNumCells];
 // TODO: Fix PylosBoard mOffs definition hack.
 int PylosBoard::mOffs[kDim] = { 0, 0, 0, 0 };
 
+// TODO: Implement this static member function.
 void PylosBoard::StaticInit()
 {
    Cell *cell;
-   int level, row, col, ndx, nextSet = 0, nextCell = 0;
+   int level = 0, row = 0, col = 0, ndx = 0, nextSet = 0, nextCell = 0;
 
-   for (level = 0; level < kDim; level++)
-      for (row = 0; row < kDim - level; row++)
-         for (col = 0; col < kDim - level; col++, nextCell++) {
+   // Hold a set for the different alignments you can have
+   Set horizontalAlignment = 0, verticalAlginment = 0, squareAlignment = 0;
+
+   for (assert(level == 0); level < kDim; level++)
+      for (assert(row == 0); row < kDim - level; row++)
+         for (assert(col == 0); col < kDim - level; col++, nextCell++) {
 
             cell = mCells + nextCell;
             cell->level = level;
             cell->mask = 1 << nextCell;
 
-            // Set up below and above pointers.
+            // [Staley] Set up below and above pointers.
             if (level > 0) {
                cell->below[kNW] = GetCell(row, col, level-1);
                cell->below[kNE] = GetCell(row, col+1, level-1);
@@ -38,18 +42,20 @@ void PylosBoard::StaticInit()
 
                cell->below[kNW]->above = cell;
 
-               for (ndx = 0; ndx < kSqr; ndx++) {
+               for (assert(ndx == 0); ndx < kSqr; ndx++) {
                   cell->below[ndx]->sups |= cell->mask;
                   cell->subs |= cell->below[ndx]->mask;
                }
             }
 
-            // Add cell mask to horizontal/vertical alignments if relevant
+            // [Staley] Add cell mask to horizontal/vertical alignments if relevant
+			
+			
          }
 
-   // Add cell masks to square alignments
+   // [Staley] Add cell masks to square alignments
 
-   // Copy set data back into cell set collections.
+   // [Staley] Copy set data back into cell set collections.
 }
 
 void PylosBoard::Rules::SetMarble(int val) {
@@ -85,7 +91,7 @@ void PylosBoard::Rules::EndSwap() {
 PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
  mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0)
 {
-   // More work needed here.
+   // [Staley] More work needed here.
 }
 
 PylosBoard::Rules PylosBoard::mRules;
@@ -102,15 +108,15 @@ long PylosBoard::GetValue() const
 }
 
 void PylosBoard::PutMarble(Spot *trg) {
-   // Other stuff needed here, related to board valuation
-   // This is a great place for a few asserts, too.
+   // [Staley] Other stuff needed here, related to board valuation
+   // [Staley] This is a great place for a few asserts, too.
 
    HalfPut(trg);
 }
 
 void PylosBoard::TakeMarble(Spot *trg) {
-   // Other stuff needed here, related to board valuation
-   // This is a great place for a few asserts, too.
+   // [Staley] Other stuff needed here, related to board valuation
+   // [Staley] This is a great place for a few asserts, too.
 
    HalfTake(trg);
 }
@@ -118,7 +124,7 @@ void PylosBoard::TakeMarble(Spot *trg) {
 void PylosBoard::ApplyMove(Move *move)
 {
    PylosMove *tm = dynamic_cast<PylosMove *>(move);
-   int rChange = -1;  // Start by assuming we'll lose one from reserve
+   int rChange = -1;  // [Staley] Start by assuming we'll lose one from reserve
    PylosMove::LocVector::iterator itr = tm->mLocs.begin();
 
    PutMarble(&mSpots[(*itr).first][(*itr).second]);
@@ -139,7 +145,7 @@ void PylosBoard::ApplyMove(Move *move)
 }
 
 void PylosBoard::UndoLastMove() {
-   // Fill in
+   // [Staley] Fill in
 }
 
 void PylosBoard::GetAllMoves(list<Move *> *moves) const
@@ -158,17 +164,17 @@ void PylosBoard::GetAllMoves(list<Move *> *moves) const
    for (tRow = 0; tRow < kDim; tRow++)
       for (tCol = 0; tCol < kDim; tCol++) {
          trg = mSpots[tRow][tCol].empty;
-         if (trg && (trg->subs & (mWhite|mBlack)) == trg->subs) { // found a target spot
+         if (trg && (trg->subs & (mWhite|mBlack)) == trg->subs) { // [Staley] found a target spot
             locs.clear();
             locs.push_back(pair<int, int>(tRow, tCol));
             moves->push_back(new PylosMove(locs, PylosMove::kReserve));
 
-            for (sRow = 0; sRow < kDim; sRow++) // search for promote moves
+            for (sRow = 0; sRow < kDim; sRow++) // [Staley] search for promote moves
                for (sCol = 0; sCol < kDim; sCol++) {
                   src = mSpots[sRow][sCol].top;
                   if (src && (src->sups & (mWhite|mBlack)) == 0
                    && (src->mask & sideMask) && src->level < trg->level
-                   && (sRow < tRow || sRow > tRow + 1    // Not a support for trg
+                   && (sRow < tRow || sRow > tRow + 1    // [Staley] Not a support for trg
                    || sCol < tCol || sCol > tCol + 1)) {
                      locs.push_back(pair<int, int>(sRow, sCol));
                      moves->push_back(new PylosMove(locs, PylosMove::kPromote));
@@ -181,14 +187,14 @@ void PylosBoard::GetAllMoves(list<Move *> *moves) const
    AddTakeBacks(mvs);
 }
 
-// For each move in *mvs that completes one or more sets, add all
-// combination of spots to take back.
+// [Staley] For each move in *mvs that completes one or more sets, add all
+// [Staley] combination of spots to take back.
 void PylosBoard::AddTakeBacks(list<PylosMove *> *mvs) const {
-   // You'll find HalfPut and HalfTake useful here.  You need to be able
-   // to temporarily put/take marbles in order to make this logic manageable,
-   // and you want it fast, so you don't want all the overhead of board
-   // value management, since you'll ultimately leave the board unchanged
-   // once the function is done.
+   // [Staley] You'll find HalfPut and HalfTake useful here.  You need to be able
+   // [Staley] to temporarily put/take marbles in order to make this logic manageable,
+   // [Staley] and you want it fast, so you don't want all the overhead of board
+   // [Staley] value management, since you'll ultimately leave the board unchanged
+   // [Staley] once the function is done.
 }
 
 Board::Move *PylosBoard::CreateMove() const
@@ -198,8 +204,8 @@ Board::Move *PylosBoard::CreateMove() const
 
 Board *PylosBoard::Clone() const
 {
-   // Think carefully about this one.  You should be able to do it in just
-   // 5-10 lines.  Don't do needless work
+   // [Staley] Think carefully about this one.  You should be able to do it in just
+   // [Staley] 5-10 lines.  Don't do needless work
 	return 0;
 }
 
@@ -219,7 +225,7 @@ istream &PylosBoard::Read(istream &is)
 	return is;
 }
 
-// Don't change this.  Make Read conform to it.
+// [Staley] Don't change this.  Make Read conform to it.
 ostream &PylosBoard::Write(ostream &os) const
 {
    Rules rls = mRules;
@@ -236,11 +242,13 @@ ostream &PylosBoard::Write(ostream &os) const
    return os;
 }
 
+// TODO: Implement this static member function.
 void *PylosBoard::GetOptions()
 {
    return new Rules(mRules);
 }
 
+// TODO: Implement this static member function.
 void PylosBoard::SetOptions(const void *opts)
 {
    mRules = *reinterpret_cast<const Rules *>(opts);
@@ -248,7 +256,7 @@ void PylosBoard::SetOptions(const void *opts)
 
 void PylosBoard::Delete()
 {
-   // As with Clone, think carefully and don't do needless work.
+   // [Staley] As with Clone, think carefully and don't do needless work.
 }
 
 // TODO: Implement reflection

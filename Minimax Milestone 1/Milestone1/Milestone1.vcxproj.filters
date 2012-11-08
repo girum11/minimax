@@ -89,5 +89,8 @@
     <ClCompile Include="PylosView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PylosDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

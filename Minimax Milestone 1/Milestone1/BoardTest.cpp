@@ -100,8 +100,8 @@ int main(int argc, char **argv) {
 				cout << "Unknown command: " << command << endl;
 
 			cout << endl;
-		} catch (exception e) {
-			cout << "Got exception... " << e.what() << endl;
+		} catch (BaseException exc) {
+			cout << "Got exception... " << exc.what() << endl;
 		}
 
 	}
