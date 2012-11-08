@@ -1,18 +1,31 @@
 #include "MyLib.h"
 #include "PylosMove.h"
 #include "PylosBoard.h"
+#include <assert.h>
 
 using namespace std;
 
+vector<PylosMove *> PylosMove::mFreeList;
+
 void *PylosMove::operator new(size_t sz)
 {
-   // [Staley] Return next node from freelist, or allocate one
+   // [Staley?] Return next node from freelist, or allocate one
+	void *temp;
+
+	if (mFreeList.size()) {
+	  temp = mFreeList.back();
+	  mFreeList.pop_back();
+	} else {
+	  temp = ::new char[sz];
+	}
+
 	return 0;
 }
 
 void PylosMove::operator delete(void *p)
 {
-   // [Staley] release node pointed to by p to the freelist
+   // [Staley?] release node pointed to by p to the freelist
+	mFreeList.push_back((PylosMove *)p);
 }
 
 bool PylosMove::operator==(const Board::Move &rhs) const
@@ -20,13 +33,17 @@ bool PylosMove::operator==(const Board::Move &rhs) const
    const PylosMove &oRhs = dynamic_cast<const PylosMove &>(rhs);
 
    return mType == oRhs.mType && mLocs.size() == oRhs.mLocs.size();
-// [Staley]   Finish on this one line.  Use STL "equal" function template.
+// [Staley?]   Finish on this one line.  Use STL "equal" function template.
 }
 
 // [Staley] Sort by target loc, then by move type, then source locs
 // [Staley] by lexicographic sort
 bool PylosMove::operator<(const Board::Move &rhs) const
 {
+	const PylosMove &oRhs = dynamic_cast<const PylosMove &>(rhs);
+
+	
+
 	return false;
 }
 
@@ -39,8 +56,11 @@ PylosMove::operator string() const
       str = FString("Play at [%d, %d]", mLocs[0].first, mLocs[0].second);
       itr = mLocs.begin() + 1;
    }
-   else {
-      // [Staley] Fill in
+   else if (mType == kPromote) {
+       // [Staley] Fill in
+   } else {
+	   // otherwise, if mType isn't one of the enum types, then exit
+	   assert(false);
    }
    
    if (itr != mLocs.end()) {
@@ -68,10 +88,10 @@ void PylosMove::operator=(const string &src)
        // [Staley] Fill in rest of sscanf.  Just one more line here is all that's needed.
       
       // [Staley] Test result of scanf for good format.  Had a total of 7 terms in this test.
-      //if () {
+      // [Staley] if () {
       // [Staley]    Fill in temp
-      //}
-      //else
+      // [Staley] }
+      // [Staley] else
       // [Staley]   throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
    }
    else if (!strcmp(wd1, "Promote")) {
@@ -85,7 +105,8 @@ void PylosMove::operator=(const string &src)
 
 Board::Move *PylosMove::Clone() const
 {
-   // [Staley] Make this just one line long, a single relatively short "return" statement.
+    // [Staley] Make this just one line long, a single relatively short 
+	// [Staley] "return" statement.
 	return 0;
 }
 

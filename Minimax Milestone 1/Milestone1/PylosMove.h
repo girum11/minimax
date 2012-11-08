@@ -38,13 +38,20 @@ protected:
    std::istream &Read(std::istream &is);
    std::ostream &Write(std::ostream &) const;
 
+   // Enum to mark what type of move we are.  Can be either kReserve or
+   // kPromote.
    char mType;
+
+   // Vector containing the locations that this move involves.  mLocs[0] is
+   // where the move is moving from, and subsequent array indices are where you're
+   // promoting from / moving to.
    LocVector mLocs;
 
-    void operator delete(void *p);
-    void *operator new(size_t sz);
+   void operator delete(void *p);
+   void *operator new(size_t sz);
 
-   // Static member datum to record freelist.  Use STL!
+    // [Staley] Static member datum to record freelist.  Use STL!
+	static std::vector<PylosMove *> mFreeList;
 };
 
 #endif

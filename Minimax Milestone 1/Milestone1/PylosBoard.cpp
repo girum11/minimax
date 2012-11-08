@@ -22,11 +22,8 @@ void PylosBoard::StaticInit()
    Cell *cell;
    int level = 0, row = 0, col = 0, ndx = 0, nextSet = 0, nextCell = 0;
 
-   // Hold a set for the different alignments you can have
-   Set horizontalAlignment = 0, verticalAlginment = 0, squareAlignment = 0;
-
-   for (assert(level == 0); level < kDim; level++)
-      for (assert(row == 0); row < kDim - level; row++)
+   for (assert(level == 0); level < kDim; level++) {
+      for (assert(row == 0); row < kDim - level; row++) {
          for (assert(col == 0); col < kDim - level; col++, nextCell++) {
 
             cell = mCells + nextCell;
@@ -47,15 +44,41 @@ void PylosBoard::StaticInit()
                   cell->subs |= cell->below[ndx]->mask;
                }
             }
+         }
+      }
+   }
+   
+   // Hold a set for the different alignments you can have
+   Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
 
-            // [Staley] Add cell mask to horizontal/vertical alignments if relevant
-			
-			
+   // [*Staley] Add cell mask to horizontal/vertical alignments if relevant
+   for (level = 0; level < 2; level++) {
+      // Step across this level's grid diagonally
+      for (int rowcol = 0; rowcol < kDim - level; rowcol++) {
+         
+         // Create the horizontal and vertical alignment for this node
+         for (int i = 0; i < kDim - level; i++) {
+            horizontalAlignment |= GetMask(rowcol, i, level);
+            verticalAlignment |= GetMask(i, rowcol, level);
          }
 
-   // [Staley] Add cell masks to square alignments
+         // Every one of the cells involved should set those alignments
+         for (int i = 0; i < kDim - level; i++) {
+            GetCell(i, rowcol, level)->sets[0] = verticalAlignment;
+            GetCell(rowcol, i, level)->sets[1] = horizontalAlignment;
+         }
 
-   // [Staley] Copy set data back into cell set collections.
+         // Reset the alignments for the next iteration
+         horizontalAlignment = verticalAlignment = 0;
+      }
+   }
+
+   // [*Staley] Add cell masks to square alignments
+
+
+
+   // [*Staley] Copy set data back into cell set collections.
+
 }
 
 void PylosBoard::Rules::SetMarble(int val) {
@@ -69,7 +92,7 @@ void PylosBoard::Rules::SetMarble(int val) {
 void PylosBoard::Rules::SetLevel(int val) {
    if (val >= marbleWgt || val < 0)
       throw BaseException("Level weight must be nonnegative and less than"
-       " marble weight");
+      " marble weight");
 
    levelWgt = val;
 }
@@ -77,7 +100,7 @@ void PylosBoard::Rules::SetLevel(int val) {
 void PylosBoard::Rules::SetFree(int val) {
    if (val % 2 != 0 || val < 0 || val >= marbleWgt)
       throw BaseException("Free weight must be even, nonnegative, and less"
-       " than marble weight");
+      " than marble weight");
 
    freeWgt = val;
 }
@@ -89,9 +112,9 @@ void PylosBoard::Rules::EndSwap() {
 }
 
 PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
- mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0)
+   mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0)
 {
-   // [Staley] More work needed here.
+   // [*Staley] More work needed here.
 }
 
 PylosBoard::Rules PylosBoard::mRules;
@@ -104,19 +127,19 @@ long PylosBoard::GetValue() const
       return kWinVal;
    else
       return mRules.marbleWgt*(mWhiteReserve - mBlackReserve)
-       + mRules.levelWgt * mLevelLead + mRules.freeWgt * mFreeLead;
+      + mRules.levelWgt * mLevelLead + mRules.freeWgt * mFreeLead;
 }
 
 void PylosBoard::PutMarble(Spot *trg) {
-   // [Staley] Other stuff needed here, related to board valuation
-   // [Staley] This is a great place for a few asserts, too.
+   // [*Staley] Other stuff needed here, related to board valuation
+   // [*Staley] This is a great place for a few asserts, too.
 
    HalfPut(trg);
 }
 
 void PylosBoard::TakeMarble(Spot *trg) {
-   // [Staley] Other stuff needed here, related to board valuation
-   // [Staley] This is a great place for a few asserts, too.
+   // [*Staley] Other stuff needed here, related to board valuation
+   // [*Staley] This is a great place for a few asserts, too.
 
    HalfTake(trg);
 }
@@ -145,7 +168,7 @@ void PylosBoard::ApplyMove(Move *move)
 }
 
 void PylosBoard::UndoLastMove() {
-   // [Staley] Fill in
+   // [*Staley] Fill in
 }
 
 void PylosBoard::GetAllMoves(list<Move *> *moves) const
@@ -173,22 +196,22 @@ void PylosBoard::GetAllMoves(list<Move *> *moves) const
                for (sCol = 0; sCol < kDim; sCol++) {
                   src = mSpots[sRow][sCol].top;
                   if (src && (src->sups & (mWhite|mBlack)) == 0
-                   && (src->mask & sideMask) && src->level < trg->level
-                   && (sRow < tRow || sRow > tRow + 1    // [Staley] Not a support for trg
-                   || sCol < tCol || sCol > tCol + 1)) {
-                     locs.push_back(pair<int, int>(sRow, sCol));
-                     moves->push_back(new PylosMove(locs, PylosMove::kPromote));
-                     locs.pop_back();
+                     && (src->mask & sideMask) && src->level < trg->level
+                     && (sRow < tRow || sRow > tRow + 1    // [Staley] Not a support for trg
+                     || sCol < tCol || sCol > tCol + 1)) {
+                        locs.push_back(pair<int, int>(sRow, sCol));
+                        moves->push_back(new PylosMove(locs, PylosMove::kPromote));
+                        locs.pop_back();
                   }
                }
          }
       }
 
-   AddTakeBacks(mvs);
+      AddTakeBacks(mvs);
 }
 
-// [Staley] For each move in *mvs that completes one or more sets, add all
-// [Staley] combination of spots to take back.
+// [*Staley] For each move in *mvs that completes one or more sets, add all
+// [*Staley] combination of spots to take back.
 void PylosBoard::AddTakeBacks(list<PylosMove *> *mvs) const {
    // [Staley] You'll find HalfPut and HalfTake useful here.  You need to be able
    // [Staley] to temporarily put/take marbles in order to make this logic manageable,
@@ -204,9 +227,9 @@ Board::Move *PylosBoard::CreateMove() const
 
 Board *PylosBoard::Clone() const
 {
-   // [Staley] Think carefully about this one.  You should be able to do it in just
-   // [Staley] 5-10 lines.  Don't do needless work
-	return 0;
+   // [*Staley] Think carefully about this one.  You should be able to do it in just
+   // [*Staley] 5-10 lines.  Don't do needless work
+   return 0;
 }
 
 Board::Key *PylosBoard::GetKey() const
@@ -222,7 +245,8 @@ Board::Key *PylosBoard::GetKey() const
 
 istream &PylosBoard::Read(istream &is)
 {
-	return is;
+   // [*Staley] Fill in (conform to Write() method below)
+   return is;
 }
 
 // [Staley] Don't change this.  Make Read conform to it.
@@ -261,5 +285,5 @@ void PylosBoard::Delete()
 
 // TODO: Implement reflection
 const Class *PylosBoard::GetClass() const {
-	return 0;
+   return 0;
 }
