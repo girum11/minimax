@@ -16,15 +16,17 @@ PylosBoard::Cell PylosBoard::mCells[kNumCells];
 // TODO: Fix PylosBoard mOffs definition hack.
 int PylosBoard::mOffs[kDim] = { 0, 0, 0, 0 };
 
-// TODO: Implement this static member function.
 void PylosBoard::StaticInit()
 {
    Cell *cell;
    int level = 0, row = 0, col = 0, ndx = 0, nextSet = 0, nextCell = 0;
 
-   for (assert(level == 0); level < kDim; level++) {
-      for (assert(row == 0); row < kDim - level; row++) {
-         for (assert(col == 0); col < kDim - level; col++, nextCell++) {
+   // Hold a set for the different alignments you can have
+   Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
+
+   for (level = 0; level < kDim; level++) {
+      for (row = 0; row < kDim - level; row++) {
+         for (col = 0; col < kDim - level; col++, nextCell++) {
 
             cell = mCells + nextCell;
             cell->level = level;
@@ -47,38 +49,66 @@ void PylosBoard::StaticInit()
          }
       }
    }
-   
-   // Hold a set for the different alignments you can have
-   Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
 
-   // [*Staley] Add cell mask to horizontal/vertical alignments if relevant
+   // Clean out mSets to assert that it was properly filled later
+   for (int i = 0; i < kNumSets; i++)
+      mSets[i] = 0x0;
+   
+   // [Staley] Add cell mask to horizontal/vertical alignments if relevant
+   int setNum = 0;
    for (level = 0; level < 2; level++) {
       // Step across this level's grid diagonally
       for (int rowcol = 0; rowcol < kDim - level; rowcol++) {
-         
+         // Clean off the alignments
+         horizontalAlignment = verticalAlignment = 0x0;
+
          // Create the horizontal and vertical alignment for this node
          for (int i = 0; i < kDim - level; i++) {
             horizontalAlignment |= GetMask(rowcol, i, level);
             verticalAlignment |= GetMask(i, rowcol, level);
          }
 
-         // Every one of the cells involved should set those alignments
-         for (int i = 0; i < kDim - level; i++) {
-            GetCell(i, rowcol, level)->sets[0] = verticalAlignment;
-            GetCell(rowcol, i, level)->sets[1] = horizontalAlignment;
-         }
-
-         // Reset the alignments for the next iteration
-         horizontalAlignment = verticalAlignment = 0;
+         // Throw the newly generated alignments into mSets
+         mSets[setNum++] = horizontalAlignment;
+         mSets[setNum++] = verticalAlignment;
       }
    }
 
-   // [*Staley] Add cell masks to square alignments
+   // [Staley] Add cell masks to square alignments
+   for (level = 0; level < kDim - 1; level++) {
+      for (row = 0; row < kDim - level; row++) {
+         for (col = 0; col < kDim - level; col++) {
+            if (InBounds(row+1,col+1,level)) {
+               // Reset the square alignment
+               squareAlignment = 0x0;
 
+               squareAlignment |= GetMask(row  , col  , level);
+               squareAlignment |= GetMask(row  , col+1, level);
+               squareAlignment |= GetMask(row+1, col  , level);
+               squareAlignment |= GetMask(row+1, col+1, level);
 
+               // Add the square alignment to mSets
+               mSets[setNum++] = squareAlignment;
+            }
+         }
+      }
+   }
 
-   // [*Staley] Copy set data back into cell set collections.
-
+   // [Staley] Copy set data back into cell set collections.
+   for (int i = 0; i < kNumSets; i++) {
+      // Assert that each alignment was properly set
+      assert(mSets[i] != 0x0);
+      
+      // For every block, add the alignments the block is a part of
+      int setCounter = 0;
+      for (level = 0; level < kDim; level++)
+         for (row = 0; row < kDim - level; row++)
+            for (col = 0; col < kDim - level; col++)
+               // If this block is part of this alignment, then set it
+               if (mSets[i] & GetMask(row, col, level))
+                  GetCell(row, col, level)->sets[setCounter++] = mSets[i];
+   }
+   
 }
 
 void PylosBoard::Rules::SetMarble(int val) {
