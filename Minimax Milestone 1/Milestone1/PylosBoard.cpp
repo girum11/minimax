@@ -16,6 +16,13 @@ PylosBoard::Cell PylosBoard::mCells[kNumCells];
 // TODO: Fix PylosBoard mOffs definition hack.
 int PylosBoard::mOffs[kDim] = { 0, 0, 0, 0 };
 
+int NumberOfSetBits(int i)
+{
+    i = i - ((i >> 1) & 0x55555555);
+    i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+    return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
+}
+
 void PylosBoard::StaticInit()
 {
    Cell *cell;
@@ -41,7 +48,7 @@ void PylosBoard::StaticInit()
 
                cell->below[kNW]->above = cell;
 
-               for (assert(ndx == 0); ndx < kSqr; ndx++) {
+               for (ndx = 0; ndx < kSqr; ndx++) {
                   cell->below[ndx]->sups |= cell->mask;
                   cell->subs |= cell->below[ndx]->mask;
                }
@@ -98,6 +105,16 @@ void PylosBoard::StaticInit()
    for (int i = 0; i < kNumSets; i++) {
       // Assert that each alignment was properly set
       assert(mSets[i] != 0x0);
+
+      // Verify level 0 horizontal/vertical alignments
+      if (i >= 0 && i < 8)
+         assert(NumberOfSetBits(mSets[i]) == 4);
+      // Verify level 1 horizontal/vertical alignments
+      else if (i >= 8 && i < 14)
+         assert(NumberOfSetBits(mSets[i]) == 3);
+      // Verify square alignments
+      else if (i >= 14 && i < 28)
+         assert(NumberOfSetBits(mSets[i]) == 4);
       
       // For every block, add the alignments the block is a part of
       int setCounter = 0;
@@ -108,8 +125,9 @@ void PylosBoard::StaticInit()
                if (mSets[i] & GetMask(row, col, level))
                   GetCell(row, col, level)->sets[setCounter++] = mSets[i];
    }
-   
 }
+
+
 
 void PylosBoard::Rules::SetMarble(int val) {
 
