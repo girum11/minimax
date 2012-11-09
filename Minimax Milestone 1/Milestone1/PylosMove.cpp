@@ -7,6 +7,7 @@ using namespace std;
 
 vector<PylosMove *> PylosMove::mFreeList;
 
+
 void *PylosMove::operator new(size_t sz)
 {
    // [Staley] Return next node from freelist, or allocate one
@@ -57,17 +58,17 @@ PylosMove::operator string() const
       itr = mLocs.begin() + 1;
    }
    else if (mType == kPromote) {
-       // [Staley] Fill 
+       // [*Staley] Fill 
 
    } else {
-	   // otherwise, if mType isn't one of the enum types, then exit
+	   // If mType isn't one of the enum types, then exit the program
 	   assert(false);
    }
    
    if (itr != mLocs.end()) {
       str += FString(" taking [%d, %d]", (*itr).first, (*itr).second);
       itr++;
-      // [Staley] Another couple lines here
+      // [*Staley] Another couple lines here
    }
    
    return str;
@@ -75,6 +76,8 @@ PylosMove::operator string() const
 
 void PylosMove::operator=(const string &src)
 {
+   static const int kPlayOneParam = 3, kPlayTwoParams = 7, kPlayThreeParams = 11;
+   
    char wd1[11], wd2[11], wd3[11], brack1, brack2, brack3;
    pair<short, short> p1, p2, p3, p4;
    int res;
@@ -86,18 +89,26 @@ void PylosMove::operator=(const string &src)
       type = kReserve;
       res = sscanf(src.c_str(), " Play at [ %hd , %hd %c %6s [ %hd , %hd %c %3s "
        "[ %hd , %hd %c %1s", &p1.first, &p1.second, &brack1, wd1, &p2.first,
-         &p2.second, &brack2, &p3.first, &p3.second, &brack3, &p4.first, &p4.second);
+         &p2.second, &brack2, wd2, &p3.first, &p3.second, &brack3);
 
-      // [*Staley] Test result of scanf for good format.  Had a total of 7 terms in this test.
-      if (res == 3) {
-      // [*Staley]    Fill in temp
+      // *Staley] Test result of scanf for good format.  Had a total of 7 terms in this test.
+      if (res == kPlayOneParam && brack1 == ']') {
+      // [Staley]    Fill in temp
          temp.push_back(p1);
+      } else if (res == kPlayTwoParams && brack1 == ']' && brack2 == ']') {
+         temp.push_back(p1);
+         temp.push_back(p2);
+      } else if (res == kPlayThreeParams && 
+       brack1 == ']' && brack2 == ']' && brack3 == ']') {
+         temp.push_back(p1);
+         temp.push_back(p2);
+         temp.push_back(p3);
       }
       else
          throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
    }
    else if (!strcmp(wd1, "Promote")) {
-      // [Staley] Similar logic for Promote
+      // [*Staley] Similar logic for Promote
    }
    else
       throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
