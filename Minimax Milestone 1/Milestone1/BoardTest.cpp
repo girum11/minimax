@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
 	// Many more locals needed
 
 	// Sample of some Class code
-	// const Class *viewCls, *dlgCls;
+	// const Class *viewCls, *dlgCls;e
 	// const BoardClass *brdCls;
 
 	// Set up Class objects based on commandline args, with appropriate
