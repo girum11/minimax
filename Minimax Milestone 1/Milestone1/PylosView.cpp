@@ -19,7 +19,7 @@ void PylosView::Draw(ostream &out) {
    for (level = PylosBoard::kDim - 1; level >= 0; level--) {
       for (row = 0; row < PylosBoard::kDim - level; row++) {
          for (col = 0; col < PylosBoard::kDim - level; col++) {
-
+            
             PylosBoard::Set mask = pb->GetCell(row, col, level)->mask;
 
             if (mask & pb->mWhite)
@@ -27,7 +27,7 @@ void PylosView::Draw(ostream &out) {
             else if (mask & pb->mBlack)
                rtn += " B";
             else
-               rtn += ". ";
+               rtn += " .";
          }
          rtn += "\n";
       }

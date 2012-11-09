@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
 				board->GetAllMoves(&listOfMoves);
 				list<Board::Move *>::const_iterator listIter;
 				for (listIter = listOfMoves.begin(); listIter != listOfMoves.end(); ++listIter) {
-					cout << (string) **listIter << " ";
+					cout << (string) **listIter << " \n";
 				}
 			} else if (command.compare("enterMove") == 0) {
 				// The exception is the exception that's thrown in the Board::Move member function.

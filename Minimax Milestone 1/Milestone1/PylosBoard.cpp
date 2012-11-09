@@ -12,13 +12,11 @@ using namespace std;
 
 PylosBoard::Set PylosBoard::mSets[kNumSets];
 PylosBoard::Cell PylosBoard::mCells[kNumCells];
+int PylosBoard::mOffs[kDim];
 
 // The C++ definition here isn't required in C++11, which I'm using.
 // Put it there anyways to force the "static block" to run.
 PylosBoard::PylosBoardInitializer PylosBoard::mInitializer;
-
-// TODO: Fix PylosBoard mOffs definition hack.
-int PylosBoard::mOffs[kDim] = { 0, 0, 0, 0 };
 
 // Stolen helper function from StackOverflow, used to assert()
 // alignment bits being set correctly
@@ -37,6 +35,11 @@ void PylosBoard::StaticInit() {
    // Hold a set for the different alignments you can have
    Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
 
+   // Initialize mOffs
+   for (int i = 0; i < kDim; i++)
+      mOffs[i] = 0;
+
+   // Initialize mCells
    for (level = 0; level < kDim; level++) {
       for (row = 0; row < kDim - level; row++) {
          for (col = 0; col < kDim - level; col++, nextCell++) {
@@ -67,6 +70,7 @@ void PylosBoard::StaticInit() {
    for (int i = 0; i < kNumSets; i++)
       mSets[i] = 0x0;
    
+   // Initialize mSets
    // [Staley] Add cell mask to horizontal/vertical alignments if relevant
    int setNum = 0;
    for (level = 0; level < 2; level++) {
@@ -173,6 +177,15 @@ PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
    // highlighter, marking red for static member data that has been initialized
    // in StaticInit(), and yellow for non-static member data that has been
    // initialized in this constructor.
+
+   // Initialize mSpots
+   for (int row = 0; row < kDim; row++) {
+      for (int col = 0; col < kDim; col++) {
+         mSpots[row][col].empty = GetCell(row, col, 0);
+         mSpots[row][col].top = NULL;
+      }
+   }
+
 }
 
 PylosBoard::Rules PylosBoard::mRules;
