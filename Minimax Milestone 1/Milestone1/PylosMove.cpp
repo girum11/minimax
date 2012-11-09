@@ -9,7 +9,7 @@ vector<PylosMove *> PylosMove::mFreeList;
 
 void *PylosMove::operator new(size_t sz)
 {
-   // [Staley?] Return next node from freelist, or allocate one
+   // [Staley] Return next node from freelist, or allocate one
 	void *temp;
 
 	if (mFreeList.size()) {
@@ -89,7 +89,7 @@ void PylosMove::operator=(const string &src)
          &p2.second, &brack2, &p3.first, &p3.second, &brack3, &p4.first, &p4.second);
 
       // [*Staley] Test result of scanf for good format.  Had a total of 7 terms in this test.
-      if (res == 2) {
+      if (res == 3) {
       // [*Staley]    Fill in temp
          temp.push_back(p1);
       }
