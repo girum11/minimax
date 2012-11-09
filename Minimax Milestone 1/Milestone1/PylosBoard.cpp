@@ -188,7 +188,7 @@ long PylosBoard::GetValue() const
 void PylosBoard::PutMarble(Spot *trg) {
    // [*Staley] Other stuff needed here, related to board valuation
    // [*Staley] This is a great place for a few asserts, too.
-   
+      
    HalfPut(trg);
 }
 
@@ -224,6 +224,7 @@ void PylosBoard::ApplyMove(Move *move)
 
 void PylosBoard::UndoLastMove() {
    // [*Staley] Fill in
+   // [Ian] Basically, do ApplyMove() backwards (obviously)
 }
 
 void PylosBoard::GetAllMoves(list<Move *> *moves) const
@@ -300,7 +301,7 @@ Board::Key *PylosBoard::GetKey() const
 
 istream &PylosBoard::Read(istream &is)
 {
-   // [*Staley] Fill in (conform to Write() method below)
+   // [Staley] Fill in (conform to Write() method below)
    return is;
 }
 
@@ -333,7 +334,7 @@ void PylosBoard::SetOptions(const void *opts)
 
 void PylosBoard::Delete()
 {
-   // [Staley] As with Clone, think carefully and don't do needless work.
+   // [*Staley] As with Clone, think carefully and don't do needless work.
 }
 
 // TODO: Implement reflection
