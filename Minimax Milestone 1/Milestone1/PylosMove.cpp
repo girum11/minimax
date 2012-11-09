@@ -59,6 +59,9 @@ PylosMove::operator string() const
    }
    else if (mType == kPromote) {
        // [*Staley] Fill 
+      str = FString("Promote from [%d, %d] to [%d, %d]", mLocs[0].first, 
+         mLocs[0].second, mLocs[1].first, mLocs[1].second);
+      itr = mLocs.begin() + 2;
 
    } else {
 	   // If mType isn't one of the enum types, then exit the program
@@ -68,7 +71,11 @@ PylosMove::operator string() const
    if (itr != mLocs.end()) {
       str += FString(" taking [%d, %d]", (*itr).first, (*itr).second);
       itr++;
-      // [*Staley] Another couple lines here
+      // [Staley] Another couple lines here
+      if (itr != mLocs.end()) {
+         str += FString(" and [%d, %d]", (*itr).first, (*itr).second);
+         itr++;
+      }
    }
    
    return str;
@@ -77,6 +84,7 @@ PylosMove::operator string() const
 void PylosMove::operator=(const string &src)
 {
    static const int kPlayOneParam = 3, kPlayTwoParams = 7, kPlayThreeParams = 11;
+   static const int kPromoteTwoParams = 5, kPromoteThreeParams = 9, kPromoteFourParams = 13;
    
    char wd1[11], wd2[11], wd3[11], brack1, brack2, brack3;
    pair<short, short> p1, p2, p3, p4;
@@ -89,11 +97,11 @@ void PylosMove::operator=(const string &src)
       type = kReserve;
       res = sscanf(src.c_str(), " Play at [ %hd , %hd %c %6s [ %hd , %hd %c %3s "
        "[ %hd , %hd %c %1s", &p1.first, &p1.second, &brack1, wd1, &p2.first,
-         &p2.second, &brack2, wd2, &p3.first, &p3.second, &brack3);
+         &p2.second, &brack2, wd2, &p3.first, &p3.second, &brack3, wd3);
 
-      // *Staley] Test result of scanf for good format.  Had a total of 7 terms in this test.
+      // [Staley] Test result of scanf for good format.  Had a total of 7 terms in this test.
       if (res == kPlayOneParam && brack1 == ']') {
-      // [Staley]    Fill in temp
+      // [Staley] Fill in temp
          temp.push_back(p1);
       } else if (res == kPlayTwoParams && brack1 == ']' && brack2 == ']') {
          temp.push_back(p1);
@@ -109,17 +117,40 @@ void PylosMove::operator=(const string &src)
    }
    else if (!strcmp(wd1, "Promote")) {
       // [*Staley] Similar logic for Promote
+      type = kPromote;
+      res = sscanf(src.c_str(), " Promote from [ %hd, %hd ] to [ %hd, %hd %c "
+       "%6s [ %hd , %hd %c %3s [ %hd, %hd %c %1s", &p1.first, &p1.second, &p2.first,
+       &p2.second, &brack1, wd1, &p3.first, &p3.second, &brack2, wd2, &p4.first,
+       &p4.second, &brack3, wd3);
+
+      // Test result of scanf for good format
+      if (res == kPromoteTwoParams && brack1 == ']') {
+         temp.push_back(p1);
+         temp.push_back(p2);
+      } else if (res == kPromoteThreeParams && brack1 == ']' && brack2 == ']') {
+         temp.push_back(p1); 
+         temp.push_back(p2);
+         temp.push_back(p3);
+      } else if (res == kPromoteFourParams && brack1 == ']' && brack2 == ']'
+       && brack3 == ']') {
+          temp.push_back(p1);
+          temp.push_back(p2);
+          temp.push_back(p3);
+          temp.push_back(p4);
+      } else
+         throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
    }
    else
       throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
 
    // [*Staley] About 5 lines of wrapup logic and final error checks needed here.
    mLocs = temp;
+   mType = type;
 }
 
 Board::Move *PylosMove::Clone() const
 {
-    // [Staley] Make this just one line long, a single relatively short 
+   // [Staley] Make this just one line long, a single relatively short 
 	// [Staley] "return" statement.
 	return 0;
 }
