@@ -12,6 +12,9 @@ using namespace std;
 
 PylosBoard::Set PylosBoard::mSets[kNumSets];
 PylosBoard::Cell PylosBoard::mCells[kNumCells];
+
+// The C++ definition here isn't required in C++11, which I'm using.
+// Put it there anyways to force the "static block" to run.
 PylosBoard::PylosBoardInitializer PylosBoard::mInitializer;
 
 // TODO: Fix PylosBoard mOffs definition hack.
@@ -189,7 +192,12 @@ void PylosBoard::PutMarble(Spot *trg) {
    // [*Staley] Other stuff needed here, related to board valuation
    // [*Staley] This is a great place for a few asserts, too.
       
+   
    HalfPut(trg);
+  
+   // Make sure that there aren't any spots that have both a white
+   // piece and a black piece in the same spot.
+   assert(mWhite & mBlack == 0x0);
 }
 
 void PylosBoard::TakeMarble(Spot *trg) {
@@ -197,6 +205,10 @@ void PylosBoard::TakeMarble(Spot *trg) {
    // [*Staley] This is a great place for a few asserts, too.
 
    HalfTake(trg);
+
+   // Make sure that there aren't any spots that have both a white
+   // piece and a black piece in the same spot. Play it safe here.
+   assert(mWhite & mBlack == 0x0);
 }
 
 void PylosBoard::ApplyMove(Move *move)

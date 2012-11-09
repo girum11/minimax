@@ -167,7 +167,6 @@ protected:
    // [*Staley] Add possible nested class and member datum to force StaticInit call.
    struct PylosBoardInitializer {
       PylosBoardInitializer() {
-         std::cout << "Called PylosBoardInitializer()..." << std::endl;
          StaticInit();
       }
    };
@@ -207,7 +206,10 @@ protected:
    int mFreeLead;     // [Staley] Amount of promoteable marbles white has over black.
 
    // [Staley] History of moves leading to this point.
-   std::list<Move *> mMoveHist;  
+   std::list<Move *> mMoveHist;
+
+   // !!!! I shouldn't need this?
+   friend class PylosView;
 };
 
 #endif
