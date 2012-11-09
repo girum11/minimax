@@ -46,7 +46,7 @@ protected:
    // where the move is moving from, and subsequent array indices are where you're
    // promoting from / moving to.
    LocVector mLocs;
-
+   
    void operator delete(void *p);
    void *operator new(size_t sz);
 

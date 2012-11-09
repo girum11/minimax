@@ -270,7 +270,7 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *mvs) const {
 
 Board::Move *PylosBoard::CreateMove() const
 {
-   return new PylosMove(PylosMove::LocVector(1), PylosMove::kReserve);
+   return new PylosMove(PylosMove::LocVector(1), PylosMove::kReserve);;
 }
 
 Board *PylosBoard::Clone() const

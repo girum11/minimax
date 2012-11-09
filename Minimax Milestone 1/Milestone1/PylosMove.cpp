@@ -19,7 +19,7 @@ void *PylosMove::operator new(size_t sz)
 	  temp = ::new char[sz];
 	}
 
-	return 0;
+	return temp;
 }
 
 void PylosMove::operator delete(void *p)
@@ -88,13 +88,13 @@ void PylosMove::operator=(const string &src)
        "[ %hd , %hd %c %1s", &p1.first, &p1.second, &brack1, wd1, &p2.first,
          &p2.second, &brack2, &p3.first, &p3.second, &brack3, &p4.first, &p4.second);
 
-      // [Staley] Test result of scanf for good format.  Had a total of 7 terms in this test.
-      if (res != EOF && ) {
+      // [*Staley] Test result of scanf for good format.  Had a total of 7 terms in this test.
+      if (res == 2) {
       // [*Staley]    Fill in temp
-         temp.push_back
+         temp.push_back(p1);
       }
-      // [*Staley] else
-      // [*Staley]   throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
+      else
+         throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
    }
    else if (!strcmp(wd1, "Promote")) {
       // [Staley] Similar logic for Promote
@@ -103,6 +103,7 @@ void PylosMove::operator=(const string &src)
       throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
 
    // [*Staley] About 5 lines of wrapup logic and final error checks needed here.
+   mLocs = temp;
 }
 
 Board::Move *PylosMove::Clone() const
