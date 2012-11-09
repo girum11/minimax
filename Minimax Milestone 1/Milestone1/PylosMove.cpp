@@ -33,8 +33,9 @@ bool PylosMove::operator==(const Board::Move &rhs) const
 {
    const PylosMove &oRhs = dynamic_cast<const PylosMove &>(rhs);
 
-   return mType == oRhs.mType && mLocs.size() == oRhs.mLocs.size();
-// [Staley?]   Finish on this one line.  Use STL "equal" function template.
+   // [Staley] Finish on this one line.  Use STL "equal" function template.
+   return mType == oRhs.mType && mLocs.size() == oRhs.mLocs.size() 
+      && mLocs == oRhs.mLocs;
 }
 
 // [*Staley] Sort by target loc, then by move type, then source locs
@@ -42,8 +43,6 @@ bool PylosMove::operator==(const Board::Move &rhs) const
 bool PylosMove::operator<(const Board::Move &rhs) const
 {
 	const PylosMove &oRhs = dynamic_cast<const PylosMove &>(rhs);
-
-	
 
 	return false;
 }
@@ -116,7 +115,7 @@ void PylosMove::operator=(const string &src)
          throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
    }
    else if (!strcmp(wd1, "Promote")) {
-      // [*Staley] Similar logic for Promote
+      // [Staley] Similar logic for Promote
       type = kPromote;
       res = sscanf(src.c_str(), " Promote from [ %hd, %hd ] to [ %hd, %hd %c "
        "%6s [ %hd , %hd %c %3s [ %hd, %hd %c %1s", &p1.first, &p1.second, &p2.first,

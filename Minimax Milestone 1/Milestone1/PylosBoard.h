@@ -168,10 +168,10 @@ protected:
    struct PylosBoardInitializer {
       PylosBoardInitializer() {
          std::cout << "Called PylosBoardInitializer()..." << std::endl;
+         StaticInit();
       }
    };
-
-   static PylosBoardInitializer init;
+   static PylosBoardInitializer mInitializer;
 
 
    // [Staley] Rules object for PylosBoard

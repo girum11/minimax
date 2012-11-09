@@ -47,7 +47,6 @@ int main(int argc, char **argv) {
 	// will need to use a try/catch block, and are welcome to violate the function
 	// line limit rule for this one method.
 	while (cin >> command) {
-
 		try {
 			if (command.compare("undoLastMove") == 0) {
 				cin >> count;
@@ -94,7 +93,30 @@ int main(int argc, char **argv) {
 
 				// applyMove code
 				board->ApplyMove(move);
-			} else if (command.compare("quit") == 0)
+			} else if (command.compare("compareMove") == 0) { 
+            getline(cin, cArg);
+            Board::Move *inputMove = board->CreateMove();
+            *inputMove = cArg.c_str();
+
+            // Figure out which move is greater
+            string result;
+            if (*move == *inputMove)
+               result = "Moves are equal";
+            /*else if (*move < *inputMove)
+               result = "Current move is less than entered move";
+            else if (!(*move < *inputMove || *move == *inputMove))
+               result = "Current move is greater than entered move";
+            else
+               assert(false);*/
+            else
+               result = "Moves are NOTTTTT equal";
+
+            cout << result << endl;
+
+            // Clean up
+            delete inputMove;
+
+         } else if (command.compare("quit") == 0)
 				break;
 			else
 				cout << "Unknown command: " << command << endl;

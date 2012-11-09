@@ -12,19 +12,22 @@ using namespace std;
 
 PylosBoard::Set PylosBoard::mSets[kNumSets];
 PylosBoard::Cell PylosBoard::mCells[kNumCells];
+PylosBoard::PylosBoardInitializer PylosBoard::mInitializer;
 
 // TODO: Fix PylosBoard mOffs definition hack.
 int PylosBoard::mOffs[kDim] = { 0, 0, 0, 0 };
 
-int NumberOfSetBits(int i)
-{
+// Stolen helper function from StackOverflow, used to assert()
+// alignment bits being set correctly
+int NumberOfSetBits(int i) {
     i = i - ((i >> 1) & 0x55555555);
     i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
     return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
 }
 
-void PylosBoard::StaticInit()
-{
+void PylosBoard::StaticInit() {
+   cout << "StaticInit() called!!!!" << endl;
+
    Cell *cell;
    int level = 0, row = 0, col = 0, ndx = 0, nextSet = 0, nextCell = 0;
 
@@ -163,6 +166,10 @@ PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
    mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0)
 {
    // [*Staley] More work needed here.
+   // [Ian] This is where you construct member data.  Try going through with a 
+   // highlighter, marking red for static member data that has been initialized
+   // in StaticInit(), and yellow for non-static member data that has been
+   // initialized in this constructor.
 }
 
 PylosBoard::Rules PylosBoard::mRules;
@@ -181,7 +188,7 @@ long PylosBoard::GetValue() const
 void PylosBoard::PutMarble(Spot *trg) {
    // [*Staley] Other stuff needed here, related to board valuation
    // [*Staley] This is a great place for a few asserts, too.
-
+   
    HalfPut(trg);
 }
 
@@ -314,13 +321,11 @@ ostream &PylosBoard::Write(ostream &os) const
    return os;
 }
 
-// TODO: Implement this static member function.
 void *PylosBoard::GetOptions()
 {
    return new Rules(mRules);
 }
 
-// TODO: Implement this static member function.
 void PylosBoard::SetOptions(const void *opts)
 {
    mRules = *reinterpret_cast<const Rules *>(opts);
