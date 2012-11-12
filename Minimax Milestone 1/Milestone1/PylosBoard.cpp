@@ -213,7 +213,7 @@ void PylosBoard::PutMarble(Spot *trg) {
   
    // Make sure that there aren't any spots that have both a white
    // piece and a black piece in the same spot.
-   assert(mWhite & mBlack == 0x0);
+   assert((mWhite & mBlack) == 0x0);
 }
 
 void PylosBoard::TakeMarble(Spot *trg) {
@@ -224,7 +224,7 @@ void PylosBoard::TakeMarble(Spot *trg) {
 
    // Make sure that there aren't any spots that have both a white
    // piece and a black piece in the same spot. Play it safe here.
-   assert(mWhite & mBlack == 0x0);
+   assert((mWhite & mBlack) == 0x0);
 }
 
 void PylosBoard::ApplyMove(Move *move)
