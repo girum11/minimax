@@ -15,12 +15,13 @@ void PylosView::Draw(ostream &out) {
    int level = 0, row = 0, col = 0;
    char sqr;
    const PylosBoard *pb = dynamic_cast<const PylosBoard *>(mModel);
+   PylosBoard::Set mask;
 
    for (level = PylosBoard::kDim - 1; level >= 0; level--) {
       for (row = 0; row < PylosBoard::kDim - level; row++) {
          for (col = 0; col < PylosBoard::kDim - level; col++) {
             
-            PylosBoard::Set mask = pb->GetCell(row, col, level)->mask;
+            mask = pb->GetCell(row, col, level)->mask;
 
             if (mask & pb->mWhite)
                rtn += " W";

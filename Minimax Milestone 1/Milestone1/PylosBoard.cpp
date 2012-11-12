@@ -36,8 +36,11 @@ void PylosBoard::StaticInit() {
    Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
 
    // Initialize mOffs
-   for (int i = 0; i < kDim; i++)
-      mOffs[i] = 0;
+   mOffs[0] = 0;
+   mOffs[1] = 16;
+   mOffs[2] = 25;
+   mOffs[3] = 29;
+
 
    // Initialize mCells
    for (level = 0; level < kDim; level++) {

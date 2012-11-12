@@ -127,8 +127,7 @@ protected:
 
    // [Staley] Return the Cell, within mCells, corresponding to row, col, lvl.  Note 
    // [Staley] that row sizes on "lvl" are (kDim-lvl)
-   static inline Cell *GetCell(int row, int col, int lvl)
-   {
+   static inline Cell *GetCell(int row, int col, int lvl) {
       return mCells + mOffs[lvl] + (kDim - lvl)*row + col;
    }
    
