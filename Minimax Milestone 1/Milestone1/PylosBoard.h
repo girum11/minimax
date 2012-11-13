@@ -150,7 +150,6 @@ protected:
          mWhite |= spot->top->mask;
       else
          mBlack |= spot->top->mask;
-
       
       // [Staley] Here write a verifier that all the spots are correct
       // Do the "IAmSane()" function that's all asserts here
@@ -215,7 +214,7 @@ protected:
    // [Staley] History of moves leading to this point.
    std::list<Move *> mMoveHist;
 
-   // !!!! I shouldn't need this?
+   // TODO!!!! I shouldn't need this!
    friend class PylosView;
 };
 

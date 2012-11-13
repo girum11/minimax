@@ -35,7 +35,7 @@ void PylosBoard::StaticInit() {
    // Hold a set for the different alignments you can have
    Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
 
-   // Initialize mOffs
+   // Initialize mOffs  TODO: No magic numbers
    mOffs[0] = 0;
    mOffs[1] = 16;
    mOffs[2] = 25;
@@ -175,7 +175,7 @@ void PylosBoard::Rules::EndSwap() {
 PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
    mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0)
 {
-   // [*Staley] More work needed here.
+   // [Staley] More work needed here.
    // [Ian] This is where you construct member data.  Try going through with a 
    // highlighter, marking red for static member data that has been initialized
    // in StaticInit(), and yellow for non-static member data that has been
@@ -207,10 +207,10 @@ long PylosBoard::GetValue() const
 void PylosBoard::PutMarble(Spot *trg) {
    // [*Staley] Other stuff needed here, related to board valuation
    // [*Staley] This is a great place for a few asserts, too.
-      
+   
    
    HalfPut(trg);
-  
+   
    // Make sure that there aren't any spots that have both a white
    // piece and a black piece in the same spot.
    assert((mWhite & mBlack) == 0x0);
@@ -230,8 +230,26 @@ void PylosBoard::TakeMarble(Spot *trg) {
 void PylosBoard::ApplyMove(Move *move)
 {
    PylosMove *tm = dynamic_cast<PylosMove *>(move);
+
    int rChange = -1;  // [Staley] Start by assuming we'll lose one from reserve
    PylosMove::LocVector::iterator itr = tm->mLocs.begin();
+
+   /** BEGIN Girum's code */
+   list<Move *> moves;
+   PylosBoard::GetAllMoves(&moves);
+   bool listContainsMove = false;
+   for (list<Move *>::const_iterator iter = moves.begin(); iter != moves.end(); iter++) {
+      if ((*iter)->operator==(*move)) {
+         listContainsMove = true;
+      }
+   }
+   if (!listContainsMove) {
+      cout << "LIST DOES NOT CONTAIN MOVE AS VALID, DID NOT DO MOVE" << endl;
+      return;
+   }
+   /** END Girum's code */
+
+
 
    PutMarble(&mSpots[(*itr).first][(*itr).second]);
 
