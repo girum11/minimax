@@ -234,7 +234,7 @@ void PylosBoard::ApplyMove(Move *move)
    int rChange = -1;  // [Staley] Start by assuming we'll lose one from reserve
    PylosMove::LocVector::iterator itr = tm->mLocs.begin();
 
-   /** BEGIN Girum's code */
+   /** BEGIN Girum's code to verify that a move is actually a valid move */
    list<Move *> moves;
    PylosBoard::GetAllMoves(&moves);
    bool listContainsMove = false;
@@ -248,8 +248,6 @@ void PylosBoard::ApplyMove(Move *move)
       return;
    }
    /** END Girum's code */
-
-
 
    PutMarble(&mSpots[(*itr).first][(*itr).second]);
 
@@ -271,6 +269,28 @@ void PylosBoard::ApplyMove(Move *move)
 void PylosBoard::UndoLastMove() {
    // [*Staley] Fill in
    // [Ian] Basically, do ApplyMove() backwards (obviously)
+
+   PylosMove *moveToUndo = dynamic_cast<PylosMove *>(mMoveHist.back());
+   
+   // Start by assuming that we'll the reserve will gain a new piece.
+   int rChange = 1;
+   PylosMove::LocVector::iterator itr = moveToUndo->mLocs.begin();
+
+   TakeMarble(&mSpots[(*itr).first][(*itr).second]);
+
+   itr++;
+   for (; itr != moveToUndo->mLocs.end(); itr++) {
+      PutMarble(&mSpots[(*itr).first][(*itr).second]);
+      rChange--;
+   }
+
+   if (mWhoseMove == kWhite)
+      mWhiteReserve -= rChange;
+   else
+      mBlackReserve -= rChange;
+
+   mMoveHist.pop_back();
+   mWhoseMove -= mWhoseMove;
 }
 
 void PylosBoard::GetAllMoves(list<Move *> *moves) const
@@ -347,7 +367,7 @@ Board::Key *PylosBoard::GetKey() const
 
 istream &PylosBoard::Read(istream &is)
 {
-   // [Staley] Fill in (conform to Write() method below)
+   // [*Staley] Fill in (conform to Write() method below)
    return is;
 }
 

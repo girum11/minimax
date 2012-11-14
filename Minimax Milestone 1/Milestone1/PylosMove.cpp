@@ -57,7 +57,7 @@ PylosMove::operator string() const
       itr = mLocs.begin() + 1;
    }
    else if (mType == kPromote) {
-       // [*Staley] Fill 
+       // [Staley] Fill 
       str = FString("Promote from [%d, %d] to [%d, %d]", mLocs[0].first, 
          mLocs[0].second, mLocs[1].first, mLocs[1].second);
       itr = mLocs.begin() + 2;
