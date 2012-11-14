@@ -276,6 +276,7 @@ void PylosBoard::UndoLastMove() {
    int rChange = 1;
    PylosMove::LocVector::iterator itr = moveToUndo->mLocs.begin();
 
+   cout << "Trying to take marble [" << (*itr).first << "," << (*itr).second << "]\n";
    TakeMarble(&mSpots[(*itr).first][(*itr).second]);
 
    itr++;

@@ -2,6 +2,7 @@
 #define PYLOSBOARD_H
 
 #include <iostream>
+#include <assert.h>
 #include <set>
 #include <vector>
 #include <string.h>
@@ -140,6 +141,7 @@ protected:
    // [Staley] and mBlack masks, but do not update state relative to board valuation.  
    // [Staley] Used to "test out" a marble placement at low cost.
    inline void HalfPut(Spot *spot) const {
+      assert(spot != NULL);
 
       // FIXME: Is this the method where I put in extra logic to do 
       // stack-height sanity checks?
@@ -158,19 +160,21 @@ protected:
    
    // [Staley] Like HalfPut, but in reverse
    inline void HalfTake(Spot *spot) const {
+      assert(spot != NULL);
+
+      // Clear out the corresponding bits
+      if (mWhoseMove == kWhite)
+         mWhite &= ~(spot->top->mask);
+      else
+         mBlack &= ~(spot->top->mask);
+      
       // [Staley] Fill in
       // Change over the Spots
       spot->empty = spot->top;
       spot->top = spot->empty->below[kNW];
-
-      // Clear out the corresponding bits
-      if (mWhoseMove == kWhite)
-         mWhite &= ~spot->empty->mask;
-      else
-         mBlack &= ~spot->empty->mask;
    }
 
-   // [*Staley] Add possible nested class and member datum to force StaticInit call.
+   // [Staley] Add possible nested class and member datum to force StaticInit call.
    struct PylosBoardInitializer {
       PylosBoardInitializer() {
          StaticInit();
