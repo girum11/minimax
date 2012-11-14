@@ -13,6 +13,7 @@ using namespace std;
 PylosBoard::Set PylosBoard::mSets[kNumSets];
 PylosBoard::Cell PylosBoard::mCells[kNumCells];
 int PylosBoard::mOffs[kDim];
+PylosBoard::Rules PylosBoard::mRules;
 
 // The C++ definition here isn't required in C++11, which I'm using.
 // Put it there anyways to force the "static block" to run.
@@ -140,8 +141,6 @@ void PylosBoard::StaticInit() {
    }
 }
 
-
-
 void PylosBoard::Rules::SetMarble(int val) {
 
    if (val < 1 || val > 1000)
@@ -191,8 +190,6 @@ PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
 
 }
 
-PylosBoard::Rules PylosBoard::mRules;
-
 long PylosBoard::GetValue() const
 {
    if (mWhiteReserve == 0)
@@ -207,7 +204,8 @@ long PylosBoard::GetValue() const
 void PylosBoard::PutMarble(Spot *trg) {
    // [*Staley] Other stuff needed here, related to board valuation
    // [*Staley] This is a great place for a few asserts, too.
-   
+   // "Board valuation" updates is to update the values of 
+   // mWhiteReserve, mBlackReserve, mLevelLead, and mFreeLead
    
    HalfPut(trg);
    
@@ -219,6 +217,8 @@ void PylosBoard::PutMarble(Spot *trg) {
 void PylosBoard::TakeMarble(Spot *trg) {
    // [*Staley] Other stuff needed here, related to board valuation
    // [*Staley] This is a great place for a few asserts, too.
+   // "Board valuation" updates is to update the values of 
+   // mWhiteReserve, mBlackReserve, mLevelLead, and mFreeLead
 
    HalfTake(trg);
 
@@ -267,7 +267,7 @@ void PylosBoard::ApplyMove(Move *move)
 }
 
 void PylosBoard::UndoLastMove() {
-   // [*Staley] Fill in
+   // [Staley] Fill in
    // [Ian] Basically, do ApplyMove() backwards (obviously)
    
    PylosMove *moveToUndo = dynamic_cast<PylosMove *>(mMoveHist.back());
@@ -345,6 +345,13 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *mvs) const {
    // [Staley] and you want it fast, so you don't want all the overhead of board
    // [Staley] value management, since you'll ultimately leave the board unchanged
    // [Staley] once the function is done.
+
+   // Hints:
+   // The reason you want to HalfPut and HalfTake here is so that you
+   // can verify that the possibility of adding in a new Cell creates possible
+   // "takeback moves."
+   // The basic logic of verifying that a move creates an alignment is to simply
+   // AND each of the Sets from sets[] of each cell against mWhite and mBlack.
 }
 
 Board::Move *PylosBoard::CreateMove() const
@@ -356,7 +363,25 @@ Board *PylosBoard::Clone() const
 {
    // [*Staley] Think carefully about this one.  You should be able to do it in just
    // [*Staley] 5-10 lines.  Don't do needless work
-   return 0;
+ 
+   PylosBoard *boardCopy = new PylosBoard();
+   *boardCopy = *this;
+   
+   // Ian:  Don't I need more work than this?  What I currently
+   // have isn't the full 5-10 lines of code... how can I test what I'm missing in
+   // the memberwise copy?  The debugger's values *appear* to have everything copied
+   // over...
+
+   return boardCopy;
+}
+
+void PylosBoard::Delete()
+{
+   // [*Staley] As with Clone, think carefully and don't do needless work.
+
+   // Ian:  Uh... inspiration?  How would I even start to go about doing this?
+   // Do I "delete this"?
+
 }
 
 Board::Key *PylosBoard::GetKey() const
@@ -373,6 +398,7 @@ Board::Key *PylosBoard::GetKey() const
 istream &PylosBoard::Read(istream &is)
 {
    // [*Staley] Fill in (conform to Write() method below)
+   // Ian:  Same here... inspiration on how to go about testing
    return is;
 }
 
@@ -402,11 +428,6 @@ void *PylosBoard::GetOptions()
 void PylosBoard::SetOptions(const void *opts)
 {
    mRules = *reinterpret_cast<const Rules *>(opts);
-}
-
-void PylosBoard::Delete()
-{
-   // [*Staley] As with Clone, think carefully and don't do needless work.
 }
 
 // TODO: Implement reflection

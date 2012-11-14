@@ -84,10 +84,26 @@ int main(int argc, char **argv) {
 			} else if (command.compare("applyMove") == 0) {
 				// applyMove code
 				board->ApplyMove(move);
-			} else if (command.compare("doMove") == 0) {
+			} 
+         
+         
+         // TODO: Remove this when you're done testing
+         else if (command.compare("cloneTest") == 0) {
+				Board *clone = board->Clone();
+            cout << "test" << endl;
+			} 
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         else if (command.compare("doMove") == 0) {
 				// enterMove code (can abstract out if you want)
 				getline(cin, cArg);
-
             move = board->CreateMove();
 				*move = cArg.c_str();
 

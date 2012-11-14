@@ -43,8 +43,24 @@ bool PylosMove::operator==(const Board::Move &rhs) const
 bool PylosMove::operator<(const Board::Move &rhs) const
 {
 	const PylosMove &oRhs = dynamic_cast<const PylosMove &>(rhs);
+   
+   if (mLocs < oRhs.mLocs)
+      return true;
+   else if (mLocs > oRhs.mLocs)
+      return false;
+   else {
+      if (mType < oRhs.mType)
+         return true;
+      else if (mType > oRhs.mType)
+         return false;
+      else {
+      }
+   }
 
-	return false;
+
+
+
+   return false;
 }
 
 PylosMove::operator string() const
@@ -63,7 +79,6 @@ PylosMove::operator string() const
       itr = mLocs.begin() + 2;
 
    } else {
-	   // If mType isn't one of the enum types, then exit the program
 	   assert(false);
    }
    

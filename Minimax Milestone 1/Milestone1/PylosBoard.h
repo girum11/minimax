@@ -212,7 +212,7 @@ protected:
    
    int mWhoseMove;    // [Staley] Whose move currently
    int mWhiteReserve; // [Staley] How many marbles has white in his reserve
-   int mBlackReserve; // [Staley] How many marbles has black in his reserve
+   int mBlackReserve; // [Staley] How many marbles has black in his 
    int mLevelLead;    // [Staley] Amount by which white leads in terms of marble level
    int mFreeLead;     // [Staley] Amount of promoteable marbles white has over black.
 
