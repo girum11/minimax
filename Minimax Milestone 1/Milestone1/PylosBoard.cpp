@@ -276,6 +276,9 @@ void PylosBoard::UndoLastMove() {
    int rChange = 1;
    PylosMove::LocVector::iterator itr = moveToUndo->mLocs.begin();
 
+   // Switch whose move it is (early so that HalfTake() works properly)
+   mWhoseMove = -mWhoseMove;
+
    cout << "Trying to take marble [" << (*itr).first << "," << (*itr).second << "]\n";
    TakeMarble(&mSpots[(*itr).first][(*itr).second]);
 
@@ -285,13 +288,14 @@ void PylosBoard::UndoLastMove() {
       rChange--;
    }
 
+   // Make changes to reserve counts
    if (mWhoseMove == kWhite)
       mWhiteReserve -= rChange;
    else
       mBlackReserve -= rChange;
 
+   // Destroy history of the move
    mMoveHist.pop_back();
-   mWhoseMove -= mWhoseMove;
 }
 
 void PylosBoard::GetAllMoves(list<Move *> *moves) const

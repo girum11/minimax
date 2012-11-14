@@ -150,8 +150,10 @@ protected:
       
       if (mWhoseMove == kWhite)
          mWhite |= spot->top->mask;
-      else
+      else if (mWhoseMove == kBlack)
          mBlack |= spot->top->mask;
+      else
+         assert(false);
       
       // [Staley] Here write a verifier that all the spots are correct
       // Do the "IAmSane()" function that's all asserts here
@@ -165,8 +167,10 @@ protected:
       // Clear out the corresponding bits
       if (mWhoseMove == kWhite)
          mWhite &= ~(spot->top->mask);
-      else
+      else if (mWhoseMove == kBlack)
          mBlack &= ~(spot->top->mask);
+      else
+         assert(false);
       
       // [Staley] Fill in
       // Change over the Spots
