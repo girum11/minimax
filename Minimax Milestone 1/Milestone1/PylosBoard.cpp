@@ -27,6 +27,25 @@ int NumberOfSetBits(int i) {
     return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
 }
 
+
+PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
+ mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0) {
+   // [Staley] More work needed here.
+   // [Ian] This is where you construct member data.  Try going through with a 
+   // highlighter, marking red for static member data that has been initialized
+   // in StaticInit(), and yellow for non-static member data that has been
+   // initialized in this constructor.
+
+   // Initialize mSpots
+   for (int row = 0; row < kDim; row++) {
+      for (int col = 0; col < kDim; col++) {
+         mSpots[row][col].empty = GetCell(row, col, 0);
+         mSpots[row][col].top = NULL;
+      }
+   }
+
+}
+
 void PylosBoard::StaticInit() {
    cout << "StaticInit() called!!!!" << endl;
 
@@ -142,7 +161,6 @@ void PylosBoard::StaticInit() {
 }
 
 void PylosBoard::Rules::SetMarble(int val) {
-
    if (val < 1 || val > 1000)
       throw BaseException("Marble weight must be between 1 and 1000 inclusive");
 
@@ -171,27 +189,7 @@ void PylosBoard::Rules::EndSwap() {
    marbleWgt = EndianXfer(marbleWgt);
 }
 
-PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
-   mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0)
-{
-   // [Staley] More work needed here.
-   // [Ian] This is where you construct member data.  Try going through with a 
-   // highlighter, marking red for static member data that has been initialized
-   // in StaticInit(), and yellow for non-static member data that has been
-   // initialized in this constructor.
-
-   // Initialize mSpots
-   for (int row = 0; row < kDim; row++) {
-      for (int col = 0; col < kDim; col++) {
-         mSpots[row][col].empty = GetCell(row, col, 0);
-         mSpots[row][col].top = NULL;
-      }
-   }
-
-}
-
-long PylosBoard::GetValue() const
-{
+long PylosBoard::GetValue() const {
    if (mWhiteReserve == 0)
       return -kWinVal;
    else if (mBlackReserve == 0)
@@ -208,10 +206,34 @@ void PylosBoard::PutMarble(Spot *trg) {
    // mWhiteReserve, mBlackReserve, mLevelLead, and mFreeLead
    
    HalfPut(trg);
-   
+
    // Make sure that there aren't any spots that have both a white
    // piece and a black piece in the same spot.
    assert((mWhite & mBlack) == 0x0);
+
+   // ****TODO: TEST THISSSSSSS
+   // Update mLevelLead and mFreeLead
+   for (int level = 0; level < kDim; level++) {
+      for (int row = 0; row < kDim - level; row++) {
+         for (int col = 0; col < kDim - level; col++) {
+            Cell *cell = GetCell(row, col, level);
+
+            // Update mLevelLead
+            if (cell->mask & mWhite) {
+               mLevelLead += level;
+            } else if (cell->mask & mBlack)  {
+               mLevelLead -= level;
+            }
+
+            // Update mFreeLead
+            if (cell->sups & mWhite) {
+               mFreeLead += 1;
+            } else if (cell->sups & mBlack) {
+               mFreeLead -= 1;
+            }
+         }
+      }
+   }
 }
 
 void PylosBoard::TakeMarble(Spot *trg) {
@@ -225,6 +247,9 @@ void PylosBoard::TakeMarble(Spot *trg) {
    // Make sure that there aren't any spots that have both a white
    // piece and a black piece in the same spot. Play it safe here.
    assert((mWhite & mBlack) == 0x0);
+
+   // *Update mLevelLead and mFreeLead
+
 }
 
 void PylosBoard::ApplyMove(Move *move)
@@ -372,6 +397,8 @@ Board *PylosBoard::Clone() const
    // the memberwise copy?  The debugger's values *appear* to have everything copied
    // over...
 
+   // Memberwise copies don't work for pointers... namely my MoveHistory
+
    return boardCopy;
 }
 
@@ -381,6 +408,16 @@ void PylosBoard::Delete()
 
    // Ian:  Uh... inspiration?  How would I even start to go about doing this?
    // Do I "delete this"?
+
+   // So Delete() is more of a "housekeeper" than an actual destructor.
+   // Performs everything the destructor needs to do that the default destructor
+   // doesn't.  Namely, freeing things that pointers point to, and clearing out
+   // arrays/vectors that won't get destroyed by the default destructor do in fact
+   // get cleared out (can't push to the back of a non-empty array). 
+   // In this case, we're not guaranteed that the destructor will even be called,
+   // so we need to clear things out ourselves.
+   // Basically, since we're not sure that the destructor will be called, just null
+   // everything out that's not static.
 
 }
 
@@ -398,20 +435,26 @@ Board::Key *PylosBoard::GetKey() const
 istream &PylosBoard::Read(istream &is)
 {
    // [*Staley] Fill in (conform to Write() method below)
-   // Ian:  Same here... inspiration on how to go about testing
+   // Ian:  Same here... inspiration on how to understand
+   // the Write() method to make Read() conform to it
+
+   // Assigned reading for this: http://cplusplus.com/doc/tutorial/files/
+   // Read() is mostly Write() backwards, with a few exceptions.
+   // Order's important.
+ 
    return is;
 }
 
 // [Staley] Don't change this.  Make Read conform to it.
 ostream &PylosBoard::Write(ostream &os) const
 {
-   Rules rls = mRules;
+   Rules rules = mRules;
    list<Move *>::const_iterator itr;
    int mvCount = EndianXfer((int)mMoveHist.size());
 
 
-   rls.EndSwap();
-   os.write((char *)&rls, sizeof(rls));
+   rules.EndSwap();
+   os.write((char *)&rules, sizeof(rules));
 
    os.write((char *)&mvCount, sizeof(mvCount));
    for (itr = mMoveHist.begin(); itr != mMoveHist.end(); itr++)
