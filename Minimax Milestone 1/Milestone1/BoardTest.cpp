@@ -40,9 +40,6 @@ int main(int argc, char **argv) {
 	board = new PylosBoard();
 	PylosView *view = new PylosView();
 
-	// enterMove issue is probably here... but I have no clue why
-	move = board->CreateMove();
-
 	// Just a sampling of the main scaffold-loop.  You'll make yours a lot longer,
 	// will need to use a try/catch block, and are welcome to violate the function
 	// line limit rule for this one method.
@@ -80,6 +77,7 @@ int main(int argc, char **argv) {
 				// The exception is the exception that's thrown in the Board::Move member function.
 				// It's this reason why we need to wrap this test scaffold up in a try-catch block.
 				getline(cin, cArg);
+            move = board->CreateMove();
 				*move = cArg.c_str();
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
@@ -89,6 +87,8 @@ int main(int argc, char **argv) {
 			} else if (command.compare("doMove") == 0) {
 				// enterMove code (can abstract out if you want)
 				getline(cin, cArg);
+
+            move = board->CreateMove();
 				*move = cArg.c_str();
 
 				// applyMove code
@@ -98,6 +98,7 @@ int main(int argc, char **argv) {
             Board::Move *inputMove = board->CreateMove();
             *inputMove = cArg.c_str();
 
+            // TODO: Finish compareMove comparison
             // Figure out which move is greater
             string result;
             if (*move == *inputMove)

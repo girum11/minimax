@@ -269,7 +269,7 @@ void PylosBoard::ApplyMove(Move *move)
 void PylosBoard::UndoLastMove() {
    // [*Staley] Fill in
    // [Ian] Basically, do ApplyMove() backwards (obviously)
-
+   
    PylosMove *moveToUndo = dynamic_cast<PylosMove *>(mMoveHist.back());
    
    // Start by assuming that we'll the reserve will gain a new piece.
@@ -382,6 +382,7 @@ ostream &PylosBoard::Write(ostream &os) const
    Rules rls = mRules;
    list<Move *>::const_iterator itr;
    int mvCount = EndianXfer((int)mMoveHist.size());
+
 
    rls.EndSwap();
    os.write((char *)&rls, sizeof(rls));

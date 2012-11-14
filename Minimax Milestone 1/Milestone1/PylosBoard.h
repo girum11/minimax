@@ -143,8 +143,6 @@ protected:
    inline void HalfPut(Spot *spot) const {
       assert(spot != NULL);
 
-      // FIXME: Is this the method where I put in extra logic to do 
-      // stack-height sanity checks?
       spot->top = spot->empty;
       spot->empty = spot->top->above;
       
@@ -157,7 +155,6 @@ protected:
       
       // [Staley] Here write a verifier that all the spots are correct
       // Do the "IAmSane()" function that's all asserts here
-
    }
    
    // [Staley] Like HalfPut, but in reverse
