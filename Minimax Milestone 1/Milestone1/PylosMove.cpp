@@ -58,8 +58,8 @@ PylosMove::operator string() const
    }
    else if (mType == kPromote) {
        // [Staley] Fill 
-      str = FString("Promote from [%d, %d] to [%d, %d]", mLocs[0].first, 
-         mLocs[0].second, mLocs[1].first, mLocs[1].second);
+      str = FString("Promote from [%d, %d] to [%d, %d]", mLocs[1].first, 
+         mLocs[1].second, mLocs[0].first, mLocs[0].second);
       itr = mLocs.begin() + 2;
 
    } else {
@@ -118,8 +118,8 @@ void PylosMove::operator=(const string &src)
       // [Staley] Similar logic for Promote
       type = kPromote;
       res = sscanf(src.c_str(), " Promote from [ %hd, %hd ] to [ %hd, %hd %c "
-       "%6s [ %hd , %hd %c %3s [ %hd, %hd %c %1s", &p1.first, &p1.second, &p2.first,
-       &p2.second, &brack1, wd1, &p3.first, &p3.second, &brack2, wd2, &p4.first,
+       "%6s [ %hd , %hd %c %3s [ %hd, %hd %c %1s", &p2.first, &p2.second, &p1.first,
+       &p1.second, &brack1, wd1, &p3.first, &p3.second, &brack2, wd2, &p4.first,
        &p4.second, &brack3, wd3);
 
       // Test result of scanf for good format
