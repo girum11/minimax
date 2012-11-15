@@ -47,8 +47,6 @@ PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
 }
 
 void PylosBoard::StaticInit() {
-   cout << "StaticInit() called!!!!" << endl;
-
    Cell *cell;
    int level = 0, row = 0, col = 0, ndx = 0, nextSet = 0, nextCell = 0;
 
@@ -60,7 +58,6 @@ void PylosBoard::StaticInit() {
    mOffs[1] = 16;
    mOffs[2] = 25;
    mOffs[3] = 29;
-
 
    // Initialize mCells
    for (level = 0; level < kDim; level++) {
@@ -323,16 +320,16 @@ void PylosBoard::UndoLastMove() {
    mMoveHist.pop_back();
 }
 
-void PylosBoard::GetAllMoves(list<Move *> *moves) const
+void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const
 {
    int tRow, tCol, sRow, sCol;
    Cell *trg, *src;
    PylosMove::LocVector locs;
    list<PylosMove *>::iterator itr;
-   list<PylosMove *> *mvs = reinterpret_cast<list<PylosMove *>*>(moves);
+   list<PylosMove *> *castedMoves = reinterpret_cast<list<PylosMove *>*>(uncastMoves);
    ulong sideMask = mWhoseMove == kWhite ? mWhite : mBlack;
 
-   moves->clear();
+   castedMoves->clear();
    if (mWhiteReserve == 0 || mBlackReserve == 0)
       return;
 
@@ -342,7 +339,7 @@ void PylosBoard::GetAllMoves(list<Move *> *moves) const
          if (trg && (trg->subs & (mWhite|mBlack)) == trg->subs) { // [Staley] found a target spot
             locs.clear();
             locs.push_back(pair<int, int>(tRow, tCol));
-            moves->push_back(new PylosMove(locs, PylosMove::kReserve));
+            castedMoves->push_back(new PylosMove(locs, PylosMove::kReserve));
 
             for (sRow = 0; sRow < kDim; sRow++) // [Staley] search for promote moves
                for (sCol = 0; sCol < kDim; sCol++) {
@@ -352,19 +349,19 @@ void PylosBoard::GetAllMoves(list<Move *> *moves) const
                      && (sRow < tRow || sRow > tRow + 1    // [Staley] Not a support for trg
                      || sCol < tCol || sCol > tCol + 1)) {
                         locs.push_back(pair<int, int>(sRow, sCol));
-                        moves->push_back(new PylosMove(locs, PylosMove::kPromote));
+                        castedMoves->push_back(new PylosMove(locs, PylosMove::kPromote));
                         locs.pop_back();
                   }
                }
          }
       }
 
-      AddTakeBacks(mvs);
+      AddTakeBacks(castedMoves);
 }
 
-// [*Staley] For each move in *mvs that completes one or more sets, add all
+// [*Staley] For each move in *moves that completes one or more sets, add all
 // [*Staley] combination of spots to take back.
-void PylosBoard::AddTakeBacks(list<PylosMove *> *mvs) const {
+void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
    // [Staley] You'll find HalfPut and HalfTake useful here.  You need to be able
    // [Staley] to temporarily put/take marbles in order to make this logic manageable,
    // [Staley] and you want it fast, so you don't want all the overhead of board
@@ -377,6 +374,84 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *mvs) const {
    // "takeback moves."
    // The basic logic of verifying that a move creates an alignment is to simply
    // AND each of the Sets from sets[] of each cell against mWhite and mBlack.
+
+   // Hints from myself:
+   // Straightaway, just HalfPut() each possible move, since a possible move could
+   // only be added into a square that's empty.  If any one of the set's alignments 
+   // is then fulfilled by the new HalfPut()'d state of the board, then you've ID'd 
+   // a move that "completes one or more sets."
+   // From there, simply iterate through all the marbles (in the HalfPut()'d board)
+   // that don't actually support any other marbles.
+   // Don't forget to HalfTake() when you're done.
+   
+   PylosMove::LocVector freeMarbles;
+
+   for (list<PylosMove *>::const_iterator moveIter = moves->begin(); moveIter != moves->end();
+    moveIter++) {
+      // Grab the cell that we're thinking about putting down
+      Spot *spot = &mSpots[(*moveIter)->mLocs[0].first][(*moveIter)->mLocs[0].second];
+      Cell *cell = spot->empty;
+
+      // Sanity check:  A possible move shouldn't be able to be applied to a filled Spot
+      assert(cell != NULL);
+
+      // If that cell that we're thinking about putting completes one
+      // or more sets, then add all combinations
+      HalfPut(spot);
+
+      // For each of this cell's possible alignments,
+      for (int i = 0; i < kSetsPerCell; i++) {
+         // If the alignment is fulfilled by the HalfPut()'d board,
+         if (cell->sets[i] & mWhite) {
+
+            // Then you've ID'd a move that "completes one or more sets."
+            // From this point you should just go through and compile a list
+            // of "freeMarbles" -- marbles that do not support other marbles.
+           /* for (int cellNumber = 0; cellNumber < kNumCells; cellNumber++) {
+               if ((mCells[cellNumber].sups & (mWhite|mBlack)) == 0) {
+                  freeMarbles.push_back(&mCells[cellNumber]);
+               }
+            }*/
+            assert(freeMarbles.size() == 0);
+
+            for (int row = 0; row < kDim; row++) {
+               for (int col = 0; col < kDim; col++) {
+                  if ((mSpots[row][col].top->sups & (mWhite|mBlack)) == 0) {
+                     freeMarbles.push_back(pair<int, int>(row,col));
+                  }
+               }
+            }
+
+            // Once you've compiled a list of "free marbles," then add
+            // all combinations of marbles you can take on this turn to
+            // the list of Moves you can make
+            for (PylosMove::LocVector::const_iterator pairIter = freeMarbles.begin();
+             pairIter != freeMarbles.end(); pairIter++) {
+               PylosMove *newMove = new PylosMove((*moveIter)->mLocs, (*moveIter)->mType);
+               newMove->mLocs.push_back(*pairIter);
+               moves->push_back(newMove);
+
+               // WARNING: Before you calculate all of the pairs, be sure that removing the
+               // first marble doesn't free up a new marble.  That is, it's at this point
+               // that you need to go back and recalculate all of the freeMarbles into
+               // a new freeMarbles list.
+               for (PylosMove::LocVector::const_iterator pairIter2 = freeMarbles.begin();
+                pairIter2 != freeMarbles.end(); pairIter2++) {
+                   if (*pairIter != *pairIter2) {
+                      newMove = new PylosMove((*moveIter)->mLocs, (*moveIter)->mType);
+                   }
+               }
+            }
+         }
+      }
+      
+      
+      
+
+      HalfTake(spot);
+      freeMarbles.clear();
+   }
+
 }
 
 Board::Move *PylosBoard::CreateMove() const

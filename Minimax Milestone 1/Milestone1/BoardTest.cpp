@@ -87,6 +87,12 @@ int main(int argc, char **argv) {
 			} 
          
          
+         // TODO: Need to implement Options before this is correct.
+         else if (command.compare("showVal") == 0) {
+            cout << "Value: " << board->GetValue() << endl;
+         }
+         
+         
          // TODO: Remove this when you're done testing
          else if (command.compare("cloneTest") == 0) {
 				Board *clone = board->Clone();

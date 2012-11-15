@@ -221,6 +221,7 @@ protected:
 
    // TODO!!!! I shouldn't need this!
    friend class PylosView;
+
 };
 
 #endif

@@ -42,9 +42,8 @@ protected:
    // kPromote.
    char mType;
 
-   // Vector containing the locations that this move involves.  mLocs[0] is
-   // where the move is moving from, and subsequent array indices are where you're
-   // promoting from / moving to.
+   // TODO: Currently, my mLocs[0] for the most basic move type is TO, not FROM
+   // Vector containing the locations that this move involves.
    LocVector mLocs;
    
    void operator delete(void *p);
