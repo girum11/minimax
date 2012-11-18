@@ -476,9 +476,9 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
 
          freeMarbles2.clear();
       }
-   }
 
-   freeMarbles1.clear();
+      freeMarbles1.clear();
+   }
 }
 
 Board::Move *PylosBoard::CreateMove() const

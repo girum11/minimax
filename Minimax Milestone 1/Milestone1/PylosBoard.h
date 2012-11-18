@@ -236,7 +236,8 @@ private:
             // A marble is "free" if it does not support any other marbles.
             // Bitwise, this means that all of the possible marbles it can 
             // sup[port] are NOT present in the current board -- black OR white.
-            if ((mSpots[row][col].top->sups & (mWhite|mBlack)) == 0) {
+            if (mSpots[row][col].top && 
+             (mSpots[row][col].top->sups & (mWhite|mBlack)) == 0) {
                freeMarbles->push_back(std::pair<int, int>(row,col));
             }
          }
