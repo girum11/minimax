@@ -229,7 +229,7 @@ private:
    void CalculateAllTakebacks(std::list<PylosMove *> *moves, 
     Set *mSet, PylosMove *potentialMove, Cell *potentialMoveCell) const;
 
-   void FindFreeMarbles(std::vector<std::pair<short, short> > *freeMarbles, 
+   void FindFreeMarbles(std::set<std::pair<short,short> > *freeMarbles, 
     ulong *playerMarbles) const {
       // Quick sanity check
       assert(freeMarbles && freeMarbles->size() == 0);
@@ -243,11 +243,12 @@ private:
             if (mSpots[row][col].top
              && mSpots[row][col].top->mask & *playerMarbles
              && (mSpots[row][col].top->sups & (mWhite|mBlack)) == 0) {
-               freeMarbles->push_back(std::pair<int, int>(row,col));
+               freeMarbles->insert(std::pair<int, int>(row,col)).second;
             }
          }
       }
    }
+
 };
 
 

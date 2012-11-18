@@ -433,8 +433,8 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
                                        Set *mSet, 
                                        PylosMove *potentialMove,
                                        Cell *potentialMoveCell) const {
-   PylosMove::LocVector freeMarbles1;
-   PylosMove::LocVector freeMarbles2;
+   set<pair<short,short> > freeMarbles1;
+   set<pair<short,short> > freeMarbles2;
 
    // For each of this cell's possible alignments,
    for (int i = 0; i < kSetsPerCell; i++) {
@@ -451,7 +451,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
          // Once you've compiled a list of "free marbles," then add
          // all combinations of marbles you can take on this turn to
          // the list of Moves you can make
-         for (PylosMove::LocVector::const_iterator freeMarbleIter1 = freeMarbles1.begin();
+         for (set<pair<short,short> >::const_iterator freeMarbleIter1 = freeMarbles1.begin();
           freeMarbleIter1 != freeMarbles1.end(); freeMarbleIter1++) {
             
             // Grab the Spot that corresponds to the free marble that we're about to yank 
@@ -476,16 +476,18 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
             FindFreeMarbles(&freeMarbles2, mSet);
 
             // For each of freeMarbles2, 
-            for (PylosMove::LocVector::const_iterator freeMarbleIter2 = freeMarbles2.begin();
+            for (set<pair<short,short> >::const_iterator freeMarbleIter2 = freeMarbles2.begin();
              freeMarbleIter2 != freeMarbles2.end(); freeMarbleIter2++) {
-               // It IS possible to take the same spot twice, since taking a spot
-               // can potentially reveal another freeMarble with the same "spot number."
-               // IT IS NOT TRUE THAT: assert(*freeMarbleIter1 != *freeMarbleIter2);
-
-               // Cosntruct the "takeback move" using freeMarble1 AND freeMarble2
+               
+               // Construct the "takeback move" using freeMarble1 AND freeMarble2.
+               // Ensure that they're ordered.
                takebackMove = new PylosMove(potentialMove->mLocs, potentialMove->mType);
                takebackMove->mLocs.push_back(*freeMarbleIter1);
                takebackMove->mLocs.push_back(*freeMarbleIter2);
+               // IT IS NOT TRUE THAT: assert(*freeMarbleIter1 != *freeMarbleIter2);
+               // That is, it IS possible to take the same spot twice, since taking a spot
+               // can potentially reveal another freeMarble with the same "spot number."
+
                takebackMove->AssertMe();
 
                // Throw this one into the list of all moves.
