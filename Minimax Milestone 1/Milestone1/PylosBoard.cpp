@@ -94,7 +94,8 @@ void PylosBoard::StaticInit() {
    // Initialize mSets
    // [Staley] Add cell mask to horizontal/vertical alignments if relevant
    int setNum = 0;
-   for (level = 0; level < 2; level++) {
+   // There cannot be alignments on the top two levels
+   for (level = 0; level < kDim - 2; level++) {
       // Step across this level's grid diagonally
       for (int rowcol = 0; rowcol < kDim - level; rowcol++) {
          // Clean off the alignments
@@ -132,7 +133,10 @@ void PylosBoard::StaticInit() {
       }
    }
 
-   // [Staley] Copy set data back into cell set collections.
+
+   // Sanity checks before we go back and copy set data
+   // back into cell set collection.
+   assert(setNum == kNumSets);
    for (int i = 0; i < kNumSets; i++) {
       // Assert that each alignment was properly set
       assert(mSets[i] != 0x0);
@@ -146,15 +150,26 @@ void PylosBoard::StaticInit() {
       // Verify square alignments
       else if (i >= 14 && i < 28)
          assert(NumberOfSetBits(mSets[i]) == 4);
+   }
       
-      // For every block, add the alignments the block is a part of
-      int setCounter = 0;
-      for (level = 0; level < kDim; level++)
-         for (row = 0; row < kDim - level; row++)
-            for (col = 0; col < kDim - level; col++)
-               // If this block is part of this alignment, then set it
-               if (mSets[i] & GetMask(row, col, level))
+   // [Staley] Copy set data back into cell set collections.
+   // For each cell, check all of the alignments to see if
+   // the cell belongs to that alignment.
+   for (level = 0; level < kDim; level++) {
+      for (row = 0; row < kDim - level; row++) {
+         for (col = 0; col < kDim - level; col++) {
+            int setCounter = 0;
+            for (int i = 0; i < kNumSets; i++) {
+               // If this cell is part of this alignment, then add
+               // this alignment to that cell's set of alignments
+               if (mSets[i] & GetMask(row, col, level)) {
+                  // Make sure we're not indexing the array out of bounds
+                  assert(setCounter < kSetsPerCell);
                   GetCell(row, col, level)->sets[setCounter++] = mSets[i];
+               }
+            }
+         }
+      }
    }
 }
 
