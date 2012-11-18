@@ -534,10 +534,13 @@ Board *PylosBoard::Clone() const {
    // [Ian] Memberwise copies don't work for pointers... namely my MoveHistory.
    // [Ian] You need to go through and deep copy the moveHistory, or else you'll
    // have a shallow copy of the pointers and not the pointers' data.
-
-   for (list<Move *>::const_iterator moveHistIter = this->mMoveHist.begin();
-    moveHistIter != this->mMoveHist.end(); moveHistIter++)
-      boardCopy->mMoveHist.push_back(*moveHistIter);
+   boardCopy->mMoveHist.clear();
+   for (list<Move *>::const_iterator moveHistIter = mMoveHist.begin();
+    moveHistIter != mMoveHist.end(); moveHistIter++) {
+      PylosMove *castedMove = dynamic_cast<PylosMove *>(*moveHistIter);
+      Move *moveCopy = new PylosMove(castedMove->mLocs, castedMove->mType);
+      boardCopy->mMoveHist.push_back(moveCopy);
+   }
 
    return boardCopy;
 }
