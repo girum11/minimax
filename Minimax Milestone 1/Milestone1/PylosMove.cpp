@@ -110,6 +110,7 @@ PylosMove::operator string() const
 // [*Staley] you'll need information on sscanf, which you can obtain from the 
 // [*Staley] online documentation or from class discussion.
 void PylosMove::operator=(const string &src) {
+   // HACK: These constants are ugly... is there a better way?
    static const int kPlayOneParam = 3, kPlayTwoParams = 7, kPlayThreeParams = 11;
    static const int kPromoteTwoParams = 5, kPromoteThreeParams = 9, kPromoteFourParams = 13;
    
@@ -129,12 +130,9 @@ void PylosMove::operator=(const string &src) {
       // [Staley] Test result of scanf for good format.  Had a total of 7 terms 
       // [Staley] in this test.
 
-      // First test:  Ensure that there's no garbage.
-      if (!string(wd3).empty())
-         throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
-
       // TODO: Verify that the words wd1, wd2, etc. are what the spec expects 
-      // them to be.
+      // them to be.  The 'wd' immediately after the last expected token is
+      // the one that needs to be == '\0'.
       if (res == kPlayOneParam && brack1 == ']') {
       // [Staley] Fill in temp
          temp.push_back(p1);
@@ -149,7 +147,8 @@ void PylosMove::operator=(const string &src) {
          temp.push_back(p1);
          temp.push_back(p2);
          temp.push_back(p3);
-      }
+      } else if (res == EOF)
+         throw BaseException(FString("Unexpected EOF????????"));
       else
          throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
    }
@@ -163,10 +162,9 @@ void PylosMove::operator=(const string &src) {
 
       // Test result of scanf for good format
 
-      // First test:  Ensure that there's no garbage.
-      if (!string(wd3).empty())
-         throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
-      
+      // TODO: Verify that the words wd1, wd2, etc. are what the spec expects 
+      // them to be.  The 'wd' immediately after the last expected token is
+      // the one that needs to be == '\0'.
       if (res == kPromoteTwoParams && brack1 == ']') {
          temp.push_back(p1);
          temp.push_back(p2);
@@ -182,7 +180,9 @@ void PylosMove::operator=(const string &src) {
           temp.push_back(p2);
           temp.push_back(p3);
           temp.push_back(p4);
-      } else
+      } else if (res == EOF)
+         throw BaseException(FString("Unexpected EOF????????"));
+      else
          throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
    }
    else
