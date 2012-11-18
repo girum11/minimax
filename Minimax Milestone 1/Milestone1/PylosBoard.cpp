@@ -434,7 +434,7 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
 }
 
 void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
-                                       list<PylosMove *>::const_iterator moveIterCopy,
+                                       list<PylosMove *>::const_iterator moveIter,
                                        Set *mSet, 
                                        PylosMove *potentialMove,
                                        Cell *potentialMoveCell) const {
@@ -470,8 +470,8 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
             takebackMove->AssertMe();
             
             // Throw the new takebackMove into the list of all moves
-            allMoves->insert(++moveIterCopy, takebackMove);
-            --moveIterCopy;
+            allMoves->insert(++moveIter, takebackMove);
+            --moveIter;
 
             // Make sure to HalfTake() freeMarble1 to update state of the board, in preparation
             // for finding all possible freeMarble2's
@@ -497,8 +497,8 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
                takebackMove->AssertMe();
 
                // Throw this one into the list of all moves.
-               allMoves->insert(++moveIterCopy, takebackMove);
-               --moveIterCopy;
+               allMoves->insert(++moveIter, takebackMove);
+               --moveIter;
             }
 
             // Don't forget to HalfPut() freeMarble1 back into the board for the next iteration
