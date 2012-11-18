@@ -440,7 +440,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
    for (int i = 0; i < kSetsPerCell; i++) {
       // If putting down this cell creates a new alignment 
       // (checking against all possible alignments),
-      if (potentialMoveCell->sets[i] & *mSet) {
+      if ((potentialMoveCell->sets[i] & *mSet) == potentialMoveCell->sets[i]) {
 
          // Then you've ID'd a move that "completes one or more sets."
          // From this point you should just go through and compile a list
