@@ -462,6 +462,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
             // the location of freeMarble1
             PylosMove *takebackMove = new PylosMove(potentialMove->mLocs, potentialMove->mType);
             takebackMove->mLocs.push_back(*freeMarbleIter1);
+            takebackMove->AssertMe();
             
             // Throw the new takebackMove into the list of all moves
             allMoves->push_back(takebackMove);
@@ -485,6 +486,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
                takebackMove = new PylosMove(potentialMove->mLocs, potentialMove->mType);
                takebackMove->mLocs.push_back(*freeMarbleIter1);
                takebackMove->mLocs.push_back(*freeMarbleIter2);
+               takebackMove->AssertMe();
 
                // Throw this one into the list of all moves.
                allMoves->push_back(takebackMove);

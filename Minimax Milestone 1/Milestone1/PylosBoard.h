@@ -221,7 +221,9 @@ protected:
 
    // TODO!!!! I shouldn't need this!
    friend class PylosView;
-
+   
+   // Mutual friendship between PylosBoard and PylosMove is allowed.
+   friend class PylosBoard;
    
 private:
    void CalculateAllTakebacks(std::list<PylosMove *> *moves, 

@@ -25,7 +25,9 @@ public:
    typedef std::vector<std::pair<short, short> > LocVector;
    friend class PylosBoard;
    
-   PylosMove(const LocVector &locs, int type) : mLocs(locs), mType(type) {}
+   PylosMove(const LocVector &locs, int type) : mLocs(locs), mType(type) {
+      AssertMe();
+   }
    virtual ~PylosMove() {}
 
    bool operator==(const Board::Move &rhs) const; 
@@ -34,6 +36,7 @@ public:
    void operator=(const std::string &src);
    Board::Move *Clone() const;
 
+   friend class PylosBoard;
 protected:
    std::istream &Read(std::istream &is);
    std::ostream &Write(std::ostream &) const;
@@ -50,6 +53,7 @@ protected:
 
     // [Staley] Static member datum to record freelist.  Use STL!
 	static std::vector<PylosMove *> mFreeList;
+   void AssertMe();
 };
 
 #endif
