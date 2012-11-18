@@ -14,3 +14,6 @@ compareMove Play at [2,3]
 
 enterMove Promote from [3,2] to [2,2]
 compareMove Play at [1,1]
+
+cloneTest
+quit

@@ -87,7 +87,8 @@ int main(int argc, char **argv) {
 			} 
          
          
-         // TODO: Need to implement Options before this is correct.
+
+         // TODO: Need to implement PylosDlg before this is correct.
          else if (command.compare("showVal") == 0) {
             cout << "Value: " << board->GetValue() << endl;
          }
@@ -96,8 +97,16 @@ int main(int argc, char **argv) {
          // TODO: Remove this when you're done testing
          else if (command.compare("cloneTest") == 0) {
 				Board *clone = board->Clone();
-            cout << "test" << endl;
+            cout << "Cloned board." << endl;
 			} 
+         // TODO: Remove this when you're done testing
+         else if (command.compare("deleteTest") == 0) {
+				Board *clone = board->Clone();
+            cout << "Cloned board." << endl;
+
+            clone->~Board();
+            cout << "Deleted board." << endl;
+         } 
          
          
          

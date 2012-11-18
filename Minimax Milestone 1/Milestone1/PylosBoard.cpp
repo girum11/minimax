@@ -535,8 +535,8 @@ Board *PylosBoard::Clone() const {
    // [Ian] You need to go through and deep copy the moveHistory, or else you'll
    // have a shallow copy of the pointers and not the pointers' data.
 
-   for (list<Move *>::const_iterator moveHistIter = boardCopy->mMoveHist.begin();
-    moveHistIter != boardCopy->mMoveHist.end(); moveHistIter++)
+   for (list<Move *>::const_iterator moveHistIter = this->mMoveHist.begin();
+    moveHistIter != this->mMoveHist.end(); moveHistIter++)
       boardCopy->mMoveHist.push_back(*moveHistIter);
 
    return boardCopy;
