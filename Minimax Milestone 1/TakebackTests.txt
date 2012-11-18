@@ -1,0 +1,7 @@
+doMove Play at [0,0]
+doMove Play at [3,0]
+doMove Play at [0,1]
+doMove Play at [3,1]
+doMove Play at [0,2]
+doMove Play at [3,2]
+showBoard

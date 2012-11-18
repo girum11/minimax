@@ -446,7 +446,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
          // Then you've ID'd a move that "completes one or more sets."
          // From this point you should just go through and compile a list
          // of "freeMarbles" -- marbles that do not support other marbles.
-         FindFreeMarbles(&freeMarbles1);
+         FindFreeMarbles(&freeMarbles1, mSet);
 
          // Once you've compiled a list of "free marbles," then add
          // all combinations of marbles you can take on this turn to
@@ -472,7 +472,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
 
             // At this point, taking away freeMarble1 might have freed up additional
             // marbles.  Check those as well.
-            FindFreeMarbles(&freeMarbles2);
+            FindFreeMarbles(&freeMarbles2, mSet);
 
             // For each of freeMarbles2, 
             for (PylosMove::LocVector::const_iterator freeMarbleIter2 = freeMarbles2.begin();
@@ -492,9 +492,8 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
 
             // Don't forget to HalfPut() freeMarble1 back into the board for the next iteration
             HalfPut(freeMarble1);
+            freeMarbles2.clear();
          }
-
-         freeMarbles2.clear();
       }
 
       freeMarbles1.clear();

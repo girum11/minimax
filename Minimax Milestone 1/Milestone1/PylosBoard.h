@@ -227,17 +227,20 @@ private:
    void CalculateAllTakebacks(std::list<PylosMove *> *moves, 
     Set *mSet, PylosMove *potentialMove, Cell *potentialMoveCell) const;
 
-   void FindFreeMarbles(std::vector<std::pair<short, short> > *freeMarbles) const {
+   void FindFreeMarbles(std::vector<std::pair<short, short> > *freeMarbles, 
+    ulong *playerMarbles) const {
       // Quick sanity check
-      assert(freeMarbles->size() == 0);
+      assert(freeMarbles && freeMarbles->size() == 0);
 
       for (int row = 0; row < kDim; row++) {
          for (int col = 0; col < kDim; col++) {
             // A marble is "free" if it does not support any other marbles.
             // Bitwise, this means that all of the possible marbles it can 
             // sup[port] are NOT present in the current board -- black OR white.
-            if (mSpots[row][col].top && 
-             (mSpots[row][col].top->sups & (mWhite|mBlack)) == 0) {
+            // Also, the freeMarble to take back must belong to that player.
+            if (mSpots[row][col].top
+             && mSpots[row][col].top->mask & *playerMarbles
+             && (mSpots[row][col].top->sups & (mWhite|mBlack)) == 0) {
                freeMarbles->push_back(std::pair<int, int>(row,col));
             }
          }
