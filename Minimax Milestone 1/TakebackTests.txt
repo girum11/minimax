@@ -15,4 +15,62 @@ compareMove Play at [2,3]
 enterMove Promote from [3,2] to [2,2]
 compareMove Play at [1,1]
 
+--stringSanityChecks()
+showBoard
+doMove Play at [0,2] taking [0,0] and [0,2] 					
+undoLastMove 1
+doMove Play at [0,2] taking [0,0] and [0,2.0]
+doMove Play at [0,2] taking [0,0] and [0,2] asdfiouas
+doMove Play at [0,2] taking [0,0] and [0,2] sdf
+doMove Play at [0,] taking [0,0] and [0,2] doMove Play at [0,] taking [0,0] and [0,2] 
+showMove
+enterMove Play at [0,2] taking [0,0] and [0,0]
+showMove
+enterMove Play at [0,2] taking [0,0] and [4,4]
+showMove
+
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [1,3]
+doMove Play at [2,0]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,0]
+doMove Play at [3,1]
+doMove Play at [3,2]
+doMove Play at [3,3]
+
+showBoard
+doMove Play at someRandomBadInputString
+doMove Play at [7,8]
+doMove Play at [8,7]
+doMove Play at [23049238047239847239847, 2]
+doMove Play at [1, 239084289034729384723984723]
+doMove Play at [2384723984729384723984, 29348723984729384723]
+doMove Play at [-1, 2]
+doMove Play at [1, -2]
+doMove Play at [1.2, 2]
+doMove Play at [1, 2.3]
+doMove Play at [,]
+doMove Play at [1,]
+doMove Play at [,2]
+domove Play at [1,2]
+doMove Play at (1,2]
+doMove Play at [1,2)
+doMove Play at (1,2)
+doMove Play at {1,2]
+doMove Play at [1,2}
+doMove Play at {1,2}
+doMove Play at [1,@]
+
+
+
+
 quit
