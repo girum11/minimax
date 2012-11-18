@@ -229,13 +229,18 @@ private:
    void CalculateAllTakebacks(std::list<PylosMove *> *moves, 
     Set *mSet, PylosMove *potentialMove, Cell *potentialMoveCell) const;
 
+
+   // WARNING: Preventing duplicates is hard.  Right now, I'm preventing
+   // them by simply only calling FindFreeMarbles on rows/cols that are PAST
+   // the current free marble.  If there's a Bender error, here's where
+   // you can start.
    void FindFreeMarbles(std::set<std::pair<short,short> > *freeMarbles, 
-    ulong *playerMarbles) const {
+    ulong *playerMarbles, unsigned short startRow = 0, unsigned short startCol = 0) const {
       // Quick sanity check
       assert(freeMarbles && freeMarbles->size() == 0);
 
-      for (int row = 0; row < kDim; row++) {
-         for (int col = 0; col < kDim; col++) {
+      for (int row = startRow; row < kDim; row++) {
+         for (int col = startCol; col < kDim; col++) {
             // A marble is "free" if it does not support any other marbles.
             // Bitwise, this means that all of the possible marbles it can 
             // sup[port] are NOT present in the current board -- black OR white.

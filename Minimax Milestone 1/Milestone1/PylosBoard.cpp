@@ -473,7 +473,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
 
             // At this point, taking away freeMarble1 might have freed up additional
             // marbles.  Check those as well.
-            FindFreeMarbles(&freeMarbles2, mSet);
+            FindFreeMarbles(&freeMarbles2, mSet, (*freeMarbleIter1).first, (*freeMarbleIter1).second);
 
             // For each of freeMarbles2, 
             for (set<pair<short,short> >::const_iterator freeMarbleIter2 = freeMarbles2.begin();
