@@ -126,15 +126,26 @@ void PylosMove::operator=(const string &src) {
        "[ %hd , %hd %c %1s", &p1.first, &p1.second, &brack1, wd1, &p2.first,
          &p2.second, &brack2, wd2, &p3.first, &p3.second, &brack3, wd3);
 
-      // [Staley] Test result of scanf for good format.  Had a total of 7 terms in this test.
+      // [Staley] Test result of scanf for good format.  Had a total of 7 terms 
+      // [Staley] in this test.
+
+      // First test:  Ensure that there's no garbage.
+      if (!string(wd3).empty())
+         throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
+
+      // TODO: Verify that the words wd1, wd2, etc. are what the spec expects 
+      // them to be.
       if (res == kPlayOneParam && brack1 == ']') {
       // [Staley] Fill in temp
          temp.push_back(p1);
-      } else if (res == kPlayTwoParams && brack1 == ']' && brack2 == ']') {
+      } else if (res == kPlayTwoParams && brack1 == ']' && brack2 == ']'
+       && string(wd1).compare("taking") == 0) {
          temp.push_back(p1);
          temp.push_back(p2);
       } else if (res == kPlayThreeParams && 
-       brack1 == ']' && brack2 == ']' && brack3 == ']') {
+       brack1 == ']' && brack2 == ']' && brack3 == ']'
+       && string(wd1).compare("taking") == 0 
+       && string(wd2).compare("and") == 0) {
          temp.push_back(p1);
          temp.push_back(p2);
          temp.push_back(p3);
@@ -151,15 +162,22 @@ void PylosMove::operator=(const string &src) {
        &p4.second, &brack3, wd3);
 
       // Test result of scanf for good format
+
+      // First test:  Ensure that there's no garbage.
+      if (!string(wd3).empty())
+         throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
+      
       if (res == kPromoteTwoParams && brack1 == ']') {
          temp.push_back(p1);
          temp.push_back(p2);
-      } else if (res == kPromoteThreeParams && brack1 == ']' && brack2 == ']') {
+      } else if (res == kPromoteThreeParams && brack1 == ']' && brack2 == ']'
+        && string(wd1).compare("taking") == 0) {
          temp.push_back(p1); 
          temp.push_back(p2);
          temp.push_back(p3);
       } else if (res == kPromoteFourParams && brack1 == ']' && brack2 == ']'
-       && brack3 == ']') {
+       && brack3 == ']' && string(wd1).compare("taking") == 0
+        && string(wd2).compare("and") == 0) {
           temp.push_back(p1);
           temp.push_back(p2);
           temp.push_back(p3);
