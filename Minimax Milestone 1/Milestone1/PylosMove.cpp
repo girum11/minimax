@@ -44,9 +44,9 @@ bool PylosMove::operator<(const Board::Move &rhs) const
 {
 	const PylosMove &oRhs = dynamic_cast<const PylosMove &>(rhs);
    
-   if (mLocs < oRhs.mLocs)
+   if (mLocs[0] < oRhs.mLocs[0])
       return true;
-   else if (mLocs > oRhs.mLocs)
+   else if (mLocs[0] > oRhs.mLocs[0])
       return false;
    else {
       if (mType < oRhs.mType)
@@ -54,6 +54,12 @@ bool PylosMove::operator<(const Board::Move &rhs) const
       else if (mType > oRhs.mType)
          return false;
       else {
+		  for (int i = 1; i < PylosBoard::kSqr; i++) {
+			  if (mLocs.size() >= i && oRhs.mLocs.size() >= i && mLocs[i] < oRhs.mLocs[i])
+				  return true;
+			  else if (mLocs.size() >= i && oRhs.mLocs.size() >= i && mLocs[i] > oRhs.mLocs[i])
+				  return false;
+		  }
       }
    }
 

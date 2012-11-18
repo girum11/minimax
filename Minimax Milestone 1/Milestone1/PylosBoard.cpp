@@ -213,8 +213,8 @@ long PylosBoard::GetValue() const {
 }
 
 void PylosBoard::PutMarble(Spot *trg) {
-   // [*Staley] Other stuff needed here, related to board valuation
-   // [*Staley] This is a great place for a few asserts, too.
+   // [Staley] Other stuff needed here, related to board valuation
+   // [Staley] This is a great place for a few asserts, too.
    // "Board valuation" updates is to update the values of 
    // mWhiteReserve, mBlackReserve, mLevelLead, and mFreeLead
    
@@ -375,8 +375,8 @@ void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const
       AddTakeBacks(castedMoves);
 }
 
-// [*Staley] For each move in *moves that completes one or more sets, add all
-// [*Staley] combination of spots to take back.
+// [Staley] For each move in *moves that completes one or more sets, add all
+// [Staley] combination of spots to take back.
 void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
    // [Staley] You'll find HalfPut and HalfTake useful here.  You need to be able
    // [Staley] to temporarily put/take marbles in order to make this logic manageable,
