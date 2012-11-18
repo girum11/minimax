@@ -100,6 +100,15 @@ PylosMove::operator string() const
    return str;
 }
 
+// [*Staley] Refine the parsing and string-handling in PylosMove::operator= to 
+// [*Staley] deal with all error conditions.  Throw a BaseException with an 
+// [*Staley] appropriate error message string in it when an error is found.  
+// [*Staley] (Recall the FString class)  Add a try-catch block to your BoardTest 
+// [*Staley] main to catch and print any BaseExceptions that result from your 
+// [*Staley] commands.  Test PylosMove::operator= thoroughly by giving all 
+// [*Staley] sorts of bad PylosMoves to the enterMove command.  For this step, 
+// [*Staley] you'll need information on sscanf, which you can obtain from the 
+// [*Staley] online documentation or from class discussion.
 void PylosMove::operator=(const string &src) {
    static const int kPlayOneParam = 3, kPlayTwoParams = 7, kPlayThreeParams = 11;
    static const int kPromoteTwoParams = 5, kPromoteThreeParams = 9, kPromoteFourParams = 13;

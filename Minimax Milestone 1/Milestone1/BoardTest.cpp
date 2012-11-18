@@ -94,22 +94,6 @@ int main(int argc, char **argv) {
          }
          
          
-         // TODO: Remove this when you're done testing
-         else if (command.compare("cloneTest") == 0) {
-				Board *clone = board->Clone();
-            cout << "Cloned board." << endl;
-			} 
-         // TODO: Remove this when you're done testing
-         else if (command.compare("deleteTest") == 0) {
-				Board *clone = board->Clone();
-            cout << "Cloned board." << endl;
-
-            clone->~Board();
-            cout << "Deleted board." << endl;
-         } 
-         
-         
-         
          
          
          
