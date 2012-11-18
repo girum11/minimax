@@ -120,19 +120,15 @@ int main(int argc, char **argv) {
             Board::Move *inputMove = board->CreateMove();
             *inputMove = cArg.c_str();
 
-            // TODO: Finish compareMove comparison
             // Figure out which move is greater
             string result;
             if (*move == *inputMove)
                result = "Moves are equal";
-            /*else if (*move < *inputMove)
+            else if (*move < *inputMove)
                result = "Current move is less than entered move";
             else if (!(*move < *inputMove || *move == *inputMove))
                result = "Current move is greater than entered move";
-            else
-               assert(false);*/
-            else
-               result = "Moves are NOTTTTT equal";
+            else assert(false);
 
             cout << result << endl;
 

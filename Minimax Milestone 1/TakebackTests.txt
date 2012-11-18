@@ -5,3 +5,12 @@ doMove Play at [3,1]
 doMove Play at [0,2]
 doMove Play at [3,2]
 showBoard
+
+enterMove Play at [1,1] taking [2,3]
+compareMove Play at [0,0]
+compareMove Play at [1,1]
+compareMove Play at [0,0] taking [2,3]
+compareMove Play at [2,3]
+
+enterMove Promote from [3,2] to [2,2]
+compareMove Play at [1,1]

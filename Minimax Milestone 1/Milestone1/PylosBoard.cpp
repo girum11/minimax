@@ -23,27 +23,27 @@ PylosBoard::PylosBoardInitializer PylosBoard::mInitializer;
 // Stolen helper function from StackOverflow, used to assert()
 // alignment bits being set correctly
 int NumberOfSetBits(int i) {
-    i = i - ((i >> 1) & 0x55555555);
-    i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
-    return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
+   i = i - ((i >> 1) & 0x55555555);
+   i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+   return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
 }
 
 
 PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
- mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0) {
-   // [Staley] More work needed here.
-   // [Ian] This is where you construct member data.  Try going through with a 
-   // highlighter, marking red for static member data that has been initialized
-   // in StaticInit(), and yellow for non-static member data that has been
-   // initialized in this constructor.
+   mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0) {
+      // [Staley] More work needed here.
+      // [Ian] This is where you construct member data.  Try going through with a 
+      // highlighter, marking red for static member data that has been initialized
+      // in StaticInit(), and yellow for non-static member data that has been
+      // initialized in this constructor.
 
-   // Initialize mSpots
-   for (int row = 0; row < kDim; row++) {
-      for (int col = 0; col < kDim; col++) {
-         mSpots[row][col].empty = GetCell(row, col, 0);
-         mSpots[row][col].top = NULL;
+      // Initialize mSpots
+      for (int row = 0; row < kDim; row++) {
+         for (int col = 0; col < kDim; col++) {
+            mSpots[row][col].empty = GetCell(row, col, 0);
+            mSpots[row][col].top = NULL;
+         }
       }
-   }
 
 }
 
@@ -54,7 +54,8 @@ void PylosBoard::StaticInit() {
    // Hold a set for the different alignments you can have
    Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
 
-   // Initialize mOffs  TODO: No magic numbers
+   // Initialize mOffs  
+   // TODO No magic numbers
    mOffs[0] = 0;
    mOffs[1] = 16;
    mOffs[2] = 25;
@@ -90,7 +91,7 @@ void PylosBoard::StaticInit() {
    // Clean out mSets to assert that it was properly filled later
    for (int i = 0; i < kNumSets; i++)
       mSets[i] = 0x0;
-   
+
    // Initialize mSets
    // [Staley] Add cell mask to horizontal/vertical alignments if relevant
    int setNum = 0;
@@ -151,7 +152,7 @@ void PylosBoard::StaticInit() {
       else if (i >= 14 && i < 28)
          assert(NumberOfSetBits(mSets[i]) == 4);
    }
-      
+
    // [Staley] Copy set data back into cell set collections.
    // For each cell, check all of the alignments to see if
    // the cell belongs to that alignment.
@@ -217,7 +218,7 @@ void PylosBoard::PutMarble(Spot *trg) {
    // [Staley] This is a great place for a few asserts, too.
    // "Board valuation" updates is to update the values of 
    // mWhiteReserve, mBlackReserve, mLevelLead, and mFreeLead
-   
+
    HalfPut(trg);
 
    // Make sure that there aren't any spots that have both a white
@@ -307,9 +308,9 @@ void PylosBoard::ApplyMove(Move *move)
 void PylosBoard::UndoLastMove() {
    // [Staley] Fill in
    // [Ian] Basically, do ApplyMove() backwards (obviously)
-   
+
    PylosMove *moveToUndo = dynamic_cast<PylosMove *>(mMoveHist.back());
-   
+
    // Start by assuming that we'll the reserve will gain a new piece.
    int rChange = 1;
    PylosMove::LocVector::iterator itr = moveToUndo->mLocs.begin();
@@ -361,12 +362,12 @@ void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const
                for (sCol = 0; sCol < kDim; sCol++) {
                   src = mSpots[sRow][sCol].top;
                   if (src && (src->sups & (mWhite|mBlack)) == 0
-                     && (src->mask & sideMask) && src->level < trg->level
-                     && (sRow < tRow || sRow > tRow + 1    // [Staley] Not a support for trg
-                     || sCol < tCol || sCol > tCol + 1)) {
-                        locs.push_back(pair<int, int>(sRow, sCol));
-                        castedMoves->push_back(new PylosMove(locs, PylosMove::kPromote));
-                        locs.pop_back();
+                   && (src->mask & sideMask) && src->level < trg->level
+                   && (sRow < tRow || sRow > tRow + 1    // [Staley] Not a support for trg
+                   || sCol < tCol || sCol > tCol + 1)) {
+                     locs.push_back(pair<int, int>(sRow, sCol));
+                     castedMoves->push_back(new PylosMove(locs, PylosMove::kPromote));
+                     locs.pop_back();
                   }
                }
          }
@@ -405,32 +406,32 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
    list<PylosMove *> movesCopy(*moves);
 
    for (list<PylosMove *>::const_iterator movesCopyIter = movesCopy.begin(); 
-    movesCopyIter != movesCopy.end(); movesCopyIter++) {
-      // Grab the cell that we're thinking about putting down
-      PylosMove *potentialMove = *movesCopyIter;
-      Spot *potentialMoveSpot = &mSpots[potentialMove->mLocs[0].first][potentialMove->mLocs[0].second];
-      Cell *potentialMoveCell = potentialMoveSpot->empty;
+      movesCopyIter != movesCopy.end(); movesCopyIter++) {
+         // Grab the cell that we're thinking about putting down
+         PylosMove *potentialMove = *movesCopyIter;
+         Spot *potentialMoveSpot = &mSpots[potentialMove->mLocs[0].first][potentialMove->mLocs[0].second];
+         Cell *potentialMoveCell = potentialMoveSpot->empty;
 
-      // Sanity check:  A possible move shouldn't be able to be applied to a filled Spot
-      assert(potentialMoveCell != NULL);
+         // Sanity check:  A possible move shouldn't be able to be applied to a filled Spot
+         assert(potentialMoveCell != NULL);
 
-      // Straightaway, put down the marble to inspect the new state of the board (to check
-      // for possible alignments)
-      HalfPut(potentialMoveSpot);
+         // Straightaway, put down the marble to inspect the new state of the board (to check
+         // for possible alignments)
+         HalfPut(potentialMoveSpot);
 
-      // Find the iterator that points to where you want to add moves to.
-	  // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(N^2)
-	  list<PylosMove *>::const_iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
+         // Find the iterator that points to where you want to add moves to.
+         // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(N^2)
+         list<PylosMove *>::const_iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
 
-      if (mWhoseMove == kWhite)
-         CalculateAllTakebacks(moves, movesIter, &mWhite, potentialMove, potentialMoveCell);
-      else if (mWhoseMove == kBlack)
-         CalculateAllTakebacks(moves, movesIter, &mBlack, potentialMove, potentialMoveCell);
-      else assert(false);
-      
-      HalfTake(potentialMoveSpot);
+         if (mWhoseMove == kWhite)
+            CalculateAllTakebacks(moves, movesIter, &mWhite, potentialMove, potentialMoveCell);
+         else if (mWhoseMove == kBlack)
+            CalculateAllTakebacks(moves, movesIter, &mBlack, potentialMove, potentialMoveCell);
+         else assert(false);
+
+         HalfTake(potentialMoveSpot);
    }
-   
+
 }
 
 void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
@@ -438,8 +439,8 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
                                        Set *mSet, 
                                        PylosMove *potentialMove,
                                        Cell *potentialMoveCell) const {
-   set<pair<short,short> > freeMarbles1;
-   set<pair<short,short> > freeMarbles2;
+                                          set<pair<short,short> > freeMarbles1;
+                                          set<pair<short,short> > freeMarbles2;
 
    // For each of this cell's possible alignments,
    for (int i = 0; i < kSetsPerCell; i++) {
@@ -457,8 +458,8 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
          // all combinations of marbles you can take on this turn to
          // the list of Moves you can make
          for (set<pair<short,short> >::const_iterator freeMarbleIter1 = freeMarbles1.begin();
-          freeMarbleIter1 != freeMarbles1.end(); freeMarbleIter1++) {
-            
+            freeMarbleIter1 != freeMarbles1.end(); freeMarbleIter1++) {
+
             // Grab the Spot that corresponds to the free marble that we're about to yank 
             Spot *freeMarble1 = &mSpots[(*freeMarbleIter1).first][(*freeMarbleIter1).second];
             assert(freeMarble1->top != NULL);
@@ -468,7 +469,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
             PylosMove *takebackMove = new PylosMove(potentialMove->mLocs, potentialMove->mType);
             takebackMove->mLocs.push_back(*freeMarbleIter1);
             takebackMove->AssertMe();
-            
+
             // Throw the new takebackMove into the list of all moves
             allMoves->insert(++moveIter, takebackMove);
             --moveIter;
@@ -483,7 +484,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
 
             // For each of freeMarbles2, 
             for (set<pair<short,short> >::const_iterator freeMarbleIter2 = freeMarbles2.begin();
-             freeMarbleIter2 != freeMarbles2.end(); freeMarbleIter2++) {
+               freeMarbleIter2 != freeMarbles2.end(); freeMarbleIter2++) {
                // IT IS NOT TRUE THAT: assert(*freeMarbleIter1 != *freeMarbleIter2);
                // That is, it IS possible to take the same spot twice, since taking a spot
                // can potentially reveal another freeMarble with the same "spot number.
@@ -520,10 +521,10 @@ Board *PylosBoard::Clone() const
 {
    // [*Staley] Think carefully about this one.  You should be able to do it in just
    // [*Staley] 5-10 lines.  Don't do needless work
- 
+
    PylosBoard *boardCopy = new PylosBoard();
    *boardCopy = *this;
-   
+
    // Ian:  Don't I need more work than this?  What I currently
    // have isn't the full 5-10 lines of code... how can I test what I'm missing in
    // the memberwise copy?  The debugger's values *appear* to have everything copied
@@ -573,7 +574,7 @@ istream &PylosBoard::Read(istream &is)
    // Assigned reading for this: http://cplusplus.com/doc/tutorial/files/
    // Read() is mostly Write() backwards, with a few exceptions.
    // Order's important.
- 
+
    return is;
 }
 
@@ -595,17 +596,15 @@ ostream &PylosBoard::Write(ostream &os) const
    return os;
 }
 
-void *PylosBoard::GetOptions()
-{
+void *PylosBoard::GetOptions() {
    return new Rules(mRules);
 }
 
-void PylosBoard::SetOptions(const void *opts)
-{
+void PylosBoard::SetOptions(const void *opts) {
    mRules = *reinterpret_cast<const Rules *>(opts);
 }
 
-// TODO: Implement reflection
+//TODO Implement reflection
 const Class *PylosBoard::GetClass() const {
    return 0;
 }

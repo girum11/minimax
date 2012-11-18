@@ -42,7 +42,7 @@ bool PylosMove::operator==(const Board::Move &rhs) const
 // [*Staley] by lexicographic sort
 bool PylosMove::operator<(const Board::Move &rhs) const
 {
-	const PylosMove &oRhs = dynamic_cast<const PylosMove &>(rhs);
+   const PylosMove &oRhs = dynamic_cast<const PylosMove &>(rhs);
    
    if (mLocs[0] < oRhs.mLocs[0])
       return true;
@@ -55,16 +55,20 @@ bool PylosMove::operator<(const Board::Move &rhs) const
          return false;
       else {
 		  for (int i = 1; i < PylosBoard::kSqr; i++) {
-			  if (mLocs.size() >= i && oRhs.mLocs.size() >= i && mLocs[i] < oRhs.mLocs[i])
+			  // Same size comparisons
+			  if (mLocs.size() > i && oRhs.mLocs.size() > i && mLocs[i] <= oRhs.mLocs[i])
 				  return true;
-			  else if (mLocs.size() >= i && oRhs.mLocs.size() >= i && mLocs[i] > oRhs.mLocs[i])
+			  else if (mLocs.size() > i && oRhs.mLocs.size() > i && mLocs[i] > oRhs.mLocs[i])
 				  return false;
-		  }
+			  // Different size comparisons
+			  else if (mLocs.size() <= i && oRhs.mLocs.size() > i)
+				  return true;
+			  else if (mLocs.size() > i && oRhs.mLocs.size() <= i)
+				  return false;
+           
+         }
       }
    }
-
-
-
 
    return false;
 }
