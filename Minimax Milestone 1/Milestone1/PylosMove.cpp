@@ -120,9 +120,16 @@ void PylosMove::operator=(const string &src) {
    char type;
    LocVector temp;
 
+   // Initialize the "words" so that we can sanity check later
+   for (int i = 0; i < 11; ++i) wd1[i] = wd2[i] = wd3[i] = '\0';
+
    sscanf(src.c_str(), "%10s", wd1);
    if (!strcmp(wd1, "Play")) {
       type = kReserve;
+
+      // Clear out wd1, now that we know what the mType of this move is.
+      for (int i = 0; i < 11; ++i) wd1[i] = '\0';
+
       res = sscanf(src.c_str(), " Play at [ %hd , %hd %c %6s [ %hd , %hd %c %3s "
        "[ %hd , %hd %c %1s", &p1.first, &p1.second, &brack1, wd1, &p2.first,
          &p2.second, &brack2, wd2, &p3.first, &p3.second, &brack3, wd3);
@@ -155,6 +162,10 @@ void PylosMove::operator=(const string &src) {
    else if (!strcmp(wd1, "Promote")) {
       // [Staley] Similar logic for Promote
       type = kPromote;
+      
+      // Clear out wd1, now that we know what the mType of this move is.
+      for (int i = 0; i < 11; ++i) wd1[i] = '\0';
+
       res = sscanf(src.c_str(), " Promote from [ %hd, %hd ] to [ %hd, %hd %c "
        "%6s [ %hd , %hd %c %3s [ %hd, %hd %c %1s", &p2.first, &p2.second, &p1.first,
        &p1.second, &brack1, wd1, &p3.first, &p3.second, &brack2, wd2, &p4.first,
