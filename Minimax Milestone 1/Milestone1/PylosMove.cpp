@@ -103,7 +103,7 @@ void PylosMove::operator=(const string &src)
    char wd1[11], wd2[11], wd3[11], brack1, brack2, brack3;
    pair<short, short> p1, p2, p3, p4;
    int res;
-   short type;
+   char type;
    LocVector temp;
 
    sscanf(src.c_str(), "%10s", wd1);

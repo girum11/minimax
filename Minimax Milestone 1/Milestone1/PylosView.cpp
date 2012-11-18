@@ -10,6 +10,15 @@
 
 using namespace std;
 
+// TODO: Use Clint's FString instead of string in PylosView::Draw()
+/*
+   You will definitely want to use FString from MyLib.h to assemble strings 
+   in at least some cases.  Also, note that std::string doesn't automatically 
+   resize when you index it; it does so only if you use operations like append or +=.  
+   The FString constructor is a variadic method, so you must pass arguments that 
+   match the format specifiers precisely.  No conversions will be made for you; 
+   mismatched types will simply cause mysterious failures.
+*/
 void PylosView::Draw(ostream &out) {
    string rtn;
    int level = 0, row = 0, col = 0;

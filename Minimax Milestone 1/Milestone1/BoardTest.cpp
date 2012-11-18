@@ -24,7 +24,7 @@ using namespace std;
 int main(int argc, char **argv) {
 	Board *board = 0, *cmpBoard;
 	Board::Move *move, *cmpMove;
-	int argLen, count;
+	unsigned argLen, count;
 	string command, cArg;
 	// Many more locals needed
 
@@ -145,7 +145,7 @@ int main(int argc, char **argv) {
 				cout << "Unknown command: " << command << endl;
 
 			cout << endl;
-		} catch (BaseException exc) {
+		} catch (BaseException &exc) {
 			cout << "Got exception... " << exc.what() << endl;
 		}
 

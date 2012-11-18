@@ -42,7 +42,6 @@ protected:
    // kPromote.
    char mType;
 
-   // TODO: Currently, my mLocs[0] for the most basic move type is TO, not FROM
    // Vector containing the locations that this move involves.
    LocVector mLocs;
    
