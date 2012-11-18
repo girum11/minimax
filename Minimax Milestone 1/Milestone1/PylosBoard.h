@@ -227,6 +227,7 @@ protected:
    
 private:
    void CalculateAllTakebacks(std::list<PylosMove *> *moves, 
+    std::list<PylosMove *>::const_iterator moveIterCopy,
     Set *mSet, PylosMove *potentialMove, Cell *potentialMoveCell) const;
 
 

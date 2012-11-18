@@ -402,12 +402,12 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
 
    // First, make a temporary copy of the original moves.
    // This is so that you don't add to the list as you loop through it.
-   list<PylosMove *> originalMoves(*moves);
+   list<PylosMove *> movesCopy(*moves);
 
-   for (list<PylosMove *>::const_iterator moveIter = originalMoves.begin(); 
-    moveIter != originalMoves.end(); moveIter++) {
+   for (list<PylosMove *>::const_iterator movesCopyIter = movesCopy.begin(); 
+    movesCopyIter != movesCopy.end(); movesCopyIter++) {
       // Grab the cell that we're thinking about putting down
-      PylosMove *potentialMove = *moveIter;
+      PylosMove *potentialMove = *movesCopyIter;
       Spot *potentialMoveSpot = &mSpots[potentialMove->mLocs[0].first][potentialMove->mLocs[0].second];
       Cell *potentialMoveCell = potentialMoveSpot->empty;
 
@@ -418,11 +418,15 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
       // for possible alignments)
       HalfPut(potentialMoveSpot);
 
+      // Find the iterator that points to where you want to add moves to.
+	  // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(N^2)
+	  list<PylosMove *>::const_iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
+
       if (mWhoseMove == kWhite)
-         CalculateAllTakebacks(moves, &mWhite, potentialMove, potentialMoveCell);
-      else if (mWhoseMove == kBlack) {
-         CalculateAllTakebacks(moves, &mBlack, potentialMove, potentialMoveCell);
-      } else assert(false);
+         CalculateAllTakebacks(moves, movesIter, &mWhite, potentialMove, potentialMoveCell);
+      else if (mWhoseMove == kBlack)
+         CalculateAllTakebacks(moves, movesIter, &mBlack, potentialMove, potentialMoveCell);
+      else assert(false);
       
       HalfTake(potentialMoveSpot);
    }
@@ -430,6 +434,7 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
 }
 
 void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
+                                       list<PylosMove *>::const_iterator moveIterCopy,
                                        Set *mSet, 
                                        PylosMove *potentialMove,
                                        Cell *potentialMoveCell) const {
@@ -465,7 +470,8 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
             takebackMove->AssertMe();
             
             // Throw the new takebackMove into the list of all moves
-            allMoves->push_back(takebackMove);
+            allMoves->insert(++moveIterCopy, takebackMove);
+            --moveIterCopy;
 
             // Make sure to HalfTake() freeMarble1 to update state of the board, in preparation
             // for finding all possible freeMarble2's
@@ -478,20 +484,21 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
             // For each of freeMarbles2, 
             for (set<pair<short,short> >::const_iterator freeMarbleIter2 = freeMarbles2.begin();
              freeMarbleIter2 != freeMarbles2.end(); freeMarbleIter2++) {
-               
+               // IT IS NOT TRUE THAT: assert(*freeMarbleIter1 != *freeMarbleIter2);
+               // That is, it IS possible to take the same spot twice, since taking a spot
+               // can potentially reveal another freeMarble with the same "spot number.
+
                // Construct the "takeback move" using freeMarble1 AND freeMarble2.
                // Ensure that they're ordered.
                takebackMove = new PylosMove(potentialMove->mLocs, potentialMove->mType);
                takebackMove->mLocs.push_back(*freeMarbleIter1);
                takebackMove->mLocs.push_back(*freeMarbleIter2);
-               // IT IS NOT TRUE THAT: assert(*freeMarbleIter1 != *freeMarbleIter2);
-               // That is, it IS possible to take the same spot twice, since taking a spot
-               // can potentially reveal another freeMarble with the same "spot number."
 
                takebackMove->AssertMe();
 
                // Throw this one into the list of all moves.
-               allMoves->push_back(takebackMove);
+               allMoves->insert(++moveIterCopy, takebackMove);
+               --moveIterCopy;
             }
 
             // Don't forget to HalfPut() freeMarble1 back into the board for the next iteration
