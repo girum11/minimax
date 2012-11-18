@@ -25,7 +25,7 @@ void *PylosMove::operator new(size_t sz)
 
 void PylosMove::operator delete(void *p)
 {
-   // [Staley?] release node pointed to by p to the freelist
+   // [Staley] release node pointed to by p to the freelist
 	mFreeList.push_back((PylosMove *)p);
 }
 
@@ -38,8 +38,8 @@ bool PylosMove::operator==(const Board::Move &rhs) const
       && mLocs == oRhs.mLocs;
 }
 
-// [*Staley] Sort by target loc, then by move type, then source locs
-// [*Staley] by lexicographic sort
+// [Staley] Sort by target loc, then by move type, then source locs
+// [Staley] by lexicographic sort
 bool PylosMove::operator<(const Board::Move &rhs) const
 {
    const PylosMove &oRhs = dynamic_cast<const PylosMove &>(rhs);
@@ -65,11 +65,9 @@ bool PylosMove::operator<(const Board::Move &rhs) const
 				  return true;
 			  else if (mLocs.size() > i && oRhs.mLocs.size() <= i)
 				  return false;
-           
          }
       }
    }
-
    return false;
 }
 
@@ -87,11 +85,8 @@ PylosMove::operator string() const
       str = FString("Promote from [%d, %d] to [%d, %d]", mLocs[1].first, 
          mLocs[1].second, mLocs[0].first, mLocs[0].second);
       itr = mLocs.begin() + 2;
+   } else assert(false);
 
-   } else {
-	   assert(false);
-   }
-   
    if (itr != mLocs.end()) {
       str += FString(" taking [%d, %d]", (*itr).first, (*itr).second);
       itr++;
@@ -105,8 +100,7 @@ PylosMove::operator string() const
    return str;
 }
 
-void PylosMove::operator=(const string &src)
-{
+void PylosMove::operator=(const string &src) {
    static const int kPlayOneParam = 3, kPlayTwoParams = 7, kPlayThreeParams = 11;
    static const int kPromoteTwoParams = 5, kPromoteThreeParams = 9, kPromoteFourParams = 13;
    

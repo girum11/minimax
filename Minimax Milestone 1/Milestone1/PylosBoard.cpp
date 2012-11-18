@@ -3,6 +3,7 @@
 #include <limits.h>
 #include "PylosDlg.h"
 #include "PylosBoard.h"
+// TODO: PylosMove cannot be imported in PylosBoard
 #include "PylosMove.h"
 #include "MyLib.h"
 #include "BasicKey.h"
@@ -38,13 +39,16 @@ PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
       // initialized in this constructor.
 
       // Initialize mSpots
-      for (int row = 0; row < kDim; row++) {
-         for (int col = 0; col < kDim; col++) {
-            mSpots[row][col].empty = GetCell(row, col, 0);
-            mSpots[row][col].top = NULL;
-         }
-      }
+      InitializeMSpots();
+}
 
+void PylosBoard::InitializeMSpots() {
+   for (int row = 0; row < kDim; row++) {
+      for (int col = 0; col < kDim; col++) {
+         mSpots[row][col].empty = GetCell(row, col, 0);
+         mSpots[row][col].top = NULL;
+      }
+   }
 }
 
 void PylosBoard::StaticInit() {
@@ -406,32 +410,31 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
    list<PylosMove *> movesCopy(*moves);
 
    for (list<PylosMove *>::const_iterator movesCopyIter = movesCopy.begin(); 
-      movesCopyIter != movesCopy.end(); movesCopyIter++) {
-         // Grab the cell that we're thinking about putting down
-         PylosMove *potentialMove = *movesCopyIter;
-         Spot *potentialMoveSpot = &mSpots[potentialMove->mLocs[0].first][potentialMove->mLocs[0].second];
-         Cell *potentialMoveCell = potentialMoveSpot->empty;
+    movesCopyIter != movesCopy.end(); movesCopyIter++) {
+      // Grab the cell that we're thinking about putting down
+      PylosMove *potentialMove = *movesCopyIter;
+      Spot *potentialMoveSpot = &mSpots[potentialMove->mLocs[0].first][potentialMove->mLocs[0].second];
+      Cell *potentialMoveCell = potentialMoveSpot->empty;
 
-         // Sanity check:  A possible move shouldn't be able to be applied to a filled Spot
-         assert(potentialMoveCell != NULL);
+      // Sanity check:  A possible move shouldn't be able to be applied to a filled Spot
+      assert(potentialMoveCell != NULL);
 
-         // Straightaway, put down the marble to inspect the new state of the board (to check
-         // for possible alignments)
-         HalfPut(potentialMoveSpot);
+      // Straightaway, put down the marble to inspect the new state of the board (to check
+      // for possible alignments)
+      HalfPut(potentialMoveSpot);
 
-         // Find the iterator that points to where you want to add moves to.
-         // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(N^2)
-         list<PylosMove *>::const_iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
+      // Find the iterator that points to where you want to add moves to.
+      // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(N^2)
+      list<PylosMove *>::const_iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
 
-         if (mWhoseMove == kWhite)
-            CalculateAllTakebacks(moves, movesIter, &mWhite, potentialMove, potentialMoveCell);
-         else if (mWhoseMove == kBlack)
-            CalculateAllTakebacks(moves, movesIter, &mBlack, potentialMove, potentialMoveCell);
-         else assert(false);
+      if (mWhoseMove == kWhite)
+         CalculateAllTakebacks(moves, movesIter, &mWhite, potentialMove, potentialMoveCell);
+      else if (mWhoseMove == kBlack)
+         CalculateAllTakebacks(moves, movesIter, &mBlack, potentialMove, potentialMoveCell);
+      else assert(false);
 
-         HalfTake(potentialMoveSpot);
+      HalfTake(potentialMoveSpot);
    }
-
 }
 
 void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
@@ -512,15 +515,13 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
    }
 }
 
-Board::Move *PylosBoard::CreateMove() const
-{
+Board::Move *PylosBoard::CreateMove() const {
    return new PylosMove(PylosMove::LocVector(1), PylosMove::kReserve);;
 }
 
-Board *PylosBoard::Clone() const
-{
-   // [*Staley] Think carefully about this one.  You should be able to do it in just
-   // [*Staley] 5-10 lines.  Don't do needless work
+Board *PylosBoard::Clone() const {
+   // [Staley] Think carefully about this one.  You should be able to do it in just
+   // [Staley] 5-10 lines.  Don't do needless work
 
    PylosBoard *boardCopy = new PylosBoard();
    *boardCopy = *this;
@@ -530,14 +531,19 @@ Board *PylosBoard::Clone() const
    // the memberwise copy?  The debugger's values *appear* to have everything copied
    // over...
 
-   // Memberwise copies don't work for pointers... namely my MoveHistory
+   // [Ian] Memberwise copies don't work for pointers... namely my MoveHistory.
+   // [Ian] You need to go through and deep copy the moveHistory, or else you'll
+   // have a shallow copy of the pointers and not the pointers' data.
+
+   for (list<Move *>::const_iterator moveHistIter = boardCopy->mMoveHist.begin();
+    moveHistIter != boardCopy->mMoveHist.end(); moveHistIter++)
+      boardCopy->mMoveHist.push_back(*moveHistIter);
 
    return boardCopy;
 }
 
-void PylosBoard::Delete()
-{
-   // [*Staley] As with Clone, think carefully and don't do needless work.
+void PylosBoard::Delete() {
+   // [Staley] As with Clone, think carefully and don't do needless work.
 
    // Ian:  Uh... inspiration?  How would I even start to go about doing this?
    // Do I "delete this"?
@@ -552,10 +558,15 @@ void PylosBoard::Delete()
    // Basically, since we're not sure that the destructor will be called, just null
    // everything out that's not static.
 
+   InitializeMSpots();
+   mWhite = mBlack = 0x0;
+   mWhoseMove = kWhite;
+   mWhiteReserve = mBlackReserve = 0;
+   mLevelLead = mFreeLead = 0;
+   mMoveHist.clear();
 }
 
-Board::Key *PylosBoard::GetKey() const
-{
+Board::Key *PylosBoard::GetKey() const {
    BasicKey<2> *rtn = new BasicKey<2>();
 
    rtn->vals[0] = (mWhoseMove == kWhite) << kNumCells | mWhite;
@@ -565,8 +576,7 @@ Board::Key *PylosBoard::GetKey() const
 }
 
 
-istream &PylosBoard::Read(istream &is)
-{
+istream &PylosBoard::Read(istream &is) {
    // [*Staley] Fill in (conform to Write() method below)
    // Ian:  Same here... inspiration on how to understand
    // the Write() method to make Read() conform to it
@@ -579,12 +589,10 @@ istream &PylosBoard::Read(istream &is)
 }
 
 // [Staley] Don't change this.  Make Read conform to it.
-ostream &PylosBoard::Write(ostream &os) const
-{
+ostream &PylosBoard::Write(ostream &os) const {
    Rules rules = mRules;
    list<Move *>::const_iterator itr;
    int mvCount = EndianXfer((int)mMoveHist.size());
-
 
    rules.EndSwap();
    os.write((char *)&rules, sizeof(rules));

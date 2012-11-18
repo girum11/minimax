@@ -255,6 +255,8 @@ private:
       }
    }
 
+   void InitializeMSpots();
+
 };
 
 
