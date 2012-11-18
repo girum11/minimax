@@ -385,8 +385,12 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
    // that don't actually support any other marbles.
    // Don't forget to HalfTake() when you're done.
 
-   for (list<PylosMove *>::const_iterator moveIter = moves->begin(); moveIter != moves->end();
-    moveIter++) {
+   // First, make a temporary copy of the original moves.
+   // This is so that you don't add to the list as you loop through it.
+   list<PylosMove *> originalMoves(*moves);
+
+   for (list<PylosMove *>::const_iterator moveIter = originalMoves.begin(); 
+    moveIter != originalMoves.end(); moveIter++) {
       // Grab the cell that we're thinking about putting down
       PylosMove *potentialMove = *moveIter;
       Spot *potentialMoveSpot = &mSpots[potentialMove->mLocs[0].first][potentialMove->mLocs[0].second];
