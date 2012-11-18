@@ -242,6 +242,6 @@ void PylosMove::AssertMe() {
    // that [a,b] < [c,d]
    if (mType == kReserve) assert(mLocs.size() <= 3);
    if (mType == kPromote) assert(mLocs.size() <= 4);
-   if (mType == kReserve && mLocs.size() == 3) assert(mLocs[1] < mLocs[2]);
-   if (mType == kPromote && mLocs.size() == 4) assert(mLocs[2] < mLocs[3]);
+   if (mType == kReserve && mLocs.size() == 3) assert(mLocs[1] <= mLocs[2]);
+   if (mType == kPromote && mLocs.size() == 4) assert(mLocs[2] <= mLocs[3]);
 }
