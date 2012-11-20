@@ -255,7 +255,7 @@ private:
       }
    }
 
-   void InitializeMSpots();
+   void ClearMSpots();
 
 };
 

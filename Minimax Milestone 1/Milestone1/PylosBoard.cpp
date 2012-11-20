@@ -39,10 +39,10 @@ PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
       // initialized in this constructor.
 
       // Initialize mSpots
-      InitializeMSpots();
+      ClearMSpots();
 }
 
-void PylosBoard::InitializeMSpots() {
+void PylosBoard::ClearMSpots() {
    for (int row = 0; row < kDim; row++) {
       for (int col = 0; col < kDim; col++) {
          mSpots[row][col].empty = GetCell(row, col, 0);
@@ -561,12 +561,13 @@ void PylosBoard::Delete() {
    // Basically, since we're not sure that the destructor will be called, just null
    // everything out that's not static.
 
-   InitializeMSpots();
+   ClearMSpots();
    mWhite = mBlack = 0x0;
    mWhoseMove = kWhite;
    mWhiteReserve = mBlackReserve = 0;
    mLevelLead = mFreeLead = 0;
    mMoveHist.clear();
+   mRules.levelWgt = mRules.marbleWgt = mRules.freeWgt = 0;
 }
 
 Board::Key *PylosBoard::GetKey() const {
@@ -587,6 +588,23 @@ istream &PylosBoard::Read(istream &is) {
    // Assigned reading for this: http://cplusplus.com/doc/tutorial/files/
    // Read() is mostly Write() backwards, with a few exceptions.
    // Order's important.
+   
+   int mvCount = -1;
+
+   // Clear out the Default board's existing data
+   Delete();
+
+   // Read in the Rules that the board should use.
+   is.read((char *)&mRules, sizeof(mRules));
+   mRules.EndSwap();
+
+   is.read((char *)&mvCount, sizeof(mvCount));
+   assert(mvCount != -1);  // sanity check to ensure the read() happened
+   for (int i = 0; i < mvCount; i++) {
+      PylosMove::LocVector mLocs;
+      PylosMove *newMove = new PylosMove(mLocs,0);
+      is >> *newMove;
+   }
 
    return is;
 }

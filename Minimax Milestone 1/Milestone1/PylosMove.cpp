@@ -209,7 +209,7 @@ Board::Move *PylosMove::Clone() const
 {
    // [Staley] Make this just one line long, a single relatively short 
 	// [Staley] "return" statement.
-	return 0;
+	return new PylosMove(mLocs, mType);
 }
 
 
@@ -231,9 +231,10 @@ ostream &PylosMove::Write(ostream &os) const
    return os;
 }
 
-// [Staley] Make this work with the (unchanged) Write method above.
+// [*Staley] Make this work with the (unchanged) Write method above.
 istream &PylosMove::Read(istream &is)
 {
+
    return is;
 }
 
