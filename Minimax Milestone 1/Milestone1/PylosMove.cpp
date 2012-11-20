@@ -234,6 +234,17 @@ ostream &PylosMove::Write(ostream &os) const
 // [*Staley] Make this work with the (unchanged) Write method above.
 istream &PylosMove::Read(istream &is)
 {
+   char mLocsSize = -1;
+
+   is.read((char *)&mType, sizeof(mType));
+   is.read((char *)&mLocsSize, sizeof(mLocsSize));
+   assert(mLocsSize != -1);  // sanity check to ensure mLocsSize was read().
+   for (int i = 0; i < mLocsSize; i++) {
+      is.read((char *)&mLocs[i].first, sizeof(short));
+      mLocs[i].first = EndianXfer(mLocs[i].first);
+      is.read((char *)&mLocs[i].second, sizeof(short));
+      mLocs[i].second = EndianXfer(mLocs[i].second);
+   }
 
    return is;
 }

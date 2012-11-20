@@ -601,6 +601,8 @@ istream &PylosBoard::Read(istream &is) {
    is.read((char *)&mvCount, sizeof(mvCount));
    assert(mvCount != -1);  // sanity check to ensure the read() happened
    for (int i = 0; i < mvCount; i++) {
+      // FIXME: Will this mLocs on the RTS still be there, since it's being
+      // inserted as a member variable of something on the RTH?
       PylosMove::LocVector mLocs;
       PylosMove *newMove = new PylosMove(mLocs,0);
       is >> *newMove;
