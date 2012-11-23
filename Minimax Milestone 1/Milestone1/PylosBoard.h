@@ -51,10 +51,10 @@ public:
    Board *Clone() const;
    Key *GetKey() const;
    
-   // [Staley] Add a method to prevent PylosBoard from being an abstract class.
-   // [Staley] May add a public method for use by PylosView
-   // [Staley] Add a static method to support the Class system, plus a static
-   // [Staley] private member datum below
+   // [*Staley] Add a method to prevent PylosBoard from being an abstract class.
+   // [*Staley] May add a public method for use by PylosView
+   // [*Staley] Add a static method to support the Class system, plus a static
+   // [*Staley] private member datum below
 
    // [Staley] Option accessor/mutator.  GetOptions returns dynamically allocated
    // [Staley] object representing options. SetOptions takes similar object.  Caller

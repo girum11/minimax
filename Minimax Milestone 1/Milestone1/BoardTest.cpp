@@ -84,7 +84,22 @@ int main(int argc, char **argv) {
 			} else if (command.compare("applyMove") == 0) {
 				// applyMove code
 				board->ApplyMove(move);
-			} 
+			} else if (command.compare("loadBoard") == 0) {
+            cin >> cArg;
+            ifstream in(cArg.c_str());
+            assert(in.is_open());
+            in >> *move;
+         } else if (command.compare("saveMove") == 0) {
+            cin >> cArg;
+            ofstream out(cArg.c_str());
+            assert(out.is_open());
+            out << *move;
+         } else if (command.compare("loadMove") == 0) {
+            cin >> cArg;
+            ifstream in(cArg.c_str());
+            assert(in.is_open());
+            in >> *move;
+         } 
          
          
 

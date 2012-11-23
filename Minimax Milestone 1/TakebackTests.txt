@@ -71,6 +71,18 @@ doMove Play at {1,2}
 doMove Play at [1,@]
 
 
+enterMove Play at [0,1]
+showMove
+saveMove test0.move
+showMove
+enterMove Play at [2,3]
+showMove
+loadMove test0.move
+showMove
+
+
+
+
 
 
 quit

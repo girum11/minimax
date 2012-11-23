@@ -19,6 +19,17 @@ using namespace std;
    match the format specifiers precisely.  No conversions will be made for you; 
    mismatched types will simply cause mysterious failures.
 */
+// TODO: Scale the Draw() picture output correctly.  
+/* 
+   Uses an appropriate View-derived object to Draw a textual picture 
+   of the default board, and also prints a list of string-conversions 
+   of all moves possible from the default board.  ShowBoard calculates 
+   the largest move size in the list of possible moves, and then 
+   figures how many columns of moves of that largest size can be fit 
+   onto an 80-char screen, with one space after each column.  It then 
+   prints all the moves using that many columns, with moves 
+   left-justified within their column, so that they line up neatly.
+*/
 void PylosView::Draw(ostream &out) {
    string rtn;
    int level = 0, row = 0, col = 0;
