@@ -96,6 +96,7 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardTest.cpp" />
+    <ClCompile Include="Class.cpp" />
     <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="OthelloBoard.cpp" />
     <ClCompile Include="OthelloDlg.cpp" />
