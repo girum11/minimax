@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
             cin >> cArg;
             ifstream in(cArg.c_str());
             assert(in.is_open());
-            in >> *move;
+            in >> *board;
          } else if (command.compare("saveMove") == 0) {
             cin >> cArg;
             ofstream out(cArg.c_str());

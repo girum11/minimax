@@ -71,6 +71,7 @@ doMove Play at {1,2}
 doMove Play at [1,@]
 
 
+--PylosMove::Read() and PylosMove::Write() tests
 enterMove Play at [0,1]
 showMove
 saveMove test0.move
@@ -80,9 +81,23 @@ showMove
 loadMove test0.move
 showMove
 
+enterMove Promote from [0,1] to [0,0] taking [2,3] and [3,3]
+showMove
+saveMove test1.move
+enterMove Promote from [0,1] to [2,2] taking [0,3] and [1,2]
+showMove
+loadMove test1.move
+showMove
 
 
+--PylosBoard::Read() and PylosBoard::Write() tests
+showBoard
+saveBoard test0.board
+undoLastMove 1000
+loadBoard test0.board
+showBoard
 
 
 
 quit
+

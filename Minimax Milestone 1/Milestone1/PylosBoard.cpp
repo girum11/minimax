@@ -266,10 +266,13 @@ void PylosBoard::TakeMarble(Spot *trg) {
    // piece and a black piece in the same spot. Play it safe here.
    assert((mWhite & mBlack) == 0x0);
 
-   // *Update mLevelLead and mFreeLead
+   // *Update mWhiteReserve, mBlackReserve, mLevelLead and mFreeLead
 
 }
 
+// TODO: If your code runs too slow, that's because ApplyMove() checks the list
+// of "GetAllMoves()" every time it tries to Apply a Move.  Maybe I should keep
+// a static list of Moves that are valid, and simply update that once per ApplyMove()?
 void PylosBoard::ApplyMove(Move *move)
 {
    PylosMove *tm = dynamic_cast<PylosMove *>(move);
@@ -287,7 +290,8 @@ void PylosBoard::ApplyMove(Move *move)
       }
    }
    if (!listContainsMove) {
-      cout << "LIST DOES NOT CONTAIN MOVE AS VALID, DID NOT DO MOVE" << endl;
+      cout << "list of valid moves doesn't contain \"" << (string)*move 
+         << "\", did NOT applyMove()" << endl;
       return;
    }
    /** END Girum's code */
@@ -302,8 +306,9 @@ void PylosBoard::ApplyMove(Move *move)
 
    if (mWhoseMove == kWhite)
       mWhiteReserve += rChange;
-   else
+   else if (mWhoseMove == kBlack)
       mBlackReserve += rChange;
+   else assert(false);
 
    mMoveHist.push_back(move);
    mWhoseMove = -mWhoseMove;
@@ -332,10 +337,11 @@ void PylosBoard::UndoLastMove() {
    }
 
    // Make changes to reserve counts
-   if (mWhoseMove == kWhite)
-      mWhiteReserve -= rChange;
-   else
-      mBlackReserve -= rChange;
+   if (mWhoseMove == kWhite) {
+      mWhiteReserve += rChange;
+   } else if (mWhoseMove == kBlack) {
+      mBlackReserve += rChange;
+   } else assert(false);
 
    // Destroy history of the move
    mMoveHist.pop_back();
@@ -601,11 +607,12 @@ istream &PylosBoard::Read(istream &is) {
    is.read((char *)&mvCount, sizeof(mvCount));
    assert(mvCount != -1);  // sanity check to ensure the read() happened
    for (int i = 0; i < mvCount; i++) {
-      // FIXME: Will this mLocs on the RTS still be there, since it's being
+      // Will this mLocs on the RTS still be there, since it's being
       // inserted as a member variable of something on the RTH?
-      PylosMove::LocVector mLocs;
-      PylosMove *newMove = new PylosMove(mLocs,0);
+      // Well, mLocs *should* be copy-constructed in.
+      PylosMove *newMove = new PylosMove(PylosMove::LocVector(),0);
       is >> *newMove;
+      ApplyMove(newMove);
    }
 
    return is;

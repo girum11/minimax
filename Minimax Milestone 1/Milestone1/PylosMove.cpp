@@ -235,15 +235,18 @@ ostream &PylosMove::Write(ostream &os) const
 istream &PylosMove::Read(istream &is)
 {
    char mLocsSize = -1;
+   pair<short, short> tempPair;
 
    is.read((char *)&mType, sizeof(mType));
    is.read((char *)&mLocsSize, sizeof(mLocsSize));
    assert(mLocsSize != -1);  // sanity check to ensure mLocsSize was read().
+   mLocs.resize(mLocsSize);
    for (int i = 0; i < mLocsSize; i++) {
+      
       is.read((char *)&mLocs[i].first, sizeof(short));
       mLocs[i].first = EndianXfer(mLocs[i].first);
       is.read((char *)&mLocs[i].second, sizeof(short));
-      mLocs[i].second = EndianXfer(mLocs[i].second);
+      mLocs[i].second = EndianXfer(mLocs[i].second);  
    }
 
    return is;
