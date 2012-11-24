@@ -114,14 +114,11 @@ void PylosMove::operator=(const string &src) {
    static const int kPlayOneParam = 3, kPlayTwoParams = 7, kPlayThreeParams = 11;
    static const int kPromoteTwoParams = 5, kPromoteThreeParams = 9, kPromoteFourParams = 13;
    
-   char wd1[11], wd2[11], wd3[11], brack1, brack2, brack3;
+   char wd1[11]={'\0'}, wd2[11]={'\0'}, wd3[11]={'\0'}, brack1, brack2, brack3;
    pair<short, short> p1, p2, p3, p4;
    int res;
    char type;
    LocVector temp;
-
-   // Initialize the "words" so that we can sanity check later
-   for (int i = 0; i < 11; ++i) wd1[i] = wd2[i] = wd3[i] = '\0';
 
    sscanf(src.c_str(), "%10s", wd1);
    if (!strcmp(wd1, "Play")) {

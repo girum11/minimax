@@ -40,11 +40,14 @@ int main(int argc, char **argv) {
 	board = new PylosBoard();
 	PylosView *view = new PylosView();
    PylosDlg *dialog = new PylosDlg();
+   move = board->CreateMove();
 
 	// Just a sampling of the main scaffold-loop.  You'll make yours a lot longer,
 	// will need to use a try/catch block, and are welcome to violate the function
 	// line limit rule for this one method.
-	while (cin >> command) {
+	
+   while (cin >> command) {
+   //while (getline(cin, command)) {
 		try {
 			if (command.compare("undoLastMove") == 0) {
 				cin >> count;
@@ -106,6 +109,11 @@ int main(int argc, char **argv) {
 
          // TODO: Abstract "GetOptions()" away so that it's not Pylos-specific
          else if (command.compare("setOptions") == 0) {
+            // Flush out the rest of this line, so that I can ignore
+            // trailing garbage
+            cin.ignore(INT_MAX, '\n');
+
+            // Run the dialog, using the Options object
             void *options = PylosBoard::GetOptions();
             dialog->Run(cin, cout, options);
             delete options;
@@ -132,30 +140,31 @@ int main(int argc, char **argv) {
 				board->ApplyMove(move);
 			} else if (command.compare("compareMove") == 0) { 
             getline(cin, cArg);
-            Board::Move *inputMove = board->CreateMove();
-            *inputMove = cArg.c_str();
+            cmpMove = board->CreateMove();
+            *cmpMove = cArg.c_str();
 
             // Figure out which move is greater
             string result;
-            if (*move == *inputMove)
+            if (*move == *cmpMove)
                result = "Moves are equal";
-            else if (*move < *inputMove)
+            else if (*move < *cmpMove)
                result = "Current move is less than entered move";
-            else if (!(*move < *inputMove || *move == *inputMove))
+            else if (!(*move < *cmpMove || *move == *cmpMove))
                result = "Current move is greater than entered move";
             else assert(false);
 
             cout << result << endl;
 
             // Clean up
-            delete inputMove;
+            delete cmpMove;
 
          } else if (command.compare("quit") == 0)
 				break;
-			else
+			else {
 				cout << "Unknown command: " << command << endl;
-
-			cout << endl;
+            cin.ignore(INT_MAX, '\n');
+			   cout << endl;
+         }
 		} catch (BaseException &exc) {
 			cout << "BaseException: " << exc.what() << endl;
 		} catch (...) {

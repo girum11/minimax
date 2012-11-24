@@ -266,7 +266,7 @@ void PylosBoard::TakeMarble(Spot *trg) {
    // piece and a black piece in the same spot. Play it safe here.
    assert((mWhite & mBlack) == 0x0);
 
-   // *Update mWhiteReserve, mBlackReserve, mLevelLead and mFreeLead
+   // *Update mLevelLead and mFreeLead
 
 }
 
@@ -292,6 +292,8 @@ void PylosBoard::ApplyMove(Move *move)
    if (!listContainsMove) {
       cout << "list of valid moves doesn't contain \"" << (string)*move 
          << "\", did NOT applyMove()" << endl;
+      // TODO: This should probably throw a BaseException().  Find out what
+      // Staley's code outputs and put that error message in the Exception here.
       return;
    }
    /** END Girum's code */
@@ -430,7 +432,7 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
       HalfPut(potentialMoveSpot);
 
       // Find the iterator that points to where you want to add moves to.
-      // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(N^2)
+      // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(n^2)
       list<PylosMove *>::const_iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
 
       if (mWhoseMove == kWhite)

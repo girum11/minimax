@@ -18,26 +18,29 @@ using namespace std;
 // [Staley] return of GetValue.
 bool PylosDlg::Run(std::istream &in, std::ostream &out, void *data) {
    PylosBoard::Rules *rules = reinterpret_cast<PylosBoard::Rules *>(data);
-   char resp;
+   char userResponse;
 
    out << "Marble weight: " << rules->marbleWgt << endl
       << "Level weight: " << rules->levelWgt << endl
       << "Free weight: " << rules->freeWgt << endl;
 
-   out << endl << "Modify? [y/n] ";
-   if ((in >> resp).eof())
+   // Ask user if he wants to modify the Options, and save response to 'resp'
+   out << "Modify? [y/n] ";
+   if ((in >> userResponse).eof())
       throw BaseException("Unexpected EOF");
       
+   // Flush out 'in' until the end of the line
    while (in.get() != '\n' && !in.eof())
       ;
 
-   if (resp == 'y') {
-      out << endl;
-      ReadMethodInt(in, out, "Enter marble weight", rules, &PylosBoard::Rules::SetMarble);
-      ReadMethodInt(in, out, "Enter level weight", rules, &PylosBoard::Rules::SetLevel);
-      ReadMethodInt(in, out, "Enter free weight", rules, &PylosBoard::Rules::SetFree);
+   if (userResponse == 'y') {
+      ReadMethodInt(in, out, "Enter marble weight: ", rules, &PylosBoard::Rules::SetMarble);
+      ReadMethodInt(in, out, "Enter level weight: ", rules, &PylosBoard::Rules::SetLevel);
+      ReadMethodInt(in, out, "Enter free weight: ", rules, &PylosBoard::Rules::SetFree);
    }
-   return resp == 'y';
+   
+   out << endl;
+   return userResponse == 'y';
 }
 
 // [*Staley] Prompt for an int (using the string parameter).  Call the method
@@ -47,19 +50,36 @@ bool PylosDlg::Run(std::istream &in, std::ostream &out, void *data) {
 // [*Staley] and "out" for the dialog, not cin and cout.
 void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
  PylosBoard::Rules *rules, void (PylosBoard::Rules::*x)(int)) {
-   int input;
+   string inputString;
+   int inputValue = 0;
+   static const int kTrailingCharLength = 11;
+   char trailingChar[kTrailingCharLength] = {'\0'};
    bool inputSuccessfullyRead = false;
 
    while (!inputSuccessfullyRead) {
       try {
          out << prompt;
-         in >> input;
-         (rules->*x)(input);
+         //in >> input;
+         
+         // Here, sscanf() the whole line to ensure that no trailing garbage 
+         // was inputted
+         getline(in, inputString);
+         sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
+         if (trailingChar[0] != '\0') {
+            out << "Badly formatted input" << endl;
+            // Clear out trailingChar
+            for (int i = 0; i < kTrailingCharLength; ++i) trailingChar[i] = '\0';
+            continue;
+         }
+
+         // Execute the setter member function
+         (rules->*x)(inputValue);
          inputSuccessfullyRead = true;
       } catch (BaseException &exc) {
          out << "Error: " << exc.what() << endl;
       } catch (...) {
          out << "SOME OTHER UNKNOWN ERROR" << endl;
+         assert(false);
       }
    }
 }
