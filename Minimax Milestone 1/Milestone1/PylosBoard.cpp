@@ -570,7 +570,7 @@ void PylosBoard::Delete() {
    ClearMSpots();
    mWhite = mBlack = 0x0;
    mWhoseMove = kWhite;
-   mWhiteReserve = mBlackReserve = 0;
+   mWhiteReserve = mBlackReserve = kStones;
    mLevelLead = mFreeLead = 0;
    mMoveHist.clear();
    mRules.levelWgt = mRules.marbleWgt = mRules.freeWgt = 0;
