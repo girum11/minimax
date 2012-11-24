@@ -634,10 +634,38 @@ ostream &PylosBoard::Write(ostream &os) const {
    return os;
 }
 
+// [*Staley] Write the two methods GetOptions and SetOptions of PylosBoard, 
+// [*Staley] without changing their signature in the PylosBoard.h file.  
+// [*Staley] (You'll need to cast to and from void *.)  Do not worry about 
+// [*Staley] setting up a Class object yet; that will come in step 7.  You just 
+// [*Staley] want the methods ready for initializing the Class object. 
+// [*Staley] 
+// [*Staley] The void * returned from GetOptions, both in Pylos and other Board 
+// [*Staley] types, is owned by the caller.  And, the caller retains ownership 
+// [*Staley] of the void * passed to SetOptions.
+// [*Staley] 
+// [*Staley] Create PylosDlg.h/cpp, and make a new PylosDlg object in your 
+// [*Staley] BoardTest main directly via new.  Test the GetOptions and 
+// [*Staley] SetOptions methods by implementing the setOptions command, using 
+// [*Staley] the PylosDlg object.
 void *PylosBoard::GetOptions() {
    return new Rules(mRules);
 }
 
+// [*Staley] Write the two methods GetOptions and SetOptions of PylosBoard, 
+// [*Staley] without changing their signature in the PylosBoard.h file.  
+// [*Staley] (You'll need to cast to and from void *.)  Do not worry about 
+// [*Staley] setting up a Class object yet; that will come in step 7.  You just 
+// [*Staley] want the methods ready for initializing the Class object. 
+// [*Staley] 
+// [*Staley] The void * returned from GetOptions, both in Pylos and other Board 
+// [*Staley] types, is owned by the caller.  And, the caller retains ownership 
+// [*Staley] of the void * passed to SetOptions.
+// [*Staley] 
+// [*Staley] Create PylosDlg.h/cpp, and make a new PylosDlg object in your 
+// [*Staley] BoardTest main directly via new.  Test the GetOptions and 
+// [*Staley] SetOptions methods by implementing the setOptions command, using 
+// [*Staley] the PylosDlg object.
 void PylosBoard::SetOptions(const void *opts) {
    mRules = *reinterpret_cast<const Rules *>(opts);
 }
