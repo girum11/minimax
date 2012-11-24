@@ -532,14 +532,11 @@ Board *PylosBoard::Clone() const {
    PylosBoard *boardCopy = new PylosBoard();
    *boardCopy = *this;
 
-   // Ian:  Don't I need more work than this?  What I currently
-   // have isn't the full 5-10 lines of code... how can I test what I'm missing in
-   // the memberwise copy?  The debugger's values *appear* to have everything copied
-   // over...
+   // [Ian] Memberwise copies don't work for pointers... 
 
-   // [Ian] Memberwise copies don't work for pointers... namely my MoveHistory.
-   // [Ian] You need to go through and deep copy the moveHistory, or else you'll
-   // have a shallow copy of the pointers and not the pointers' data.
+   // Yeah... my MoveHistory. You need to go through and deep copy the 
+   // moveHistory, or else you'll have a shallow copy of the pointers and 
+   // not the pointers' data.
    boardCopy->mMoveHist.clear();
    for (list<Move *>::const_iterator moveHistIter = mMoveHist.begin();
     moveHistIter != mMoveHist.end(); moveHistIter++) {
@@ -554,18 +551,15 @@ Board *PylosBoard::Clone() const {
 void PylosBoard::Delete() {
    // [Staley] As with Clone, think carefully and don't do needless work.
 
-   // Ian:  Uh... inspiration?  How would I even start to go about doing this?
-   // Do I "delete this"?
-
-   // So Delete() is more of a "housekeeper" than an actual destructor.
-   // Performs everything the destructor needs to do that the default destructor
-   // doesn't.  Namely, freeing things that pointers point to, and clearing out
-   // arrays/vectors that won't get destroyed by the default destructor do in fact
-   // get cleared out (can't push to the back of a non-empty array). 
-   // In this case, we're not guaranteed that the destructor will even be called,
-   // so we need to clear things out ourselves.
-   // Basically, since we're not sure that the destructor will be called, just null
-   // everything out that's not static.
+   // [Ian] So Delete() is more of a "housekeeper" than an actual destructor.
+   // [Ian] Performs everything the destructor needs to do that the default destructor
+   // [Ian] doesn't.  Namely, freeing things that pointers point to, and clearing out
+   // [Ian] arrays/vectors that won't get destroyed by the default destructor do in fact
+   // [Ian] get cleared out (can't push to the back of a non-empty array). 
+   // [Ian] In this case, we're not guaranteed that the destructor will even be called,
+   // [Ian] so we need to clear things out ourselves.
+   // [Ian] Basically, since we're not sure that the destructor will be called, just null
+   // [Ian] everything out that's not static.
 
    ClearMSpots();
    mWhite = mBlack = 0x0;
@@ -588,8 +582,6 @@ Board::Key *PylosBoard::GetKey() const {
 
 istream &PylosBoard::Read(istream &is) {
    // [Staley] Fill in (conform to Write() method below)
-   // Ian:  Same here... inspiration on how to understand
-   // the Write() method to make Read() conform to it
 
    // Assigned reading for this: http://cplusplus.com/doc/tutorial/files/
    // Read() is mostly Write() backwards, with a few exceptions.
@@ -670,7 +662,7 @@ void PylosBoard::SetOptions(const void *opts) {
    mRules = *reinterpret_cast<const Rules *>(opts);
 }
 
-//TODO Implement reflection
+// TODO: Implement reflection
 const Class *PylosBoard::GetClass() const {
    return 0;
 }

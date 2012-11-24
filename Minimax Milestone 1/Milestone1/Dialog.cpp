@@ -6,8 +6,12 @@
  */
 
 #include "Dialog.h"
+#include <assert.h>
 
 void Dialog::ReadLimitInt(std::istream &is, std::ostream &os,
-	    int *val, int lo , int hi, std::string prompt) {
+ int *val, int lo , int hi, std::string prompt) {
 
+   // TODO: Staley's code for this (OthelloDlg code) references this method,
+   // but the method was never given.  Why?
+   assert(false);
 }

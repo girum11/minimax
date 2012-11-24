@@ -39,6 +39,7 @@ int main(int argc, char **argv) {
 	/// TODO: Hack for now - I'm avoiding reflection
 	board = new PylosBoard();
 	PylosView *view = new PylosView();
+   PylosDlg *dialog = new PylosDlg();
 
 	// Just a sampling of the main scaffold-loop.  You'll make yours a lot longer,
 	// will need to use a try/catch block, and are welcome to violate the function
@@ -103,6 +104,12 @@ int main(int argc, char **argv) {
          
          
 
+         // TODO: Abstract "GetOptions()" away so that it's not Pylos-specific
+         else if (command.compare("setOptions") == 0) {
+            void *options = PylosBoard::GetOptions();
+            dialog->Run(cin, cout, options);
+            delete options;
+         }
          // TODO: Need to implement PylosDlg before this is correct.
          else if (command.compare("showVal") == 0) {
             cout << "Value: " << board->GetValue() << endl;
