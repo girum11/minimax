@@ -231,7 +231,7 @@ ostream &PylosMove::Write(ostream &os) const
    return os;
 }
 
-// [*Staley] Make this work with the (unchanged) Write method above.
+// Staley] Make this work with the (unchanged) Write method above.
 istream &PylosMove::Read(istream &is)
 {
    char mLocsSize = -1;

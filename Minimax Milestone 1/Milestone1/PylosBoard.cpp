@@ -587,7 +587,7 @@ Board::Key *PylosBoard::GetKey() const {
 
 
 istream &PylosBoard::Read(istream &is) {
-   // [*Staley] Fill in (conform to Write() method below)
+   // [Staley] Fill in (conform to Write() method below)
    // Ian:  Same here... inspiration on how to understand
    // the Write() method to make Read() conform to it
 
