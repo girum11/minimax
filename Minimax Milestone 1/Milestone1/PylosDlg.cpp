@@ -1,7 +1,5 @@
 #include "PylosDlg.h"
 
-#define CALL_MEMBER_FN(object,ptrToMember)  ((object).*(ptrToMember))
-
 using namespace std;
 
 // [Staley] Run the dialog object, passing it the options for the default board
@@ -65,7 +63,6 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
       }
    }
 }
-
 
 // TODO: Implement reflection
 const Class *PylosDlg::GetClass() const {

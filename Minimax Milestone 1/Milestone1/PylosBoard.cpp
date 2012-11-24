@@ -182,7 +182,7 @@ void PylosBoard::Rules::SetMarble(int val) {
    if (val < 1 || val > 1000)
       throw BaseException("Marble weight must be between 1 and 1000 inclusive");
 
-   marbleWgt = val;
+   PylosBoard::mRules.marbleWgt = val;
 }
 
 void PylosBoard::Rules::SetLevel(int val) {
@@ -190,7 +190,7 @@ void PylosBoard::Rules::SetLevel(int val) {
       throw BaseException("Level weight must be nonnegative and less than"
       " marble weight");
 
-   levelWgt = val;
+   PylosBoard::mRules.levelWgt = val;
 }
 
 void PylosBoard::Rules::SetFree(int val) {
@@ -198,7 +198,7 @@ void PylosBoard::Rules::SetFree(int val) {
       throw BaseException("Free weight must be even, nonnegative, and less"
       " than marble weight");
 
-   freeWgt = val;
+   PylosBoard::mRules.freeWgt = val;
 }
 
 void PylosBoard::Rules::EndSwap() {

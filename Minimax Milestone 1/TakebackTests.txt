@@ -95,7 +95,18 @@ showBoard
 saveBoard test0.board
 undoLastMove 1000
 loadBoard test0.board
-showBoard
+showBoard	
+
+--PylosDlg tests
+setOptions
+n
+setOptions
+y
+100
+50
+20
+setOptions
+n
 
 
 
