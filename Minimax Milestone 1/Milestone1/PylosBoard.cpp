@@ -332,21 +332,27 @@ void PylosBoard::UndoLastMove() {
 
    PylosMove *moveToUndo = dynamic_cast<PylosMove *>(mMoveHist.back());
 
-   // Start by assuming that we'll the reserve will gain a new piece.
+   // Start by assuming that the reserve will gain a new piece.
    int rChange = 1;
    PylosMove::LocVector::iterator itr = moveToUndo->mLocs.begin();
 
-   // Switch whose move it is (early so that HalfTake() works properly)
+   // Switch whose move it is (early, so that you're taking away the turn
+   // that happened BEFORE this current turn)
    mWhoseMove = -mWhoseMove;
 
-   cout << "Trying to take marble [" << (*itr).first << "," << (*itr).second << "]\n";
-   TakeMarble(&mSpots[(*itr).first][(*itr).second]);
+   cout << "Trying to undo move: " << (string) *moveToUndo << endl;
 
+   // If the piece was a Promote piece, or if it removed pieces, put those back
+   // first, before you take away any pieces you put down.
    itr++;
    for (; itr != moveToUndo->mLocs.end(); itr++) {
       PutMarble(&mSpots[(*itr).first][(*itr).second]);
       rChange--;
    }
+
+   // Now, take away that first piece that you put down
+   itr = moveToUndo->mLocs.begin();
+   TakeMarble(&mSpots[(*itr).first][(*itr).second]);
 
    // Make changes to reserve counts
    if (mWhoseMove == kWhite) {
