@@ -172,7 +172,8 @@ protected:
       // [Staley] Fill in
       // Change over the Spots
       spot->empty = spot->top;
-      spot->top = spot->empty->below[kNW];
+      spot->top = spot->empty->below[kNW];  // FIXME: Well, here's my bug.
+                                            // What if I HalfTake() [0,0]?
    }
 
    // [Staley] Add possible nested class and member datum to force StaticInit call.

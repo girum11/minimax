@@ -127,6 +127,9 @@ int main(int argc, char **argv) {
             cout << "Value: " << board->GetValue() << endl;
          } else if (command.compare("doMove") == 0) {
 				// enterMove code (can abstract out if you want)
+            getline(cin, cArg);
+            move = board->CreateMove();
+				*move = cArg.c_str();
 
 				// applyMove code
 				board->ApplyMove(move);
