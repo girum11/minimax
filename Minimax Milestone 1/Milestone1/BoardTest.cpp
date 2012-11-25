@@ -252,8 +252,8 @@ int main(int argc, char **argv) {
             } 
          } else if (command.compare("keyMoveCount") == 0) {
             // TODO: keyMoveCount
-            cout << "Moves/Keys: " << move->GetOutstanding()
-             << "/" << board->GetKey()->GetOutstanding() << endl;
+            cout << "Moves/Keys: " << Board::Move::GetOutstanding()
+             << "/" << Board::Key::GetOutstanding() << endl;
          } else if (command.compare("quit") == 0)
 				break;
 			else {

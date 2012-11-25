@@ -20,6 +20,7 @@ void *PylosMove::operator new(size_t sz)
 	  temp = ::new char[sz];
 	}
 
+   mOutstanding++;
 	return temp;
 }
 
@@ -27,6 +28,8 @@ void PylosMove::operator delete(void *p)
 {
    // [Staley] release node pointed to by p to the freelist
 	mFreeList.push_back((PylosMove *)p);
+
+   mOutstanding--;
 }
 
 bool PylosMove::operator==(const Board::Move &rhs) const

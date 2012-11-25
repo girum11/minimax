@@ -88,17 +88,15 @@ void *BasicKey<X>::operator new(size_t size) {
 	  temp = ::new char[size];
 	}
 
-	Board::Key::mOutstanding++;
+	mOutstanding++;
 	return temp;
 }
 
 // TODO: Test BasicKey operator delete() [template code isn't emitted until it runs]
 template <unsigned int X>
 void BasicKey<X>::operator delete(void *p) {
-
 	mFreeList.push_back((BasicKey *)p);
-
-	Board::Key::mOutstanding--;
+	mOutstanding--;
 }
 
 template <unsigned int X>
