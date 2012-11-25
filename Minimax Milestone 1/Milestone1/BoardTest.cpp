@@ -22,11 +22,13 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-	Board *board = 0, *cmpBoard;
-	Board::Move *move, *cmpMove;
-	unsigned argLen, count;
+	Board *board = NULL, *cmpBoard = NULL;
+	Board::Move *move = NULL, *cmpMove = NULL;
+	unsigned argLen = 0, count = 0;
 	string command, cArg;
 	// Many more locals needed
+   View *view = NULL;
+   Dialog *dialog = NULL;
 
 	// Sample of some Class code
 	const Class *viewClass, *dialogClass;
@@ -35,14 +37,14 @@ int main(int argc, char **argv) {
    // Verify the number of arguments is correct
    if (argc != 2 && argc != 3) {
       cout << "Usage: BoardTest BoardClass [runLimit]" << endl;
-      return;
+      return -1;
    }
 
    // Attempt to instantiate the boardClass object
    boardClass = BoardClass::ForName(argv[1]);
    if (boardClass == NULL) {
       cout << "Failed to create classes or objects" << endl;
-      return;
+      return -1;
    }
 
 	// Set up Class objects based on commandline args, with appropriate
