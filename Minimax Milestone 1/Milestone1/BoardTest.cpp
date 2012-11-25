@@ -14,7 +14,7 @@ using namespace std;
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
 	Board::Move *move = NULL, *cmpMove = NULL;
-	unsigned argLen = 0, count = 0;
+	unsigned count = 0;
 	string command, cArg;
 	// Many more locals needed
    View *view = NULL;
@@ -177,7 +177,35 @@ int main(int argc, char **argv) {
                }
             }
          } else if (command.compare("testPlay") == 0) {
-            // TODO: testPlay
+            int seed = 0;
+            unsigned moveCount = 0, selectedMove = 0;
+            
+            // Take a seed and moveCount, and apply the seed
+            cin >> seed >> moveCount;
+            srand(seed);
+
+            while (moveCount-- > 0) {
+               // Grab all possible moves
+               list<Board::Move *> listOfMoves;
+               board->GetAllMoves(&listOfMoves);
+
+               // Pick one randomly (ensuring that the game is still going)
+               if (listOfMoves.size() == 0) break;
+               selectedMove = rand() % listOfMoves.size();
+               
+               // Iterate to that move
+               list<Board::Move *>::const_iterator iter = listOfMoves.begin();
+               for (int i = 0; i < selectedMove; i++) {
+                  iter++;
+               }
+               assert(iter != listOfMoves.end());
+
+               // WARNING: Bender watch -- should I set this move to be the
+               // default move? (that is, set it to be the variable 'move' up
+               // top...)
+               // Apply the selected move to the game
+               board->ApplyMove(*iter);
+            }
          } else if (command.compare("testRun") == 0) {
             // TODO: testRun
          } else if (command.compare("keyMoveCount") == 0) {

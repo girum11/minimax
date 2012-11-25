@@ -61,7 +61,7 @@ stringSanityChecks()
 -- doMove Play at [,]
 -- doMove Play at [1,]
 -- doMove Play at [,2]
--- domove Play at [1,2]
+-- doMove Play at [1,2]
 -- doMove Play at (1,2]
 -- doMove Play at [1,2)
 -- doMove Play at (1,2)
@@ -167,22 +167,24 @@ showBoard
 -- showVal
 -- showMoveHist
 
-
--- All of the above tests work.
-
-doMove Play at [0,0]
-saveBoard test0.board
-undoLastMove 1
-compareKeys test0.board
-doMove Play at [0,0]
-compareKeys test0.board
-undoLastMove 1
-saveBoard test1.board
-doMove Play at [0,0]
-compareKeys test1.board
-undoLastMove 1
+-- doMove Play at [0,0]
+-- saveBoard test0.board
+-- undoLastMove 1
+-- compareKeys test0.board
+-- doMove Play at [0,0]
+-- compareKeys test0.board
+-- undoLastMove 1
+-- saveBoard test1.board
+-- doMove Play at [0,0]
+-- compareKeys test1.board
+-- undoLastMove 1
 
 
+--------------- All of the above tests work. ------------------
+
+showBoard
+testPlay 5 2
+showBoard
 
 
 
