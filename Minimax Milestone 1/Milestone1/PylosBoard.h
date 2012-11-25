@@ -141,7 +141,7 @@ protected:
    // [Staley] and mBlack masks, but do not update state relative to board valuation.  
    // [Staley] Used to "test out" a marble placement at low cost.
    inline void HalfPut(Spot *spot) const {
-      assert(spot != NULL);
+      assert(spot != NULL && spot->empty != NULL);
 
       spot->top = spot->empty;
       spot->empty = spot->top->above;
@@ -150,10 +150,9 @@ protected:
          mWhite |= spot->top->mask;
       else if (mWhoseMove == kBlack)
          mBlack |= spot->top->mask;
-      else
-         assert(false);
+      else assert(false);
       
-      // [Staley] Here write a verifier that all the spots are correct
+      // [*Staley] Here write a verifier that all the spots are correct
       // Do the "IAmSane()" function that's all asserts here
    }
    
@@ -161,19 +160,23 @@ protected:
    inline void HalfTake(Spot *spot) const {
       assert(spot != NULL && spot->top != NULL);
 
-      // Clear out the corresponding bits
+      // Clear out the spot->top bit.
       if (mWhoseMove == kWhite)
          mWhite &= ~(spot->top->mask);
       else if (mWhoseMove == kBlack)
          mBlack &= ~(spot->top->mask);
-      else
-         assert(false);
+      else assert(false);
       
       // [Staley] Fill in
-      // Change over the Spots
+      // Reset the spot so that it reflects the removed piece.
+      
+      // FIXME: Well, here's my bug.  My current Spot setting logic breaks 
+      // when I HalfTake() a Spot *without* something below it to the NW.
+      //
+      // E.g.: doesn't work when I half-take any bottom-level cell on the
+      // topmost row or leftmost column.
       spot->empty = spot->top;
-      spot->top = spot->empty->below[kNW];  // FIXME: Well, here's my bug.
-                                            // What if I HalfTake() [0,0]?
+      spot->top = spot->top->below[kNW];
    }
 
    // [Staley] Add possible nested class and member datum to force StaticInit call.

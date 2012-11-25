@@ -86,6 +86,13 @@ void PylosBoard::StaticInit() {
                   cell->subs |= cell->below[ndx]->mask;
                }
             }
+            // Initialize below[] pointers to be NULL for cells at bottom level.
+            // This is so that my HalfTake() logic can work.
+            else if (level == 0) {
+               for (int dir = 0; dir < kSqr; dir++) {
+                  cell->below[dir] = NULL;
+               }
+            }
          }
       }
    }
@@ -424,6 +431,7 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
       // Grab the cell that we're thinking about putting down
       PylosMove *potentialMove = *movesCopyIter;
       Spot *potentialMoveSpot = &mSpots[potentialMove->mLocs[0].first][potentialMove->mLocs[0].second];
+      Spot *potentialPromoteFromSpot = NULL;
       Cell *potentialMoveCell = potentialMoveSpot->empty;
 
       // Sanity check:  A possible move shouldn't be able to be applied to a filled Spot
@@ -432,6 +440,11 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
       // Straightaway, put down the marble to inspect the new state of the board (to check
       // for possible alignments)
       HalfPut(potentialMoveSpot);
+      // (don't forget to HalfTake() if we're promoting a marble)
+      if (potentialMove->mType == PylosMove::kPromote) {
+         potentialPromoteFromSpot = &mSpots[potentialMove->mLocs[1].first][potentialMove->mLocs[1].second];
+         HalfTake(potentialPromoteFromSpot);
+      }
 
       // Find the iterator that points to where you want to add moves to.
       // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(n^2)
@@ -443,7 +456,13 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
          CalculateAllTakebacks(moves, movesIter, &mBlack, potentialMove, potentialMoveCell);
       else assert(false);
 
+      // Don't forget to take away that "trial" attempt of putting down a
+      // marble, along with putting back the one you may have taken away if
+      // it was a Promote move.
       HalfTake(potentialMoveSpot);
+      if (potentialMove->mType == PylosMove::kPromote) {
+         HalfPut(potentialPromoteFromSpot);
+      }
    }
 }
 
@@ -496,7 +515,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
 
             // For each of freeMarbles2, 
             for (set<pair<short,short> >::const_iterator freeMarbleIter2 = freeMarbles2.begin();
-               freeMarbleIter2 != freeMarbles2.end(); freeMarbleIter2++) {
+             freeMarbleIter2 != freeMarbles2.end(); freeMarbleIter2++) {
                // IT IS NOT TRUE THAT: assert(*freeMarbleIter1 != *freeMarbleIter2);
                // That is, it IS possible to take the same spot twice, since taking a spot
                // can potentially reveal another freeMarble with the same "spot number.
