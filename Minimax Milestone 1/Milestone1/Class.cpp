@@ -40,11 +40,11 @@ BoardClass::BoardClass(const string &n, Object *(*mCreate)(), const string &fn,
 }
 
 void *BoardClass::GetOptions() const {
-   return NULL;
+   return (*optionGetter)();
 }
 
-void BoardClass::SetOptions(void *) const {
-
+void BoardClass::SetOptions(void *options) const {
+   (*optionSetter)(options);
 }
 
 const BoardClass *BoardClass::ForName(const string &name) {

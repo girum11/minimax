@@ -130,13 +130,12 @@ int main(int argc, char **argv) {
          
          
 
-         // TODO: Abstract "GetOptions()" away so that it's not Pylos-specific
          else if (command.compare("setOptions") == 0) {
             // Flush until '\n'
             cin.ignore(INT_MAX, '\n');
 
             // Run the dialog, using the Options object
-            void *options = PylosBoard::GetOptions();
+            void *options = boardClass->GetOptions();
             dialog->Run(cin, cout, options);
             delete options;
          }
