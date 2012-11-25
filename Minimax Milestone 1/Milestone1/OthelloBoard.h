@@ -73,6 +73,9 @@ protected:
    char mPassCount;             // How many pass moves have just been made
    short mWeight;               // Current board weight.
    std::list<Move *> mMoveHist; // History of moves thus far.
+
+private:
+   static Object *CreateOthelloBoard() { return new OthelloBoard; };
 };
 
 #endif

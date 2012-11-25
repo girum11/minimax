@@ -3,6 +3,8 @@
 
 using namespace std;
 
+Class OthelloView::mClass("OthelloView", CreateOthelloView);
+
 void OthelloView::Draw(ostream &out) {
    string rtn;
    int row, col;

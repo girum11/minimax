@@ -31,11 +31,7 @@ public:
 
 class Class {
 public:
-
-   // TODO: fixme -- Default constructor shouldn't exist, as per the spec.
-   Class();
-
-   Class(const std::string &n, Object *(*c)());
+   Class(const std::string &name, Object *(*mCreate)());
 
    virtual Object *NewInstance() const;
    std::string GetName() const {return mName;}
@@ -76,7 +72,7 @@ public:
    // NOTE: Do note place any methods inline except those already provided 
    // as inline.
 
-   BoardClass(const std::string &n, Object *(*c)(), const std::string &fn,
+   BoardClass(const std::string &n, Object *(*mCreate)(), const std::string &fn,
 
     // Parameter to initialize the mViewClass member
     Class *mViewClass,
@@ -84,10 +80,10 @@ public:
     Class *mDlgClass,
     // Function pointer parameter to the mutator for the options
     // TODO: This SHOULD be a member function pointer, not a function pointer.
-    void (*setter)(int),
+    void (*optionSetter)(int),
     // Function pointer parameter to the accessor for the options
     // TODO: This SHOULD be a member function pointer, not a function pointer.
-    int (*getter)(void),
+    int (*optionGetter)(void),
 
     bool useXPos = false, int minPlayers = 2);
 
@@ -100,15 +96,20 @@ public:
    virtual int  GetMinPlayers() const {return mMinPlayers;}
    static std::vector<const BoardClass *> GetAllClasses();
 
+   // Return the Class object for the given type name.
+   // TODO: The BoardClass:: version of this wasn't here originally.
+   // MAKE SURE that it should be here.
+   static const BoardClass *ForName(const std::string &name);
+
 protected:
    std::string mFriendlyName;
    const Class *mViewClass;
    const Class *mDlgClass;
 
    // Function pointer for SetOptions
-   void (*setter)(int);
+   void (*optionSetter)(int);
    // Function pointer for GetOptions
-   int (*getter)();
+   int (*optionGetter)();
 
    bool mUseXPos;      
    int mMinPlayers;             // Min number of players for game.      

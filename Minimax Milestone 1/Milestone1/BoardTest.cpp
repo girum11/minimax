@@ -29,18 +29,31 @@ int main(int argc, char **argv) {
 	// Many more locals needed
 
 	// Sample of some Class code
-	// const Class *viewCls, *dlgCls;e
-	// const BoardClass *brdCls;
+	const Class *viewClass, *dialogClass;
+	const BoardClass *boardClass;
+
+   // Verify the number of arguments is correct
+   if (argc != 2 && argc != 3) {
+      cout << "Usage: BoardTest BoardClass [runLimit]" << endl;
+      return;
+   }
+
+   // Attempt to instantiate the boardClass object
+   boardClass = BoardClass::ForName(argv[1]);
+   if (boardClass == NULL) {
+      cout << "Failed to create classes or objects" << endl;
+      return;
+   }
 
 	// Set up Class objects based on commandline args, with appropriate
 	// error handling, so that this works...
-	// board = dynamic_cast<Board *>(brdCls->NewInstance());
+   board = dynamic_cast<Board *>(boardClass->NewInstance());
 
-	/// TODO: Hack for now - I'm avoiding reflection
-	board = new PylosBoard();
-	PylosView *view = new PylosView();
-   PylosDlg *dialog = new PylosDlg();
-   move = board->CreateMove();
+// 	/// TODO: Hack for now - I'm avoiding reflection
+// 	board = new PylosBoard();
+// 	PylosView *view = new PylosView();
+//    PylosDlg *dialog = new PylosDlg();
+//    move = board->CreateMove();
 
 	// Just a sampling of the main scaffold-loop.  You'll make yours a lot longer,
 	// will need to use a try/catch block, and are welcome to violate the function

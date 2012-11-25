@@ -7,13 +7,9 @@ using namespace std;
 Class *Class::mClsHead = NULL;
 BoardClass *BoardClass::mBrdClsHead = NULL;
 
-Class::Class() {
-   // TODO: Delete me.
-}
-
-Class::Class(const string &n, Object *(*c)()) {
+Class::Class(const string &n, Object *(*mCreate)()) {
    this->mName = n;
-   this->mCreate = c;
+   this->mCreate = mCreate;
 
    // Add this Class * to the linked list of Class *'s
    this->mNext = Class::mClsHead;
@@ -21,25 +17,29 @@ Class::Class(const string &n, Object *(*c)()) {
 }
 
 Object *Class::NewInstance() const {
-   return NULL;
+   return (*mCreate)();
 }
 
 const Class *Class::ForName(const string &name) {
-   return NULL;
+   Class *cursor = Class::mClsHead;
+
+   while (cursor != NULL && cursor->mName.compare(name) != 0)
+      cursor = cursor->mNext;  
+   
+   return cursor;
 }
 
-
-BoardClass::BoardClass(const string &n, Object *(*c)(), const string &fn, 
- Class *mViewClass, Class *mDlgClass, void (*setter)(int), int (*getter)(void),
- bool useXPos, int minPlayers) {
+BoardClass::BoardClass(const string &n, Object *(*mCreate)(), const string &fn, 
+ Class *mViewClass, Class *mDlgClass, void (Board::*optionSetter)(int), 
+ int (Board::*optionGetter)(void), bool useXPos, int minPlayers) {
 
    this->mName = n;
-   this->mCreate = c;
+   this->mCreate = mCreate;
    this->mFriendlyName = fn;
    this->mViewClass = mViewClass;
    this->mDlgClass = mDlgClass;
-   this->setter = setter;
-   this->getter = getter;
+   this->optionSetter = optionSetter;
+   this->optionGetter = optionGetter;
    this->mUseXPos = useXPos;
    this->mMinPlayers = minPlayers;
 
@@ -47,7 +47,6 @@ BoardClass::BoardClass(const string &n, Object *(*c)(), const string &fn,
    this->mNext = BoardClass::mBrdClsHead;
    BoardClass::mBrdClsHead = this;
 }
-
 
 void *BoardClass::GetOptions() const {
    return NULL;
@@ -57,3 +56,11 @@ void BoardClass::SetOptions(void *) const {
 
 }
 
+const BoardClass *BoardClass::ForName(const string &name) {
+   BoardClass *cursor = BoardClass::mBrdClsHead;
+
+   while (cursor != NULL && cursor->mName.compare(name) != 0)
+      cursor = cursor->mNext;  
+   
+   return cursor;
+}
