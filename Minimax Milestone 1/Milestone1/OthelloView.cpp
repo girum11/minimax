@@ -23,8 +23,3 @@ void OthelloView::Draw(ostream &out) {
 
    out << rtn;
 }
-
-// TODO: Implement reflection
-const Class *OthelloView::GetClass() const {
-	return 0;
-}

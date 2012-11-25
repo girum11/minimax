@@ -30,8 +30,8 @@ const Class *Class::ForName(const string &name) {
 }
 
 BoardClass::BoardClass(const string &n, Object *(*mCreate)(), const string &fn, 
- Class *mViewClass, Class *mDlgClass, void (Board::*optionSetter)(int), 
- int (Board::*optionGetter)(void), bool useXPos, int minPlayers) {
+ Class *mViewClass, Class *mDlgClass, void (*optionSetter)(const void *), 
+ void *(*optionGetter)(void), bool useXPos, int minPlayers) {
 
    this->mName = n;
    this->mCreate = mCreate;

@@ -74,18 +74,16 @@ public:
 
    BoardClass(const std::string &n, Object *(*mCreate)(), const std::string &fn,
 
-    // Parameter to initialize the mViewClass member
-    Class *mViewClass,
-    // Parameter to initialize the mDlgClass member
-    Class *mDlgClass,
-    // Function pointer parameter to the mutator for the options
-    // TODO: This SHOULD be a member function pointer, not a function pointer.
-    void (*optionSetter)(int),
-    // Function pointer parameter to the accessor for the options
-    // TODO: This SHOULD be a member function pointer, not a function pointer.
-    int (*optionGetter)(void),
+   // Parameter to initialize the mViewClass member
+   Class *mViewClass,
+   // Parameter to initialize the mDlgClass member
+   Class *mDlgClass,
+   // Function pointer parameter to the mutator for the options
+   void (*optionSetter)(const void *),
+   // Function pointer parameter to the accessor for the options
+   void *(*optionGetter)(void),
 
-    bool useXPos = false, int minPlayers = 2);
+   bool useXPos = false, int minPlayers = 2);
 
    virtual std::string GetFriendlyName() const {return mFriendlyName;}
    virtual const Class *GetViewClass() const {return mViewClass;}
@@ -107,9 +105,9 @@ protected:
    const Class *mDlgClass;
 
    // Function pointer for SetOptions
-   void (*optionSetter)(int);
+   void (*optionSetter)(const void *);
    // Function pointer for GetOptions
-   int (*optionGetter)();
+   void *(*optionGetter)();
 
    bool mUseXPos;      
    int mMinPlayers;             // Min number of players for game.      
