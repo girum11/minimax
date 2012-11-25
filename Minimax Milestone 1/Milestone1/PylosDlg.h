@@ -10,7 +10,7 @@ public:
    bool Run(std::istream &in, std::ostream &out, void *data);
 
    // [Staley] Two methods and a member datum to support the Class system
-   const Class *GetClass() const;
+   const Class *GetClass() const { return &mClass; };
    static Class mClass;
 
 private:

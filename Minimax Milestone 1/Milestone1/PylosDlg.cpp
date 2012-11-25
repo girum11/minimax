@@ -87,8 +87,3 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
       out << endl;
    }
 }
-
-// TODO: Implement reflection
-const Class *PylosDlg::GetClass() const {
-   return 0;
-}

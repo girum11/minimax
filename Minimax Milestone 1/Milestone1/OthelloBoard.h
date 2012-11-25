@@ -50,7 +50,7 @@ public:
    static void *GetOptions();
    static void SetOptions(const void *opts);
 
-   const Class *GetClass() const;
+   const Class *GetClass() const { return &mClass; };
 
 protected:
    enum {mNumDirs = 8, squareCount = 64, sqrShift = 2, sqrMask = 0x3};

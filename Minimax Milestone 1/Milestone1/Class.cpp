@@ -3,8 +3,7 @@
 
 using namespace std;
 
-// Static initialization, just to be sure on C++11...
-// TODO: Yank this.
+// Static initialization, since C++11 apparently requires it.
 Class *Class::mClsHead = NULL;
 BoardClass *BoardClass::mBrdClsHead = NULL;
 

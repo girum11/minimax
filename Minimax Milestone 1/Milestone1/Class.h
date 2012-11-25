@@ -95,8 +95,6 @@ public:
    static std::vector<const BoardClass *> GetAllClasses();
 
    // Return the Class object for the given type name.
-   // TODO: The BoardClass:: version of this wasn't here originally.
-   // MAKE SURE that it should be here.
    static const BoardClass *ForName(const std::string &name);
 
 protected:

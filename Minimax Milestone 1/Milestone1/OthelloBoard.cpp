@@ -346,8 +346,3 @@ void OthelloBoard::SetOptions(const void *data)
    for (itr = mRoster.begin(); itr != mRoster.end(); itr++)
       (*itr)->RecalcWeight();
 }
-
-// TODO: Implement reflection
-const Class *OthelloBoard::GetClass() const {
-	return 0;
-}
