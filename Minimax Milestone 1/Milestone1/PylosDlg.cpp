@@ -32,6 +32,8 @@ bool PylosDlg::Run(std::istream &in, std::ostream &out, void *data) {
    // Flush out 'in' until the end of the line
    while (in.get() != '\n' && !in.eof())
       ;
+   
+   out << endl;
 
    if (userResponse == 'y') {
       ReadMethodInt(in, out, "Enter marble weight: ", rules, &PylosBoard::Rules::SetMarble);
@@ -39,7 +41,6 @@ bool PylosDlg::Run(std::istream &in, std::ostream &out, void *data) {
       ReadMethodInt(in, out, "Enter free weight: ", rules, &PylosBoard::Rules::SetFree);
    }
    
-   out << endl;
    return userResponse == 'y';
 }
 
@@ -59,14 +60,13 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
    while (!inputSuccessfullyRead) {
       try {
          out << prompt;
-         //in >> input;
          
          // Here, sscanf() the whole line to ensure that no trailing garbage 
          // was inputted
          getline(in, inputString);
          sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
          if (trailingChar[0] != '\0') {
-            out << "Badly formatted input" << endl;
+            out << "Badly formatted input\n";
             // Clear out trailingChar
             for (int i = 0; i < kTrailingCharLength; ++i) trailingChar[i] = '\0';
             continue;
@@ -76,11 +76,13 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
          (rules->*x)(inputValue);
          inputSuccessfullyRead = true;
       } catch (BaseException &exc) {
-         out << "Error: " << exc.what() << endl;
+         out << "Error: " << exc.what();
       } catch (...) {
-         out << "SOME OTHER UNKNOWN ERROR" << endl;
+         out << "SOME OTHER UNKNOWN ERROR";
          assert(false);
       }
+
+      out << endl;
    }
 }
 

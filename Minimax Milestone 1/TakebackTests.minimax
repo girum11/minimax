@@ -97,52 +97,58 @@ PylosBoard::Read() and PylosBoard::Write() tests
 -- loadBoard test0.board
 -- showBoard	
 
---PylosDlg tests
-setOptions
-n
-setOptions
-y
-100
-50
-20
-setOptions
-n
-setOptions
+-- setOptions
+-- n
 
---28.) Modification of rules (or "options" as the BoardTest language calls them) is done via the CheckersDlg and PylosDlg classes, which engage the user in a dialog to adjust the parameters used by the boards to determine their value.
-setOptions
-n
-setOptions
-noooooooooooooooooooo
-setOptions
-Y
-setOptions maybe?
-nah
+-- setOptions
+-- y
+-- 100
+-- 50
+-- 20
+
+-- setOptions
+-- n
+
+-- setOptions
+-- garbage
+
+-- setOptions
+-- n
+
+-- setOptions
+-- noooooooooooooooooooo
+
+-- setOptions
+-- Y
+
+-- setOptions maybe?
+-- nah
+
+-- setOptions pretty please????
+-- yeah, sure
+-- 100
+-- 20 6
+-- 20
+-- 6
+
+-- setOptions
+-- y
+-- 100
+-- 20
+-- 6 asdf
+-- 6
+
+-- setOptions
+-- y
+-- 100 20 6
+-- 100
+-- 20
+-- 6
+
+All of the above tests work.
 
 
---29.) A "y" is the only acceptable "yes" answer.  It may be followed by arbitrary garbage on the reply line without error.
-setOptions pretty please????
-yeah, sure
 
---30.) The user must enter a valid integer falling within the inclusive ranges given when you run the model program.  The integer must be on a line by itself -- trailing nonwhitespace garbage is unacceptable and geenerates an error indicating there is extra garbage on the line.
-100
-20 6
-20
-6
-
-setOptions
-y
-100
-20
-6 asdf
-6
-
-setOptions
-y
-100 20 6
-100
-20
-6
 
 
 
