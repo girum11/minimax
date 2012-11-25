@@ -155,15 +155,15 @@ int main(int argc, char **argv) {
             delete cmpMove;
 
          } else if (command.compare("showMoveHist") == 0) {
-            // TODO
+            // TODO: showMoveHist
          } else if (command.compare("compareKeys") == 0) {
-            // TODO
+            // TODO: compareKeys
          } else if (command.compare("testPlay") == 0) {
-            // TODO
+            // TODO: testPlay
          } else if (command.compare("testRun") == 0) {
-            // TODO
+            // TODO: testRun
          } else if (command.compare("keyMoveCount") == 0) {
-            // TODO
+            // TODO: keyMoveCount
          } else if (command.compare("quit") == 0)
 				break;
 			else {
