@@ -9,16 +9,6 @@
 #include <exception>
 
 // Add more includes, possibly, but not board-specific ones
-// TODO: Remove these includes once you get reflection working
-#include "OthelloBoard.h"
-#include "OthelloMove.h"
-#include "OthelloDlg.h"
-#include "OthelloView.h"
-#include "PylosBoard.h"
-#include "PylosMove.h"
-#include "PylosDlg.h"
-#include "PylosView.h"
-
 using namespace std;
 
 int main(int argc, char **argv) {
