@@ -340,7 +340,7 @@ void PylosBoard::UndoLastMove() {
    // that happened BEFORE this current turn)
    mWhoseMove = -mWhoseMove;
 
-   cout << "Trying to undo move: " << (string) *moveToUndo << endl;
+   // cout << "Trying to undo move: " << (string) *moveToUndo << endl;
 
    // If the piece was a Promote piece, or if it removed pieces, put those back
    // first, before you take away any pieces you put down.
@@ -362,6 +362,7 @@ void PylosBoard::UndoLastMove() {
    } else assert(false);
 
    // Destroy history of the move
+   delete moveToUndo;
    mMoveHist.pop_back();
 }
 
@@ -595,6 +596,7 @@ void PylosBoard::Delete() {
    mWhiteReserve = mBlackReserve = kStones;
    mLevelLead = mFreeLead = 0;
    mMoveHist.clear();
+
    mRules.levelWgt = mRules.marbleWgt = mRules.freeWgt = 0;
 }
 

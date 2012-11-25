@@ -90,12 +90,12 @@ PylosMove::Read() and PylosMove::Write() tests
 -- showMove
 
 
--- PylosBoard::Read() and PylosBoard::Write() tests
-showBoard
-saveBoard test0.board
-undoLastMove 1000
-loadBoard test0.board
-showBoard
+PylosBoard::Read() and PylosBoard::Write() tests
+-- showBoard
+-- saveBoard test0.board
+-- undoLastMove 1000
+-- loadBoard test0.board
+-- showBoard
 
 -- setOptions
 -- n
@@ -189,12 +189,16 @@ showBoard
 
 --------------- All of the above tests work. ------------------
 
-
+undoLastMove 1000
 showBoard
+keyMoveCount
+
 testPlay 5 1000
 showBoard
 keyMoveCount
+
 undoLastMove 1000
+showBoard
 keyMoveCount
 
 
