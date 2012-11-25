@@ -60,7 +60,6 @@ int main(int argc, char **argv) {
 	// will need to use a try/catch block, and are welcome to violate the function
 	// line limit rule for this one method.
    while (cin >> command) {
-   //while (getline(cin, command)) {
 		try {
 			if (command.compare("undoLastMove") == 0) {
 				cin >> count;
@@ -128,9 +127,6 @@ int main(int argc, char **argv) {
             cout << "Value: " << board->GetValue() << endl;
          } else if (command.compare("doMove") == 0) {
 				// enterMove code (can abstract out if you want)
-				getline(cin, cArg);
-            move = board->CreateMove();
-				*move = cArg.c_str();
 
 				// applyMove code
 				board->ApplyMove(move);
@@ -164,6 +160,15 @@ int main(int argc, char **argv) {
             cout << endl;
          } else if (command.compare("compareKeys") == 0) {
             // TODO: compareKeys
+            cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
+            cin >> cArg;
+            ifstream in(cArg.c_str());
+            assert(in.is_open());
+            in >> *cmpBoard;
+
+            if (
+
+
          } else if (command.compare("testPlay") == 0) {
             // TODO: testPlay
          } else if (command.compare("testRun") == 0) {

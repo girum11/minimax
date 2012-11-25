@@ -90,12 +90,12 @@ PylosMove::Read() and PylosMove::Write() tests
 -- showMove
 
 
-PylosBoard::Read() and PylosBoard::Write() tests
--- showBoard
--- saveBoard test0.board
--- undoLastMove 1000
--- loadBoard test0.board
--- showBoard	
+-- PylosBoard::Read() and PylosBoard::Write() tests
+showBoard
+saveBoard test0.board
+undoLastMove 1000
+loadBoard test0.board
+showBoard
 
 -- setOptions
 -- n
@@ -169,6 +169,8 @@ showBoard
 showVal
 showMoveHist
 
+
+compareKeys test0.board
 
 
 quit
