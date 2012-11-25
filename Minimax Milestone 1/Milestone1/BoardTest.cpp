@@ -213,7 +213,6 @@ int main(int argc, char **argv) {
             }
          } else if (command.compare("testRun") == 0) {
            
-            /*
             // TODO: testRun
             int seed = 0;
             unsigned stepCount = 0, selectedMove = 0;
@@ -230,8 +229,8 @@ int main(int argc, char **argv) {
                board->GetAllMoves(&listOfMoves);
 
                // If the game is over, retract 1-rand() steps backwards
-               if (listOfMoves.size() == 0) {                  
-                  count = rand() % listOfMoves.size() + 1;
+               if (listOfMoves.size() == 0) {
+                  count = rand() % board->GetMoveHist().size() + 1;
                                  
 				      while (count-- > 0)
 					      board->UndoLastMove();
@@ -252,7 +251,7 @@ int main(int argc, char **argv) {
                // top...)
                // Apply the selected move to the game
                board->ApplyMove(*iter);
-            } */
+            } 
          } else if (command.compare("keyMoveCount") == 0) {
             // TODO: keyMoveCount
          } else if (command.compare("quit") == 0)
