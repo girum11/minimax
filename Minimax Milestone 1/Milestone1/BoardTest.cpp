@@ -159,16 +159,23 @@ int main(int argc, char **argv) {
             }
             cout << endl;
          } else if (command.compare("compareKeys") == 0) {
-            // TODO: compareKeys
             cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
             cin >> cArg;
             ifstream in(cArg.c_str());
             assert(in.is_open());
             in >> *cmpBoard;
 
-            if (
+            if (*board->GetKey() == *cmpBoard->GetKey()) {
+               cout << "Board keys are equal" << endl;
+            } else {
+               cout << "Board keys are unequal" << endl;
 
-
+               if (*board->GetKey() < *cmpBoard->GetKey()) {
+                  cout << "Current board is less than " << cArg << endl;
+               } else {
+                  cout << "Current board is greater than " << cArg << endl;
+               }
+            }
          } else if (command.compare("testPlay") == 0) {
             // TODO: testPlay
          } else if (command.compare("testRun") == 0) {

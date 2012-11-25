@@ -145,32 +145,46 @@ showBoard
 -- 20
 -- 6
 
+-- undoLastMove 1000
+-- showVal
+-- showBoard
+-- doMove Play at [0,0]
+-- showVal
+-- doMove Play at [3,0]
+-- showVal
+-- doMove Play at [0,1]
+-- showVal
+-- doMove Play at [3,1]
+-- showVal
+-- doMove Play at [0,2]
+-- showVal
+-- doMove Play at [3,2]
+-- doMove Play at [1,0]
+-- doMove Play at [1,1]
+-- doMove Play at [0,0]
+-- showVal
+-- showBoard
+-- showVal
+-- showMoveHist
+
+
 -- All of the above tests work.
 
-undoLastMove 1000
-showVal
-showBoard
 doMove Play at [0,0]
-showVal
-doMove Play at [3,0]
-showVal
-doMove Play at [0,1]
-showVal
-doMove Play at [3,1]
-showVal
-doMove Play at [0,2]
-showVal
-doMove Play at [3,2]
-doMove Play at [1,0]
-doMove Play at [1,1]
-doMove Play at [0,0]
-showVal
-showBoard
-showVal
-showMoveHist
-
-
+saveBoard test0.board
+undoLastMove 1
 compareKeys test0.board
+doMove Play at [0,0]
+compareKeys test0.board
+undoLastMove 1
+saveBoard test1.board
+doMove Play at [0,0]
+compareKeys test1.board
+undoLastMove 1
+
+
+
+
 
 
 quit
