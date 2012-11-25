@@ -73,10 +73,16 @@ public:
    // as inline.
    
    BoardClass(const std::string &n, Object *(*c)(), const std::string &fn,
+
     // Parameter to initialize the mViewClass member
+    Class *mViewClass,
     // Parameter to initialize the mDlgClass member
+    Class *mDlgClass,
     // Function pointer parameter to the mutator for the options
+    void (*setter)(int),
     // Function pointer parameter to the accessor for the options
+    int (*getter)(void),
+
     bool useXPos = false, int minPlayers = 2);
 
    virtual std::string GetFriendlyName() const {return mFriendlyName;}
