@@ -167,7 +167,7 @@ doMove Play at [0,0]
 showVal
 showBoard
 showVal
-
+showMoveHist
 
 
 

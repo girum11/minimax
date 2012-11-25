@@ -155,7 +155,13 @@ int main(int argc, char **argv) {
             delete cmpMove;
 
          } else if (command.compare("showMoveHist") == 0) {
-            // TODO: showMoveHist
+            cout << "Move History: " << endl;
+            const list<const Board::Move *> moveHist = board->GetMoveHist();
+            for (list<const Board::Move *>::const_iterator iter = moveHist.begin();
+             iter != moveHist.end(); iter++) {
+                cout << (string) **iter << ' ';
+            }
+            cout << endl;
          } else if (command.compare("compareKeys") == 0) {
             // TODO: compareKeys
          } else if (command.compare("testPlay") == 0) {

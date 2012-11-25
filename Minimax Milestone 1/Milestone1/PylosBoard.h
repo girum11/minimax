@@ -219,7 +219,7 @@ protected:
    // [Staley] History of moves leading to this point.
    std::list<Move *> mMoveHist;
 
-   // TODO!!!! I shouldn't need this!
+   // TODO: PylosBoard cannot friend PylosView
    friend class PylosView;
    
    // Mutual friendship between PylosBoard and PylosMove is allowed.
