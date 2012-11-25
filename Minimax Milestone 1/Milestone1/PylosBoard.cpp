@@ -401,7 +401,8 @@ void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const {
          }
       }
 
-      AddTakeBacks(castedMoves);
+   AddTakeBacks(castedMoves);
+
 }
 
 // [Staley] For each move in *moves that completes one or more sets, add all

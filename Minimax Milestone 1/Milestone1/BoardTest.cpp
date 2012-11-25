@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
 	// Many more locals needed
    View *view = NULL;
    Dialog *dialog = NULL;
+   list<Board::Move *> allMoves;
 
 	// Sample of some Class code
 	const Class *viewClass, *dialogClass;
@@ -82,18 +83,18 @@ int main(int argc, char **argv) {
 
 				// Print out all possible moves
 				cout << "All Moves: ";
-				
-				list<Board::Move *> listOfMoves;
-				board->GetAllMoves(&listOfMoves);
+
+				board->GetAllMoves(&allMoves);
 				list<Board::Move *>::const_iterator listIter;
-				for (listIter = listOfMoves.begin(); listIter != listOfMoves.end(); ++listIter) {
+				for (listIter = allMoves.begin(); listIter != allMoves.end(); ++listIter) {
 					cout << (string) **listIter << " \n";
-				}
+               delete *listIter;
+            }
+            allMoves.clear();
 			} else if (command.compare("enterMove") == 0) {
 				// The exception is the exception that's thrown in the Board::Move member function.
 				// It's this reason why we need to wrap this test scaffold up in a try-catch block.
 				getline(cin, cArg);
-            move = board->CreateMove();
 				*move = cArg.c_str();
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
@@ -128,7 +129,6 @@ int main(int argc, char **argv) {
          } else if (command.compare("doMove") == 0) {
 				// enterMove code (can abstract out if you want)
             getline(cin, cArg);
-            move = board->CreateMove();
 				*move = cArg.c_str();
 
 				// applyMove code
@@ -189,25 +189,28 @@ int main(int argc, char **argv) {
 
             while (moveCount-- > 0) {
                // Grab all possible moves
-               list<Board::Move *> listOfMoves;
-               board->GetAllMoves(&listOfMoves);
+               board->GetAllMoves(&allMoves);
 
                // Pick one randomly (ensuring that the game is still going)
-               if (listOfMoves.size() == 0) break;
-               selectedMove = rand() % listOfMoves.size();
+               if (allMoves.size() == 0) break;
+               selectedMove = rand() % allMoves.size();
                
                // Iterate to that move
-               list<Board::Move *>::const_iterator iter = listOfMoves.begin();
+               list<Board::Move *>::const_iterator iter = allMoves.begin();
                for (int i = 0; i < selectedMove; i++) {
                   iter++;
                }
-               assert(iter != listOfMoves.end());
+               assert(iter != allMoves.end());
 
                // WARNING: Bender watch -- should I set this move to be the
                // default move? (that is, set it to be the variable 'move' up
                // top...)
                // Apply the selected move to the game
                board->ApplyMove(*iter);
+
+//                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
+//                   delete *iter;
+//                allMoves.clear();
             }
          } else if (command.compare("testRun") == 0) {
             int seed = 0;
@@ -219,34 +222,38 @@ int main(int argc, char **argv) {
 
             while (stepCount-- > 0) {
                // Grab all possible moves
-               // WARNING: Speedcheck -- maybe using instance variables
-               // like this is a bad idea?  Maybe I should declare them up top?
-               list<Board::Move *> listOfMoves;
-               board->GetAllMoves(&listOfMoves);
+               board->GetAllMoves(&allMoves);
 
                // If the game is over, retract 1-rand() steps backwards
-               if (listOfMoves.size() == 0) {
+               if (allMoves.size() == 0) {
                   count = rand() % board->GetMoveHist().size() + 1;
                                  
 				      while (count-- > 0)
 					      board->UndoLastMove();
 
+//                   for (list<Board::Move *>::iterator iter = allMoves.begin(); 
+//                    iter != allMoves.end(); iter++)
+//                      delete *iter;
                   continue;
                }
 
                // Otherwise, pick a random move to do just like testPlay
-               selectedMove = rand() % listOfMoves.size();
-               list<Board::Move *>::const_iterator iter = listOfMoves.begin();
+               selectedMove = rand() % allMoves.size();
+               list<Board::Move *>::const_iterator iter = allMoves.begin();
                for (int i = 0; i < selectedMove; i++) {
                   iter++;
                }
-               assert(iter != listOfMoves.end());
+               assert(iter != allMoves.end());
 
                // WARNING: Bender watch -- should I set this move to be the
                // default move? (that is, set it to be the variable 'move' up
                // top...)
                // Apply the selected move to the game
                board->ApplyMove(*iter);
+
+//                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
+//                   delete *iter;
+//                allMoves.clear();
             } 
          } else if (command.compare("keyMoveCount") == 0) {
             // TODO: keyMoveCount
