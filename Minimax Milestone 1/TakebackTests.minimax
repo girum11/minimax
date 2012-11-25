@@ -180,11 +180,16 @@ showBoard
 -- undoLastMove 1
 
 
+showBoard
+testPlay 5 1000
+showBoard
+
 --------------- All of the above tests work. ------------------
 
-showBoard
-testPlay 5 2
-showBoard
+-- showBoard
+-- testRun 5 1000
+-- showBoard
+
 
 
 

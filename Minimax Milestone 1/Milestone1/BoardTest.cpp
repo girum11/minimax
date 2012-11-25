@@ -207,7 +207,47 @@ int main(int argc, char **argv) {
                board->ApplyMove(*iter);
             }
          } else if (command.compare("testRun") == 0) {
+           
+            /*
             // TODO: testRun
+            int seed = 0;
+            unsigned stepCount = 0, selectedMove = 0;
+            
+            // Take a seed and moveCount, and apply the seed
+            cin >> seed >> stepCount;
+            srand(seed);
+
+            while (stepCount-- > 0) {
+               // Grab all possible moves
+               // WARNING: Speedcheck -- maybe using instance variables
+               // like this is a bad idea?  Maybe I should declare them up top?
+               list<Board::Move *> listOfMoves;
+               board->GetAllMoves(&listOfMoves);
+
+               // If the game is over, retract 1-rand() steps backwards
+               if (listOfMoves.size() == 0) {                  
+                  count = rand() % listOfMoves.size() + 1;
+                                 
+				      while (count-- > 0)
+					      board->UndoLastMove();
+
+                  continue;
+               }
+
+               // Otherwise, pick a random move to do just like testPlay
+               selectedMove = rand() % listOfMoves.size();
+               list<Board::Move *>::const_iterator iter = listOfMoves.begin();
+               for (int i = 0; i < selectedMove; i++) {
+                  iter++;
+               }
+               assert(iter != listOfMoves.end());
+
+               // WARNING: Bender watch -- should I set this move to be the
+               // default move? (that is, set it to be the variable 'move' up
+               // top...)
+               // Apply the selected move to the game
+               board->ApplyMove(*iter);
+            } */
          } else if (command.compare("keyMoveCount") == 0) {
             // TODO: keyMoveCount
          } else if (command.compare("quit") == 0)
