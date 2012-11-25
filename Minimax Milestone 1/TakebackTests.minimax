@@ -183,12 +183,19 @@ showBoard
 -- testPlay 5 1000
 -- showBoard
 
+-- showBoard
+-- testRun 5 1000
+-- showBoard
 
 --------------- All of the above tests work. ------------------
 
+
 showBoard
-testRun 5 1000
+testPlay 5 1000
 showBoard
+keyMoveCount
+undoLastMove 1000
+keyMoveCount
 
 
 
