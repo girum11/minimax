@@ -210,8 +210,8 @@ int main(int argc, char **argv) {
                // Apply the selected move to the game
                board->ApplyMove(*iter);
 
-//                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
-//                   delete *iter;
+               for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
+                  delete *iter;
                allMoves.clear();
             }
          } else if (command.compare("testRun") == 0) {

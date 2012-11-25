@@ -306,19 +306,30 @@ void PylosBoard::ApplyMove(Move *move) {
       }
    }
    if (!listContainsMove) {
-      cout << "list of valid moves doesn't contain \"" << (string)*move 
-         << "\", did NOT applyMove()" << endl;
       // TODO: This should probably throw a BaseException().  Find out what
       // Staley's code outputs and put that error message in the Exception here.
-//       for (moveIter = moves.begin(); moveIter != moves.end(); moveIter++)
-//          delete *moveIter;
-//       moves.clear();
+      cout << "list of valid moves doesn't contain \"" << (string)*move 
+         << "\", did NOT applyMove()" << endl;
 
+      // Cleanup after your GetAllMoves() call
+      for (list<Move *>::const_iterator moveIter = moves.begin(); 
+       moveIter != moves.end(); moveIter++)
+         delete *moveIter;
+      moves.clear();
+
+      // If the list of valid moves DOES NOT contain the move you're trying
+      // to do, then just kill this ApplyMove() call.
       return;
+   } else {
+      // If the list of valid moves DOES contain it though, then continue as
+      // normal.
+
+      // Cleanup after your GetAllMoves() call
+      for (list<Move *>::const_iterator moveIter = moves.begin(); 
+       moveIter != moves.end(); moveIter++)
+         delete *moveIter;
+      moves.clear();
    }
-//    for (moveIter = moves.begin(); moveIter != moves.end(); moveIter++)
-//       delete *moveIter;
-//    moves.clear();
 
    /** END Girum's code */
 
