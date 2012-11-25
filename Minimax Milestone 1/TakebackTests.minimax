@@ -189,7 +189,6 @@ PylosBoard::Read() and PylosBoard::Write() tests
 
 --------------- All of the above tests work. ------------------
 
-undoLastMove 1000
 showBoard
 keyMoveCount
 

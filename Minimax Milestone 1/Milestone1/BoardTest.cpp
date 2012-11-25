@@ -210,54 +210,13 @@ int main(int argc, char **argv) {
                // Apply the selected move to the game
                board->ApplyMove(*iter);
 
-               for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
-                  delete *iter;
+               // Clean up after your GetAllMoves() call
+//                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
+//                   delete *iter;
                allMoves.clear();
             }
          } else if (command.compare("testRun") == 0) {
-            int seed = 0;
-            unsigned stepCount = 0, selectedMove = 0;
-            
-            // Take a seed and moveCount, and apply the seed
-            cin >> seed >> stepCount;
-            srand(seed);
-
-            while (stepCount-- > 0) {
-               // Grab all possible moves
-               assert(allMoves.size() == 0);
-               board->GetAllMoves(&allMoves);
-
-               // If the game is over, retract 1-rand() steps backwards
-               if (allMoves.size() == 0) {
-                  count = rand() % board->GetMoveHist().size() + 1;
-                                 
-				      while (count-- > 0)
-					      board->UndoLastMove();
-
-//                   for (list<Board::Move *>::iterator iter = allMoves.begin(); 
-//                    iter != allMoves.end(); iter++)
-//                      delete *iter;
-                  continue;
-               }
-
-               // Otherwise, pick a random move to do just like testPlay
-               selectedMove = rand() % allMoves.size();
-               list<Board::Move *>::const_iterator iter = allMoves.begin();
-               for (int i = 0; i < selectedMove; i++) {
-                  iter++;
-               }
-               assert(iter != allMoves.end());
-
-               // WARNING: Bender watch -- should I set this move to be the
-               // default move? (that is, set it to be the variable 'move' up
-               // top...)
-               // Apply the selected move to the game
-               board->ApplyMove(*iter);
-
-//                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
-//                   delete *iter;
-//                allMoves.clear();
-            } 
+            // TODO: testRun
          } else if (command.compare("keyMoveCount") == 0) {
             // TODO: keyMoveCount
             cout << "Moves/Keys: " << Board::Move::GetOutstanding()
