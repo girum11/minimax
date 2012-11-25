@@ -229,34 +229,13 @@ void PylosBoard::PutMarble(Spot *trg) {
    // piece and a black piece in the same spot.
    assert((mWhite & mBlack) == 0x0);
 
-   // ****TODO: TEST THISSSSSSS
    // Update mLevelLead and mFreeLead
-   for (int level = 0; level < kDim; level++) {
-      for (int row = 0; row < kDim - level; row++) {
-         for (int col = 0; col < kDim - level; col++) {
-            Cell *cell = GetCell(row, col, level);
-
-            // Update mLevelLead
-            if (cell->mask & mWhite) {
-               mLevelLead += level;
-            } else if (cell->mask & mBlack)  {
-               mLevelLead -= level;
-            }
-
-            // Update mFreeLead
-            if (cell->sups & mWhite) {
-               mFreeLead += 1;
-            } else if (cell->sups & mBlack) {
-               mFreeLead -= 1;
-            }
-         }
-      }
-   }
+   UpdateBoardValuation();
 }
 
 void PylosBoard::TakeMarble(Spot *trg) {
-   // [*Staley] Other stuff needed here, related to board valuation
-   // [*Staley] This is a great place for a few asserts, too.
+   // [Staley] Other stuff needed here, related to board valuation
+   // [Staley] This is a great place for a few asserts, too.
    // "Board valuation" updates is to update the values of 
    // mWhiteReserve, mBlackReserve, mLevelLead, and mFreeLead
 
@@ -266,8 +245,35 @@ void PylosBoard::TakeMarble(Spot *trg) {
    // piece and a black piece in the same spot. Play it safe here.
    assert((mWhite & mBlack) == 0x0);
 
-   // *Update mLevelLead and mFreeLead
+   // Update mLevelLead and mFreeLead
+   UpdateBoardValuation();
+}
 
+void PylosBoard::UpdateBoardValuation() {
+   // Update mLevelLead and mFreeLead
+   Set allPieces(mWhite|mBlack);
+   mLevelLead = mFreeLead = 0;
+   for (int level = 0; level < kDim; level++) {
+      for (int row = 0; row < kDim - level; row++) {
+         for (int col = 0; col < kDim - level; col++) {
+
+            Cell *cell = GetCell(row, col, level);
+            // Update mLevelLead
+            if (cell->mask & mWhite) {
+               mLevelLead += level;
+            } else if (cell->mask & mBlack)  {
+               mLevelLead -= level;
+            }
+
+            // Update mFreeLead
+            if ((cell->sups & allPieces) == 0 && (cell->mask & mWhite)) {
+               mFreeLead += 1;
+            } else if ((cell->sups & allPieces) == 0 && (cell->mask & mBlack)) {
+               mFreeLead -= 1;
+            }
+         }
+      }
+   }
 }
 
 // TODO: If your code runs too slow, that's because ApplyMove() checks the list

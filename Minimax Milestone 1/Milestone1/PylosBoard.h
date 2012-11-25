@@ -264,6 +264,7 @@ private:
    }
 
    void ClearMSpots();
+   void UpdateBoardValuation();
 
    static BoardClass mClass;
    static Object *CreatePylosBoard() { return new PylosBoard; };
