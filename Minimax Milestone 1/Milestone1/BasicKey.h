@@ -45,7 +45,7 @@ Object *BasicKey<X>::CreateBasicKey() {
 }
 
 template <unsigned int X>
-Class BasicKey<X>::mClass(strcat("BasicKey<",strcat(X,">")), &CreateBasicKey);
+Class BasicKey<X>::mClass(FString("BasicKey<%d", X), &CreateBasicKey);
 
 template <unsigned int X>
 bool BasicKey<X>::operator==(const Board::Key &key) const {
