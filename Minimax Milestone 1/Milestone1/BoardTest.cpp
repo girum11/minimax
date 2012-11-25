@@ -116,11 +116,7 @@ int main(int argc, char **argv) {
             ifstream in(cArg.c_str());
             assert(in.is_open());
             in >> *move;
-         } 
-         
-         
-
-         else if (command.compare("setOptions") == 0) {
+         } else if (command.compare("setOptions") == 0) {
             // Flush until '\n'
             cin.ignore(INT_MAX, '\n');
 
@@ -128,20 +124,9 @@ int main(int argc, char **argv) {
             void *options = boardClass->GetOptions();
             dialog->Run(cin, cout, options);
             delete options;
-         }
-         // TODO: Need to implement PylosDlg before this is correct.
-         else if (command.compare("showVal") == 0) {
+         } else if (command.compare("showVal") == 0) {
             cout << "Value: " << board->GetValue() << endl;
-         }
-         
-         
-         
-         
-         
-         
-         
-         
-         else if (command.compare("doMove") == 0) {
+         } else if (command.compare("doMove") == 0) {
 				// enterMove code (can abstract out if you want)
 				getline(cin, cArg);
             move = board->CreateMove();
@@ -169,6 +154,16 @@ int main(int argc, char **argv) {
             // Clean up
             delete cmpMove;
 
+         } else if (command.compare("showMoveHist") == 0) {
+            // TODO
+         } else if (command.compare("compareKeys") == 0) {
+            // TODO
+         } else if (command.compare("testPlay") == 0) {
+            // TODO
+         } else if (command.compare("testRun") == 0) {
+            // TODO
+         } else if (command.compare("keyMoveCount") == 0) {
+            // TODO
          } else if (command.compare("quit") == 0)
 				break;
 			else {

@@ -24,19 +24,28 @@ public:
 	static void *operator new(size_t);
 	static void operator delete(void *p);
 
-	const Class *GetClass() const;
+   const Class *GetClass() const { return &mClass; };
 
 protected:
 	std::istream &Read(std::istream &);
 	std::ostream &Write(std::ostream &) const;
 
 private:
-	// TODO: Statically instantiate this freeList?
+   static Class mClass;
+   static Object *CreateBasicKey();
 	static std::vector<BasicKey *> mFreeList;
 };
 
 template <unsigned int X>
 std::vector<BasicKey<X> *> BasicKey<X>::mFreeList;
+
+template <unsigned int X>
+Object *BasicKey<X>::CreateBasicKey() {
+   return new BasicKey<X>;
+}
+
+template <unsigned int X>
+Class BasicKey<X>::mClass(strcat("BasicKey<",strcat(X,">")), &CreateBasicKey);
 
 template <unsigned int X>
 bool BasicKey<X>::operator==(const Board::Key &key) const {
@@ -90,12 +99,6 @@ void BasicKey<X>::operator delete(void *p) {
 	mFreeList.push_back((BasicKey *)p);
 
 	Board::Key::mOutstanding--;
-}
-
-// TODO: Implement reflection
-template <unsigned int X>
-const Class *BasicKey<X>::GetClass() const {
-	return 0;
 }
 
 template <unsigned int X>

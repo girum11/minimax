@@ -9,8 +9,6 @@
 #include "BasicKey.h"
 #include "PylosView.h"
 
-
-////////////////////////////////////////////////////////////////////////////////
 using namespace std;
 
 PylosBoard::Set PylosBoard::mSets[kNumSets];
@@ -279,8 +277,7 @@ void PylosBoard::UpdateBoardValuation() {
 // TODO: If your code runs too slow, that's because ApplyMove() checks the list
 // of "GetAllMoves()" every time it tries to Apply a Move.  Maybe I should keep
 // a static list of Moves that are valid, and simply update that once per ApplyMove()?
-void PylosBoard::ApplyMove(Move *move)
-{
+void PylosBoard::ApplyMove(Move *move) {
    PylosMove *tm = dynamic_cast<PylosMove *>(move);
 
    int rChange = -1;  // [Staley] Start by assuming we'll lose one from reserve
@@ -355,8 +352,7 @@ void PylosBoard::UndoLastMove() {
    mMoveHist.pop_back();
 }
 
-void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const
-{
+void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const {
    int tRow, tCol, sRow, sCol;
    Cell *trg, *src;
    PylosMove::LocVector locs;
@@ -452,12 +448,11 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
 }
 
 void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
-                                       list<PylosMove *>::const_iterator moveIter,
-                                       Set *mSet, 
-                                       PylosMove *potentialMove,
-                                       Cell *potentialMoveCell) const {
-                                          set<pair<short,short> > freeMarbles1;
-                                          set<pair<short,short> > freeMarbles2;
+ list<PylosMove *>::const_iterator moveIter, Set *mSet, 
+ PylosMove *potentialMove, Cell *potentialMoveCell) const {
+
+   set<pair<short,short> > freeMarbles1;
+   set<pair<short,short> > freeMarbles2;
 
    // For each of this cell's possible alignments,
    for (int i = 0; i < kSetsPerCell; i++) {
@@ -634,38 +629,38 @@ ostream &PylosBoard::Write(ostream &os) const {
    return os;
 }
 
-// [*Staley] Write the two methods GetOptions and SetOptions of PylosBoard, 
-// [*Staley] without changing their signature in the PylosBoard.h file.  
-// [*Staley] (You'll need to cast to and from void *.)  Do not worry about 
-// [*Staley] setting up a Class object yet; that will come in step 7.  You just 
-// [*Staley] want the methods ready for initializing the Class object. 
-// [*Staley] 
-// [*Staley] The void * returned from GetOptions, both in Pylos and other Board 
-// [*Staley] types, is owned by the caller.  And, the caller retains ownership 
-// [*Staley] of the void * passed to SetOptions.
-// [*Staley] 
-// [*Staley] Create PylosDlg.h/cpp, and make a new PylosDlg object in your 
-// [*Staley] BoardTest main directly via new.  Test the GetOptions and 
-// [*Staley] SetOptions methods by implementing the setOptions command, using 
-// [*Staley] the PylosDlg object.
+// [Staley] Write the two methods GetOptions and SetOptions of PylosBoard, 
+// [Staley] without changing their signature in the PylosBoard.h file.  
+// [Staley] (You'll need to cast to and from void *.)  Do not worry about 
+// [Staley] setting up a Class object yet; that will come in step 7.  You just 
+// [Staley] want the methods ready for initializing the Class object. 
+// [Staley] 
+// [Staley] The void * returned from GetOptions, both in Pylos and other Board 
+// [Staley] types, is owned by the caller.  And, the caller retains ownership 
+// [Staley] of the void * passed to SetOptions.
+// [Staley] 
+// [Staley] Create PylosDlg.h/cpp, and make a new PylosDlg object in your 
+// [Staley] BoardTest main directly via new.  Test the GetOptions and 
+// [Staley] SetOptions methods by implementing the setOptions command, using 
+// [Staley] the PylosDlg object.
 void *PylosBoard::GetOptions() {
    return new Rules(mRules);
 }
 
-// [*Staley] Write the two methods GetOptions and SetOptions of PylosBoard, 
-// [*Staley] without changing their signature in the PylosBoard.h file.  
-// [*Staley] (You'll need to cast to and from void *.)  Do not worry about 
-// [*Staley] setting up a Class object yet; that will come in step 7.  You just 
-// [*Staley] want the methods ready for initializing the Class object. 
-// [*Staley] 
-// [*Staley] The void * returned from GetOptions, both in Pylos and other Board 
-// [*Staley] types, is owned by the caller.  And, the caller retains ownership 
-// [*Staley] of the void * passed to SetOptions.
-// [*Staley] 
-// [*Staley] Create PylosDlg.h/cpp, and make a new PylosDlg object in your 
-// [*Staley] BoardTest main directly via new.  Test the GetOptions and 
-// [*Staley] SetOptions methods by implementing the setOptions command, using 
-// [*Staley] the PylosDlg object.
+// [Staley] Write the two methods GetOptions and SetOptions of PylosBoard, 
+// [Staley] without changing their signature in the PylosBoard.h file.  
+// [Staley] (You'll need to cast to and from void *.)  Do not worry about 
+// [Staley] setting up a Class object yet; that will come in step 7.  You just 
+// [Staley] want the methods ready for initializing the Class object. 
+// [Staley] 
+// [Staley] The void * returned from GetOptions, both in Pylos and other Board 
+// [Staley] types, is owned by the caller.  And, the caller retains ownership 
+// [Staley] of the void * passed to SetOptions.
+// [Staley] 
+// [Staley] Create PylosDlg.h/cpp, and make a new PylosDlg object in your 
+// [Staley] BoardTest main directly via new.  Test the GetOptions and 
+// [Staley] SetOptions methods by implementing the setOptions command, using 
+// [Staley] the PylosDlg object.
 void PylosBoard::SetOptions(const void *opts) {
    mRules = *reinterpret_cast<const Rules *>(opts);
 }
