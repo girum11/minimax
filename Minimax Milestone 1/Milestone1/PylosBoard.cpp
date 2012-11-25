@@ -281,14 +281,14 @@ void PylosBoard::ApplyMove(Move *move) {
    PylosMove *tm = dynamic_cast<PylosMove *>(move);
 
    int rChange = -1;  // [Staley] Start by assuming we'll lose one from reserve
-   PylosMove::LocVector::iterator itr = tm->mLocs.begin();
+   PylosMove::LocVector::iterator locIter = tm->mLocs.begin();
 
    /** BEGIN Girum's code to verify that a move is actually a valid move */
    list<Move *> moves;
    PylosBoard::GetAllMoves(&moves);
    bool listContainsMove = false;
-   for (list<Move *>::const_iterator iter = moves.begin(); iter != moves.end(); iter++) {
-      if ((*iter)->operator==(*move)) {
+   for (list<Move *>::const_iterator moveIter = moves.begin(); moveIter != moves.end(); moveIter++) {
+      if ((*moveIter)->operator==(*move)) {
          listContainsMove = true;
       }
    }
@@ -301,11 +301,11 @@ void PylosBoard::ApplyMove(Move *move) {
    }
    /** END Girum's code */
 
-   PutMarble(&mSpots[(*itr).first][(*itr).second]);
+   PutMarble(&mSpots[(*locIter).first][(*locIter).second]);
 
-   itr++;
-   for (; itr != tm->mLocs.end(); itr++) {
-      TakeMarble(&mSpots[(*itr).first][(*itr).second]);
+   locIter++;
+   for (; locIter != tm->mLocs.end(); locIter++) {
+      TakeMarble(&mSpots[(*locIter).first][(*locIter).second]);
       rChange++;
    }
 

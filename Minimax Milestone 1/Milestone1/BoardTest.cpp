@@ -204,6 +204,8 @@ int main(int argc, char **argv) {
                // default move? (that is, set it to be the variable 'move' up
                // top...)
                // Apply the selected move to the game
+               cout << "Move " << 1000 - moveCount << ": "
+                << (string) **iter << endl;
                board->ApplyMove(*iter);
             }
          } else if (command.compare("testRun") == 0) {

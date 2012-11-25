@@ -159,7 +159,7 @@ protected:
    
    // [Staley] Like HalfPut, but in reverse
    inline void HalfTake(Spot *spot) const {
-      assert(spot != NULL);
+      assert(spot != NULL && spot->top != NULL);
 
       // Clear out the corresponding bits
       if (mWhoseMove == kWhite)
