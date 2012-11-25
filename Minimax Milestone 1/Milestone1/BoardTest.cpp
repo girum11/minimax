@@ -84,6 +84,7 @@ int main(int argc, char **argv) {
 				// Print out all possible moves
 				cout << "All Moves: ";
 
+            assert(allMoves.size() == 0);
 				board->GetAllMoves(&allMoves);
 				list<Board::Move *>::const_iterator listIter;
 				for (listIter = allMoves.begin(); listIter != allMoves.end(); ++listIter) {
@@ -189,17 +190,18 @@ int main(int argc, char **argv) {
 
             while (moveCount-- > 0) {
                // Grab all possible moves
+               assert(allMoves.size() == 0);
                board->GetAllMoves(&allMoves);
 
                // Pick one randomly (ensuring that the game is still going)
-               if (allMoves.size() == 0) break;
+               if (allMoves.size() == 0) {
+                  break;
+               }
                selectedMove = rand() % allMoves.size();
                
-               // Iterate to that move
+               // Iterate over to that randomly selected move
                list<Board::Move *>::const_iterator iter = allMoves.begin();
-               for (int i = 0; i < selectedMove; i++) {
-                  iter++;
-               }
+               for (int i = 0; i < selectedMove; i++) iter++;
                assert(iter != allMoves.end());
 
                // WARNING: Bender watch -- should I set this move to be the
@@ -210,7 +212,7 @@ int main(int argc, char **argv) {
 
 //                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
 //                   delete *iter;
-//                allMoves.clear();
+               allMoves.clear();
             }
          } else if (command.compare("testRun") == 0) {
             int seed = 0;
@@ -222,6 +224,7 @@ int main(int argc, char **argv) {
 
             while (stepCount-- > 0) {
                // Grab all possible moves
+               assert(allMoves.size() == 0);
                board->GetAllMoves(&allMoves);
 
                // If the game is over, retract 1-rand() steps backwards

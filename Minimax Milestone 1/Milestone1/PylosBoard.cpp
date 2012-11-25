@@ -291,12 +291,18 @@ void PylosBoard::ApplyMove(Move *move) {
    PylosMove::LocVector::iterator locIter = tm->mLocs.begin();
 
    /** BEGIN Girum's code to verify that a move is actually a valid move */
+
+   // TODO: Instead of repeatedly calculating GetAllMoves() [by far your
+   // slowest function], why not hold onto a static copy of the currently 
+   // valid moves?
    list<Move *> moves;
-   PylosBoard::GetAllMoves(&moves);
+   GetAllMoves(&moves);
    bool listContainsMove = false;
-   for (list<Move *>::const_iterator moveIter = moves.begin(); moveIter != moves.end(); moveIter++) {
+   for (list<Move *>::const_iterator moveIter = moves.begin();
+    moveIter != moves.end(); moveIter++) {
       if ((*moveIter)->operator==(*move)) {
          listContainsMove = true;
+         // TODO: Can't I just break; here, knowing that I found a match?
       }
    }
    if (!listContainsMove) {
@@ -304,8 +310,16 @@ void PylosBoard::ApplyMove(Move *move) {
          << "\", did NOT applyMove()" << endl;
       // TODO: This should probably throw a BaseException().  Find out what
       // Staley's code outputs and put that error message in the Exception here.
+//       for (moveIter = moves.begin(); moveIter != moves.end(); moveIter++)
+//          delete *moveIter;
+//       moves.clear();
+
       return;
    }
+//    for (moveIter = moves.begin(); moveIter != moves.end(); moveIter++)
+//       delete *moveIter;
+//    moves.clear();
+
    /** END Girum's code */
 
    PutMarble(&mSpots[(*locIter).first][(*locIter).second]);
@@ -374,7 +388,8 @@ void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const {
    list<PylosMove *> *castedMoves = reinterpret_cast<list<PylosMove *>*>(uncastMoves);
    ulong sideMask = mWhoseMove == kWhite ? mWhite : mBlack;
 
-   castedMoves->clear();
+   assert(uncastMoves->size() == 0 && castedMoves->size() == 0);
+
    if (mWhiteReserve == 0 || mBlackReserve == 0)
       return;
 
@@ -552,7 +567,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
 }
 
 Board::Move *PylosBoard::CreateMove() const {
-   return new PylosMove(PylosMove::LocVector(1), PylosMove::kReserve);;
+   return new PylosMove(PylosMove::LocVector(1), PylosMove::kReserve);
 }
 
 Board *PylosBoard::Clone() const {
@@ -596,6 +611,11 @@ void PylosBoard::Delete() {
    mWhoseMove = kWhite;
    mWhiteReserve = mBlackReserve = kStones;
    mLevelLead = mFreeLead = 0;
+
+//    for (list<Move *>::iterator iter = mMoveHist.begin();
+//     iter != mMoveHist.end(); iter++) {
+//        delete *iter;
+//    }
    mMoveHist.clear();
 
    mRules.levelWgt = mRules.marbleWgt = mRules.freeWgt = 0;
