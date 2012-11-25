@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Class OthelloDlg::mClass("OthelloDlg", OthelloDlg::CreateOthelloDlg);
+Class OthelloDlg::mClass("OthelloDlg", &CreateOthelloDlg);
 
 bool OthelloDlg::Run(istream &in, ostream &out, void *data) {
    OthelloBoard::Rules *rules = reinterpret_cast<OthelloBoard::Rules *>(data);

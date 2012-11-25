@@ -7,6 +7,7 @@
 #include "PylosMove.h"
 #include "MyLib.h"
 #include "BasicKey.h"
+#include "PylosView.h"
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -17,18 +18,17 @@ PylosBoard::Cell PylosBoard::mCells[kNumCells];
 int PylosBoard::mOffs[kDim];
 PylosBoard::Rules PylosBoard::mRules;
 
+BoardClass PylosBoard::mClass("PylosBoard",
+                   &CreatePylosBoard,
+                   "Pylos",
+                   &PylosView::mClass,
+                   &PylosDlg::mClass,
+                   &PylosBoard::SetOptions,
+                   &PylosBoard::GetOptions);
+
 // The C++ definition here isn't required in C++11, which I'm using.
 // Put it there anyways to force the "static block" to run.
 PylosBoard::PylosBoardInitializer PylosBoard::mInitializer;
-
-// Stolen helper function from StackOverflow, used to assert()
-// alignment bits being set correctly
-int NumberOfSetBits(int i) {
-   i = i - ((i >> 1) & 0x55555555);
-   i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
-   return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
-}
-
 
 PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
    mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0) {
@@ -664,7 +664,3 @@ void PylosBoard::SetOptions(const void *opts) {
    mRules = *reinterpret_cast<const Rules *>(opts);
 }
 
-// TODO: Implement reflection
-const Class *PylosBoard::GetClass() const {
-   return 0;
-}

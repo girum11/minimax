@@ -2,6 +2,8 @@
 
 using namespace std;
 
+Class PylosDlg::mClass("PylosDlg", &CreatePylosDlg);
+
 // [Staley] Run the dialog object, passing it the options for the default board
 // [Staley] as a void *.  You’ll have to use the BoardClass for the default 
 // [Staley] board type to get this void *.  The dialog object modifies the 

@@ -66,7 +66,7 @@ public:
    // [Staley] the static mCells and mSets.  See below
    static void StaticInit();
    
-   const Class *GetClass() const;
+   const Class *GetClass() const { return &mClass; };
 
 protected:
    enum {kBitsPerCell = 2, kCellMask = 0x3, kBlack = -1, kWhite = 1};
@@ -226,10 +226,18 @@ protected:
    friend class PylosBoard;
    
 private:
+   // Stolen helper function from StackOverflow, used to assert() 
+   // alignment bits being set correctly
+   static int NumberOfSetBits(int i) {
+      i = i - ((i >> 1) & 0x55555555);
+      i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+      return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
+   }
+
+   // My own helper function for AddTakebacks().
    void CalculateAllTakebacks(std::list<PylosMove *> *moves, 
     std::list<PylosMove *>::const_iterator moveIter,
     Set *mSet, PylosMove *potentialMove, Cell *potentialMoveCell) const;
-
 
    // WARNING: Preventing duplicates is hard.  Right now, I'm preventing
    // them by simply only calling FindFreeMarbles on rows/cols that are PAST
@@ -257,6 +265,8 @@ private:
 
    void ClearMSpots();
 
+   static BoardClass mClass;
+   static Object *CreatePylosBoard() { return new PylosBoard; };
 };
 
 

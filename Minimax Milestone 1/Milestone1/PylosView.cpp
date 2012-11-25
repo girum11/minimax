@@ -10,6 +10,8 @@
 
 using namespace std;
 
+Class PylosView::mClass("PylosView", &CreatePylosView);
+
 // TODO: Use Clint's FString instead of string in PylosView::Draw()
 /*
    You will definitely want to use FString from MyLib.h to assemble strings 
@@ -57,9 +59,4 @@ void PylosView::Draw(ostream &out) {
    rtn += pb->GetWhoseMove() ? "Black's move\n" : "White's move\n";
 
    out << rtn;
-}
-
-// TODO: Implement reflection
-const Class *PylosView::GetClass() const {
-	return 0;
 }

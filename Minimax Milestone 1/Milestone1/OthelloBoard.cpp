@@ -32,8 +32,8 @@ BoardClass OthelloBoard::mClass("OthelloBoard",
                                 "Othello",
                                 &OthelloView::mClass,
                                 &OthelloDlg::mClass,
-                                &SetOptions,
-                                &GetOptions);
+                                &OthelloBoard::SetOptions,
+                                &OthelloBoard::GetOptions);
 
 OthelloBoard::OthelloBoard() : mNextMove(mBPiece), mWeight(0), mPassCount(0)
 {

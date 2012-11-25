@@ -10,7 +10,6 @@ BoardClass *BoardClass::mBrdClsHead = NULL;
 
 Class::Class(const string &n, Object *(*mCreate)()) 
  : mName(n), mCreate(mCreate) {
-
    // Add this Class * to the linked list of Class *'s
    this->mNext = Class::mClsHead;
    Class::mClsHead = this;
