@@ -31,6 +31,10 @@ public:
 
 class Class {
 public:
+
+   // TODO: fixme -- Default constructor shouldn't exist, as per the spec.
+   Class();
+
    Class(const std::string &n, Object *(*c)());
 
    virtual Object *NewInstance() const;
@@ -71,7 +75,7 @@ public:
    // NOTE: Keep your added parameters and member data in the order shown!
    // NOTE: Do note place any methods inline except those already provided 
    // as inline.
-   
+
    BoardClass(const std::string &n, Object *(*c)(), const std::string &fn,
 
     // Parameter to initialize the mViewClass member
@@ -79,8 +83,10 @@ public:
     // Parameter to initialize the mDlgClass member
     Class *mDlgClass,
     // Function pointer parameter to the mutator for the options
+    // TODO: This SHOULD be a member function pointer, not a function pointer.
     void (*setter)(int),
     // Function pointer parameter to the accessor for the options
+    // TODO: This SHOULD be a member function pointer, not a function pointer.
     int (*getter)(void),
 
     bool useXPos = false, int minPlayers = 2);
@@ -98,8 +104,12 @@ protected:
    std::string mFriendlyName;
    const Class *mViewClass;
    const Class *mDlgClass;
+
    // Function pointer for SetOptions
+   void (*setter)(int);
    // Function pointer for GetOptions
+   int (*getter)();
+
    bool mUseXPos;      
    int mMinPlayers;             // Min number of players for game.      
    BoardClass *mNext;         
