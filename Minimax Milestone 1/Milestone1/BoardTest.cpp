@@ -195,10 +195,12 @@ int main(int argc, char **argv) {
                assert(allMoves.size() == 0);
                board->GetAllMoves(&allMoves);
 
-               // Pick one randomly (ensuring that the game is still going)
+               // Ensure that the game is still going.
                if (allMoves.size() == 0) {
                   break;
                }
+
+               // Pick and choose a move, if the game is still going
                selectedMove = rand() % allMoves.size();
                
                // Iterate over to that randomly selected move
@@ -209,11 +211,25 @@ int main(int argc, char **argv) {
                // WARNING: Bender watch -- should I set this move to be the
                // default move? (that is, set it to be the variable 'move' up
                // top...)
+               //*move = **iter;
+
                // Apply the selected move to the game
-               board->ApplyMove(*iter);
+               board->ApplyMove((*iter)->Clone());
+
+               // FIXME: More of a question, but in Clint's version of this,
+               // keyMoveHist returns 1 if the game is empty, and ~117 while
+               // the game has moves.  It appears that the GetOutstanding() 
+               // of the moves just the Moves pointed to mMoveHist, plus the 
+               // default move.  Is this true?
+
+               // FIXME: How exactly can I write private helper functions
+               // for my test scaffold?
+               // 
+               // Related: Is it good practice to make inline private helper 
+               // functions inside an abstract class like Board.h?
 
                // Clean up after your GetAllMoves() call
-                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
+               for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
                    delete *iter;
                allMoves.clear();
             }

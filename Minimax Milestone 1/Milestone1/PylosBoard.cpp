@@ -333,6 +333,7 @@ void PylosBoard::ApplyMove(Move *move) {
       rChange++;
    }
 
+   // Update the reserve weights, once you've finished calculating rChange
    if (mWhoseMove == kWhite)
       mWhiteReserve += rChange;
    else if (mWhoseMove == kBlack)
@@ -348,6 +349,10 @@ void PylosBoard::UndoLastMove() {
    // [Ian] Basically, do ApplyMove() backwards (obviously)
 
    PylosMove *moveToUndo = dynamic_cast<PylosMove *>(mMoveHist.back());
+   assert(moveToUndo != NULL);
+
+   assert(mMoveHist.size() > 0);
+   mMoveHist.pop_back();
 
    // Start by assuming that the reserve will gain a new piece.
    int rChange = 1;
@@ -378,9 +383,8 @@ void PylosBoard::UndoLastMove() {
       mBlackReserve += rChange;
    } else assert(false);
 
-   // Destroy history of the move
-   delete moveToUndo;
-   mMoveHist.pop_back();
+   // Finally, destroy the PylosMove itself
+   delete moveToUndo;  // This isn't the mMoveHist bug for sure.
 }
 
 void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const {
@@ -573,29 +577,31 @@ Board::Move *PylosBoard::CreateMove() const {
    return new PylosMove(PylosMove::LocVector(1), PylosMove::kReserve);
 }
 
+// mMoveHist bug isn't in Clone() for sure.
 Board *PylosBoard::Clone() const {
    // [Staley] Think carefully about this one.  You should be able to do it in just
    // [Staley] 5-10 lines.  Don't do needless work
 
-   PylosBoard *boardCopy = new PylosBoard();
-   *boardCopy = *this;
-
+   PylosBoard *boardCopy = new PylosBoard(*this);
+   list<Move *>::iterator moveHistIter;
    // [Ian] Memberwise copies don't work for pointers... 
 
    // Yeah... my MoveHistory. You need to go through and deep copy the 
    // moveHistory, or else you'll have a shallow copy of the pointers and 
    // not the pointers' data.
    boardCopy->mMoveHist.clear();
-   for (list<Move *>::const_iterator moveHistIter = mMoveHist.begin();
-    moveHistIter != mMoveHist.end(); moveHistIter++) {
-      PylosMove *castedMove = dynamic_cast<PylosMove *>(*moveHistIter);
+   for (moveHistIter = boardCopy->mMoveHist.begin(); moveHistIter != boardCopy->mMoveHist.end(); moveHistIter++) {
+      // my old code before I looked at Clint's OthelloBoard::Clone()
+      /*PylosMove *castedMove = dynamic_cast<PylosMove *>(*moveHistIter);
       Move *moveCopy = new PylosMove(castedMove->mLocs, castedMove->mType);
-      boardCopy->mMoveHist.push_back(moveCopy);
+      boardCopy->mMoveHist.push_back(moveCopy);*/
+      *moveHistIter = (*moveHistIter)->Clone();
    }
 
    return boardCopy;
 }
 
+// mMoveHist bug isn't in Clone() for sure.
 void PylosBoard::Delete() {
    // [Staley] As with Clone, think carefully and don't do needless work.
 

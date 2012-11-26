@@ -8,8 +8,7 @@ using namespace std;
 vector<PylosMove *> PylosMove::mFreeList;
 
 
-void *PylosMove::operator new(size_t sz)
-{
+void *PylosMove::operator new(size_t sz) {
    // [Staley] Return next node from freelist, or allocate one
 	void *temp;
 
@@ -24,16 +23,14 @@ void *PylosMove::operator new(size_t sz)
 	return temp;
 }
 
-void PylosMove::operator delete(void *p)
-{
+void PylosMove::operator delete(void *p) {
    // [Staley] release node pointed to by p to the freelist
 	mFreeList.push_back((PylosMove *)p);
 
    mOutstanding--;
 }
 
-bool PylosMove::operator==(const Board::Move &rhs) const
-{
+bool PylosMove::operator==(const Board::Move &rhs) const {
    const PylosMove &oRhs = dynamic_cast<const PylosMove &>(rhs);
 
    // [Staley] Finish on this one line.  Use STL "equal" function template.

@@ -51,7 +51,7 @@ template <unsigned int X>
 bool BasicKey<X>::operator==(const Board::Key &key) const {
 	// downcast to a const BasicKey<X> here
 	const BasicKey<X> *castedKey = dynamic_cast<const BasicKey<X> *>(&key);
-	assert(castedKey != 0);
+	assert(castedKey != NULL);
 
 	for (unsigned int i = 0; i < X; i++)
 		if (this->vals[i] != castedKey->vals[i])
@@ -63,7 +63,7 @@ template <unsigned int X>
 bool BasicKey<X>::operator<(const Board::Key &key) const {
 	// downcast to a const BasicKey<X> here
 	const BasicKey<X> *castedKey = dynamic_cast<const BasicKey<X> *>(&key);
-	assert(castedKey != 0);
+	assert(castedKey != NULL);
 
 	for (unsigned int i = 0; i < X; i++) {
 		if (this->vals[i] < castedKey->vals[i])
