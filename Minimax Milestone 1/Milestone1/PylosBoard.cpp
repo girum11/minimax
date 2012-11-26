@@ -305,32 +305,24 @@ void PylosBoard::ApplyMove(Move *move) {
          // TODO: Can't I just break; here, knowing that I found a match?
       }
    }
+
+   // Cleanup after your GetAllMoves() call regardless of whether you found it
+   // or not.
+   for (list<Move *>::const_iterator moveIter = moves.begin(); 
+      moveIter != moves.end(); moveIter++)
+      delete *moveIter;
+   moves.clear();
+
    if (!listContainsMove) {
       // TODO: This should probably throw a BaseException().  Find out what
       // Staley's code outputs and put that error message in the Exception here.
       cout << "list of valid moves doesn't contain \"" << (string)*move 
          << "\", did NOT applyMove()" << endl;
 
-      // Cleanup after your GetAllMoves() call
-      for (list<Move *>::const_iterator moveIter = moves.begin(); 
-       moveIter != moves.end(); moveIter++)
-         delete *moveIter;
-      moves.clear();
-
       // If the list of valid moves DOES NOT contain the move you're trying
       // to do, then just kill this ApplyMove() call.
       return;
-   } else {
-      // If the list of valid moves DOES contain it though, then continue as
-      // normal.
-
-      // Cleanup after your GetAllMoves() call
-      for (list<Move *>::const_iterator moveIter = moves.begin(); 
-       moveIter != moves.end(); moveIter++)
-         delete *moveIter;
-      moves.clear();
-   }
-
+   } 
    /** END Girum's code */
 
    PutMarble(&mSpots[(*locIter).first][(*locIter).second]);
