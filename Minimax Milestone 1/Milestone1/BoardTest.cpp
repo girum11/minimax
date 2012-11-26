@@ -11,6 +11,26 @@
 // Add more includes, possibly, but not board-specific ones
 using namespace std;
 
+enum { kFileInput, kFileOutput };
+
+void applyMove(Board *defaultBoard, Board::Move *defaultMove) {
+   defaultBoard->ApplyMove(defaultMove);
+}
+
+void enterMove(Board *defaultBoard, Board::Move *defaultMove) {
+   // The exception is the exception that's thrown in the Board::Move member function.
+   // It's this reason why we need to wrap this test scaffold up in a try-catch block.
+   string cArg;
+
+   getline(cin, cArg);
+   defaultMove = defaultBoard->CreateMove();
+   (*defaultMove).operator=(cArg.c_str());
+}
+
+void fileIO() {
+
+}
+
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
 	Board::Move *move = NULL, *cmpMove = NULL;
@@ -50,6 +70,7 @@ int main(int argc, char **argv) {
    board = dynamic_cast<Board *>(boardClass->NewInstance());
    view = dynamic_cast<View *>(viewClass->NewInstance());
    dialog = dynamic_cast<Dialog *>(dialogClass->NewInstance());
+   assert(board != NULL && view != NULL && dialog != NULL);
    move = board->CreateMove();
 
    if (board == NULL || view == NULL || dialog == NULL) {
@@ -95,15 +116,11 @@ int main(int argc, char **argv) {
             }
             allMoves.clear();
 			} else if (command.compare("enterMove") == 0) {
-				// The exception is the exception that's thrown in the Board::Move member function.
-				// It's this reason why we need to wrap this test scaffold up in a try-catch block.
-				getline(cin, cArg);
-				*move = cArg.c_str();
+            enterMove(board, move);
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
 			} else if (command.compare("applyMove") == 0) {
-				// applyMove code
-				board->ApplyMove(move);
+            applyMove(board, move);
 			} else if (command.compare("loadBoard") == 0) {
             cin >> cArg;
             ifstream in(cArg.c_str());
@@ -130,12 +147,8 @@ int main(int argc, char **argv) {
          } else if (command.compare("showVal") == 0) {
             cout << "Value: " << board->GetValue() << endl;
          } else if (command.compare("doMove") == 0) {
-				// enterMove code (can abstract out if you want)
-            getline(cin, cArg);
-				*move = cArg.c_str();
-
-				// applyMove code
-				board->ApplyMove(move);
+            enterMove(board, move);
+            applyMove(board, move);
 			} else if (command.compare("compareMove") == 0) { 
             getline(cin, cArg);
             cmpMove = board->CreateMove();
@@ -225,7 +238,7 @@ int main(int argc, char **argv) {
                // FIXME: How exactly can I write private helper functions
                // for my test scaffold?
                // 
-               // Related: Is it good practice to make inline private helper 
+               // FIXME: Is it good practice to make inline private helper 
                // functions inside an abstract class like Board.h?
 
                // Clean up after your GetAllMoves() call

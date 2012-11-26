@@ -302,10 +302,11 @@ void PylosBoard::ApplyMove(Move *move) {
     moveIter != moves.end(); moveIter++) {
       if ((*moveIter)->operator==(*move)) {
          listContainsMove = true;
-         // TODO: Can't I just break; here, knowing that I found a match?
+         // TODO: Can't I just {break;} here, knowing that I found a match?
       }
    }
 
+   // TODO: Refactor this logic to be public: PylosBoard::CleanMoveList()
    // Cleanup after your GetAllMoves() call regardless of whether you found it
    // or not.
    for (list<Move *>::const_iterator moveIter = moves.begin(); 
@@ -349,10 +350,6 @@ void PylosBoard::UndoLastMove() {
    // [Ian] Basically, do ApplyMove() backwards (obviously)
 
    PylosMove *moveToUndo = dynamic_cast<PylosMove *>(mMoveHist.back());
-   assert(moveToUndo != NULL);
-
-   assert(mMoveHist.size() > 0);
-   mMoveHist.pop_back();
 
    // Start by assuming that the reserve will gain a new piece.
    int rChange = 1;
@@ -383,8 +380,9 @@ void PylosBoard::UndoLastMove() {
       mBlackReserve += rChange;
    } else assert(false);
 
-   // Finally, destroy the PylosMove itself
-   delete moveToUndo;  // This isn't the mMoveHist bug for sure.
+   // Destroy history of the move
+   delete moveToUndo;
+   mMoveHist.pop_back();
 }
 
 void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const {
