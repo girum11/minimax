@@ -89,6 +89,8 @@ int main(int argc, char **argv) {
 				list<Board::Move *>::const_iterator listIter;
 				for (listIter = allMoves.begin(); listIter != allMoves.end(); ++listIter) {
 					cout << (string) **listIter << " \n";
+
+               // Clean up after your GetAllMoves() call
                delete *listIter;
             }
             allMoves.clear();
@@ -211,8 +213,8 @@ int main(int argc, char **argv) {
                board->ApplyMove(*iter);
 
                // Clean up after your GetAllMoves() call
-//                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
-//                   delete *iter;
+                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
+                   delete *iter;
                allMoves.clear();
             }
          } else if (command.compare("testRun") == 0) {
