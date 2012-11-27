@@ -13,23 +13,21 @@ using namespace std;
 
 enum { kFileInput, kFileOutput };
 
-void applyMove(Board *defaultBoard, Board::Move *defaultMove) {
-   defaultBoard->ApplyMove(defaultMove);
-}
+// void applyMove(Board *defaultBoard, Board::Move *defaultMove) {
+//    defaultBoard->ApplyMove(defaultMove);
+// }
+// 
+// void enterMove(Board *defaultBoard, Board::Move *defaultMove) {
+//    // The exception is the exception that's thrown in the Board::Move member function.
+//    // It's this reason why we need to wrap this test scaffold up in a try-catch block.
+//    string cArg;
+// 
+// 
+// }
 
-void enterMove(Board *defaultBoard, Board::Move *defaultMove) {
-   // The exception is the exception that's thrown in the Board::Move member function.
-   // It's this reason why we need to wrap this test scaffold up in a try-catch block.
-   string cArg;
-
-   getline(cin, cArg);
-   defaultMove = defaultBoard->CreateMove();
-   (*defaultMove).operator=(cArg.c_str());
-}
-
-void fileIO() {
-
-}
+// void fileIO() {
+// 
+// }
 
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
@@ -116,11 +114,13 @@ int main(int argc, char **argv) {
             }
             allMoves.clear();
 			} else if (command.compare("enterMove") == 0) {
-            enterMove(board, move);
+            getline(cin, cArg);
+            move = board->CreateMove();
+            (*move).operator=(cArg.c_str());
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
 			} else if (command.compare("applyMove") == 0) {
-            applyMove(board, move);
+            board->ApplyMove(move);
 			} else if (command.compare("loadBoard") == 0) {
             cin >> cArg;
             ifstream in(cArg.c_str());
@@ -147,8 +147,11 @@ int main(int argc, char **argv) {
          } else if (command.compare("showVal") == 0) {
             cout << "Value: " << board->GetValue() << endl;
          } else if (command.compare("doMove") == 0) {
-            enterMove(board, move);
-            applyMove(board, move);
+            getline(cin, cArg);
+            move = board->CreateMove();
+            (*move).operator=(cArg.c_str());
+
+            board->ApplyMove(move);
 			} else if (command.compare("compareMove") == 0) { 
             getline(cin, cArg);
             cmpMove = board->CreateMove();
@@ -234,12 +237,6 @@ int main(int argc, char **argv) {
                // the game has moves.  It appears that the GetOutstanding() 
                // of the moves just the Moves pointed to mMoveHist, plus the 
                // default move.  Is this true?
-
-               // FIXME: How exactly can I write private helper functions
-               // for my test scaffold?
-               // 
-               // FIXME: Is it good practice to make inline private helper 
-               // functions inside an abstract class like Board.h?
 
                // Clean up after your GetAllMoves() call
                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)

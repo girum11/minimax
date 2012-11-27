@@ -299,7 +299,7 @@ void PylosBoard::ApplyMove(Move *move) {
    GetAllMoves(&moves);
    bool listContainsMove = false;
    for (list<Move *>::const_iterator moveIter = moves.begin();
-    moveIter != moves.end(); moveIter++) {
+    !listContainsMove && moveIter != moves.end(); moveIter++) {
       if ((*moveIter)->operator==(*move)) {
          listContainsMove = true;
          // TODO: Can't I just {break;} here, knowing that I found a match?

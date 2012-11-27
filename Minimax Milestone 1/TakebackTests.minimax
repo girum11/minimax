@@ -168,6 +168,7 @@ showBoard
 showVal
 showMoveHist
 
+undoLastMove 1000
 doMove Play at [0,0]
 saveBoard test0.board
 undoLastMove 1
@@ -180,13 +181,13 @@ doMove Play at [0,0]
 compareKeys test1.board
 undoLastMove 1
 
-showBoard
-testPlay 5 1000
-showBoard
+-- showBoard
+-- testPlay 5 1000
+-- showBoard
 
-showBoard
-testRun 5 1000
-showBoard
+-- showBoard
+-- testRun 5 1000
+-- showBoard
 
 --------------- All of the above tests work. ------------------
 
