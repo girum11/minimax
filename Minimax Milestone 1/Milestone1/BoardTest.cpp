@@ -253,7 +253,7 @@ int main(int argc, char **argv) {
          } else if (command.compare("testRun") == 0) {
             // TODO: testRun
          } else if (command.compare("keyMoveCount") == 0) {
-            // TODO: keyMoveCount
+            // keyMoveCount
             cout << "Moves/Keys: " << Board::Move::GetOutstanding()
              << "/" << Board::Key::GetOutstanding() << endl;
          } else if (command.compare("quit") == 0)
@@ -268,7 +268,6 @@ int main(int argc, char **argv) {
 		} catch (...) {
          cout << "Got some other exception... " << endl;
       }
-
 	}
 
 	delete board;
