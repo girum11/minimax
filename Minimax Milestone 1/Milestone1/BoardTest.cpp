@@ -13,22 +13,6 @@ using namespace std;
 
 enum { kFileInput, kFileOutput };
 
-// void applyMove(Board *defaultBoard, Board::Move *defaultMove) {
-//    defaultBoard->ApplyMove(defaultMove);
-// }
-// 
-// void enterMove(Board *defaultBoard, Board::Move *defaultMove) {
-//    // The exception is the exception that's thrown in the Board::Move member function.
-//    // It's this reason why we need to wrap this test scaffold up in a try-catch block.
-//    string cArg;
-// 
-// 
-// }
-
-// void fileIO() {
-// 
-// }
-
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
 	Board::Move *move = NULL, *cmpMove = NULL;
@@ -115,12 +99,20 @@ int main(int argc, char **argv) {
             allMoves.clear();
 			} else if (command.compare("enterMove") == 0) {
             getline(cin, cArg);
+
+            // Delete the old move
+            delete move;
+
+            // Make this move to a new object
             move = board->CreateMove();
             (*move).operator=(cArg.c_str());
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
 			} else if (command.compare("applyMove") == 0) {
-            board->ApplyMove(move);
+            
+            // This version of applyMove gives a clone of the default
+            // move to the board.
+            board->ApplyMove(move->Clone());
 			} else if (command.compare("loadBoard") == 0) {
             cin >> cArg;
             ifstream in(cArg.c_str());
@@ -148,10 +140,17 @@ int main(int argc, char **argv) {
             cout << "Value: " << board->GetValue() << endl;
          } else if (command.compare("doMove") == 0) {
             getline(cin, cArg);
+
+            // Delete the old move
+            delete move;
+
+            // Make this move to a new object
             move = board->CreateMove();
             (*move).operator=(cArg.c_str());
 
-            board->ApplyMove(move);
+            // Apply a clone the move to the board, making the board own the
+            // move clone.
+            board->ApplyMove(move->Clone());
 			} else if (command.compare("compareMove") == 0) { 
             getline(cin, cArg);
             cmpMove = board->CreateMove();
