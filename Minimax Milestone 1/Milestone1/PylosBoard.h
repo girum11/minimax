@@ -23,7 +23,7 @@ public:
       int marbleWgt; // [Staley] Weight of each marble in reserve
       int freeWgt;   // [Staley] Weight for each uncovered marble
       
-      Rules() : levelWgt(20), freeWgt(6), marbleWgt(100) {}
+      Rules() : levelWgt(20), marbleWgt(100), freeWgt(6) {}
       
       int GetLevel()  {return levelWgt;}
       int GetMarble() {return marbleWgt;}

@@ -102,9 +102,6 @@ public:
 protected:
    virtual std::istream &Read(std::istream &) = 0;
    virtual std::ostream &Write(std::ostream &) const = 0;
-
-private:
-
 };
 
 #endif

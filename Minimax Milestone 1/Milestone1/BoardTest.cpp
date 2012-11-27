@@ -228,7 +228,7 @@ int main(int argc, char **argv) {
                
                // Iterate over to that randomly selected move
                list<Board::Move *>::const_iterator iter = allMoves.begin();
-               for (int i = 0; i < selectedMove; i++) iter++;
+               for (unsigned i = 0; i < selectedMove; i++) iter++;
                assert(iter != allMoves.end());
 
                // Apply the selected move to the game
