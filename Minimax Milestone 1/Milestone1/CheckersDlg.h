@@ -1,5 +1,5 @@
 #pragma once
-#include "dialog.h"
+#include "Dialog.h"
 class CheckersDlg :
    public Dialog
 {

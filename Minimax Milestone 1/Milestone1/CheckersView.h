@@ -1,5 +1,5 @@
 #pragma once
-#include "view.h"
+#include "View.h"
 class CheckersView :
    public View
 {
