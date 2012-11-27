@@ -6,6 +6,7 @@
  */
 
 #include "Board.h"
+#include <climits>
 
 const long Board::kWinVal = LONG_MAX / 4;
 long Board::Move::mOutstanding = 0;

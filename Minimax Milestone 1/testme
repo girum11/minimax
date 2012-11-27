@@ -1,0 +1,4 @@
+echo "Test 1"
+myexec OthelloBoard < ../milestone0/simple > myOthello0.out
+clintsExec OthelloBoard < ../milestone0/simple > clintsOthello0.out
+diff -bw myOthello0.out clintsOthello0.out

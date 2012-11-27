@@ -7,6 +7,8 @@
 #include "View.h"
 #include "Dialog.h"
 #include <exception>
+#include <climits>
+#include <cstdlib>
 
 // Add more includes, possibly, but not board-specific ones
 using namespace std;

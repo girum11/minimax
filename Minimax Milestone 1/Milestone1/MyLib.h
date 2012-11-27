@@ -82,6 +82,7 @@ typedef char *CStr;
 
 #ifdef LITTLE_ENDIAN
 
+// TODO: This probably isn't done yet.
 inline ushort EndianXfer(ushort val) {return val >> 8 | val << 8;}
 inline short  EndianXfer(short val)  {return (val >> 8)&0xFF | val << 8;}
 inline int    EndianXfer(int val)    {}

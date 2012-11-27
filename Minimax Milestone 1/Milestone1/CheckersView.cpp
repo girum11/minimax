@@ -8,4 +8,5 @@ CheckersView::CheckersView(void)
 
 CheckersView::~CheckersView(void)
 {
+
 }

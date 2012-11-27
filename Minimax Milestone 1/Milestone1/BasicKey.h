@@ -9,6 +9,7 @@
 #define BASICKEY_H_
 
 #include "Board.h"
+#include "MyLib.h"
 
 template <unsigned int X>
 class BasicKey : public Board::Key {
@@ -45,7 +46,7 @@ Object *BasicKey<X>::CreateBasicKey() {
 }
 
 template <unsigned int X>
-Class BasicKey<X>::mClass(FString("BasicKey<%d", X), &CreateBasicKey);
+Class BasicKey<X>::mClass(FString("BasicKey<%d>", X), &CreateBasicKey);
 
 template <unsigned int X>
 bool BasicKey<X>::operator==(const Board::Key &key) const {
