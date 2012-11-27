@@ -51,8 +51,6 @@ public:
    Board *Clone() const;
    Key *GetKey() const;
    
-   // TODO: Add a method to prevent PylosBoard from being an abstract class.
-   
    // [Staley] May add a public method for use by PylosView.
    // Public helper function that returns true if a cell is occupied
    // by a certain color.
@@ -168,7 +166,7 @@ protected:
          mBlack |= spot->top->mask;
       else assert(false);
       
-      // TODO: Here write a verifier that all the spots are correct.  That is,
+      // WARNING: Here write a verifier that all the spots are correct.  That is,
       // do the "IAmSane()" function for Spot correction in the board's state.
    }
    
@@ -234,9 +232,6 @@ protected:
 
    // [Staley] History of moves leading to this point.
    std::list<Move *> mMoveHist;
-
-//    // TODO: PylosBoard cannot friend PylosView
-//    friend class PylosView;
    
    // Mutual friendship between PylosBoard and PylosMove is allowed.
    friend class PylosBoard;
@@ -255,7 +250,7 @@ private:
     std::list<PylosMove *>::const_iterator moveIter,
     Set *mSet, PylosMove *potentialMove, Cell *potentialMoveCell) const;
 
-   // TODO: Preventing duplicates is hard.  Right now, I'm preventing
+   // WARNING: Preventing duplicates is hard.  Right now, I'm preventing
    // them by simply only calling FindFreeMarbles on rows/cols that are PAST
    // the current free marble.  If there's a Bender error, here's where
    // you can start.

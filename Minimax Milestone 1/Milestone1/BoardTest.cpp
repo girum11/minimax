@@ -231,13 +231,10 @@ int main(int argc, char **argv) {
                for (int i = 0; i < selectedMove; i++) iter++;
                assert(iter != allMoves.end());
 
-               // TODO: Bender watch -- should I set this move to be the
-               // default move? (that is, set it to be the variable 'move' up
-               // top...)
-               // I don't think Bender tests this test scaffold though...
-               //*move = **iter;
-
                // Apply the selected move to the game
+               // WARNING: In case BoardTest.cpp is being tested by Bender,
+               // watch that the default move isn't being modified by
+               // this command.
                board->ApplyMove((*iter)->Clone());
 
                // Clean up after your GetAllMoves() call
@@ -279,13 +276,10 @@ int main(int argc, char **argv) {
                for (int i = 0; i < selectedMove; i++) iter++;
                assert(iter != allMoves.end());
 
-               // TODO: Bender watch -- should I set this move to be the
-               // default move? (that is, set it to be the variable 'move' up
-               // top...)
-               // I don't think Bender tests this test scaffold though...
-               //*move = **iter;
-
                // Apply the selected move to the game
+               // WARNING: In case BoardTest.cpp is being tested by Bender,
+               // watch that the default move isn't being modified by
+               // this command.
                board->ApplyMove((*iter)->Clone());
 
                // Clean up after your GetAllMoves() call
