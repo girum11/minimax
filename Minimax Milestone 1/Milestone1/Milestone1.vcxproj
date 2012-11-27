@@ -81,6 +81,10 @@
   <ItemGroup>
     <ClInclude Include="BasicKey.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="CheckersBoard.h" />
+    <ClInclude Include="CheckersDlg.h" />
+    <ClInclude Include="CheckersMove.h" />
+    <ClInclude Include="CheckersView.h" />
     <ClInclude Include="Class.h" />
     <ClInclude Include="Dialog.h" />
     <ClInclude Include="MyLib.h" />
@@ -97,6 +101,10 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardTest.cpp" />
+    <ClCompile Include="CheckersBoard.cpp" />
+    <ClCompile Include="CheckersDlg.cpp" />
+    <ClCompile Include="CheckersMove.cpp" />
+    <ClCompile Include="CheckersView.cpp" />
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="OthelloBoard.cpp" />
