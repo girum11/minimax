@@ -294,6 +294,8 @@ void PylosBoard::ApplyMove(Move *move) {
    PylosMove::LocVector::iterator locIter = tm->mLocs.begin();
 
    /** BEGIN Girum's code to verify that a move is actually a valid move */
+   // TODO: The spec says specifically NOT to check for whether or not a 
+   // move can logically be made.  We only check strings.
 
    // WARNING: Instead of repeatedly calculating GetAllMoves() [by far your
    // slowest function], why not hold onto a static copy of the currently 

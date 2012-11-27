@@ -1,6 +1,6 @@
 -- 1.) A player with no moves must make a "Pass" move (and we permit Pass only in that case).
 doMove Pass
-testPlay 7 50
+-- testPlay 7 50
 doMove Pass
 doMove [0,6]
 doMove [7,7]
