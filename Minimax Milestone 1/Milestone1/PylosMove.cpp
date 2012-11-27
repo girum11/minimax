@@ -110,7 +110,7 @@ PylosMove::operator string() const
 // [Staley] you'll need information on sscanf, which you can obtain from the 
 // [Staley] online documentation or from class discussion.
 void PylosMove::operator=(const string &src) {
-   // TODO: These constants are ugly... is there a better way?
+   // WARNING: These constants are ugly... is there a better way?
    static const int kPlayOneParam = 3, kPlayTwoParams = 7, kPlayThreeParams = 11;
    static const int kPromoteTwoParams = 5, kPromoteThreeParams = 9, kPromoteFourParams = 13;
    

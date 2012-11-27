@@ -55,12 +55,15 @@ void PylosBoard::StaticInit() {
    // Hold a set for the different alignments you can have
    Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
 
-   // Initialize mOffs  
-   // TODO No magic numbers
+   // Initialize mOffs.  Logically equivalent to:
+   /*    mOffs[0] = 0;
+         mOffs[1] = 16;
+         mOffs[2] = 25;
+         mOffs[3] = 29;     */
    mOffs[0] = 0;
-   mOffs[1] = 16;
-   mOffs[2] = 25;
-   mOffs[3] = 29;
+   for (int i = 1; i < kDim; ++i) {
+      mOffs[i] = mOffs[i-1] + (kDim - (i-1)) * (kDim - (i-1));
+   }
 
    // Initialize mCells
    for (level = 0; level < kDim; level++) {
@@ -97,8 +100,8 @@ void PylosBoard::StaticInit() {
    }
 
    // Clean out mSets to assert that it was properly filled later
-   for (int i = 0; i < kNumSets; i++)
-      mSets[i] = 0x0;
+   for (int level = 0; level < kNumSets; level++)
+      mSets[level] = 0x0;
 
    // Initialize mSets
    // [Staley] Add cell mask to horizontal/vertical alignments if relevant
@@ -146,19 +149,19 @@ void PylosBoard::StaticInit() {
    // Sanity checks before we go back and copy set data
    // back into cell set collection.
    assert(setNum == kNumSets);
-   for (int i = 0; i < kNumSets; i++) {
+   for (int level = 0; level < kNumSets; level++) {
       // Assert that each alignment was properly set
-      assert(mSets[i] != 0x0);
+      assert(mSets[level] != 0x0);
 
       // Verify level 0 horizontal/vertical alignments
-      if (i >= 0 && i < 8)
-         assert(NumberOfSetBits(mSets[i]) == 4);
+      if (level >= 0 && level < 8)
+         assert(NumberOfSetBits(mSets[level]) == 4);
       // Verify level 1 horizontal/vertical alignments
-      else if (i >= 8 && i < 14)
-         assert(NumberOfSetBits(mSets[i]) == 3);
+      else if (level >= 8 && level < 14)
+         assert(NumberOfSetBits(mSets[level]) == 3);
       // Verify square alignments
-      else if (i >= 14 && i < 28)
-         assert(NumberOfSetBits(mSets[i]) == 4);
+      else if (level >= 14 && level < 28)
+         assert(NumberOfSetBits(mSets[level]) == 4);
    }
 
    // [Staley] Copy set data back into cell set collections.
@@ -280,7 +283,7 @@ void PylosBoard::UpdateBoardValuation() {
    }
 }
 
-// TODO: If your code runs too slow, that's because ApplyMove() checks the list
+// WARNING: If your code runs too slow, that's because ApplyMove() checks the list
 // of "GetAllMoves()" every time it tries to Apply a Move.  Maybe I should keep
 // a static list of Moves that are valid, and simply update that once per ApplyMove()?
 void PylosBoard::ApplyMove(Move *move) {
@@ -291,7 +294,7 @@ void PylosBoard::ApplyMove(Move *move) {
 
    /** BEGIN Girum's code to verify that a move is actually a valid move */
 
-   // TODO: Instead of repeatedly calculating GetAllMoves() [by far your
+   // WARNING: Instead of repeatedly calculating GetAllMoves() [by far your
    // slowest function], why not hold onto a static copy of the currently 
    // valid moves?
    list<Move *> moves;
@@ -304,7 +307,7 @@ void PylosBoard::ApplyMove(Move *move) {
       }
    }
 
-   // TODO: Refactor this logic to be public: PylosBoard::CleanMoveList()
+   // WARNING: Refactor this logic to be public: PylosBoard::CleanMoveList()
    // Cleanup after your GetAllMoves() call regardless of whether you found it
    // or not.
    for (list<Move *>::const_iterator moveIter = moves.begin(); 
@@ -474,7 +477,7 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
       }
 
       // Find the iterator that points to where you want to add moves to.
-      // TODO:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(n^2)
+      // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(n^2)
       list<PylosMove *>::const_iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
 
       if (mWhoseMove == kWhite)
