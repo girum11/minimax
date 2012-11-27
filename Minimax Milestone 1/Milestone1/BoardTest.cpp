@@ -22,6 +22,7 @@ int main(int argc, char **argv) {
    View *view = NULL;
    Dialog *dialog = NULL;
    list<Board::Move *> allMoves;
+   const Board::Key *key = NULL, *cmpKey = NULL;
 
 	// Sample of some Class code
 	const Class *viewClass, *dialogClass;
@@ -186,17 +187,24 @@ int main(int argc, char **argv) {
             assert(in.is_open());
             in >> *cmpBoard;
 
-            if (*board->GetKey() == *cmpBoard->GetKey()) {
+            // Grab references to the keys so that you can delete them after
+            // this call
+            key = board->GetKey();  cmpKey = cmpBoard->GetKey();
+
+            if (*key == *cmpKey) {
                cout << "Board keys are equal" << endl;
             } else {
                cout << "Board keys are unequal" << endl;
 
-               if (*board->GetKey() < *cmpBoard->GetKey()) {
+               if (*key < *cmpKey) {
                   cout << "Current board is less than " << cArg << endl;
                } else {
                   cout << "Current board is greater than " << cArg << endl;
                }
             }
+
+            // Clean up what you left behind
+            delete cmpBoard;  delete key;  delete cmpKey;
          } else if (command.compare("testPlay") == 0) {
             int seed = 0;
             unsigned moveCount = 0, selectedMove = 0;

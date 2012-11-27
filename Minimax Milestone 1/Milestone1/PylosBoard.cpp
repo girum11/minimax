@@ -322,6 +322,10 @@ void PylosBoard::ApplyMove(Move *move) {
 
       // If the list of valid moves DOES NOT contain the move you're trying
       // to do, then just kill this ApplyMove() call.
+
+      // Don't forget to delete the move that was passed in, since ApplyMove()
+      // takes ownership of the move
+      delete move;
       return;
    } 
    /** END Girum's code */
