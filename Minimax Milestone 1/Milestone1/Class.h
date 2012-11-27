@@ -26,8 +26,8 @@ public:
 // class. Implementing ForName requires a means of getting to all Class objects.
 // You will need to arrange a linked list of Class objects, with mClsHead as the
 // head pointer.  Don't dynamically allocate Class objects just because you have 
-// a linked list of them and pointers to them.  The phrase "new Class..." should
-// never appear in your code.
+// a linked list of them and pointers to them.  The phrase 
+// "n e w   C l a s s..." should never appear in your code.
 
 class Class {
 public:

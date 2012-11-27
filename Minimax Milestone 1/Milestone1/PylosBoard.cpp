@@ -302,7 +302,6 @@ void PylosBoard::ApplyMove(Move *move) {
     !listContainsMove && moveIter != moves.end(); moveIter++) {
       if ((*moveIter)->operator==(*move)) {
          listContainsMove = true;
-         // TODO: Can't I just {break;} here, knowing that I found a match?
       }
    }
 
@@ -315,14 +314,11 @@ void PylosBoard::ApplyMove(Move *move) {
    moves.clear();
 
    if (!listContainsMove) {
-      // TODO: This should probably throw a BaseException().  Find out what
-      // Staley's code outputs and put that error message in the Exception here.
-      cout << "list of valid moves doesn't contain \"" << (string)*move 
-         << "\", did NOT applyMove()" << endl;
+      cout << "Invalid move being applied" << endl;
 
       // If the list of valid moves DOES NOT contain the move you're trying
       // to do, then just kill this ApplyMove() call.
-
+      //
       // Don't forget to delete the move that was passed in, since ApplyMove()
       // takes ownership of the move
       delete move;

@@ -168,8 +168,8 @@ void PylosMove::operator=(const string &src) {
        &p1.second, &brack1, wd1, &p3.first, &p3.second, &brack2, wd2, &p4.first,
        &p4.second, &brack3, wd3);
 
-      // Test result of scanf for good format
-
+      // [Staley] Test result of scanf for good format.
+      //
       // Verify that the words wd1, wd2, etc. are what the spec expects 
       // them to be.  The 'wd' immediately after the last expected token is
       // the one that needs to be == '\0'.

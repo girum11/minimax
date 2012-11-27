@@ -306,7 +306,7 @@ int main(int argc, char **argv) {
 			   cout << endl;
          }
 		} catch (BaseException &exc) {
-			cout << "BaseException: " << exc.what() << endl;
+			cout << "Error: " << exc.what() << endl;
 		} catch (...) {
          cout << "Got some other exception... " << endl;
       }
