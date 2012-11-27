@@ -24,7 +24,6 @@ Class PylosView::mClass("PylosView", &CreatePylosView);
 void PylosView::Draw(ostream &out) {
    string rtn = "\n";
    int level = 0, row = 0, col = 0;
-   char sqr;
    const PylosBoard *pb = dynamic_cast<const PylosBoard *>(mModel);
 
    // Reserve some space for the output string so that you're not

@@ -8,6 +8,7 @@
 #include <string.h>
 #include "MyLib.h"
 #include "Board.h"
+// Cannot #include "PylosBoard.h" as per the spec.
 
 class PylosMove;
 
@@ -63,7 +64,10 @@ public:
          return mask & this->mWhite;
       } else if (byWhom == kBlack) {
          return mask & this->mBlack;
-      } else assert(false);
+      } else {
+         assert(false);
+         return false;
+      }
    }
 
    // [Staley] Add a static method to support the Class system, plus a static

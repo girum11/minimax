@@ -54,7 +54,7 @@ bool PylosMove::operator<(const Board::Move &rhs) const
       else if (mType > oRhs.mType)
          return false;
       else {
-		  for (int i = 1; i < PylosBoard::kSqr; i++) {
+		  for (unsigned i = 1; i < PylosBoard::kSqr; i++) {
 			  // Same size comparisons
 			  if (mLocs.size() > i && oRhs.mLocs.size() > i && mLocs[i] <= oRhs.mLocs[i])
 				  return true;

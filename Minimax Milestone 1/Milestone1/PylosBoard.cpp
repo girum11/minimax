@@ -3,7 +3,6 @@
 #include <limits.h>
 #include "PylosDlg.h"
 #include "PylosBoard.h"
-// TODO: PylosMove cannot be imported in PylosBoard
 #include "PylosMove.h"
 #include "MyLib.h"
 #include "BasicKey.h"
