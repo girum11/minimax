@@ -32,7 +32,7 @@ Class PylosView::mClass("PylosView", &CreatePylosView);
    left-justified within their column, so that they line up neatly.
 */
 void PylosView::Draw(ostream &out) {
-   string rtn;
+   string rtn = "\n";
    int level = 0, row = 0, col = 0;
    char sqr;
    const PylosBoard *pb = dynamic_cast<const PylosBoard *>(mModel);
@@ -61,7 +61,7 @@ void PylosView::Draw(ostream &out) {
                rtn += ". ";
          }
          // Step down to the next row
-         rtn += "\n";
+         rtn += "\n\n";
       }
    }
    rtn += pb->GetWhoseMove() ? "Black's move\n" : "White's move\n";
