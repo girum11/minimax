@@ -46,11 +46,11 @@ bool PylosDlg::Run(std::istream &in, std::ostream &out, void *data) {
    return userResponse == 'y';
 }
 
-// [*Staley] Prompt for an int (using the string parameter).  Call the method
-// [*Staley] of PylosRules indicated by the method pointer to set the rules
-// [*Staley] object's property.  Catch and report any exceptions, looping
-// [*Staley] until reaching a value that has no exceptions.  Use "in"
-// [*Staley] and "out" for the dialog, not cin and cout.
+// [Staley] Prompt for an int (using the string parameter).  Call the method
+// [Staley] of PylosRules indicated by the method pointer to set the rules
+// [Staley] object's property.  Catch and report any exceptions, looping
+// [Staley] until reaching a value that has no exceptions.  Use "in"
+// [Staley] and "out" for the dialog, not cin and cout.
 void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
  PylosBoard::Rules *rules, void (PylosBoard::Rules::*x)(int)) {
    string inputString;

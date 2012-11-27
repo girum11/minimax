@@ -231,19 +231,14 @@ int main(int argc, char **argv) {
                for (int i = 0; i < selectedMove; i++) iter++;
                assert(iter != allMoves.end());
 
-               // WARNING: Bender watch -- should I set this move to be the
+               // TODO: Bender watch -- should I set this move to be the
                // default move? (that is, set it to be the variable 'move' up
                // top...)
+               // I don't think Bender tests this test scaffold though...
                //*move = **iter;
 
                // Apply the selected move to the game
                board->ApplyMove((*iter)->Clone());
-
-               // FIXME: More of a question, but in Clint's version of this,
-               // keyMoveHist returns 1 if the game is empty, and ~117 while
-               // the game has moves.  It appears that the GetOutstanding() 
-               // of the moves just the Moves pointed to mMoveHist, plus the 
-               // default move.  Is this true?
 
                // Clean up after your GetAllMoves() call
                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
@@ -284,19 +279,14 @@ int main(int argc, char **argv) {
                for (int i = 0; i < selectedMove; i++) iter++;
                assert(iter != allMoves.end());
 
-               // WARNING: Bender watch -- should I set this move to be the
+               // TODO: Bender watch -- should I set this move to be the
                // default move? (that is, set it to be the variable 'move' up
                // top...)
+               // I don't think Bender tests this test scaffold though...
                //*move = **iter;
 
                // Apply the selected move to the game
                board->ApplyMove((*iter)->Clone());
-
-               // FIXME: More of a question, but in Clint's version of this,
-               // keyMoveHist returns 1 if the game is empty, and ~117 while
-               // the game has moves.  It appears that the GetOutstanding() 
-               // of the moves just the Moves pointed to mMoveHist, plus the 
-               // default move.  Is this true?
 
                // Clean up after your GetAllMoves() call
                for (iter = allMoves.begin(); iter != allMoves.end(); iter++)

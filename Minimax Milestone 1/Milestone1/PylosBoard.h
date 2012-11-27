@@ -51,8 +51,8 @@ public:
    Board *Clone() const;
    Key *GetKey() const;
    
-   // [*Staley] Add a method to prevent PylosBoard from being an abstract class.
-   // [*Staley] May add a public method for use by PylosView
+   // TODO: Add a method to prevent PylosBoard from being an abstract class.
+   // TODO: May add a public method for use by PylosView
    // [Staley] Add a static method to support the Class system, plus a static
    // [Staley] private member datum below
 
@@ -141,6 +141,7 @@ protected:
    // [Staley] and mBlack masks, but do not update state relative to board valuation.  
    // [Staley] Used to "test out" a marble placement at low cost.
    inline void HalfPut(Spot *spot) const {
+      // Ensure that you're not trying to HalfPut() a completely filled Spot
       assert(spot != NULL && spot->empty != NULL);
 
       spot->top = spot->empty;
@@ -152,12 +153,13 @@ protected:
          mBlack |= spot->top->mask;
       else assert(false);
       
-      // [*Staley] Here write a verifier that all the spots are correct
-      // Do the "IAmSane()" function that's all asserts here
+      // TODO: Here write a verifier that all the spots are correct.  That is,
+      // do the "IAmSane()" function for Spot correction in the board's state.
    }
    
    // [Staley] Like HalfPut, but in reverse
    inline void HalfTake(Spot *spot) const {
+      // Ensure that you're not trying to HalfTake() an empty Spot
       assert(spot != NULL && spot->top != NULL);
 
       // Clear out the spot->top bit.
@@ -170,11 +172,6 @@ protected:
       // [Staley] Fill in
       // Reset the spot so that it reflects the removed piece.
       
-      // FIXME: Well, here's my bug.  My current Spot setting logic breaks 
-      // when I HalfTake() a Spot *without* something below it to the NW.
-      //
-      // E.g.: doesn't work when I half-take any bottom-level cell on the
-      // topmost row or leftmost column.
       spot->empty = spot->top;
       spot->top = spot->top->below[kNW];
    }
@@ -243,7 +240,7 @@ private:
     std::list<PylosMove *>::const_iterator moveIter,
     Set *mSet, PylosMove *potentialMove, Cell *potentialMoveCell) const;
 
-   // WARNING: Preventing duplicates is hard.  Right now, I'm preventing
+   // TODO: Preventing duplicates is hard.  Right now, I'm preventing
    // them by simply only calling FindFreeMarbles on rows/cols that are PAST
    // the current free marble.  If there's a Bender error, here's where
    // you can start.
