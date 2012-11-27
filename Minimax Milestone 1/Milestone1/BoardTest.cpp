@@ -251,7 +251,59 @@ int main(int argc, char **argv) {
                allMoves.clear();
             }
          } else if (command.compare("testRun") == 0) {
-            // TODO: testRun
+            int seed = 0;
+            unsigned stepCount = 0, selectedMove = 0, movesToRetract = 0;
+            
+            // Take a seed and moveCount, and apply the seed
+            cin >> seed >> stepCount;
+            srand(seed);
+
+            while (stepCount-- > 0) {
+               // Grab all possible moves
+               assert(allMoves.size() == 0);
+               board->GetAllMoves(&allMoves);
+
+               // Ensure that the game is still going.
+               // If the game is over, then retract a random number of moves,
+               // between [1,n] where n is the number of moves that you even 
+               // have to retract (the move history).
+               if (allMoves.size() == 0) {
+                  movesToRetract = rand() % board->GetMoveHist().size() + 1;
+                  
+                  while (movesToRetract-- > 0)
+                     board->UndoLastMove();
+                  
+                  continue;
+               }
+
+               // Pick and choose a move, if the game is still going
+               selectedMove = rand() % allMoves.size();
+               
+               // Iterate over to that randomly selected move
+               list<Board::Move *>::const_iterator iter = allMoves.begin();
+               for (int i = 0; i < selectedMove; i++) iter++;
+               assert(iter != allMoves.end());
+
+               // WARNING: Bender watch -- should I set this move to be the
+               // default move? (that is, set it to be the variable 'move' up
+               // top...)
+               //*move = **iter;
+
+               // Apply the selected move to the game
+               board->ApplyMove((*iter)->Clone());
+
+               // FIXME: More of a question, but in Clint's version of this,
+               // keyMoveHist returns 1 if the game is empty, and ~117 while
+               // the game has moves.  It appears that the GetOutstanding() 
+               // of the moves just the Moves pointed to mMoveHist, plus the 
+               // default move.  Is this true?
+
+               // Clean up after your GetAllMoves() call
+               for (iter = allMoves.begin(); iter != allMoves.end(); iter++)
+                   delete *iter;
+               allMoves.clear();
+            }
+
          } else if (command.compare("keyMoveCount") == 0) {
             // keyMoveCount
             cout << "Moves/Keys: " << Board::Move::GetOutstanding()
