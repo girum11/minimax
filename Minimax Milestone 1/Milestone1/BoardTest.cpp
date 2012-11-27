@@ -185,7 +185,7 @@ int main(int argc, char **argv) {
             cin >> cArg;
             ifstream in(cArg.c_str());
             assert(in.is_open());
-            in >> *cmpBoard;
+            in >> *cmpBoard;   // HERE is my PylosMove memory leak.
 
             // Grab references to the keys so that you can delete them after
             // this call

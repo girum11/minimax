@@ -623,10 +623,10 @@ void PylosBoard::Delete() {
    mWhiteReserve = mBlackReserve = kStones;
    mLevelLead = mFreeLead = 0;
 
-//    for (list<Move *>::iterator iter = mMoveHist.begin();
-//     iter != mMoveHist.end(); iter++) {
-//        delete *iter;
-//    }
+   for (list<Move *>::iterator iter = mMoveHist.begin();
+    iter != mMoveHist.end(); iter++) {
+       delete *iter;
+   }
    mMoveHist.clear();
 
    mRules.levelWgt = mRules.marbleWgt = mRules.freeWgt = 0;

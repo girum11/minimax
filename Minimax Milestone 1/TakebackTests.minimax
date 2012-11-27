@@ -173,17 +173,15 @@ undoLastMove 1000
 doMove Play at [0,0]
 saveBoard test0.board
 undoLastMove 1
-
--- small leak here...
 compareKeys test0.board
-doMove Play at [0,0]
 
--- compareKeys test0.board
--- undoLastMove 1
--- saveBoard test1.board
--- doMove Play at [0,0]
--- compareKeys test1.board
--- undoLastMove 1
+doMove Play at [0,0]
+compareKeys test0.board
+undoLastMove 1
+saveBoard test1.board
+doMove Play at [0,0]
+compareKeys test1.board
+undoLastMove 1
 
 -- showBoard
 -- testPlay 5 1000
@@ -205,6 +203,10 @@ undoLastMove 1000
 showBoard
 keyMoveCount
 
+
+*** Ideas for testing Milestone 0: ***
+-- I can totally put a keyMoveCount along with all calls of showBoard
+-- just to check for memory leaks.
 
 
 quit
