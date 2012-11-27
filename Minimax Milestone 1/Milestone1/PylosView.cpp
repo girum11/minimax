@@ -12,25 +12,15 @@ using namespace std;
 
 Class PylosView::mClass("PylosView", &CreatePylosView);
 
-/*
-   You will definitely want to use FString from MyLib.h to assemble strings 
-   in at least some cases.  Also, note that std::string doesn't automatically 
-   resize when you index it; it does so only if you use operations like append or +=.  
-   The FString constructor is a variadic method, so you must pass arguments that 
-   match the format specifiers precisely.  No conversions will be made for you; 
-   mismatched types will simply cause mysterious failures.
-*/
-// TODO: Scale the Draw() picture output correctly.  
-/* 
-   Uses an appropriate View-derived object to Draw a textual picture 
-   of the default board, and also prints a list of string-conversions 
-   of all moves possible from the default board.  ShowBoard calculates 
-   the largest move size in the list of possible moves, and then 
-   figures how many columns of moves of that largest size can be fit 
-   onto an 80-char screen, with one space after each column.  It then 
-   prints all the moves using that many columns, with moves 
-   left-justified within their column, so that they line up neatly.
-*/
+  
+// [Staley] Uses an appropriate View-derived object to Draw a textual picture 
+// [Staley] of the default board, and also prints a list of string-conversions 
+// [Staley] of all moves possible from the default board.  ShowBoard calculates 
+// [Staley] the largest move size in the list of possible moves, and then 
+// [Staley] figures how many columns of moves of that largest size can be fit 
+// [Staley] onto an 80-char screen, with one space after each column.  It then 
+// [Staley] prints all the moves using that many columns, with moves 
+// [Staley] left-justified within their column, so that they line up neatly.
 void PylosView::Draw(ostream &out) {
    string rtn = "\n";
    int level = 0, row = 0, col = 0;

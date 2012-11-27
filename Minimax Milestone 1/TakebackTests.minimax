@@ -185,21 +185,23 @@ undoLastMove 1
 showBoard
 testPlay 5 1000
 showBoard
+showVal
 
-showBoard
-testRun 5 1000
-showBoard
+*** Stress test ***
+-- showBoard
+-- testRun 5 1000
+-- showBoard
 
 ------------- All of the above tests work. ------------------
 
 
 
--- PylosMove memory leak test
-showBoard
-keyMoveCount
-undoLastMove 1000
-showBoard
-keyMoveCount
+*** PylosMove memory leak test
+-- showBoard
+-- keyMoveCount
+-- undoLastMove 1000
+-- showBoard
+-- keyMoveCount
 
 
 *** Ideas for testing Milestone 0: ***
