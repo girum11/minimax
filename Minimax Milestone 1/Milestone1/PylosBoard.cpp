@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <memory.h>
 #include <limits.h>
+#include <algorithm>
 #include "PylosDlg.h"
 #include "PylosBoard.h"
 #include "PylosMove.h"
@@ -479,6 +480,7 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
       // Find the iterator that points to where you want to add moves to.
       // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(n^2)
       list<PylosMove *>::iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
+
 
       if (mWhoseMove == kWhite)
          CalculateAllTakebacks(moves, movesIter, &mWhite, potentialMove, potentialMoveCell);

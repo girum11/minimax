@@ -104,7 +104,7 @@ int main(int argc, char **argv) {
             // Delete the old move
             delete move;
 
-            // Make this move to a new object
+            // Make this move point to a new object
             move = board->CreateMove();
             (*move).operator=(cArg.c_str());
 			} else if (command.compare("showMove") == 0) {
