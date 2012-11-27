@@ -23,7 +23,6 @@ class PylosMove : public Board::Move {
 public:
    enum {kReserve, kPromote};  // Enum to mark what type of move we are.
    typedef std::vector<std::pair<short, short> > LocVector;
-   friend class PylosBoard;
    
    PylosMove(const LocVector &locs, int type) : mLocs(locs), mType(type) {
       AssertMe();
@@ -36,6 +35,7 @@ public:
    void operator=(const std::string &src);
    Board::Move *Clone() const;
 
+   // Mutual friendship between PylosBoard and PylosMove is allowed.
    friend class PylosBoard;
 protected:
    std::istream &Read(std::istream &is);

@@ -26,7 +26,6 @@ void PylosView::Draw(ostream &out) {
    int level = 0, row = 0, col = 0;
    char sqr;
    const PylosBoard *pb = dynamic_cast<const PylosBoard *>(mModel);
-   PylosBoard::Set mask;
 
    // Reserve some space for the output string so that you're not
    // reallocating over and over again.
@@ -41,11 +40,9 @@ void PylosView::Draw(ostream &out) {
 
          // Draw this row
          for (col = 0; col < PylosBoard::kDim - level; col++) {
-            mask = pb->GetCell(row, col, level)->mask;
-
-            if (mask & pb->mWhite)
+            if (pb->CellOccupied(row, col, level, 1))
                rtn += "W ";
-            else if (mask & pb->mBlack)
+            else if (pb->CellOccupied(row, col, level, -1))
                rtn += "B ";
             else
                rtn += ". ";

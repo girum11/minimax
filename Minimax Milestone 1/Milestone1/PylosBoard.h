@@ -52,7 +52,22 @@ public:
    Key *GetKey() const;
    
    // TODO: Add a method to prevent PylosBoard from being an abstract class.
-   // TODO: May add a public method for use by PylosView
+   
+   // [Staley] May add a public method for use by PylosView.
+   // Public helper function that returns true if a cell is occupied
+   // by a certain color.
+   //
+   // "byWhom" expects either kWhite or kBlack.
+   bool CellOccupied(int row, int col, int level, int byWhom) const {
+      Set mask = this->GetCell(row, col, level)->mask;
+
+      if (byWhom == kWhite) {
+         return mask & this->mWhite;
+      } else if (byWhom == kBlack) {
+         return mask & this->mBlack;
+      } else assert(false);
+   }
+
    // [Staley] Add a static method to support the Class system, plus a static
    // [Staley] private member datum below
 
@@ -220,8 +235,8 @@ protected:
    // [Staley] History of moves leading to this point.
    std::list<Move *> mMoveHist;
 
-   // TODO: PylosBoard cannot friend PylosView
-   friend class PylosView;
+//    // TODO: PylosBoard cannot friend PylosView
+//    friend class PylosView;
    
    // Mutual friendship between PylosBoard and PylosMove is allowed.
    friend class PylosBoard;
