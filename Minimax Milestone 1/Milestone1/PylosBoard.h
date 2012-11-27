@@ -237,9 +237,6 @@ protected:
    // [Staley] History of moves leading to this point.
    std::list<Move *> mMoveHist;
    
-   // Mutual friendship between PylosBoard and PylosMove is allowed.
-   friend class PylosBoard;
-   
 private:
    // Stolen helper function from StackOverflow, used to assert() 
    // alignment bits being set correctly
@@ -251,7 +248,7 @@ private:
 
    // My own helper function for AddTakebacks().
    void CalculateAllTakebacks(std::list<PylosMove *> *moves, 
-    std::list<PylosMove *>::const_iterator moveIter,
+    std::list<PylosMove *>::iterator moveIter,
     Set *mSet, PylosMove *potentialMove, Cell *potentialMoveCell) const;
 
    // WARNING: Preventing duplicates is hard.  Right now, I'm preventing
@@ -270,7 +267,7 @@ private:
             // sup[port] are NOT present in the current board -- black OR white.
             // Also, the freeMarble to take back must belong to that player.
             if (mSpots[row][col].top
-             && mSpots[row][col].top->mask & *playerMarbles
+             && (mSpots[row][col].top->mask & *playerMarbles)
              && (mSpots[row][col].top->sups & (mWhite|mBlack)) == 0) {
                freeMarbles->insert(std::pair<int, int>(row,col)).second;
             }

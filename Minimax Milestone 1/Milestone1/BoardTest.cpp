@@ -13,8 +13,6 @@
 // Add more includes, possibly, but not board-specific ones
 using namespace std;
 
-enum { kFileInput, kFileOutput };
-
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
 	Board::Move *move = NULL, *cmpMove = NULL;
@@ -138,7 +136,7 @@ int main(int argc, char **argv) {
             // Run the dialog, using the Options object
             void *options = boardClass->GetOptions();
             dialog->Run(cin, cout, options);
-            delete options;
+            // delete options;
          } else if (command.compare("showVal") == 0) {
             cout << "Value: " << board->GetValue() << endl;
          } else if (command.compare("doMove") == 0) {
@@ -275,7 +273,7 @@ int main(int argc, char **argv) {
                
                // Iterate over to that randomly selected move
                list<Board::Move *>::const_iterator iter = allMoves.begin();
-               for (int i = 0; i < selectedMove; i++) iter++;
+               for (unsigned i = 0; i < selectedMove; i++) iter++;
                assert(iter != allMoves.end());
 
                // Apply the selected move to the game

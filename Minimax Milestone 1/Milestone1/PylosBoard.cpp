@@ -50,7 +50,7 @@ void PylosBoard::ClearMSpots() {
 
 void PylosBoard::StaticInit() {
    Cell *cell;
-   int level = 0, row = 0, col = 0, ndx = 0, nextSet = 0, nextCell = 0;
+   int level = 0, row = 0, col = 0, ndx = 0, nextCell = 0;
 
    // Hold a set for the different alignments you can have
    Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
@@ -478,7 +478,7 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
 
       // Find the iterator that points to where you want to add moves to.
       // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(n^2)
-      list<PylosMove *>::const_iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
+      list<PylosMove *>::iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
 
       if (mWhoseMove == kWhite)
          CalculateAllTakebacks(moves, movesIter, &mWhite, potentialMove, potentialMoveCell);
@@ -497,7 +497,7 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
 }
 
 void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
- list<PylosMove *>::const_iterator moveIter, Set *mSet, 
+ list<PylosMove *>::iterator moveIter, Set *mSet,
  PylosMove *potentialMove, Cell *potentialMoveCell) const {
 
    set<pair<short,short> > freeMarbles1;
@@ -532,8 +532,9 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
             takebackMove->AssertMe();
 
             // Throw the new takebackMove into the list of all moves
-            allMoves->insert(++moveIter, takebackMove);
-            --moveIter;
+            moveIter++;
+            allMoves->insert(moveIter, takebackMove);
+            moveIter--;
 
             // Make sure to HalfTake() freeMarble1 to update state of the board, in preparation
             // for finding all possible freeMarble2's

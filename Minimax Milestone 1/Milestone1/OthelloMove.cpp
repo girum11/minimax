@@ -49,7 +49,7 @@ OthelloMove::operator string() const
 
 void OthelloMove::operator=(const string &src)
 {
-   int start = src.find_first_not_of(" \t"), end = src.find_last_not_of(" \t");
+   unsigned start = src.find_first_not_of(" \t"), end = src.find_last_not_of(" \t");
    char tkn, tkn2;
    short tRow, tCol;
 

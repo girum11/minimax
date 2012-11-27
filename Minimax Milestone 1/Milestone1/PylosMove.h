@@ -24,7 +24,7 @@ public:
    enum {kReserve, kPromote};  // Enum to mark what type of move we are.
    typedef std::vector<std::pair<short, short> > LocVector;
    
-   PylosMove(const LocVector &locs, int type) : mLocs(locs), mType(type) {
+   PylosMove(const LocVector &locs, int type) : mType(type), mLocs(locs) {
       AssertMe();
    }
    virtual ~PylosMove() {}

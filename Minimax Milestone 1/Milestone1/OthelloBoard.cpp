@@ -35,7 +35,7 @@ BoardClass OthelloBoard::mClass("OthelloBoard",
                                 &OthelloBoard::SetOptions,
                                 &OthelloBoard::GetOptions);
 
-OthelloBoard::OthelloBoard() : mNextMove(mBPiece), mWeight(0), mPassCount(0)
+OthelloBoard::OthelloBoard() : mNextMove(mBPiece), mPassCount(0), mWeight(0)
 {
    int row, col;
 
