@@ -293,43 +293,43 @@ void PylosBoard::ApplyMove(Move *move) {
    int rChange = -1;  // [Staley] Start by assuming we'll lose one from reserve
    PylosMove::LocVector::iterator locIter = tm->mLocs.begin();
 
-   /** BEGIN Girum's code to verify that a move is actually a valid move */
-   // TODO: The spec says specifically NOT to check for whether or not a 
-   // move can logically be made.  We only check strings.
-
-   // WARNING: Instead of repeatedly calculating GetAllMoves() [by far your
-   // slowest function], why not hold onto a static copy of the currently 
-   // valid moves?
-   list<Move *> moves;
-   GetAllMoves(&moves);
-   bool listContainsMove = false;
-   for (list<Move *>::const_iterator moveIter = moves.begin();
-    !listContainsMove && moveIter != moves.end(); moveIter++) {
-      if ((*moveIter)->operator==(*move)) {
-         listContainsMove = true;
-      }
-   }
-
-   // WARNING: Refactor this logic to be public: PylosBoard::CleanMoveList()
-   // Cleanup after your GetAllMoves() call regardless of whether you found it
-   // or not.
-   for (list<Move *>::const_iterator moveIter = moves.begin(); 
-      moveIter != moves.end(); moveIter++)
-      delete *moveIter;
-   moves.clear();
-
-   if (!listContainsMove) {
-      cout << "Invalid move being applied" << endl;
-
-      // If the list of valid moves DOES NOT contain the move you're trying
-      // to do, then just kill this ApplyMove() call.
-      //
-      // Don't forget to delete the move that was passed in, since ApplyMove()
-      // takes ownership of the move
-      delete move;
-      return;
-   } 
-   /** END Girum's code */
+//    /** BEGIN Girum's code to verify that a move is actually a valid move */
+//    // TODO: The spec says specifically NOT to check for whether or not a 
+//    // move can logically be made.  We only check strings.
+// 
+//    // WARNING: Instead of repeatedly calculating GetAllMoves() [by far your
+//    // slowest function], why not hold onto a static copy of the currently 
+//    // valid moves?
+//    list<Move *> moves;
+//    GetAllMoves(&moves);
+//    bool listContainsMove = false;
+//    for (list<Move *>::const_iterator moveIter = moves.begin();
+//     !listContainsMove && moveIter != moves.end(); moveIter++) {
+//       if ((*moveIter)->operator==(*move)) {
+//          listContainsMove = true;
+//       }
+//    }
+// 
+//    // WARNING: Refactor this logic to be public: PylosBoard::CleanMoveList()
+//    // Cleanup after your GetAllMoves() call regardless of whether you found it
+//    // or not.
+//    for (list<Move *>::const_iterator moveIter = moves.begin(); 
+//       moveIter != moves.end(); moveIter++)
+//       delete *moveIter;
+//    moves.clear();
+// 
+//    if (!listContainsMove) {
+//       cout << "Invalid move being applied" << endl;
+// 
+//       // If the list of valid moves DOES NOT contain the move you're trying
+//       // to do, then just kill this ApplyMove() call.
+//       //
+//       // Don't forget to delete the move that was passed in, since ApplyMove()
+//       // takes ownership of the move
+//       delete move;
+//       return;
+//    } 
+//    /** END Girum's code */
 
    PutMarble(&mSpots[(*locIter).first][(*locIter).second]);
 
