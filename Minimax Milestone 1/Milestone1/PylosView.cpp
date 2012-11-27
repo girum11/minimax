@@ -12,7 +12,6 @@ using namespace std;
 
 Class PylosView::mClass("PylosView", &CreatePylosView);
 
-// TODO: Use Clint's FString instead of string in PylosView::Draw()
 /*
    You will definitely want to use FString from MyLib.h to assemble strings 
    in at least some cases.  Also, note that std::string doesn't automatically 
@@ -39,22 +38,31 @@ void PylosView::Draw(ostream &out) {
    const PylosBoard *pb = dynamic_cast<const PylosBoard *>(mModel);
    PylosBoard::Set mask;
 
+   // Reserve some space for the output string so that you're not
+   // reallocating over and over again.
+   rtn.reserve(200);
+
    for (level = PylosBoard::kDim - 1; level >= 0; level--) {
       for (row = 0; row < PylosBoard::kDim - level; row++) {
+         
+         // "Center" this row's output
+         for (int i = 0; i < level; ++i)
+            rtn += " ";
+
+         // Draw this row
          for (col = 0; col < PylosBoard::kDim - level; col++) {
-            
             mask = pb->GetCell(row, col, level)->mask;
 
             if (mask & pb->mWhite)
-               rtn += " W";
+               rtn += "W ";
             else if (mask & pb->mBlack)
-               rtn += " B";
+               rtn += "B ";
             else
-               rtn += " .";
+               rtn += ". ";
          }
+         // Step down to the next row
          rtn += "\n";
       }
-      rtn += "\n";
    }
    rtn += pb->GetWhoseMove() ? "Black's move\n" : "White's move\n";
 
