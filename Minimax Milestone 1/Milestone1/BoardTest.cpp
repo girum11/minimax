@@ -126,7 +126,7 @@ int main(int argc, char **argv) {
                // Clean up after your GetAllMoves() call
                delete *listIter;
             }
-            cout << endl << endl;
+            cout << endl;
             allMoves.clear();
 			} else if (command.compare("enterMove") == 0) {
             getline(cin, cArg);
@@ -321,14 +321,13 @@ int main(int argc, char **argv) {
          } else if (command.compare("keyMoveCount") == 0) {
             // keyMoveCount
             cout << "Moves/Keys: " << Board::Move::GetOutstanding()
-             << "/" << Board::Key::GetOutstanding() << endl << endl;
+             << "/" << Board::Key::GetOutstanding() << endl;
          } else if (command.compare("quit") == 0) {
 				break;
          }
 			else {
 				cout << "Unknown command: " << command << endl;
             cin.ignore(INT_MAX, '\n');
-			   cout << endl;
          }
 		} catch (BaseException &exc) {
 			cout << "Error: " << exc.what() << endl << endl;
