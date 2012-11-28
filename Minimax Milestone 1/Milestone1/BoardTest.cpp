@@ -38,14 +38,14 @@ int main(int argc, char **argv) {
 
    // Verify the number of arguments is correct
    if (argc != 2 && argc != 3) {
-      cout << "Usage: BoardTest BoardClass [runLimit]" << endl << endl;
+      cout << "Usage: BoardTest BoardClass [runLimit]" << endl;
       return -1;
    }
 
    // Attempt to instantiate the boardClass object
    boardClass = BoardClass::ForName(argv[1]);
    if (boardClass == NULL) {
-      cout << "Failed to create classes or objects" << endl << endl;
+      cout << "Failed to create classes or objects" << endl;
       return -1;
    }
    
@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
    dialogClass = boardClass->GetDlgClass();
 
    if (viewClass == NULL || dialogClass == NULL) {
-      cout << "Failed to create classes or objects" << endl << endl;
+      cout << "Failed to create classes or objects" << endl;
       return -1;
    }
 
@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
    move = board->CreateMove();
 
    if (board == NULL || view == NULL || dialog == NULL) {
-      cout << "Failed to create classes or objects" << endl << endl;
+      cout << "Failed to create classes or objects" << endl;
       return -1;
    }
 
@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
 				ofstream out(cArg.c_str());
 				out << *board;
 			} else if (command.compare("showVal") == 0) {
-				cout << "Value: " << board->GetValue() << endl << endl;
+				cout << "Value: " << board->GetValue() << endl;
 			} else if (command.compare("showBoard") == 0) {
 				// Show the board
 				view->SetModel(board);
@@ -98,6 +98,16 @@ int main(int argc, char **argv) {
 
             assert(allMoves.size() == 0);
 				board->GetAllMoves(&allMoves);
+
+            // If the list is empty, then drop what you're doing and don't
+            // print the endl in this *if* block, or the required endl for
+            // each turn.  To make up for the required endl though, print one
+            // more out.
+            if (allMoves.size() == 0) {
+               cout << endl;
+               continue;
+            }
+
 				list<Board::Move *>::const_iterator listIter;
 
             // Figure out the max move length
@@ -138,7 +148,7 @@ int main(int argc, char **argv) {
             move = board->CreateMove();
             (*move).operator=(cArg.c_str());
 			} else if (command.compare("showMove") == 0) {
-				cout << (string) *move << endl << endl;
+				cout << (string) *move << endl;
 			} else if (command.compare("applyMove") == 0) {
             
             // This version of applyMove gives a clone of the default
@@ -197,7 +207,7 @@ int main(int argc, char **argv) {
                result = "Current move is greater than entered move";
             else assert(false);
 
-            cout << result << endl << endl;
+            cout << result << endl;
 
             // Clean up
             delete cmpMove;
@@ -209,7 +219,7 @@ int main(int argc, char **argv) {
              iter != moveHist.end(); iter++) {
                 cout << (string) **iter << ' ';
             }
-            cout << endl << endl;
+            cout << endl;
          } else if (command.compare("compareKeys") == 0) {
             cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
             cin >> cArg;
@@ -222,14 +232,14 @@ int main(int argc, char **argv) {
             key = board->GetKey();  cmpKey = cmpBoard->GetKey();
 
             if (*key == *cmpKey) {
-               cout << "Board keys are equal" << endl << endl;
+               cout << "Board keys are equal" << endl;
             } else {
-               cout << "Board keys are unequal" << endl << endl;
+               cout << "Board keys are unequal" << endl;
 
                if (*key < *cmpKey) {
-                  cout << "Current board is less than " << cArg << endl << endl;
+                  cout << "Current board is less than " << cArg << endl;
                } else {
-                  cout << "Current board is greater than " << cArg << endl << endl;
+                  cout << "Current board is greater than " << cArg << endl;
                }
             }
 
@@ -330,9 +340,9 @@ int main(int argc, char **argv) {
             cin.ignore(INT_MAX, '\n');
          }
 		} catch (BaseException &exc) {
-			cout << "Error: " << exc.what() << endl << endl;
+			cout << "Error: " << exc.what() << endl;
 		} catch (...) {
-         cout << "Got some other exception... " << endl << endl;
+         cout << "Got some other exception... " << endl;
       }
 
       // Every command that you input, regardless of success or not,
@@ -343,7 +353,7 @@ int main(int argc, char **argv) {
 	delete board;
 
    if (cin.eof())
-      cout << "Error: Unexpected EOF" << endl;
+      cout << "Error: Unexpected EOF" << endl << endl;
 
 	return 0;
 }
