@@ -30,14 +30,14 @@ int main(int argc, char **argv) {
 
    // Verify the number of arguments is correct
    if (argc != 2 && argc != 3) {
-      cout << "Usage: BoardTest BoardClass [runLimit]" << endl;
+      cout << "Usage: BoardTest BoardClass [runLimit]" << endl << endl;
       return -1;
    }
 
    // Attempt to instantiate the boardClass object
    boardClass = BoardClass::ForName(argv[1]);
    if (boardClass == NULL) {
-      cout << "Failed to create classes or objects" << endl;
+      cout << "Failed to create classes or objects" << endl << endl;
       return -1;
    }
    
@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
    dialogClass = boardClass->GetDlgClass();
 
    if (viewClass == NULL || dialogClass == NULL) {
-      cout << "Failed to create classes or objects" << endl;
+      cout << "Failed to create classes or objects" << endl << endl;
       return -1;
    }
 
@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
    move = board->CreateMove();
 
    if (board == NULL || view == NULL || dialog == NULL) {
-      cout << "Failed to create classes or objects" << endl;
+      cout << "Failed to create classes or objects" << endl << endl;
       return -1;
    }
 
@@ -79,24 +79,25 @@ int main(int argc, char **argv) {
 				ofstream out(cArg.c_str());
 				out << *board;
 			} else if (command.compare("showVal") == 0) {
-				cout << "Value: " << board->GetValue() << endl;
+				cout << "Value: " << board->GetValue() << endl << endl;
 			} else if (command.compare("showBoard") == 0) {
 				// Show the board
 				view->SetModel(board);
 				view->Draw(cout);
 
 				// Print out all possible moves
-				cout << "All Moves: ";
+				cout << "\nAll Moves: \n";
 
             assert(allMoves.size() == 0);
 				board->GetAllMoves(&allMoves);
 				list<Board::Move *>::const_iterator listIter;
 				for (listIter = allMoves.begin(); listIter != allMoves.end(); ++listIter) {
-					cout << (string) **listIter << " \n";
+					cout << (string) **listIter << " ";
 
                // Clean up after your GetAllMoves() call
                delete *listIter;
             }
+            cout << endl << endl;
             allMoves.clear();
 			} else if (command.compare("enterMove") == 0) {
             getline(cin, cArg);
@@ -108,7 +109,7 @@ int main(int argc, char **argv) {
             move = board->CreateMove();
             (*move).operator=(cArg.c_str());
 			} else if (command.compare("showMove") == 0) {
-				cout << (string) *move << endl;
+				cout << (string) *move << endl << endl;
 			} else if (command.compare("applyMove") == 0) {
             
             // This version of applyMove gives a clone of the default
@@ -138,7 +139,7 @@ int main(int argc, char **argv) {
             dialog->Run(cin, cout, options);
             // delete options;
          } else if (command.compare("showVal") == 0) {
-            cout << "Value: " << board->GetValue() << endl;
+            cout << "Value: " << board->GetValue() << endl << endl;
          } else if (command.compare("doMove") == 0) {
             getline(cin, cArg);
 
@@ -167,7 +168,7 @@ int main(int argc, char **argv) {
                result = "Current move is greater than entered move";
             else assert(false);
 
-            cout << result << endl;
+            cout << result << endl << endl;
 
             // Clean up
             delete cmpMove;
@@ -179,7 +180,7 @@ int main(int argc, char **argv) {
              iter != moveHist.end(); iter++) {
                 cout << (string) **iter << ' ';
             }
-            cout << endl;
+            cout << endl << endl;
          } else if (command.compare("compareKeys") == 0) {
             cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
             cin >> cArg;
@@ -192,14 +193,14 @@ int main(int argc, char **argv) {
             key = board->GetKey();  cmpKey = cmpBoard->GetKey();
 
             if (*key == *cmpKey) {
-               cout << "Board keys are equal" << endl;
+               cout << "Board keys are equal" << endl << endl;
             } else {
-               cout << "Board keys are unequal" << endl;
+               cout << "Board keys are unequal" << endl << endl;
 
                if (*key < *cmpKey) {
-                  cout << "Current board is less than " << cArg << endl;
+                  cout << "Current board is less than " << cArg << endl << endl;
                } else {
-                  cout << "Current board is greater than " << cArg << endl;
+                  cout << "Current board is greater than " << cArg << endl << endl;
                }
             }
 
@@ -291,18 +292,18 @@ int main(int argc, char **argv) {
          } else if (command.compare("keyMoveCount") == 0) {
             // keyMoveCount
             cout << "Moves/Keys: " << Board::Move::GetOutstanding()
-             << "/" << Board::Key::GetOutstanding() << endl;
+             << "/" << Board::Key::GetOutstanding() << endl << endl;
          } else if (command.compare("quit") == 0)
 				break;
 			else {
-				cout << "Unknown command: " << command << endl;
+				cout << "Unknown command: " << command << endl << endl;
             cin.ignore(INT_MAX, '\n');
-			   cout << endl;
+			   cout << endl << endl;
          }
 		} catch (BaseException &exc) {
-			cout << "Error: " << exc.what() << endl;
+			cout << "Error: " << exc.what() << endl << endl;
 		} catch (...) {
-         cout << "Got some other exception... " << endl;
+         cout << "Got some other exception... " << endl << endl;
       }
 	}
 

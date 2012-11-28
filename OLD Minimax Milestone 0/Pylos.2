@@ -1,4 +1,4 @@
--- 26.) You may find it useful is your test main to do a quick check that each movey ou enter is in the GetAllMoves list.
+-- 26.) You may find it useful is your test main to do a quick check that each move you enter is in the GetAllMoves list.
 
 -- 35.) Also testing Pylos weight rules.
 
@@ -312,25 +312,6 @@ showBoard
 showMove
 keyMoveCount
 testPlay 1 1
-
-
--- 48.) testPlay test: End the loop early and without complaint if the game reaches its end.
-undoLastMove 1000
-testPlay 54 1000
-
--- 49.) Additional Pylos string sanity checks
-undoLastMove 1000                
--- Invalid format sanity checks
-doMove Prom0te from [0,2] to [1,1]
-doMove Play at [0,2] to [2,0]
-doMove Promote at [1,2]
-doMove Play at [1,0] to [1,2]
-doMove Promote to [2,2]
-doMove Play from [1,1] to [1,2] taking [2,3] and [1,2]
-doMove Promote to [1,2] from [2,3] taking [3,2] and [3,2]
-doMove Play at [3,2] taking [2,2] and [1,0]
-
--- 50.) Pylos move comparison checks
 
 
 -- 39.) Key A is "less" than Key B if
