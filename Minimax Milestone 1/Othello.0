@@ -1,0 +1,46 @@
+*** "Shotgun" tests ***
+-- Random tests
+showBoard
+keyMoveCount
+
+doMove [2, 3]
+doMove [2, 4]
+doMove [1, 5]
+doMove [1, 2]
+doMove [2, 2]
+doMove [3, 2]
+doMove [2, 5]
+doMove [4, 5]
+doMove [1, 3]
+doMove [5, 2]
+doMove [0, 1]
+doMove [0, 3]
+doMove [5, 4]
+doMove [1, 1]
+doMove [5, 6]
+doMove [0, 6]
+doMove [1, 4]
+doMove [1, 6]
+doMove [4, 1]
+doMove [2, 1]
+doMove [6, 3]
+doMove [0, 4]
+doMove [2, 6]
+doMove [2, 7]
+doMove [3, 1]
+doMove [6, 1]
+doMove [1, 7]
+doMove [7, 4]
+doMove [7, 0]
+doMove [5, 3]
+doMove [7, 2]
+doMove [0, 2]
+doMove [4, 2]
+doMove [6, 4]
+doMove [3, 6]
+doMove [3, 0]
+
+showBoard
+keyMoveCount
+
+quit

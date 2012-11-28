@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <list>
 #include "MyLib.h"
@@ -13,6 +14,12 @@
 // Add more includes, possibly, but not board-specific ones
 using namespace std;
 
+void printList(list<Board::Move *> *list) {
+   
+}
+
+// WARNING:  If Bender bugs, it could be because I'm ignoring the
+// difference in newlines.
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
 	Board::Move *move = NULL, *cmpMove = NULL;
@@ -23,6 +30,7 @@ int main(int argc, char **argv) {
    Dialog *dialog = NULL;
    list<Board::Move *> allMoves;
    const Board::Key *key = NULL, *cmpKey = NULL;
+   const unsigned int LINE_LENGTH = 70;
 
 	// Sample of some Class code
 	const Class *viewClass, *dialogClass;
@@ -91,8 +99,29 @@ int main(int argc, char **argv) {
             assert(allMoves.size() == 0);
 				board->GetAllMoves(&allMoves);
 				list<Board::Move *>::const_iterator listIter;
-				for (listIter = allMoves.begin(); listIter != allMoves.end(); ++listIter) {
-					cout << (string) **listIter << " ";
+
+            // Figure out the max move length
+            unsigned maxCharLength = 0;
+            for (listIter = allMoves.begin(); listIter != allMoves.end(); listIter++) {
+               if (((string) **listIter).size() > maxCharLength) {
+                  maxCharLength = ((string) **listIter).size();
+               }
+            }
+
+            // Print out all the moves
+            unsigned col = 0;
+				for (listIter = allMoves.begin(); listIter != allMoves.end(); listIter++) {
+					// If adding this next move puts you over LINE_LENGTH,
+               // then start a newline
+               //cout << "++col * maxCharLength = " << ((col+1)*maxCharLength) << " -- ";
+               if ((++col * maxCharLength) > LINE_LENGTH) {
+                  //cout << "END OF LINE!!" << endl;
+                  cout << endl;
+                  col = 0;
+               }
+               
+               string moveString = (string) **listIter;
+               cout << setw(maxCharLength) << moveString << " ";
 
                // Clean up after your GetAllMoves() call
                delete *listIter;
@@ -139,7 +168,7 @@ int main(int argc, char **argv) {
             dialog->Run(cin, cout, options);
             // delete options;
          } else if (command.compare("showVal") == 0) {
-            cout << "Value: " << board->GetValue() << endl << endl;
+            cout << "Value: " << board->GetValue() << endl;
          } else if (command.compare("doMove") == 0) {
             getline(cin, cArg);
 
@@ -293,12 +322,13 @@ int main(int argc, char **argv) {
             // keyMoveCount
             cout << "Moves/Keys: " << Board::Move::GetOutstanding()
              << "/" << Board::Key::GetOutstanding() << endl << endl;
-         } else if (command.compare("quit") == 0)
+         } else if (command.compare("quit") == 0) {
 				break;
+         }
 			else {
-				cout << "Unknown command: " << command << endl << endl;
+				cout << "Unknown command: " << command << endl;
             cin.ignore(INT_MAX, '\n');
-			   cout << endl << endl;
+			   cout << endl;
          }
 		} catch (BaseException &exc) {
 			cout << "Error: " << exc.what() << endl << endl;
@@ -308,6 +338,9 @@ int main(int argc, char **argv) {
 	}
 
 	delete board;
+
+   if (cin.eof())
+      cout << "Error: Unexpected EOF" << endl;
 
 	return 0;
 }

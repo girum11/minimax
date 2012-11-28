@@ -1,0 +1,145 @@
+--1.) A player with no moves must make a "Pass" move (and we permit Pass only in that case).  We end the game when both players have just made Pass moves.
+
+-- Step to the *almost* end of the game, then GetAllMoves() to show that players can't Pass.  Slowly step to the end of the game showing Pass moves.  Show Board's value as you step to ensure that the game ends at the right moment.
+showBoard
+showVal
+testPlay 1 55
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+
+
+--2.) What if the piece that you're trying to outflank is outside of the board's range?
+enterMove [-1,0]
+enterMove [0,-1]
+enterMove [-1,0]
+enterMove [7,8]
+enterMove [8,7]
+
+--6a.) A *badly formed* move is one that disobeys string formats, or that has obvious errors such as out-of-range number values.  The operator=(const std::string &) method detects badly formed moevs and throws an exception when it is passe d one.
+
+-- 6b.) The [1,2] permits spaces anywhere
+
+
+-- 7.) The operator=(string) method for all games must check for incorrect format including garbage after the end of the move, and for out-of-bounds numerical values.
+-- (out-of-bounds move testing has been done in the test case above)
+
+
+
+-- 8.) Verify that a move is one of those returned by GetAllMoves
+
+
+-- 9.)  Tests will certainly include moves with various invalid formats and with squares or bowls that are out fo bounds, to fully test your operator=.
+
+
+
+-- 10.) If a badly formatted Move string is presented to the operator= method, the method throws a BaseException with one fo the contents below where X is the name of the game, and M is the full move string.  If this happens, the method does not modify the move at all.  In other words, it either modifies the move, or throws an exception indicating a bad move string, but not both.
+
+
+-- What if I try to continue the game after "quit"?
+
+
+-- 11.) Modification of rules (or "options" as the BoardTest language calls them) is done via the CheckersDlg and PylosDlg classes, which engage the user in a dialog to adjust parameters used by teh boards to determine their value (See GetValue).
+
+
+
+-- 12.) The user must enter a valid integer falling within the inclusive ranges given when you run the model program.
+
+
+
+-- 13.) The integer must be on a line by itself.
+
+
+
+
+-- 14.) Trailing nonwhitespace garbage is unacceptable and generates an error indicating there is extra garbage on the line.
+
+
+
+-- 15.) A "y" is the only acceptable "yes" answer.  It may be followed by arbitrary garbage on teh reply line without error.
+
+
+
+-- 16.) A cell like [0,1] that is both on an edge an one away from an edge counts as "one away from an edge."
+
+
+
+-- 17.) For Othello, the rule [for GetAllMoves] is the same as for Checkers, except that "Pass" is less than all other moves.
+
+
+
+-- 18.) As a special case, if the game is over then GetValue returns winVal if first player has won, -winVal if the second player has won, and 0 in the case of a draw.
+
+
+-- 19.) Two OthelloBoard::Keys are equal if all squares have same color of piece (or are both empty) and if the next player to move is the same.
+
+
+-- 20.) OthelloBoard::Key A is "less" than OthelloBoard::Key B if in the first square taht they differ, reading in row-major order, A's value is "less" than B's if we give teh following values to squares:
+
+
+
+-- 21.) Two OthelloMoves are equal if their row and col are equal.
+
+
+
+-- 22.) OthelloMove A is "less" than OthelloMove B if its row is less, or if the rows are equal and its col is less.  A "Pass" move is less than any other move.
+
+
+-- 23.) showMove Tests
+
+
+
+-- 24.) ApplyMove does not clear the current move.  A showMove call after ApplyMove still shows the move.
+
+
+
+-- 25.) compareKeys tests.  
+
+
+
+-- 26.) Whenever the static weights are changed all existing boards of the current board class must automatically reflect the change in the return of GetValue
+
+
+
+-- 27.) [During testPlay,] end the loop early and without complaint if the game reaches its end.
+
+
+
+-- 28.) Can you flank two different rows at the same time?
+
+
+
+-- 29.) Note that since [compareKeys] requires loading a board, the command has the side effect of changing board options to those stored in the boardFile.
+
+-- 30.) I need more "GUI" input sanity checks on the strings that have been inputted.
+
+
+-- 31.) END GAME tests
+
+
+
+
+
+
+
+
