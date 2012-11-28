@@ -335,6 +335,10 @@ int main(int argc, char **argv) {
 		} catch (...) {
          cout << "Got some other exception... " << endl << endl;
       }
+
+      // Every command that you input, regardless of success or not,
+      // should \n.
+      cout << endl;
 	}
 
 	delete board;
