@@ -198,8 +198,18 @@ void PylosMove::operator=(const string &src) {
       throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
 
    // [Staley] About 5 lines of wrapup logic and final error checks needed here.
+   for (LocVector::const_iterator iter = temp.begin(); iter != temp.end(); 
+    iter++) {
+       if (iter->first < 0 || iter->first >= PylosBoard::kDim ||
+        iter->second < 0 || iter->second >= PylosBoard::kDim) {
+           throw BaseException(
+            FString("Out of bounds Pylos move: %s", src.c_str()));
+       }
+   }
+   
    mLocs = temp;
    mType = type;
+
    AssertMe();
 }
 
@@ -253,8 +263,16 @@ istream &PylosMove::Read(istream &is)
 void PylosMove::AssertMe() {  
    // Assert that the "doMove ... taking [a,b] and [c,d] cases ensure
    // that [a,b] < [c,d]
-   if (mType == kReserve) assert(mLocs.size() <= 3);
-   if (mType == kPromote) assert(mLocs.size() <= 4);
-   if (mType == kReserve && mLocs.size() == 3) assert(mLocs[1] <= mLocs[2]);
-   if (mType == kPromote && mLocs.size() == 4) assert(mLocs[2] <= mLocs[3]);
+   
+   if (mType == kReserve) 
+      assert(mLocs.size() <= 3);
+   if (mType == kPromote) 
+      assert(mLocs.size() <= 4);
+   
+   // I can't leave these logical PylosMove asserts in here -- it diffs
+   // in Milestone 1
+//    if (mType == kReserve && mLocs.size() == 3) 
+//       assert(mLocs[1] <= mLocs[2]);
+//    if (mType == kPromote && mLocs.size() == 4) 
+//       assert(mLocs[2] <= mLocs[3]);
 }

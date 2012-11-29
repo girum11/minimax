@@ -470,10 +470,10 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
       // Sanity check:  A possible move shouldn't be able to be applied to a filled Spot
       assert(potentialMoveCell != NULL);
 
-      // Straightaway, put down the marble to inspect the new state of the board (to check
-      // for possible alignments)
+      // Straightaway, put down the marble to inspect the new state of the 
+      // board (to check for possible alignments).  Also, don't forget to 
+      // HalfTake() in case we're promoting a marble.
       HalfPut(potentialMoveSpot);
-      // (don't forget to HalfTake() if we're promoting a marble)
       if (potentialMove->mType == PylosMove::kPromote) {
          potentialPromoteFromSpot = &mSpots[potentialMove->mLocs[1].first][potentialMove->mLocs[1].second];
          HalfTake(potentialPromoteFromSpot);
@@ -482,7 +482,6 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
       // Find the iterator that points to where you want to add moves to.
       // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(n^2)
       list<PylosMove *>::iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
-
 
       if (mWhoseMove == kWhite)
          CalculateAllTakebacks(moves, movesIter, &mWhite, potentialMove, potentialMoveCell);
@@ -508,9 +507,10 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
    // instead of O(logn).
    set<pair<short,short> > freeMarbles1;
    set<pair<short,short> > freeMarbles2;
+   bool alignmentFound = false;
 
    // For each of this cell's possible alignments,
-   for (int i = 0; i < kSetsPerCell; i++) {
+   for (int i = 0; i < kSetsPerCell && !alignmentFound; i++) {
       // If putting down this cell creates a new alignment 
       // (checking against all possible alignments),
       if (potentialMoveCell->sets[i] &&
@@ -574,6 +574,10 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
             HalfPut(freeMarble1);
             freeMarbles2.clear();
          }
+
+         // If you *did* find an alignment, then you should NOT check the rest
+         // of the possible alignments, since you'd only get duplicate moves.
+         alignmentFound = true;
       }
 
       freeMarbles1.clear();
