@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
    // TODO: WARNING: This should be 80... but Clint insists that I have
    // something messed up on my end -- he thinks that I might not be using the 
    // max length of the strings.  Schedule office hours for this if necessary.
-   const unsigned int LINE_LENGTH = 70;
+   const unsigned int LINE_LENGTH = 80;
 
 	// Sample of some Class code
 	const Class *viewClass, *dialogClass;
@@ -115,21 +115,24 @@ int main(int argc, char **argv) {
             // Figure out the max move length
             unsigned maxCharLength = 0;
             for (listIter = allMoves.begin(); listIter != allMoves.end(); listIter++) {
-               if (((string) **listIter).size() > maxCharLength) {
-                  maxCharLength = ((string) **listIter).size();
+               string moveString = (string) **listIter;
+               
+               if (moveString.size() > maxCharLength) {
+                  maxCharLength = moveString.size();
                }
             }
 
             // Print out all the moves
-            unsigned col = 0;
+            unsigned col = 1;
+            unsigned MAX_COLUMNS = 80 / (maxCharLength + 1);
 				for (listIter = allMoves.begin(); listIter != allMoves.end(); listIter++) {
 					// If adding this next move puts you over LINE_LENGTH,
                // then start a newline
                //cout << "++col * maxCharLength = " << ((col+1)*maxCharLength) << " -- ";
-               if ((++col * maxCharLength) > LINE_LENGTH) {
+               if (col > MAX_COLUMNS) {
                   //cout << "END OF LINE!!" << endl;
                   cout << endl;
-                  col = 0;
+                  col = 1;
                }
                
                string moveString = (string) **listIter;
@@ -137,6 +140,7 @@ int main(int argc, char **argv) {
 
                // Clean up after your GetAllMoves() call
                delete *listIter;
+               col++;
             }
             cout << endl;
             allMoves.clear();
