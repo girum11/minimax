@@ -262,13 +262,14 @@ private:
 
       for (int row = startRow; row < kDim; row++) {
          for (int col = startCol; col < kDim; col++) {
+            Cell *cell = mSpots[row][col].top;
+
             // A marble is "free" if it does not support any other marbles.
             // Bitwise, this means that all of the possible marbles it can 
             // sup[port] are NOT present in the current board -- black OR white.
             // Also, the freeMarble to take back must belong to that player.
-            if (mSpots[row][col].top
-             && (mSpots[row][col].top->mask & *playerMarbles)
-             && (mSpots[row][col].top->sups & (mWhite|mBlack)) == 0) {
+            if (cell && (cell->mask & *playerMarbles)
+             && (cell->sups & (mWhite|mBlack)) == 0) {
                freeMarbles->insert(std::pair<int, int>(row,col)).second;
             }
          }

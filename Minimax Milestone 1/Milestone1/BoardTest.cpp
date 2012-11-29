@@ -131,12 +131,12 @@ int main(int argc, char **argv) {
                //cout << "++col * maxCharLength = " << ((col+1)*maxCharLength) << " -- ";
                if (col > MAX_COLUMNS) {
                   //cout << "END OF LINE!!" << endl;
-                  cout << left << endl;
+                  cout << endl;
                   col = 1;
                }
                
                string moveString = (string) **listIter;
-               cout << setw(maxCharLength) << moveString << " ";
+               cout << left << setw(maxCharLength) << moveString << " ";
 
                // Clean up after your GetAllMoves() call
                delete *listIter;
