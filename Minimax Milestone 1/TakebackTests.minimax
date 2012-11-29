@@ -205,21 +205,15 @@ PylosBoard::Read() and PylosBoard::Write() tests
 
 ------------- All of the above tests work. ------------------
 
--- "A "y" is the only acceptable "yes" answer.  It may be followed by arbitrary garbage on the reply line without error."
-setOptions pretty please????
-yeah, sure
+setOptions
+y
+50
+10
+2
 
-
-
-
-
-
--- The user must [input] a valid integer falling within the inclusive ranges given when you run the model program.  The integer must be on a line by itself -- trailing nonwhitespace garbage is unacceptable and geenerates an error indicating there is extra garbage on the line.
-100
-20 6
-20
-6
-
+undoLastMove 1000
+showVal
+doMove Play at [1, 0]   
 
 quit
 

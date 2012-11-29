@@ -79,11 +79,7 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
             for (int i = 0; i < kTrailingCharLength; ++i) 
                trailingChar[i] = '\0';
             continue;
-         } 
-         else if (res == 2
-            // TODO: If I get past all PylosTests like this, yank this line.
-            // || trailingChar[0] != '\0'   (
-            ) {
+         } else if (res == 2) {
             out << "Unexpected garbage after value." << endl;
             
             // Clear out trailingChar
@@ -92,13 +88,13 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
             continue;
          }
 
-
-
          // Execute the setter member function
          (rules->*x)(inputValue);
          inputSuccessfullyRead = true;
-      } catch (BaseException &exc) {
-         //out << "Error: " << exc.what();
+      }
+      // Need this line to catch exceptions that the setters throw.
+      catch (BaseException &exc) {
+         out << "Error: " << exc.what();
       } catch (...) {
          out << "SOME OTHER UNKNOWN ERROR";
          assert(false);

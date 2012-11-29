@@ -186,45 +186,6 @@ void PylosBoard::StaticInit() {
    }
 }
 
-void PylosBoard::Rules::SetMarble(int val) {
-   if (val < 1 || val > 1000)
-      throw BaseException("Marble weight must be between 1 and 1000 inclusive");
-
-   PylosBoard::mRules.marbleWgt = val;
-}
-
-void PylosBoard::Rules::SetLevel(int val) {
-   if (val >= marbleWgt || val < 0)
-      throw BaseException("Level weight must be nonnegative and less than"
-      " marble weight");
-
-   PylosBoard::mRules.levelWgt = val;
-}
-
-void PylosBoard::Rules::SetFree(int val) {
-   if (val % 2 != 0 || val < 0 || val >= marbleWgt)
-      throw BaseException("Free weight must be even, nonnegative, and less"
-      " than marble weight");
-
-   PylosBoard::mRules.freeWgt = val;
-}
-
-void PylosBoard::Rules::EndSwap() {
-   levelWgt = EndianXfer(levelWgt);
-   freeWgt = EndianXfer(freeWgt);
-   marbleWgt = EndianXfer(marbleWgt);
-}
-
-long PylosBoard::GetValue() const {
-   if (mWhiteReserve == 0)
-      return -kWinVal;
-   else if (mBlackReserve == 0)
-      return kWinVal;
-   else
-      return mRules.marbleWgt*(mWhiteReserve - mBlackReserve)
-      + mRules.levelWgt * mLevelLead + mRules.freeWgt * mFreeLead;
-}
-
 void PylosBoard::PutMarble(Spot *trg) {
    // [Staley] Other stuff needed here, related to board valuation
    // [Staley] This is a great place for a few asserts, too.
@@ -638,7 +599,10 @@ void PylosBoard::Delete() {
    }
    mMoveHist.clear();
 
-   mRules.levelWgt = mRules.marbleWgt = mRules.freeWgt = 0;
+   // Reset the rules to their defaults
+   mRules.marbleWgt = 100;
+   mRules.levelWgt = 20;
+   mRules.freeWgt = 6;
 }
 
 Board::Key *PylosBoard::GetKey() const {
@@ -731,5 +695,44 @@ void *PylosBoard::GetOptions() {
 // [Staley] the PylosDlg object.
 void PylosBoard::SetOptions(const void *opts) {
    mRules = *reinterpret_cast<const Rules *>(opts);
+}
+
+void PylosBoard::Rules::SetMarble(int val) {
+   if (val < 1 || val > 1000)
+      throw BaseException("Marble weight must be between 1 and 1000 inclusive");
+
+   this->marbleWgt = val;
+}
+
+void PylosBoard::Rules::SetLevel(int val) {
+   if (val >= this->marbleWgt || val < 0)
+      throw BaseException("Level weight must be nonnegative and less than"
+      " marble weight");
+
+   this->levelWgt = val;
+}
+
+void PylosBoard::Rules::SetFree(int val) {
+   if (val % 2 != 0 || val < 0 || val >= this->marbleWgt)
+      throw BaseException("Free weight must be even, nonnegative, and less"
+      " than marble weight");
+
+   this->freeWgt = val;
+}
+
+void PylosBoard::Rules::EndSwap() {
+   this->levelWgt = EndianXfer(this->levelWgt);
+   this->freeWgt = EndianXfer(this->freeWgt);
+   this->marbleWgt = EndianXfer(this->marbleWgt);
+}
+
+long PylosBoard::GetValue() const {
+   if (mWhiteReserve == 0)
+      return -kWinVal;
+   else if (mBlackReserve == 0)
+      return kWinVal;
+   else
+      return mRules.marbleWgt*(mWhiteReserve - mBlackReserve)
+      + mRules.levelWgt * mLevelLead + mRules.freeWgt * mFreeLead;
 }
 
