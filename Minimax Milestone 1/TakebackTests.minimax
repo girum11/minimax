@@ -225,7 +225,8 @@ doMove Play at [1, 1]
 showBoard
 
 *** THIS IS THE SOURCE OF YOUR NEXT BUG ***
-doMove Play at [3,2] taking [3,2] and [3,3]
+*** AddTakebacks() isn't returning all possible takebacks.
+-- doMove Play at [3,2] taking [3,2] and [3,3]
 
 showBoard
 

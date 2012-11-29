@@ -131,7 +131,7 @@ int main(int argc, char **argv) {
                //cout << "++col * maxCharLength = " << ((col+1)*maxCharLength) << " -- ";
                if (col > MAX_COLUMNS) {
                   //cout << "END OF LINE!!" << endl;
-                  cout << endl;
+                  cout << left << endl;
                   col = 1;
                }
                
