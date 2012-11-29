@@ -182,7 +182,11 @@ int main(int argc, char **argv) {
             // Run the dialog, using the Options object
             void *options = boardClass->GetOptions();
             dialog->Run(cin, cout, options);
-            // delete options;
+            boardClass->SetOptions(options);
+
+            // TODO: delete options
+            free(options);
+
          } else if (command.compare("showVal") == 0) {
             cout << "Value: " << board->GetValue() << endl;
          } else if (command.compare("doMove") == 0) {

@@ -28,8 +28,8 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
    bool inputSuccessfullyRead = false;
 
    while (!inputSuccessfullyRead) {
-      try {
-         out << prompt;
+//      try {
+         out << prompt << " [" << lo << ", " << hi << "]: ";
          
          // Here, sscanf() the whole line to ensure that no trailing garbage 
          // was inputted
@@ -46,17 +46,19 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
          if (inputValue >= lo && inputValue <= hi) {
             *val = inputValue;
          } else {
-            out << "INPUT OUT OF RANGE" << endl;
+            out << "Please enter a value between " << lo << " and " << hi << endl;
+            continue;
          }
 
          inputSuccessfullyRead = true;
-      } catch (BaseException &exc) {
-         out << "Error: " << exc.what();
-      } catch (...) {
-         out << "SOME OTHER UNKNOWN ERROR";
-         assert(false);
-      }
 
-      out << endl;
+//       } catch (BaseException &exc) {
+//          out << "Error: " << exc.what();
+//       } catch (...) {
+//          out << "SOME OTHER UNKNOWN ERROR";
+//          assert(false);
+//       }
+
+      // out << endl;
    }
 }
