@@ -22,7 +22,7 @@ void printList(list<Board::Move *> *list) {
 // difference in newlines.
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
-	Board::Move *move = NULL, *cmpMove = NULL;
+	Board::Move *move = NULL, *cmpMove = NULL, *temp = NULL;
 	unsigned count = 0;
 	string command, cArg;
 	// Many more locals needed
@@ -145,7 +145,7 @@ int main(int argc, char **argv) {
             // Make this move point to a new object.  Use a temporary
             // move in between as to prevent changing the default
             // move if operator=() fails.
-            Board::Move *temp = board->CreateMove();
+            temp = board->CreateMove();
             (*temp).operator=(cArg.c_str());
             
             // Delete the old move
@@ -195,7 +195,7 @@ int main(int argc, char **argv) {
             // Make this move point to a new object.  Use a temporary
             // move in between as to prevent changing the default
             // move if operator=() fails.
-            Board::Move *temp = board->CreateMove();
+            temp = board->CreateMove();
             (*temp).operator=(cArg.c_str());
             
             // Delete the old move
@@ -228,7 +228,7 @@ int main(int argc, char **argv) {
             delete cmpMove;
 
          } else if (command.compare("showMoveHist") == 0) {
-            cout << "Move History: " << endl;
+            cout << "\nMove History: " << endl;
             const list<const Board::Move *> moveHist = board->GetMoveHist();
             for (list<const Board::Move *>::const_iterator iter = moveHist.begin();
              iter != moveHist.end(); iter++) {
@@ -344,7 +344,6 @@ int main(int argc, char **argv) {
             }
 
          } else if (command.compare("keyMoveCount") == 0) {
-            // keyMoveCount
             cout << "Moves/Keys: " << Board::Move::GetOutstanding()
              << "/" << Board::Key::GetOutstanding() << endl;
          } else if (command.compare("quit") == 0) {
@@ -356,12 +355,17 @@ int main(int argc, char **argv) {
          }
 		} catch (BaseException &exc) {
 			cout << "Error: " << exc.what() << endl;
+         
+         // clean up after temp in case operator=() caught an error
+         // TODO: Do I even need temp?
+         delete temp;
+
 		} catch (...) {
          cout << "Got some other exception... " << endl;
       }
 
       // Every command that you input, regardless of success or not,
-      // should \n.
+      // should print a newline.
       cout << endl;
 	}
 
