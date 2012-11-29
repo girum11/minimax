@@ -1,4 +1,5 @@
 #include "PylosDlg.h"
+#include <climits>
 
 using namespace std;
 
@@ -34,10 +35,9 @@ bool PylosDlg::Run(std::istream &in, std::ostream &out, void *data) {
    // Flush out 'in' until the end of the line
    while (in.get() != '\n' && !in.eof())
       ;
-   
-   // out << endl;
 
    if (userResponse == 'y') {
+      out << endl;
       ReadMethodInt(in, out, "Enter marble weight: ", rules, &PylosBoard::Rules::SetMarble);
       ReadMethodInt(in, out, "Enter level weight: ", rules, &PylosBoard::Rules::SetLevel);
       ReadMethodInt(in, out, "Enter free weight: ", rules, &PylosBoard::Rules::SetFree);
@@ -54,7 +54,7 @@ bool PylosDlg::Run(std::istream &in, std::ostream &out, void *data) {
 void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
  PylosBoard::Rules *rules, void (PylosBoard::Rules::*x)(int)) {
    string inputString;
-   int inputValue = 0;
+   int inputValue = 0, res = 0;
    static const int kTrailingCharLength = 11;
    char trailingChar[kTrailingCharLength] = {'\0'};
    bool inputSuccessfullyRead = false;
@@ -65,9 +65,13 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
          
          // Here, sscanf() the whole line to ensure that no trailing garbage 
          // was inputted
-         getline(in, inputString);
-         sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
-         if (trailingChar[0] != '\0') {
+         do {
+            getline(in, inputString);
+         } while (inputString == "");         
+         
+         res = sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
+
+         if (trailingChar[0] != '\0' || res == 0) {
             out << "Badly formatted input\n";
 
             // Clear out trailingChar
@@ -87,6 +91,5 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
          assert(false);
       }
 
-      out << endl;
    }
 }

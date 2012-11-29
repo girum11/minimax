@@ -205,7 +205,20 @@ PylosBoard::Read() and PylosBoard::Write() tests
 
 ------------- All of the above tests work. ------------------
 
-enterMove Promote from[1,2]to[0,0]taking[2,2]and[1,1]
+-- "A "y" is the only acceptable "yes" answer.  It may be followed by arbitrary garbage on the reply line without error."
+setOptions pretty please????
+yeah, sure
+
+
+
+
+
+
+-- The user must [input] a valid integer falling within the inclusive ranges given when you run the model program.  The integer must be on a line by itself -- trailing nonwhitespace garbage is unacceptable and geenerates an error indicating there is extra garbage on the line.
+100
+20 6
+20
+6
 
 
 quit
