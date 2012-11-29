@@ -22,7 +22,7 @@ Class PylosView::mClass("PylosView", &CreatePylosView);
 // [Staley] prints all the moves using that many columns, with moves 
 // [Staley] left-justified within their column, so that they line up neatly.
 void PylosView::Draw(ostream &out) {
-   string rtn = "\n";
+   string rtn;
    int level = 0, row = 0, col = 0;
    const PylosBoard *pb = dynamic_cast<const PylosBoard *>(mModel);
 
