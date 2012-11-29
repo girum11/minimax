@@ -7,11 +7,56 @@
 
 #include "Dialog.h"
 #include <assert.h>
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include "MyLib.h"
 
-void Dialog::ReadLimitInt(std::istream &is, std::ostream &os,
- int *val, int lo , int hi, std::string prompt) {
+using namespace std;
 
-   // WARNING: Staley's code for this (OthelloDlg code) references this method,
-   // but the method was never given.  Why?
-   //assert(false);
+// This method is used by Othello and Checkers, but not Pylos (since
+// Pylos has specific setters that apply logic for its options).
+// 
+// This method is similar to PylosDlg::ReadMethodInt(), except that there isn't
+// setter logic for it.
+void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
+ int *val, int lo, int hi, std::string prompt) {
+   string inputString;
+   int inputValue = 0;
+   static const int kTrailingCharLength = 11;
+   char trailingChar[kTrailingCharLength] = {'\0'};
+   bool inputSuccessfullyRead = false;
+
+   while (!inputSuccessfullyRead) {
+      try {
+         out << prompt;
+         
+         // Here, sscanf() the whole line to ensure that no trailing garbage 
+         // was inputted
+         getline(in, inputString);
+         sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
+         if (trailingChar[0] != '\0') {
+            out << "Badly formatted input\n";
+            // Clear out trailingChar
+            for (int i = 0; i < kTrailingCharLength; ++i) trailingChar[i] = '\0';
+            continue;
+         }
+
+         // Execute the setter member function
+         if (inputValue >= lo && inputValue <= hi) {
+            *val = inputValue;
+         } else {
+            out << "INPUT OUT OF RANGE" << endl;
+         }
+
+         inputSuccessfullyRead = true;
+      } catch (BaseException &exc) {
+         out << "Error: " << exc.what();
+      } catch (...) {
+         out << "SOME OTHER UNKNOWN ERROR";
+         assert(false);
+      }
+
+      out << endl;
+   }
 }

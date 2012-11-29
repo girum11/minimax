@@ -208,11 +208,17 @@ PylosBoard::Read() and PylosBoard::Write() tests
 -- I can totally put a keyMoveCount along with all calls of showBoard
 -- just to check for memory leaks.
 
---4.) In the event that an invalid string is passed in, the default move shall not have changed.
-enterMove [3,3]
-showMove
-enterMove garbage
-showMove
+--5.) setOptions tests: Test trailing garbage.
+
+-- setOptions "may be followed by arbitrary garbage on the reply line without error."
+setOptions
+noo
+setOptions
+ygarbage
+50
+50
+50
+50
 
 
 quit
