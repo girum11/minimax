@@ -4,6 +4,11 @@
  					
 (numbers correspond to actual test case numbers from
 my test files)
+
+-- Test string operator=.  Try out of bounds moves, non-numeric characteres, missing dimensions, trailing garbage, preceding garbage, and extra whitespace.
+
+-- In the event that an invalid string is passed in, the default move shall not have changed.
+
 					
 *** Othello-specific tests ****************************
 

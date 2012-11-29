@@ -141,16 +141,22 @@ int main(int argc, char **argv) {
 			} else if (command.compare("enterMove") == 0) {
             getline(cin, cArg);
 
+
+            // Make this move point to a new object.  Use a temporary
+            // move in between as to prevent changing the default
+            // move if operator=() fails.
+            Board::Move *temp = board->CreateMove();
+            (*temp).operator=(cArg.c_str());
+            
             // Delete the old move
             delete move;
+            move = temp->Clone();
 
-            // Make this move point to a new object
-            move = board->CreateMove();
-            (*move).operator=(cArg.c_str());
+            delete temp;
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
 			} else if (command.compare("applyMove") == 0) {
-            
+
             // This version of applyMove gives a clone of the default
             // move to the board.
             board->ApplyMove(move->Clone());
@@ -182,12 +188,17 @@ int main(int argc, char **argv) {
          } else if (command.compare("doMove") == 0) {
             getline(cin, cArg);
 
+            // Make this move point to a new object.  Use a temporary
+            // move in between as to prevent changing the default
+            // move if operator=() fails.
+            Board::Move *temp = board->CreateMove();
+            (*temp).operator=(cArg.c_str());
+            
             // Delete the old move
             delete move;
+            move = temp->Clone();
 
-            // Make this move to a new object
-            move = board->CreateMove();
-            (*move).operator=(cArg.c_str());
+            delete temp;
 
             // Apply a clone the move to the board, making the board own the
             // move clone.
