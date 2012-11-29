@@ -53,7 +53,7 @@ bool PylosDlg::Run(std::istream &in, std::ostream &out, void *data) {
 // [Staley] and "out" for the dialog, not cin and cout.
 void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
  PylosBoard::Rules *rules, void (PylosBoard::Rules::*x)(int)) {
-   string inputString;
+   string inputString("");
    int inputValue = 0, res = 0;
    static const int kTrailingCharLength = 11;
    char trailingChar[kTrailingCharLength] = {'\0'};
@@ -64,22 +64,35 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
          out << prompt;
          
          // Here, sscanf() the whole line to ensure that no trailing garbage 
-         // was inputted
+         // was inputted. Can't really change this to a while() loop, since you 
+         // need to getline() first to change the value of inputString.
          do {
             getline(in, inputString);
-         } while (inputString == "");         
+         } while (inputString == "");
          
          res = sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
 
-         if (trailingChar[0] != '\0' || res == 0) {
+         if (res == 0) {
             out << "Badly formatted input\n";
 
             // Clear out trailingChar
             for (int i = 0; i < kTrailingCharLength; ++i) 
                trailingChar[i] = '\0';
-
+            continue;
+         } 
+         else if (res == 2
+            // TODO: If I get past all PylosTests like this, yank this line.
+            // || trailingChar[0] != '\0'   (
+            ) {
+            out << "Unexpected garbage after value." << endl;
+            
+            // Clear out trailingChar
+            for (int i = 0; i < kTrailingCharLength; ++i) 
+               trailingChar[i] = '\0';
             continue;
          }
+
+
 
          // Execute the setter member function
          (rules->*x)(inputValue);

@@ -41,8 +41,7 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
             // Clear out trailingChar
             for (int i = 0; i < kTrailingCharLength; ++i) trailingChar[i] = '\0';
             continue;
-         }
-         if (trailingChar[0] != '\0') {
+         } else if (trailingChar[0] != '\0') {
             out << "Unexpected garbage after value.\n";
             // Clear out trailingChar
             for (int i = 0; i < kTrailingCharLength; ++i) trailingChar[i] = '\0';
