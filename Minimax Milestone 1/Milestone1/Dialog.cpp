@@ -22,7 +22,7 @@ using namespace std;
 void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
  int *val, int lo, int hi, std::string prompt) {
    string inputString;
-   int inputValue = 0;
+   int inputValue = 0, res = 0;
    static const int kTrailingCharLength = 11;
    char trailingChar[kTrailingCharLength] = {'\0'};
    bool inputSuccessfullyRead = false;
@@ -34,8 +34,8 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
          // Here, sscanf() the whole line to ensure that no trailing garbage 
          // was inputted
          getline(in, inputString);
-         sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
-         if (trailingChar[0] != '\0') {
+         res = sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
+         if (res == EOF || res != 1 || trailingChar[0] != '\0') {
             out << "Badly formatted input\n";
             // Clear out trailingChar
             for (int i = 0; i < kTrailingCharLength; ++i) trailingChar[i] = '\0';

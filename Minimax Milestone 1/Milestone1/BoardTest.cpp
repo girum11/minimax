@@ -185,7 +185,7 @@ int main(int argc, char **argv) {
             boardClass->SetOptions(options);
 
             // TODO: delete options
-            free(options);
+            //free(options);
 
          } else if (command.compare("showVal") == 0) {
             cout << "Value: " << board->GetValue() << endl;

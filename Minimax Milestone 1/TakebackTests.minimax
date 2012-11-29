@@ -205,30 +205,18 @@ PylosBoard::Read() and PylosBoard::Write() tests
 
 
 *** Ideas for testing Milestone 0: ***
--- I can totally put a keyMoveCount along with all calls of showBoard
--- just to check for memory leaks.
+-- Test for memory leaks using keyMoveCount
 
---5.) setOptions tests: Test trailing garbage.
-
--- setOptions "may be followed by arbitrary garbage on the reply line without error."
-setOptions
-noo
-setOptions
-ygarbage
-50
-50
-50
-50
-
---6.) setOptions tests: Test input boundary values and out of bounds values.
+--7.) setOptions tests: "The integer must be on a line by itself".  
+-- No trailing or preceding garbage in setOptions
 setOptions
 y
-0
-100
--1
-101
-51
-51
+garbage 52
+52 garbage
+52
+52
+52
+52
 
 
 quit
