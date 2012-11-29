@@ -1,0 +1,373 @@
+-- 26.) You may find it useful is your test main to do a quick check that each move you enter is in the GetAllMoves list.
+
+-- 35.) Also testing Pylos weight rules.
+
+-- [keyMoveCount] displays the number of allocated Keys (of any derived type) and Moves (of any derived type) currently outstanding, in this format: Moves/Keys: ###/###
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+
+showVal
+showBoard
+testPlay 88 100
+
+showBoard
+showVal
+setOptions
+y
+50
+10
+2
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+showBoard
+showMove
+keyMoveCount
+testPlay 1 1
+
+
+-- 39.) Key A is "less" than Key B if
+-- If both have the same next player, then: In the last cell, in level-major, row-submajor, column-minor order, at which one has a white cell and the other does not, then the one with the white cell is larger.
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [1,3]
+doMove Play at [2,0]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,0]
+doMove Play at [3,1]
+saveBoard PylosBoardIbssa3
+doMove Play at [3,2]
+compareKeys PylosBoardIbssa3
+doMove Play at [3,3]
+compareKeys PylosBoardIbssa3
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [1,3]
+doMove Play at [2,0]
+saveBoard PylosBoardIbssa4
+doMove Play at [2,1]
+compareKeys PylosBoardIbssa4
+doMove Play at [2,2]
+compareKeys PylosBoardIbssa4
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [1,3]
+doMove Play at [2,0]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,0]
+doMove Play at [3,1]
+doMove Play at [3,2]
+doMove Play at [3,3]
+
+
+
+

@@ -1,0 +1,256 @@
+--1.) A player with no moves must make a "Pass" move (and we permit Pass only in that case).  We end the game when both players have just made Pass moves.
+
+-- Step to the *almost* end of the game, then GetAllMoves() to show that players can't Pass.  Slowly step to the end of the game showing Pass moves.  Show Board's value as you step to ensure that the game ends at the right moment.
+showBoard
+showVal
+testPlay 1 55
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+testPlay 1 1
+showBoard
+showVal
+undoLastMove 1000
+
+
+--2.) What if the move that you play is outside of the board's range?
+enterMove [-1,0]
+enterMove [0,-1]
+enterMove [-1,0]
+enterMove [7,8]
+enterMove [8,7]
+
+--3.) What if you pass in bad input for the move?  Test non-numeric characteres, missing dimensions, trailing garbage, preceding garbage, and extra whitespace.
+enterMove [a,0]
+enterMove [0,a]
+enterMove [0,]
+enterMove [,0]
+enterMove [0,0] garbage
+enterMove (0,0]
+enterMove [0,0)
+enterMove [0,0]s
+enterMove s[0,0]
+enterMove [ 0 , 0 ]
+enterMove    [0,0]
+enterMove [0.0, 0]
+enterMove [0, 0.0]
+enterMove [0, 0, 1]
+enterMove Passs
+
+--4.) BoardTest test:  In the event that an invalid string is passed in, the default move shall not have changed.
+enterMove [3,3]
+showMove
+enterMove garbage
+showMove
+
+
+--5.) setOptions tests: Test trailing garbage for user response.
+
+-- "A "y" is the only acceptable "yes" answer.  It may be followed by arbitrary garbage on teh reply line without error."
+setOptions
+noo
+setOptions
+ygarbage
+50
+50
+50
+50
+
+--6.) setOptions tests: Test input boundary values and out of bounds values.
+setOptions
+y
+0
+100
+ -1
+101
+51
+51
+
+--7.) setOptions tests: "The integer must be on a line by itself".  
+-- No trailing or preceding garbage in setOptions
+setOptions
+y
+garbage 52
+52 garbage
+52
+52
+52
+52
+
+
+--8.) OthelloBoard valuation test:  Ensure that "A cell like [0,1] that is both on an edge an one away from an edge counts as "one away from an edge.""
+keyMoveCount
+showBoard
+
+undoLastMove 1000
+doMove [2,3]
+doMove [2,2]
+doMove [2,1]
+doMove [1,1]
+doMove [0,1]
+
+showBoard
+showVal
+showMove
+showVal
+showMoveHist
+showMoveHist
+showMoveHist
+showVal
+showVal
+showMoveHist
+keyMoveCount
+
+undoLastMove 500
+
+
+--9.) OthelloMove comparison tests:  I have 100% code coverage of two comparison methods with these tests.
+enterMove [1,1]
+-- Greater than
+compareMove Pass
+compareMove [0,1]
+compareMove [1,0]
+-- Equal to
+compareMove [1,1]
+-- Less than
+compareMove [2,1]
+compareMove [1,2]
+compareMove [2,2]
+
+enterMove Pass
+-- Equal to
+compareMove Pass
+-- Less than
+compareMove [0,1]
+compareMove [1,0]
+compareMove [1,1]
+compareMove [2,1]
+compareMove [1,2]
+compareMove [2,2]
+
+
+--10.) Board valuation tests: end game showVal for black and white wins
+
+--  "if the game is over then GetValue returns winVal if first player has won, -winVal if the second player has won, and 0 in the case of a draw."
+-- Black win
+showVal
+testPlay 39 80
+showVal
+
+-- White win
+undoLastMove 100
+testPlay 40 80
+showVal
+undoLastMove 1000
+
+
+--11.) Key comparison tests -- test of identical board values, but different "mWhoseMove" values.
+-- "Two OthelloBoard::Keys are equal if all squares have same color of piece (or are both empty) and if the next player to move is the same."
+undoLastMove 1000
+testPlay 7 62
+saveBoard OthelloBoardIbssa0
+compareKeys OthelloBoardIbssa0
+doMove Pass
+compareKeys OthelloBoardIbssa0
+undoLastMove 1000
+
+--12.) Key comparison tests -- code coverage test
+-- "OthelloBoard::Key A is "less" than OthelloBoard::Key B if in the first square that they differ, reading in row-major order"
+
+undoLastMove 1000
+saveBoard OthelloBoardIbssa1
+-- Equal to
+compareKeys OthelloBoardIbssa1
+doMove [5,4]
+-- Less than
+compareKeys OthelloBoardIbssa1
+doMove [3,5]
+-- Greater than
+compareKeys OthelloBoardIbssa1
+undoLastMove 1000
+
+
+--13.) setOptions test -- Changing setOptions should immediately change showVal values.
+-- "Whenever the static weights are changed all existing boards of the current board class must automatically reflect the change in the return of GetValue"
+undoLastMove 100
+testPlay 34 39
+showVal
+
+setOptions
+y
+76
+7
+5
+65
+
+showVal
+
+--14.) BoardTest test:  Loading a board should load its options as well
+-- Note that since [compareKeys] requires loading a board, the command has the side effect of changing board options to those stored in the boardFile.
+setOptions
+n
+showVal
+
+testPlay 8 40
+showVal
+
+saveBoard OthelloBoardIbssa2
+
+setOptions
+y
+20
+30
+40
+50
+
+showVal
+loadBoard OthelloBoardIbssa2
+showVal
+
+
+--15.) Ensure that you cannot you flank two different rows at the same time.
+undoLastMove 1000
+doMove [2,3]
+doMove [2,4]
+doMove [1,5]
+doMove [5,2]
+doMove [5,3]
+doMove [1,4]
+doMove [3,5]
+doMove [5,4]
+doMove [5,5]
+showBoard
+showVal
+keyMoveCount
+
+
+
+-- 30.) I need more "GUI" input sanity checks on the strings that have been inputted.
+
+
+-- 31.) END GAME tests
+
+
+
+
+
+
+
+

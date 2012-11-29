@@ -1,3 +1,10 @@
-*** "Shotgun" tests ***
--- Random tests
+-- "Shotgun" tests (random testing)
+showBoard
+keyMoveCount
+
 testRun 7 10000
+
+showBoard
+keyMoveCount
+
+quit
