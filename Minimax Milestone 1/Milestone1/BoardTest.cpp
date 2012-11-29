@@ -18,8 +18,6 @@ void printList(list<Board::Move *> *list) {
    
 }
 
-// WARNING:  If Bender bugs, it could be because I'm ignoring the
-// difference in newlines.
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
 	Board::Move *move = NULL, *cmpMove = NULL, *temp = NULL;
@@ -32,8 +30,8 @@ int main(int argc, char **argv) {
    const Board::Key *key = NULL, *cmpKey = NULL;
 
    // TODO: WARNING: This should be 80... but Clint insists that I have
-   // something messed up on my end.  Schedule office hours for this if
-   // necessary.
+   // something messed up on my end -- he thinks that I might not be using the 
+   // max length of the strings.  Schedule office hours for this if necessary.
    const unsigned int LINE_LENGTH = 70;
 
 	// Sample of some Class code
