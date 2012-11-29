@@ -205,6 +205,28 @@ PylosBoard::Read() and PylosBoard::Write() tests
 
 ------------- All of the above tests work. ------------------
 
+
+doMove Play at [0, 1]                
+doMove Play at [0, 0]
+doMove Play at [2, 1]                
+doMove Play at [1, 2]
+doMove Play at [0, 3]                
+doMove Play at [1, 3]
+doMove Play at [2, 3]                
+doMove Play at [2, 2]
+doMove Play at [2, 0]                
+doMove Play at [0, 2]
+doMove Promote from [2, 0] to [0, 2] 
+doMove Promote from [0, 0] to [1, 2]
+doMove Play at [0, 0]                
+doMove Play at [3, 3]
+doMove Play at [1, 1]
+
+showBoard
+
+*** THIS IS THE SOURCE OF YOUR NEXT BUG ***
+doMove Play at [3,2] taking [3,2] and [3,3]
+
 showBoard
 
 quit
