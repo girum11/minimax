@@ -504,6 +504,8 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
  list<PylosMove *>::iterator moveIter, Set *mSet,
  PylosMove *potentialMove, Cell *potentialMoveCell) const {
 
+   // TODO: These sets can probably be lists instead, and insert at O(1)
+   // instead of O(logn).
    set<pair<short,short> > freeMarbles1;
    set<pair<short,short> > freeMarbles2;
 

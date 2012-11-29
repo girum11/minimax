@@ -255,26 +255,46 @@ private:
    // them by simply only calling FindFreeMarbles on rows/cols that are PAST
    // the current free marble.  If there's a Bender error, here's where
    // you can start.
+   //
+   // BUG: Instead of truly finding free marbles that are PAST the current
+   // free marble, I'm only finding marbles with row AND col values that are
+   // greater than or equal to startRow.  Instead, iterate through the rest
+   // of this row, and then step down to the next row and iterate through
+   // to the end as normal.
    void FindFreeMarbles(std::set<std::pair<short,short> > *freeMarbles, 
     ulong *playerMarbles, unsigned short startRow = 0, unsigned short startCol = 0) const {
       // Quick sanity check
       assert(freeMarbles && freeMarbles->size() == 0);
 
+      // First, iterate through the rest of this starting row.
       for (int row = startRow; row < kDim; row++) {
          for (int col = startCol; col < kDim; col++) {
-            Cell *cell = mSpots[row][col].top;
+            InsertIfFree(freeMarbles, playerMarbles, row, col);
+         }
+      }
 
-            // A marble is "free" if it does not support any other marbles.
-            // Bitwise, this means that all of the possible marbles it can 
-            // sup[port] are NOT present in the current board -- black OR white.
-            // Also, the freeMarble to take back must belong to that player.
-            if (cell && (cell->mask & *playerMarbles)
-             && (cell->sups & (mWhite|mBlack)) == 0) {
-               freeMarbles->insert(std::pair<int, int>(row,col)).second;
-            }
+      // Then, iterate through the rest of the board as usual
+      for (int row = startRow + 1; row < kDim; row++) {
+         for (int col = 0; col < kDim; col++) {
+            InsertIfFree(freeMarbles, playerMarbles, row, col);
          }
       }
    }
+
+   // A marble is "free" if it does not support any other marbles.
+   // Bitwise, this means that all of the possible marbles it can 
+   // sup[port] are NOT present in the current board -- black OR white.
+   // Also, the freeMarble to take back must belong to that player.
+   void InsertIfFree(std::set<std::pair<short,short> > *freeMarbles,
+    ulong *playerMarbles, int row, int col) const {
+       Cell *marble = mSpots[row][col].top;
+
+       if (marble && (marble->mask & *playerMarbles)
+             && (marble->sups & (mWhite|mBlack)) == 0) {
+         freeMarbles->insert(std::pair<short,short>(row,col));
+      }
+   }
+
 
    void ClearMSpots();
    void UpdateBoardValuation();
