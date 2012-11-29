@@ -30,6 +30,10 @@ int main(int argc, char **argv) {
    Dialog *dialog = NULL;
    list<Board::Move *> allMoves;
    const Board::Key *key = NULL, *cmpKey = NULL;
+
+   // TODO: WARNING: This should be 80... but Clint insists that I have
+   // something messed up on my end.  Schedule office hours for this if
+   // necessary.
    const unsigned int LINE_LENGTH = 70;
 
 	// Sample of some Class code

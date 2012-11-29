@@ -184,6 +184,28 @@ doMove Promote to [1,2] [2,3] [3,2] [2,2]
 doMove Promote to [1,2] from [2,3] taking [3,1
 doMove Play Play at [0,0]
 
+-- 50.) What if you try to promote a piece onto a square that uses its own (old) position as a base?
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Promote from [1,1] to [1,1]
+doMove Promote from [2,1] to [1,1]
+showBoard
+
+-- 51.) What if I try and promote a piece *down* a level instead of *up* a level?
+
+-- 52.) What if I try and promote a piece, but promote it parallel?
+
+
+-- 53.) PylosDlg tests
+
+
+-- 54.) PylosMove comparison tests
+
+-- 55.) PylosBoard::Key comparison tests
+
+
 quit
 
 
