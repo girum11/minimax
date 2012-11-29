@@ -35,12 +35,14 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
          // was inputted
          getline(in, inputString);
          res = sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
-         if (res == EOF || res != 1 || trailingChar[0] != '\0') {
-            out << "Badly formatted input\n";
+
+         if (trailingChar[0] != '\0') {
+            out << "Unexpected garbage after value.\n";
             // Clear out trailingChar
             for (int i = 0; i < kTrailingCharLength; ++i) trailingChar[i] = '\0';
             continue;
          }
+ 
 
          // Execute the setter member function
          if (inputValue >= lo && inputValue <= hi) {
