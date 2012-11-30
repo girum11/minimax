@@ -386,6 +386,8 @@ int main(int argc, char **argv) {
 
 	delete board;
 
+   // TODO: If "quit" is the last line of the file, I stil output
+   // this error message, even though I shouldn't.
    if (cin.eof())
       cout << "Error: Unexpected EOF" << endl << endl;
 

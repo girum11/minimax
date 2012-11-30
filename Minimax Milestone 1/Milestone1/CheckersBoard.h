@@ -12,7 +12,7 @@ public:
    friend class CheckersMove;
 
    enum { kWhite = -1, kBlack = 1, kKing = 7 };
-   enum { kNumCells = 32, kStartingPieces = 12, kStartingBackPieces = 4 };
+   enum { kNumCells = 32 };
 
    // Running Clint's version of this says the following:
    // "(Piece weight is always 100)"
@@ -58,6 +58,7 @@ protected:
    // kDim is equal to kHeight / 2 -- the number of actual Cells you can fit
    // vertically in the board
    enum { kDim = 4, kWidth = 8 };
+   enum { kStartingPieces = 12, kStartingBackPieces = 4 };
 
    typedef ulong Set;
 
@@ -83,7 +84,6 @@ protected:
    // Quick helper functions for GetCell()
    static inline bool IsEven(char num) { return num % 2; }
    static inline bool IsOdd(char num) { return !IsEven(num); }
-
 
 // // Quick test of GetCell()
 //    //

@@ -35,7 +35,6 @@ void CheckersBoard::StaticInit() {
    char row = 'A';
    unsigned col = 1;
    int nextCell = 0;
-   // TODO: Go back and initialize all of your static data here
 
    // Initialize mCells, mBlackBackRow and mWhiteBackRow
    for (row = 'A'; row <= 'H'; row ++) {
@@ -45,7 +44,7 @@ void CheckersBoard::StaticInit() {
          cell = mCells + nextCell;
          cell->mask = 1 << nextCell;
 
-         cout << "GetCell(" << row << col << ")\n";
+         // cout << "GetCell(" << row << col << ")\n";
 
          // Set up the directional pointers for mCells.  GetCell() 
          // automatically returns NULL for any out of bounds values.
@@ -54,23 +53,47 @@ void CheckersBoard::StaticInit() {
          cell->bottomLeft = GetCell(row-1, col-1);
          cell->bottomRight = GetCell(row-1, col+1);
 
-         
+         // Initialize mBlackBackRow
+         if (row == 'A') {
+            mBlackBackRow |= cell->mask;
+         }
+         // Initialize mWhiteBackRow
+         else if (row == 'H') {
+            mWhiteBackRow |= cell->mask;
+         } 
       }
    }
-
 }
 
 
-
-CheckersBoard::CheckersBoard() : mWhoseMove(kBlack) {
-   // Just to make sure that I'm covering all my bases with member datum
+CheckersBoard::CheckersBoard() : mWhoseMove(kBlack), 
+ mBlackCount(kStartingPieces), mBlackBackCount(kStartingBackPieces),
+ mWhiteCount(kStartingPieces), mWhiteBackCount(kStartingBackPieces) {
+   // Just to make sure that I'm covering all my bases with ALL member datum
    assert(mMoveHist.size() == 0);
 
-   // TODO: Go back and initialize all of your nonstatic data here
-   
+   char row = 'A';
+   unsigned col = 1;
 
 
+   // Fill up mBlackSet and mWhiteSet
+   for (row = 'A'; row <= 'H'; row ++) {
+      for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2) {
 
+         // Fill up initial mBlackSet
+         if (row == 'A' || row == 'B' || row == 'C') {
+            mBlackSet |= GetCell(row, col)->mask;
+         }
+         // Fill up initial mWhiteSet
+         else if (row == 'F' || row == 'G' || row == 'H') {
+            mWhiteSet |= GetCell(row, col)->mask;
+         }
+
+      }
+   }
+
+   // Clear out initial mKingSet (there are no kings at the start)
+   mKingSet = 0x0;
 }
 
 CheckersBoard::~CheckersBoard() {
