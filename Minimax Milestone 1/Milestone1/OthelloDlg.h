@@ -7,11 +7,11 @@ class OthelloDlg : public Dialog {
 public:
    bool Run(std::istream &in, std::ostream &out, void *data);
    
-   const Class *GetClass() const { return &mClass; };
+   const Class *GetClass() const { return &mClass; }
    static Class mClass;
 
 private:
-   static Object *CreateOthelloDlg() { return new OthelloDlg; };
+   static Object *CreateOthelloDlg() { return new OthelloDlg; }
 };
 
 #endif

@@ -6,8 +6,15 @@
 
 class CheckersDlg : public Dialog {
 public:
-   CheckersDlg(void);
-   ~CheckersDlg(void);
+   
+   bool Run(std::istream &in, std::ostream &out, void *data);
+   
+   const Class *GetClass() const { return &mClass; }
+   static Class mClass;
+
+private:
+   static Object *CreateCheckersDlg() { return new CheckersDlg; }
+
 };
 
 
