@@ -12,7 +12,19 @@ undoLastMove 1
 doMove Play at [1,1]
 undoLastMove 1
 doMove Play at [2,1]
+setOptions
+y
+50
+40
+30
 saveBoard PylosBoardIbssa0
+
+setOptions
+y
+100
+20
+6
+
 compareKeys PylosBoardIbssa0
 
 setOptions

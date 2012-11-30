@@ -573,9 +573,11 @@ Board *PylosBoard::Clone() const {
    return boardCopy;
 }
 
-// mMoveHist bug isn't in Clone() for sure.
+
 void PylosBoard::Delete() {
    // [Staley] As with Clone, think carefully and don't do needless work.
+
+   // Delete all NONSTATIC member datum.  Do NOT delete static member datum.
 
    // [Ian] So Delete() is more of a "housekeeper" than an actual destructor.
    // [Ian] Performs everything the destructor needs to do that the default destructor
@@ -599,10 +601,11 @@ void PylosBoard::Delete() {
    }
    mMoveHist.clear();
 
-   // Reset the rules to their defaults
-   mRules.marbleWgt = 100;
-   mRules.levelWgt = 20;
-   mRules.freeWgt = 6;
+   // DON'T reset the static rules to their defaults, since this is a member
+   // function, and Delete() gets called on the cmpBoard in the BoardTest.
+//    PylosBoard::mRules.marbleWgt = 100;
+//    PylosBoard::mRules.levelWgt = 20;
+//    PylosBoard::mRules.freeWgt = 6;
 }
 
 Board::Key *PylosBoard::GetKey() const {

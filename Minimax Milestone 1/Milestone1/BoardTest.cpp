@@ -252,11 +252,12 @@ int main(int argc, char **argv) {
             cin >> cArg;
             ifstream in(cArg.c_str());
             assert(in.is_open());
-            in >> *cmpBoard;   // HERE is my PylosMove memory leak.
+            in >> *cmpBoard;
 
             // Grab references to the keys so that you can delete them after
             // this call
-            key = board->GetKey();  cmpKey = cmpBoard->GetKey();
+            key = board->GetKey();
+            cmpKey = cmpBoard->GetKey();
 
             if (*key == *cmpKey) {
                cout << "Board keys are equal" << endl;
@@ -271,7 +272,9 @@ int main(int argc, char **argv) {
             }
 
             // Clean up what you left behind
-            delete cmpBoard;  delete key;  delete cmpKey;
+            delete key;
+            delete cmpKey;
+            delete cmpBoard;
          } else if (command.compare("testPlay") == 0) {
             int seed = 0;
             unsigned moveCount = 0, selectedMove = 0;
