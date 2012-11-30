@@ -34,8 +34,13 @@ void CheckersView::Draw(ostream &out) {
       out << row << "  ";
       for (col = 1; col <= CheckersBoard::kWidth; col++) {
          
-         if (IsValidCell(row, col)) {
-            out << "f  ";
+         if (IsValidCell(row, col) 
+          && cb->CellOccupied(row, col, CheckersBoard::kBlack)) {
+            out << "b  ";
+         }
+         else if (IsValidCell(row, col)
+          && cb->CellOccupied(row, col, CheckersBoard::kWhite)) {
+               out << "w  ";
          } else {
             out << ".  ";
          }

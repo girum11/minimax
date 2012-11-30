@@ -45,6 +45,24 @@ public:
    Board *Clone() const;
    Key *GetKey() const;
 
+   // [Staley] May add a public method for use by PylosView.
+   // Public helper function that returns true if a cell is occupied
+   // by a certain color.
+   //
+   // "byWhom" expects either kWhite or kBlack.
+   bool CellOccupied(int row, int col, int byWhom) const {
+      Set mask = this->GetCell(row, col)->mask;
+
+      if (byWhom == kWhite) {
+         return mask & this->mWhiteSet;
+      } else if (byWhom == kBlack) {
+         return mask & this->mBlackSet;
+      } else {
+         assert(false);
+         return false;
+      }
+   }
+
    // Option accessor/mutator.  GetOptions returns dynamically allocated
    // object representing options. SetOptions takes similar object.  Caller
    // owns object in both cases.
