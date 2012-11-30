@@ -9,6 +9,9 @@ using namespace std;
 Class CheckersView::mClass("CheckersView", &CreateCheckersView);
 
 void CheckersView::Draw(ostream &out) {
+
+   // TODO: Next up is a basic view of the CheckersBoard
+
    string rtn("");
    int row = 0, col = 0;
    char sqr;
