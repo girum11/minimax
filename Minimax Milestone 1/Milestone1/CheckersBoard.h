@@ -82,7 +82,7 @@ protected:
    static inline bool IsEven(char num) { return num % 2; }
    static inline bool IsOdd(char num) { return !IsEven(num); }
 
-   static inline Cell *GetCell(char row, char col) {
+   static inline Cell *GetCell(int row, int col) {
       // Out of bounds assertion
       assert(row >= 'A' && row <= 'H' && col >= 1 && col <= 8);
 
@@ -92,15 +92,14 @@ protected:
       col -= 1;
       
       // Invalid square assertion [the operator=(string) should've caught
-      // that before flow of control gets here].
-      //
-      // Row and Col must either both be odd or both be even to be valid.
+      // that before flow of control gets here].  Row and Col must either 
+      // both be odd or both be even to be valid.
       assert((IsEven(row) && IsEven(col)) || (IsOdd(row) && IsOdd(col)));
 
-      std::cout << "GetCell(" << row+'A' << col+1 << ") returns element #"
-         << (kDim*row) + col << std::endl;
+      int offset = (row*kDim) + (col/2);
+      std::cout << "GetCell() returns offset: " << offset << std::endl << std::endl;
 
-      return mCells + (kDim*row) + col;
+      return mCells + (row*kDim) + (col/2);
    }
 
 

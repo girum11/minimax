@@ -51,6 +51,16 @@ void CheckersBoard::StaticInit() {
    // GetCell(A1) should return 0
    // GetCell(F6) should return 22
 
+   // GetCell('H', 9);  this should assert()
+   // GetCell('G', 0);  this should assert()
+   // GetCell('A', 6);  this should assert()
+   // GetCell('B', 5);  this should assert()
+   GetCell('A', 5);
+   GetCell('H', 8);
+   GetCell('A', 1);
+   GetCell('F', 6);
+
+
    
 
 
