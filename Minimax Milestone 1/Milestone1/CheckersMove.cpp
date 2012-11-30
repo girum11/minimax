@@ -44,6 +44,8 @@ CheckersMove::operator string() const {
    // TODO: Be sure to handle the case when the move is equal to the
    // NULL_MOVE macro.  Clint's executable has a blank line output for
    // the first move in the Checkers game.
+
+   return "\n";
 }
 
 void CheckersMove::operator=(const string &src) {

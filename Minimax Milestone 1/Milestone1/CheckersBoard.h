@@ -13,18 +13,28 @@ public:
    // Don't rename these -- mWhite and mBlack are member datum names
    enum {mWPiece = -1, mBPiece = 1};
 
+   // Running Clint's version of this says the following:
+   // "(Piece weight is always 100)"
+   static const int pieceWgt = 100;
+
    // TODO: Put any inner classes you want here
+   struct Rules {
+      int kingWgt;
+      int backRowWgt;
+      int moveWgt;
 
+      Rules() : kingWgt(300), backRowWgt(100), moveWgt(20) {}
+   };
 
-   CheckersBoard(void);
-   ~CheckersBoard(void);
+   CheckersBoard();
+   ~CheckersBoard();
 
    long GetValue() const;
    void ApplyMove(Move *);
    void UndoLastMove();
    void GetAllMoves(std::list<Move *> *) const;
    Move *CreateMove() const;
-   int GetWhoseMove() const {return mNextMove == mWhite;}
+   int GetWhoseMove() const {return mNextMove == mWPiece;}
    const std::list<const Move *> &GetMoveHist() const 
     {return *(std::list<const Move *> *)&mMoveHist;}
 

@@ -25,7 +25,7 @@ BoardClass CheckersBoard::mClass("CheckersBoard",
 
 CheckersBoard::CheckersBoard() : mNextMove(mBPiece) {
    // Just to make sure that I'm covering all my bases with member datum
-   assert(mMoveHist.size == 0);
+   assert(mMoveHist.size() == 0);
 
    // TODO: Initialize mWhite, mBlack and mKings
 
@@ -63,5 +63,37 @@ Board::Move *CheckersBoard::CreateMove() const {
 }
 
 
+Board *CheckersBoard::Clone() const {
+   // [Staley] Think carefully about this one.  You should be able to do it in just
+   // [Staley] 5-10 lines.  Don't do needless work
+
+   return NULL;
+}
 
 
+Board::Key *CheckersBoard::GetKey() const {
+   return NULL;
+}
+
+
+void *CheckersBoard::GetOptions() {
+   // The caller of this method owns the object that is returned here.
+
+   return NULL;
+}
+
+void CheckersBoard::SetOptions(const void *opts) {
+   // The caller of this method owns the object that is returned here.
+
+
+}
+
+istream &CheckersBoard::Read(istream &is) {
+
+   return is;
+}
+
+ostream &CheckersBoard::Write(ostream &os) const { 
+   
+   return os;
+}
