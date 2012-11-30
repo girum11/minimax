@@ -1,10 +1,15 @@
-#pragma once
+#ifndef CHECKERSMOVE_H
+#define CHECKERSMOVE_H
+
 #include "Board.h"
 
-class CheckersMove : public Board::Move
-{
+
+class CheckersMove : public Board::Move {
 public:
    CheckersMove(void);
    ~CheckersMove(void);
+
+
 };
 
+#endif

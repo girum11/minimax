@@ -161,12 +161,29 @@ showVal
 undoLastMove 1000
 
 
---11.) Key comparison tests -- test of identical board values, but different "mWhoseMove" values.
+--11a.) Key comparison tests -- test of identical board values, but different "mWhoseMove" values.
+--11b.) Also, test to verify that compareKeys doesn't mess with the setOptions
 -- "Two OthelloBoard::Keys are equal if all squares have same color of piece (or are both empty) and if the next player to move is the same."
 undoLastMove 1000
 testPlay 7 62
+
+-- (set the options real quick to verify that they aren't changed by compareKeys)
+setOptions
+y
+100
+40
+20
+30
+setOptions
+n
+
 saveBoard OthelloBoardIbssa0
 compareKeys OthelloBoardIbssa0
+
+-- (verify that compareKeys doesn't mess with the options)
+setOptions
+n
+
 doMove Pass
 compareKeys OthelloBoardIbssa0
 undoLastMove 1000
@@ -220,9 +237,15 @@ y
 40
 50
 
+setOptions
+n
+
 showVal
 loadBoard OthelloBoardIbssa2
 showVal
+
+setOptions
+n
 
 
 --15.) Ensure that you cannot you flank two different rows at the same time.
@@ -239,6 +262,38 @@ doMove [5,5]
 showBoard
 showVal
 keyMoveCount
+
+--16.) compareKeys test: Try to setOptions before and after compareKeys and see if compareKeys changed them.
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [1,3]
+doMove Play at [0,1]
+doMove Play at [2,3]
+doMove Play at [0,2]
+doMove Play at [3,3]
+doMove Play at [0,3]
+undoLastMove 1
+doMove Play at [0,3] taking [0,0] and [0,3]
+undoLastMove 1
+doMove Play at [1,1]
+undoLastMove 1
+doMove Play at [2,1]
+setOptions
+y
+50
+40
+30
+20
+saveBoard PylosBoardIbssa0
+setOptions
+y
+100
+20
+10
+20
+compareKeys PylosBoardIbssa0
+setOptions
+n
 
 
 
