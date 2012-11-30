@@ -32,12 +32,11 @@ CheckersBoard::CheckersBoardInitializer CheckersBoard::mInitializer;
 
 void CheckersBoard::StaticInit() {
    Cell *cell;
-   char row = 'A', col = 1;
+   char row = 'A';
+   unsigned col = 1;
    int nextCell = 0;
    // TODO: Go back and initialize all of your static data here
 
-
-   
    // Initialize mCells, mBlackBackRow and mWhiteBackRow
    for (row = 'A'; row <= 'H'; row ++) {
       for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2, nextCell++) {
@@ -46,26 +45,16 @@ void CheckersBoard::StaticInit() {
          cell = mCells + nextCell;
          cell->mask = 1 << nextCell;
 
-         GetCell(row, col);
+         cout << "GetCell(" << row << col << ")\n";
 
-         // TODO: Set up the directional pointers.
-         //
-         // 
-         // Cells that are on the leftmost column have NULL topLeft pointers.
-         // 
-         // Cells that are on the rightmost column have NULL topRight pointers.
-         // 
-         // Cells that are a part of mBlackBackRow have NULL bottomLeft and
-         // bottomRight pointers.
-         // 
-         // Cells that are a part of mWhiteBackRow have NULL topLeft and
-         // topRight pointers.
-         // 
-         // For all other Cells, Cells have no NULL direction pointers.
+         // Set up the directional pointers for mCells.  GetCell() 
+         // automatically returns NULL for any out of bounds values.
+         cell->topLeft = GetCell(row-1, col+1);
+         cell->topRight = GetCell(row+1,col+1);
+         cell->bottomLeft = GetCell(row-1, col-1);
+         cell->bottomRight = GetCell(row-1, col+1);
 
-
-
-
+         
       }
    }
 

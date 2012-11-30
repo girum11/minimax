@@ -107,22 +107,28 @@ protected:
 //    GetCell('H', 8);
 //    GetCell('A', 1);
 //    GetCell('F', 6);
-   static inline Cell *GetCell(char row, int col) {
-      // Out of bounds assertion
-      assert(row >= 'A' && row <= 'H' && col >= 1 && col <= 8);
+   // 
+   // Returns NULL if parameters are invalid
+   static inline Cell *GetCell(char row, unsigned col) {
+      // Out of bounds
+      if (row < 'A' || row > 'H' || col < 1 || col > 8) {
+         return NULL;
+      }
 
       // Reduce the inputted characters to their numerical form
       // (I drew up a diagram of this in my binder)
       row -= 'A';
       col -= 1;
       
-      // Invalid square assertion [the operator=(string) should've caught
-      // that before flow of control gets here].  Row and Col must either 
-      // both be odd or both be even to be valid.
-      assert((IsEven(row) && IsEven(col)) || (IsOdd(row) && IsOdd(col)));
+      // Invalid square.  Row and Col must either both be odd or both be even 
+      // to be valid.
+      if (!((IsEven(row) && IsEven(col)) || (IsOdd(row) && IsOdd(col)))) {
 
-      int offset = (row*kDim) + (col/2);
-      std::cout << "GetCell() returns offset: " << offset << std::endl << std::endl;
+         return NULL;
+      }
+
+//       int offset = (row*kDim) + (col/2);
+//       std::cout << "GetCell() returns offset: " << offset << std::endl << std::endl;
 
       return mCells + (row*kDim) + (col/2);
    }
