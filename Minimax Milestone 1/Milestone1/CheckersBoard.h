@@ -107,7 +107,7 @@ protected:
 //    GetCell('H', 8);
 //    GetCell('A', 1);
 //    GetCell('F', 6);
-   static inline Cell *GetCell(int row, int col) {
+   static inline Cell *GetCell(char row, int col) {
       // Out of bounds assertion
       assert(row >= 'A' && row <= 'H' && col >= 1 && col <= 8);
 

@@ -39,8 +39,8 @@ void CheckersBoard::StaticInit() {
 
    
    // Initialize mCells, mBlackBackRow and mWhiteBackRow
-   for (row = 'A'; row < 'H'; row += 2) {
-      for (col = 1; col < kWidth; col += 2, nextCell++) {
+   for (row = 'A'; row <= 'H'; row ++) {
+      for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2, nextCell++) {
       
          // Initialize cell->mask
          cell = mCells + nextCell;
