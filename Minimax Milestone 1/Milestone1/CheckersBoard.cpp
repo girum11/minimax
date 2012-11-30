@@ -11,10 +11,8 @@ using namespace std;
 
 
 /************************************************************************/
-/* Initialize static member datum                                       */
+/* Initialize static member datum here                                  */
 /************************************************************************/
-
-
 BoardClass CheckersBoard::mClass("CheckersBoard",
                                  &CreateCheckersBoard,
                                  "Checkers",
@@ -22,13 +20,25 @@ BoardClass CheckersBoard::mClass("CheckersBoard",
                                  &CheckersDlg::mClass,
                                  &CheckersBoard::SetOptions,
                                  &CheckersBoard::GetOptions);
+// The C++ definition here isn't required in C++11, which I'm using.
+// Put it there anyways to force the "static block" to run.
+CheckersBoard::CheckersBoardInitializer CheckersBoard::mInitializer;
 
-CheckersBoard::CheckersBoard() : mNextMove(mBPiece) {
+void CheckersBoard::StaticInit() {
+   // TODO: Go back and initialize all of your static data here
+   cout << "Static init called!" << endl;
+
+
+
+}
+
+
+
+CheckersBoard::CheckersBoard() : mWhoseMove(kBPiece) {
    // Just to make sure that I'm covering all my bases with member datum
    assert(mMoveHist.size() == 0);
 
-   // TODO: Initialize mWhite, mBlack and mKings
-
+   // TODO: Go back and initialize all of your nonstatic data here
 
 }
 

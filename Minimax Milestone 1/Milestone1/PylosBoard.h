@@ -196,7 +196,7 @@ protected:
    // [Staley] Add possible nested class and member datum to force StaticInit call.
    struct PylosBoardInitializer {
       PylosBoardInitializer() {
-         StaticInit();
+         PylosBoard::StaticInit();
       }
    };
    static PylosBoardInitializer mInitializer;
