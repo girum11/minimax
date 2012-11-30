@@ -14,8 +14,52 @@
 // Add more includes, possibly, but not board-specific ones
 using namespace std;
 
-void printList(list<Board::Move *> *list) {
-   
+// Prints a list, but does NOT delete it when it's done.
+void PrintList(const list<const Board::Move *> *moves) {
+
+   // If the list is empty, then drop what you're doing and don't
+   // print the endl in this *if* block, or the required endl for
+   // each turn.  To make up for the required endl though, print one
+   // more out.
+   //
+   // POST-REFACTOR:  No longer need to compensate for the endl that you
+   // didn't print, since you didn't skip the rest of the turn.
+   if (moves->size() == 0) {
+      // cout << endl;
+      return;
+   }
+
+   list<const Board::Move *>::const_iterator listIter;
+
+   // Figure out the max move length
+   unsigned maxCharLength = 0;
+   for (listIter = moves->begin(); listIter != moves->end(); listIter++) {
+      string moveString = (string) **listIter;
+               
+      if (moveString.size() > maxCharLength) {
+         maxCharLength = moveString.size();
+      }
+   }
+
+   // Print out all the moves
+   unsigned col = 1;
+   unsigned MAX_COLUMNS = 80 / (maxCharLength + 1);
+   for (listIter = moves->begin(); listIter != moves->end(); listIter++) {
+      // If adding this next move puts you over LINE_LENGTH,
+      // then start a newline
+      //cout << "++col * maxCharLength = " << ((col+1)*maxCharLength) << " -- ";
+      if (col > MAX_COLUMNS) {
+         //cout << "END OF LINE!!" << endl;
+         cout << endl;
+         col = 1;
+      }
+               
+      string moveString = (string) **listIter;
+      cout << left << setw(maxCharLength) << moveString << " ";
+
+      col++;
+   }
+   cout << endl;
 }
 
 int main(int argc, char **argv) {
@@ -97,53 +141,63 @@ int main(int argc, char **argv) {
 
 				// Print out all possible moves
 				cout << "\nAll Moves: \n";
-
-            assert(allMoves.size() == 0);
 				board->GetAllMoves(&allMoves);
 
-            // If the list is empty, then drop what you're doing and don't
-            // print the endl in this *if* block, or the required endl for
-            // each turn.  To make up for the required endl though, print one
-            // more out.
-            if (allMoves.size() == 0) {
-               cout << endl;
-               continue;
+            PrintList((std::list<const Board::Move *> *)&allMoves);
+            
+            // TODO: Refactor this out.
+            // Clean up after your GetAllMoves() call
+            for (list<Board::Move *>::iterator listIter =  allMoves.begin();
+             listIter != allMoves.end(); listIter++) {
+                delete *listIter;
             }
 
-				list<Board::Move *>::const_iterator listIter;
-
-            // Figure out the max move length
-            unsigned maxCharLength = 0;
-            for (listIter = allMoves.begin(); listIter != allMoves.end(); listIter++) {
-               string moveString = (string) **listIter;
-               
-               if (moveString.size() > maxCharLength) {
-                  maxCharLength = moveString.size();
-               }
-            }
-
-            // Print out all the moves
-            unsigned col = 1;
-            unsigned MAX_COLUMNS = 80 / (maxCharLength + 1);
-				for (listIter = allMoves.begin(); listIter != allMoves.end(); listIter++) {
-					// If adding this next move puts you over LINE_LENGTH,
-               // then start a newline
-               //cout << "++col * maxCharLength = " << ((col+1)*maxCharLength) << " -- ";
-               if (col > MAX_COLUMNS) {
-                  //cout << "END OF LINE!!" << endl;
-                  cout << endl;
-                  col = 1;
-               }
-               
-               string moveString = (string) **listIter;
-               cout << left << setw(maxCharLength) << moveString << " ";
-
-               // Clean up after your GetAllMoves() call
-               delete *listIter;
-               col++;
-            }
-            cout << endl;
             allMoves.clear();
+
+// 
+//             // If the list is empty, then drop what you're doing and don't
+//             // print the endl in this *if* block, or the required endl for
+//             // each turn.  To make up for the required endl though, print one
+//             // more out.
+//             if (allMoves.size() == 0) {
+//                cout << endl;
+//                continue;
+//             }
+// 
+// 				list<Board::Move *>::const_iterator listIter;
+// 
+//             // Figure out the max move length
+//             unsigned maxCharLength = 0;
+//             for (listIter = allMoves.begin(); listIter != allMoves.end(); listIter++) {
+//                string moveString = (string) **listIter;
+//                
+//                if (moveString.size() > maxCharLength) {
+//                   maxCharLength = moveString.size();
+//                }
+//             }
+// 
+//             // Print out all the moves
+//             unsigned col = 1;
+//             unsigned MAX_COLUMNS = 80 / (maxCharLength + 1);
+// 				for (listIter = allMoves.begin(); listIter != allMoves.end(); listIter++) {
+// 					// If adding this next move puts you over LINE_LENGTH,
+//                // then start a newline
+//                //cout << "++col * maxCharLength = " << ((col+1)*maxCharLength) << " -- ";
+//                if (col > MAX_COLUMNS) {
+//                   //cout << "END OF LINE!!" << endl;
+//                   cout << endl;
+//                   col = 1;
+//                }
+//                
+//                string moveString = (string) **listIter;
+//                cout << left << setw(maxCharLength) << moveString << " ";
+// 
+//                // Clean up after your GetAllMoves() call
+//                delete *listIter;
+//                col++;
+//             }
+//             cout << endl;
+//             allMoves.clear();
 			} else if (command.compare("enterMove") == 0) {
             getline(cin, cArg);
 
@@ -235,12 +289,13 @@ int main(int argc, char **argv) {
 
          } else if (command.compare("showMoveHist") == 0) {
             cout << "\nMove History: " << endl;
-            const list<const Board::Move *> moveHist = board->GetMoveHist();
-            for (list<const Board::Move *>::const_iterator iter = moveHist.begin();
-             iter != moveHist.end(); iter++) {
-                cout << (string) **iter << ' ';
-            }
-            cout << endl;
+            const list<const Board::Move *> moveHist(board->GetMoveHist());
+//             for (list<const Board::Move *>::const_iterator iter = moveHist.begin();
+//              iter != moveHist.end(); iter++) {
+//                 cout << (string) **iter << ' ';
+//             }
+//             cout << endl;
+            PrintList(&moveHist);
          } else if (command.compare("compareKeys") == 0) {
             cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
             cin >> cArg;
