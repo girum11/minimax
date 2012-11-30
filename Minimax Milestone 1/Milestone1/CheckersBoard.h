@@ -1,6 +1,7 @@
 #ifndef CHECKERSBOARD_H
 #define CHECKERSBOARD_H
 
+#include <assert.h>
 #include "Board.h"
 #include "MyLib.h"
 
@@ -53,8 +54,7 @@ public:
 
 protected:
    
-   // kDim is equal to the board's Cell length divided by 2 -- which is the
-   // number of pieces you can fit on a single row/column of the board.
+   // kDim is equal to vertical height of the board, measured in Cells.
    enum { kDim = 4 };
 
    typedef ulong Set;
@@ -78,8 +78,29 @@ protected:
    std::istream &Read(std::istream &);
    std::ostream &Write(std::ostream &) const;
 
-   static inline Cell *GetCell(int row, int col) {
+   // Quick helper functions for GetCell()
+   static inline bool IsEven(char num) { return num % 2; }
+   static inline bool IsOdd(char num) { return !IsEven(num); }
+
+   static inline Cell *GetCell(char row, char col) {
+      // Out of bounds assertion
+      assert(row >= 'A' && row <= 'H' && col >= 1 && col <= 8);
+
+      // Reduce the inputted characters to their numerical form
+      // (I drew up a diagram of this in my binder)
+      row -= 'A';
+      col -= 1;
       
+      // Invalid square assertion [the operator=(string) should've caught
+      // that before flow of control gets here].
+      //
+      // Row and Col must either both be odd or both be even to be valid.
+      assert((IsEven(row) && IsEven(col)) || (IsOdd(row) && IsOdd(col)));
+
+      std::cout << "GetCell(" << row+'A' << col+1 << ") returns element #"
+         << (kDim*row) + col << std::endl;
+
+      return mCells + (kDim*row) + col;
    }
 
 

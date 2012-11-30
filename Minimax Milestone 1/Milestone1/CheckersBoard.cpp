@@ -31,16 +31,40 @@ CheckersBoard::CheckersBoardInitializer CheckersBoard::mInitializer;
 
 void CheckersBoard::StaticInit() {
    Cell *cell;
-   int row = 0, col = 0, nextCell = 0;
+   char row = 'A', col = 1;
+   int nextCell = 0;
    // TODO: Go back and initialize all of your static data here
 
+
+   
+   // Quick test of GetCell()
+   //
+   // Test out of bounds assertion.
+   //    GetCell(H9) -- number too big
+   //    GetCell(G0) -- number too small
+   // Need 100% coverage on invalid square assertion
+   //   GetCell(A6) -- even row, odd col
+   //   GetCell(B5) -- odd row, even col
+   // 
+   // GetCell(A5) should return 2
+   // GetCell(H8) should return 31
+   // GetCell(A1) should return 0
+   // GetCell(F6) should return 22
+
+   
+
+
+
    // Initialize mCells, mBlackBackRow and mWhiteBackRow
-   for (row = 0; row < kDim; row++) {
-      for (col = 0; col < kDim; col++, nextCell++) {
+   for (row = 'A'; row < 'H'; row += 2) {
+      for (col = 1; col < kDim; col += 2, nextCell++) {
       
          // Initialize cell->mask
          cell = mCells + nextCell;
          cell->mask = 1 << nextCell;
+
+
+
 
          // TODO: Set up the directional pointers.
          //
