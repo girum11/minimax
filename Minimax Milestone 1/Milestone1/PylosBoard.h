@@ -94,9 +94,9 @@ protected:
    
    struct Cell {
       int level;     // [Staley] Level the cell is on, numbering from 0 (bottom)
-      ulong mask;    // [Staley] Mask with this cell's bit turned on
-      ulong subs;    // [Staley] Mask having 1-bits for the cells supporting this one
-      ulong sups;    // [Staley] Mask having 1-bits for the cells supported by this one
+      Set mask;    // [Staley] Mask with this cell's bit turned on
+      Set subs;    // [Staley] Mask having 1-bits for the cells supporting this one
+      Set sups;    // [Staley] Mask having 1-bits for the cells supported by this one
       int setCount;  // [Staley] Number of alignments this cell might be part of
       Set sets[kSetsPerCell];  // [Staley] Masks for the cells in each alignment
       Cell *below[kSqr];       // [Staley] Direct pointers to the 4 supporting cells
@@ -150,7 +150,7 @@ protected:
    }
    
    // [Staley] Return a bitmask with a 1-bit for (row, col, lvl), or 0 if out of bounds.
-   static inline ulong GetMask(int row, int col, int lvl) {
+   static inline Set GetMask(int row, int col, int lvl) {
       return InBounds(row, col, lvl) ? GetCell(row, col, lvl)->mask : 0;
    }
    
@@ -225,8 +225,8 @@ protected:
    // [Staley] a black marble.  No-marble cells are 0 in both masks.  Bits are assigned
    // [Staley] to cells in level-major, row submajor order, from LSB to MSB.  Top
    // [Staley] two bits are thus unused
-   mutable ulong mWhite;
-   mutable ulong mBlack;
+   mutable Set mWhite;
+   mutable Set mBlack;
    
    int mWhoseMove;    // [Staley] Whose move currently
    int mWhiteReserve; // [Staley] How many marbles has white in his reserve
@@ -262,7 +262,7 @@ private:
    // of this row, and then step down to the next row and iterate through
    // to the end as normal.
    void FindFreeMarbles(std::set<std::pair<short,short> > *freeMarbles, 
-    ulong *playerMarbles, unsigned short startRow = 0, unsigned short startCol = 0) const {
+    Set *playerMarbles, unsigned short startRow = 0, unsigned short startCol = 0) const {
       // Quick sanity check
       assert(freeMarbles && freeMarbles->size() == 0);
 
@@ -286,7 +286,7 @@ private:
    // sup[port] are NOT present in the current board -- black OR white.
    // Also, the freeMarble to take back must belong to that player.
    void InsertIfFree(std::set<std::pair<short,short> > *freeMarbles,
-    ulong *playerMarbles, int row, int col) const {
+    Set *playerMarbles, int row, int col) const {
        Cell *marble = mSpots[row][col].top;
 
        if (marble && (marble->mask & *playerMarbles)
