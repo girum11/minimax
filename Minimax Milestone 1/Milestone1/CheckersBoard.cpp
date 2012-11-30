@@ -11,8 +11,13 @@ using namespace std;
 
 
 /************************************************************************/
-/* Initialize static member datum here                                  */
+/* Declare/initialize static member datum here                          */
 /************************************************************************/
+CheckersBoard::Rules CheckersBoard::mRules;
+CheckersBoard::Cell CheckersBoard::mCells[kNumCells];
+ulong CheckersBoard::mBlackBackRow;
+ulong CheckersBoard::mWhiteBackRow;
+
 BoardClass CheckersBoard::mClass("CheckersBoard",
                                  &CreateCheckersBoard,
                                  "Checkers",
@@ -25,26 +30,60 @@ BoardClass CheckersBoard::mClass("CheckersBoard",
 CheckersBoard::CheckersBoardInitializer CheckersBoard::mInitializer;
 
 void CheckersBoard::StaticInit() {
+   Cell *cell;
+   int row = 0, col = 0, nextCell = 0;
    // TODO: Go back and initialize all of your static data here
-   cout << "Static init called!" << endl;
+
+   // Initialize mCells, mBlackBackRow and mWhiteBackRow
+   for (row = 0; row < kDim; row++) {
+      for (col = 0; col < kDim; col++, nextCell++) {
+      
+         // Initialize cell->mask
+         cell = mCells + nextCell;
+         cell->mask = 1 << nextCell;
+
+         // TODO: Set up the directional pointers.
+         //
+         // 
+         // Cells that are on the leftmost column have NULL topLeft pointers.
+         // 
+         // Cells that are on the rightmost column have NULL topRight pointers.
+         // 
+         // Cells that are a part of mBlackBackRow have NULL bottomLeft and
+         // bottomRight pointers.
+         // 
+         // Cells that are a part of mWhiteBackRow have NULL topLeft and
+         // topRight pointers.
+         // 
+         // For all other Cells, Cells have no NULL direction pointers.
 
 
+
+
+      }
+   }
 
 }
 
 
 
-CheckersBoard::CheckersBoard() : mWhoseMove(kBPiece) {
+CheckersBoard::CheckersBoard() : mWhoseMove(kBlack) {
    // Just to make sure that I'm covering all my bases with member datum
    assert(mMoveHist.size() == 0);
 
    // TODO: Go back and initialize all of your nonstatic data here
+   
+
+
 
 }
 
 CheckersBoard::~CheckersBoard() {
-   // Handle anything you need to in the destructor
-
+   // Clear out mMoveHistory
+   list<Move *>::iterator itr;
+   for (itr = mMoveHist.begin(); itr != mMoveHist.end(); itr++)
+      delete *itr;
+   mMoveHist.clear();
 }
 
 long CheckersBoard::GetValue() const {
@@ -54,6 +93,9 @@ long CheckersBoard::GetValue() const {
 void CheckersBoard::ApplyMove(Move *move) {
 
 
+
+
+   assert(mBlackSet & mWhiteSet & mKingSet == 0);
 }
 
 void CheckersBoard::UndoLastMove() {

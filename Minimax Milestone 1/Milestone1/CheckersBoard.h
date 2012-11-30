@@ -10,19 +10,16 @@ class CheckersBoard : public Board {
 public:
    friend class CheckersMove;
 
-   // Don't rename these -- KWPiece and kBPiece are member datum names
-   enum { kWPiece = -1, kBPiece = 1 };
-   enum { kStartingPieces = 12, kStartingBackPieces = 4 };
+   enum { kWhite = -1, kBlack = 1, kKing = 7 };
+   enum { kNumCells = 32, kStartingPieces = 12, kStartingBackPieces = 4 };
 
    // Running Clint's version of this says the following:
    // "(Piece weight is always 100)"
    static const int pieceWgt = 100;
-
-   // TODO: Put any inner classes you want here
    struct Rules {
-      int kingWgt;
-      int backRowWgt;
-      int moveWgt;
+      int kingWgt; // Weight of each King
+      int backRowWgt; // Weight of any back row pieces
+      int moveWgt; // Weight of it being your turn
 
       Rules() : kingWgt(300), backRowWgt(100), moveWgt(20) {}
    };
@@ -35,7 +32,7 @@ public:
    void UndoLastMove();
    void GetAllMoves(std::list<Move *> *) const;
    Move *CreateMove() const;
-   int GetWhoseMove() const {return mWhoseMove == kWPiece;}
+   int GetWhoseMove() const {return mWhoseMove == kWhite;}
    const std::list<const Move *> &GetMoveHist() const 
     {return *(std::list<const Move *> *)&mMoveHist;}
 
@@ -56,12 +53,34 @@ public:
 
 protected:
    
-   enum {};
+   // kDim is equal to the board's Cell length divided by 2 -- which is the
+   // number of pieces you can fit on a single row/column of the board.
+   enum { kDim = 4 };
 
    typedef ulong Set;
 
+   struct Cell {
+      Set mask; // Mask with this cell's bit turned on
+
+      // Pointer to the cell to the top left of this one, or NULL
+      Cell *topLeft; 
+
+      // Pointer to the cell to the top right of this one, or NULL
+      Cell *topRight; 
+      
+      // Pointer to the cell to the bottom left of this one, or NULL
+      Cell *bottomLeft;
+      
+      // Pointer to the cell to the bottom right of this one, or NULL
+      Cell *bottomRight;
+   };
+
    std::istream &Read(std::istream &);
    std::ostream &Write(std::ostream &) const;
+
+   static inline Cell *GetCell(int row, int col) {
+      
+   }
 
 
    // Static member datum goes here
@@ -72,8 +91,11 @@ protected:
    };
    static CheckersBoardInitializer mInitializer;
 
-   static Set mBlackBackRow;
-   static Set mWhiteBackRow;
+   static Rules mRules; // The static rules object for CheckersBoard
+
+   static Cell mCells[kNumCells]; // One Cell for each cell
+   static Set mBlackBackRow; // Static bitmask of the cells of Black's back row
+   static Set mWhiteBackRow; // Static bitmask of the cells of White's back row
 
    // Bitmasks indicating which cells contain white pieces, black pieces,
    // and Kings.  No-marble cells are 0 in both masks.  Bits are assigned to
