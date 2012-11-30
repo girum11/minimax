@@ -29,17 +29,21 @@ void CheckersMove::operator delete(void *p) {
 bool CheckersMove::operator==(const Board::Move &rhs) const {
    const CheckersMove &oRhs = dynamic_cast<const CheckersMove &>(rhs);
 
-   return mRow == oRhs.mRow && mCol == oRhs.mCol;
+   return mFrom == oRhs.mFrom && mTo == oRhs.mTo;
 }
 
 bool CheckersMove::operator<(const Board::Move &rhs) const {
    const CheckersMove &oRhs = dynamic_cast<const CheckersMove &>(rhs);
 
-   return mRow < oRhs.mRow || mRow == oRhs.mRow && mCol < oRhs.mCol;
+   return mFrom < oRhs.mFrom || mFrom == oRhs.mFrom && mTo < oRhs.mTo;
 }
 
 CheckersMove::operator string() const {
    // TODO: Write this method out.  It's not as trivial as Othello though.
+
+   // TODO: Be sure to handle the case when the move is equal to the
+   // NULL_MOVE macro.  Clint's executable has a blank line output for
+   // the first move in the Checkers game.
 }
 
 void CheckersMove::operator=(const string &src) {

@@ -7,7 +7,6 @@
 #include "MyLib.h"
 #include "BasicKey.h"
 
-////////////////////////////////////////////////////////////////////////////////
 using namespace std;
 
 short OthelloBoard::mWeights[dim][dim] = {
@@ -35,8 +34,7 @@ BoardClass OthelloBoard::mClass("OthelloBoard",
                                 &OthelloBoard::SetOptions,
                                 &OthelloBoard::GetOptions);
 
-OthelloBoard::OthelloBoard() : mNextMove(mBPiece), mPassCount(0), mWeight(0)
-{
+OthelloBoard::OthelloBoard() : mNextMove(mBPiece), mPassCount(0), mWeight(0) {
    int row, col;
 
    for (row = 0; row < dim; row++)
@@ -48,14 +46,12 @@ OthelloBoard::OthelloBoard() : mNextMove(mBPiece), mPassCount(0), mWeight(0)
    mRoster.insert(this);
 }
 
-OthelloBoard::~OthelloBoard() 
-{
+OthelloBoard::~OthelloBoard() {
    ClearHistory();
    mRoster.erase(this);
 }
 
-long OthelloBoard::GetValue() const
-{
+long OthelloBoard::GetValue() const {
    int row, col, total = 0;
     
    if (mPassCount < 2)  // Game not over
@@ -146,8 +142,7 @@ void OthelloBoard::UndoLastMove() {
    delete om;
 }
 
-void OthelloBoard::GetAllMoves(list<Move *> *moves) const
-{
+void OthelloBoard::GetAllMoves(list<Move *> *moves) const {
    int testRow, testCol, row, col, dNdx, steps;
    Direction *dir;
 
@@ -182,13 +177,11 @@ void OthelloBoard::GetAllMoves(list<Move *> *moves) const
       moves->push_back(new OthelloMove(-1, -1));
 }
 
-Board::Move *OthelloBoard::CreateMove() const
-{
+Board::Move *OthelloBoard::CreateMove() const {
    return new OthelloMove(0, 0);
 }
 
-Board *OthelloBoard::Clone() const
-{
+Board *OthelloBoard::Clone() const {
    OthelloBoard *rtn = new OthelloBoard(*this);
    list<Move *>::iterator itr;
 

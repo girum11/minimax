@@ -4,17 +4,25 @@
 #include <iostream>
 #include <list>
 #include <vector>
+#include <cctype>
+#include <assert.h>
 #include "Board.h"
 
+#define NULL_MOVE CharPair(kNull, kNull)
 
 class CheckersMove : public Board::Move {
 public:
+
+   enum { kNull = -1 };
+
+   typedef pair<char,char> CharPair;
 
    // TODO: Inner classes go here if you need them.
 
    friend class CheckersBoard;
 
-   CheckersMove(char row = 0, char col = 0) : mRow(row), mCol(col) {
+   CheckersMove(CharPair from = NULL_MOVE, CharPair to = NULL_MOVE) : 
+    mFrom(from), mTo(to) {
       AssertMe();
    }
    virtual ~CheckersMove() {}
@@ -39,14 +47,24 @@ protected:
 
    enum {};
 
-   char mRow;
-   char mCol;
+   CharPair mFrom;
+   CharPair mTo;
 
    static std::vector<CheckersMove *> mFreeList;
 
-   // TODO: Write the equivalent of "IAmSane()" for a CheckersMove.
    void AssertMe() {
+      // Ensure that this move is valid.
 
+      // If it's a null move, then don't bounce it.
+      if (this->mFrom.first == kNull
+       && this->mFrom.second == kNull
+       && this->mTo.first == kNull
+       && this->mTo.second == kNull) {
+         return;
+      }
+
+      assert(isalpha(mFrom.first) && isdigit(mFrom.second));
+      assert(isalpha(mTo.first) && isdigit(mTo.second));
    }
 
 };

@@ -10,7 +10,8 @@ class CheckersBoard : public Board {
 public:
    friend class CheckersMove;
 
-   enum {mWhite = -1, mBlack = 1};
+   // Don't rename these -- mWhite and mBlack are member datum names
+   enum {mWPiece = -1, mBPiece = 1};
 
    // TODO: Put any inner classes you want here
 
@@ -44,7 +45,6 @@ protected:
 
    std::istream &Read(std::istream &);
    std::ostream &Write(std::ostream &) const;
-
 
 
    static BoardClass mClass;
