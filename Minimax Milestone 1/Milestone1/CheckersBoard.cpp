@@ -77,7 +77,7 @@ CheckersBoard::CheckersBoard() : mWhoseMove(kBlack),
 
 
    // Fill up mBlackSet and mWhiteSet
-   for (row = 'A'; row <= 'H'; row ++) {
+   for (row = 'A'; row <= 'H'; row++) {
       for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2) {
 
          // Fill up initial mBlackSet

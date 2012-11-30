@@ -9,10 +9,15 @@ class CheckersMove;
 
 class CheckersBoard : public Board {
 public:
+   static const int kWidth = 8;
+
    friend class CheckersMove;
 
    enum { kWhite = -1, kBlack = 1, kKing = 7 };
-   enum { kNumCells = 32 };
+   // kHeight is equal to vertical height of the board, measured in Cells.
+   // kDim is equal to kHeight / 2 -- the number of actual Cells you can fit
+   // vertically in the board
+   enum { kNumCells = 32, kDim = 4 };
 
    // Running Clint's version of this says the following:
    // "(Piece weight is always 100)"
@@ -33,7 +38,7 @@ public:
    void UndoLastMove();
    void GetAllMoves(std::list<Move *> *) const;
    Move *CreateMove() const;
-   int GetWhoseMove() const {return mWhoseMove == kWhite;}
+   int GetWhoseMove() const {return mWhoseMove;}
    const std::list<const Move *> &GetMoveHist() const 
     {return *(std::list<const Move *> *)&mMoveHist;}
 
@@ -54,10 +59,7 @@ public:
 
 protected:
    
-   // kHeight is equal to vertical height of the board, measured in Cells.
-   // kDim is equal to kHeight / 2 -- the number of actual Cells you can fit
-   // vertically in the board
-   enum { kDim = 4, kWidth = 8 };
+   
    enum { kStartingPieces = 12, kStartingBackPieces = 4 };
 
    typedef ulong Set;
