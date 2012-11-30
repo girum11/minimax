@@ -139,10 +139,11 @@ int main(int argc, char **argv) {
 				view->SetModel(board);
 				view->Draw(cout);
 
-				// Print out all possible moves
+				// Retrieve all possible moves, mutable
 				cout << "\nAll Moves: \n";
 				board->GetAllMoves(&allMoves);
 
+            // Print an immutable version of those moves
             PrintList((std::list<const Board::Move *> *)&allMoves);
             
             // TODO: Refactor this out.

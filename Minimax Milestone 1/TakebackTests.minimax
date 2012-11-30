@@ -202,12 +202,3 @@ PylosBoard::Read() and PylosBoard::Write() tests
 
 *** Ideas for testing Milestone 0: ***
 -- Test for memory leaks using 
-
-------------- All of the above tests work. ------------------
-
-
-enterMove Promote from [1,1] to [2,2] taking [1,1] and [2,2]
-compareMove Promote from [1,1] to [2,2] taking [1,1]
-
-quit
-
