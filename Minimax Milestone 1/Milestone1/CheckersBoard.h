@@ -54,8 +54,10 @@ public:
 
 protected:
    
-   // kDim is equal to vertical height of the board, measured in Cells.
-   enum { kDim = 4 };
+   // kHeight is equal to vertical height of the board, measured in Cells.
+   // kDim is equal to kHeight / 2 -- the number of actual Cells you can fit
+   // vertically in the board
+   enum { kDim = 4, kWidth = 8 };
 
    typedef ulong Set;
 
@@ -82,6 +84,29 @@ protected:
    static inline bool IsEven(char num) { return num % 2; }
    static inline bool IsOdd(char num) { return !IsEven(num); }
 
+
+// // Quick test of GetCell()
+//    //
+//    // Test out of bounds assertion.
+//    //    GetCell(H9) -- number too big
+//    //    GetCell(G0) -- number too small
+//    // Need 100% coverage on invalid square assertion
+//    //   GetCell(A6) -- even row, odd col
+//    //   GetCell(B5) -- odd row, even col
+//    // 
+//    // GetCell(A5) should return 2
+//    // GetCell(H8) should return 31
+//    // GetCell(A1) should return 0
+//    // GetCell(F6) should return 22
+// 
+//    // GetCell('H', 9);  this should assert()
+//    // GetCell('G', 0);  this should assert()
+//    // GetCell('A', 6);  this should assert()
+//    // GetCell('B', 5);  this should assert()
+//    GetCell('A', 5);
+//    GetCell('H', 8);
+//    GetCell('A', 1);
+//    GetCell('F', 6);
    static inline Cell *GetCell(int row, int col) {
       // Out of bounds assertion
       assert(row >= 'A' && row <= 'H' && col >= 1 && col <= 8);

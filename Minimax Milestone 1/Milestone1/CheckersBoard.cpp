@@ -29,6 +29,7 @@ BoardClass CheckersBoard::mClass("CheckersBoard",
 // Put it there anyways to force the "static block" to run.
 CheckersBoard::CheckersBoardInitializer CheckersBoard::mInitializer;
 
+
 void CheckersBoard::StaticInit() {
    Cell *cell;
    char row = 'A', col = 1;
@@ -37,44 +38,15 @@ void CheckersBoard::StaticInit() {
 
 
    
-   // Quick test of GetCell()
-   //
-   // Test out of bounds assertion.
-   //    GetCell(H9) -- number too big
-   //    GetCell(G0) -- number too small
-   // Need 100% coverage on invalid square assertion
-   //   GetCell(A6) -- even row, odd col
-   //   GetCell(B5) -- odd row, even col
-   // 
-   // GetCell(A5) should return 2
-   // GetCell(H8) should return 31
-   // GetCell(A1) should return 0
-   // GetCell(F6) should return 22
-
-   // GetCell('H', 9);  this should assert()
-   // GetCell('G', 0);  this should assert()
-   // GetCell('A', 6);  this should assert()
-   // GetCell('B', 5);  this should assert()
-   GetCell('A', 5);
-   GetCell('H', 8);
-   GetCell('A', 1);
-   GetCell('F', 6);
-
-
-   
-
-
-
    // Initialize mCells, mBlackBackRow and mWhiteBackRow
    for (row = 'A'; row < 'H'; row += 2) {
-      for (col = 1; col < kDim; col += 2, nextCell++) {
+      for (col = 1; col < kWidth; col += 2, nextCell++) {
       
          // Initialize cell->mask
          cell = mCells + nextCell;
          cell->mask = 1 << nextCell;
 
-
-
+         GetCell(row, col);
 
          // TODO: Set up the directional pointers.
          //
