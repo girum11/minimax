@@ -59,7 +59,7 @@ void CheckersBoard::GetAllMoves(list<Move *> *moves) const {
 }
 
 Board::Move *CheckersBoard::CreateMove() const {
-   return new CheckersMove(0,0);
+   return new CheckersMove(NULL_PAIR, NULL_PAIR);
 }
 
 

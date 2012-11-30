@@ -8,20 +8,21 @@
 #include <assert.h>
 #include "Board.h"
 
-#define NULL_MOVE CharPair(kNull, kNull)
+#define NULL_CHAR -1
+#define NULL_PAIR std::pair<char,char>(NULL_CHAR, NULL_CHAR)
 
 class CheckersMove : public Board::Move {
 public:
 
-   enum { kNull = -1 };
+   enum {};
 
-   typedef pair<char,char> CharPair;
+   typedef std::pair<char,char> CharPair;
 
    // TODO: Inner classes go here if you need them.
 
    friend class CheckersBoard;
 
-   CheckersMove(CharPair from = NULL_MOVE, CharPair to = NULL_MOVE) : 
+   CheckersMove(CharPair from, CharPair to) : 
     mFrom(from), mTo(to) {
       AssertMe();
    }
@@ -52,16 +53,12 @@ protected:
 
    static std::vector<CheckersMove *> mFreeList;
 
+
    void AssertMe() {
       // Ensure that this move is valid.
-
-      // If it's a null move, then don't bounce it.
-      if (this->mFrom.first == kNull
-       && this->mFrom.second == kNull
-       && this->mTo.first == kNull
-       && this->mTo.second == kNull) {
-         return;
-      }
+      //
+      // If it's a null move though, don't bounce it.
+      if (this->mFrom == NULL_PAIR && this->mTo == NULL_PAIR) return;
 
       assert(isalpha(mFrom.first) && isdigit(mFrom.second));
       assert(isalpha(mTo.first) && isdigit(mTo.second));
