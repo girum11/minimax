@@ -54,7 +54,7 @@ bool PylosDlg::Run(std::istream &in, std::ostream &out, void *data) {
 void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
  PylosBoard::Rules *rules, void (PylosBoard::Rules::*x)(int)) {
    string inputString("");
-   int inputValue = 0, res = 0;
+   unsigned inputValue = 0, res = 0;
    static const int kTrailingCharLength = 11;
    char trailingChar[kTrailingCharLength] = {'\0'};
    bool inputSuccessfullyRead = false;
@@ -70,7 +70,7 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
             getline(in, inputString);
          } while (inputString == "");
          
-         res = sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
+         res = sscanf(inputString.c_str(), " %4u %1s", &inputValue, trailingChar);
 
          if (res == 0) {
             out << "Badly formatted input\n";

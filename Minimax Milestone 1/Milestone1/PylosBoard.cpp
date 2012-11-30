@@ -628,8 +628,8 @@ istream &PylosBoard::Read(istream &is) {
    Delete();
 
    // Read in the Rules that the board should use.
-   is.read((char *)&mRules, sizeof(mRules));
-   mRules.EndSwap();
+   is.read((char *)&PylosBoard::mRules, sizeof(PylosBoard::mRules));
+   PylosBoard::mRules.EndSwap();
 
    is.read((char *)&mvCount, sizeof(mvCount));
    assert(mvCount != -1);  // sanity check to ensure the read() happened
@@ -645,14 +645,15 @@ istream &PylosBoard::Read(istream &is) {
    return is;
 }
 
-// [Staley] Don't change this.  Make Read conform to it.
-ostream &PylosBoard::Write(ostream &os) const {
-   Rules rules = mRules;
+// Don't change this.  Make Read conform to it.
+ostream &PylosBoard::Write(ostream &os) const
+{
+   Rules rls = mRules;
    list<Move *>::const_iterator itr;
    int mvCount = EndianXfer((int)mMoveHist.size());
 
-   rules.EndSwap();
-   os.write((char *)&rules, sizeof(rules));
+   rls.EndSwap();
+   os.write((char *)&rls, sizeof(rls));
 
    os.write((char *)&mvCount, sizeof(mvCount));
    for (itr = mMoveHist.begin(); itr != mMoveHist.end(); itr++)
@@ -660,6 +661,7 @@ ostream &PylosBoard::Write(ostream &os) const {
 
    return os;
 }
+
 
 // [Staley] Write the two methods GetOptions and SetOptions of PylosBoard, 
 // [Staley] without changing their signature in the PylosBoard.h file.  
@@ -699,7 +701,7 @@ void PylosBoard::SetOptions(const void *opts) {
 
 void PylosBoard::Rules::SetMarble(int val) {
    if (val < 1 || val > 1000)
-      throw BaseException("Marble weight must be between 1 and 1000 inclusive");
+      throw BaseException("Marble weight must be between 1 and 1000 inclusive\n");
 
    this->marbleWgt = val;
 }
@@ -707,7 +709,7 @@ void PylosBoard::Rules::SetMarble(int val) {
 void PylosBoard::Rules::SetLevel(int val) {
    if (val >= this->marbleWgt || val < 0)
       throw BaseException("Level weight must be nonnegative and less than"
-      " marble weight");
+      " marble weight\n");
 
    this->levelWgt = val;
 }
@@ -715,7 +717,7 @@ void PylosBoard::Rules::SetLevel(int val) {
 void PylosBoard::Rules::SetFree(int val) {
    if (val % 2 != 0 || val < 0 || val >= this->marbleWgt)
       throw BaseException("Free weight must be even, nonnegative, and less"
-      " than marble weight");
+      " than marble weight\n");
 
    this->freeWgt = val;
 }

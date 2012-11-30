@@ -55,12 +55,13 @@ bool PylosMove::operator<(const Board::Move &rhs) const
          return false;
       else {
 		  for (unsigned i = 1; i < PylosBoard::kSqr; i++) {
-			  // Same size comparisons
-			  if (mLocs.size() > i && oRhs.mLocs.size() > i && mLocs[i] <= oRhs.mLocs[i])
+			  // If both moves are big enough (recall that size() returns 1 bigger
+           // than the indexes that you can index into), compare this index.
+			  if (mLocs.size() > i && oRhs.mLocs.size() > i && mLocs[i] < oRhs.mLocs[i])
 				  return true;
 			  else if (mLocs.size() > i && oRhs.mLocs.size() > i && mLocs[i] > oRhs.mLocs[i])
 				  return false;
-			  // Different size comparisons
+			  // If one of them is smaller than the other, cut off here
 			  else if (mLocs.size() <= i && oRhs.mLocs.size() > i)
 				  return true;
 			  else if (mLocs.size() > i && oRhs.mLocs.size() <= i)

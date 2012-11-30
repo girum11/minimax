@@ -153,54 +153,8 @@ int main(int argc, char **argv) {
             }
 
             allMoves.clear();
-
-// 
-//             // If the list is empty, then drop what you're doing and don't
-//             // print the endl in this *if* block, or the required endl for
-//             // each turn.  To make up for the required endl though, print one
-//             // more out.
-//             if (allMoves.size() == 0) {
-//                cout << endl;
-//                continue;
-//             }
-// 
-// 				list<Board::Move *>::const_iterator listIter;
-// 
-//             // Figure out the max move length
-//             unsigned maxCharLength = 0;
-//             for (listIter = allMoves.begin(); listIter != allMoves.end(); listIter++) {
-//                string moveString = (string) **listIter;
-//                
-//                if (moveString.size() > maxCharLength) {
-//                   maxCharLength = moveString.size();
-//                }
-//             }
-// 
-//             // Print out all the moves
-//             unsigned col = 1;
-//             unsigned MAX_COLUMNS = 80 / (maxCharLength + 1);
-// 				for (listIter = allMoves.begin(); listIter != allMoves.end(); listIter++) {
-// 					// If adding this next move puts you over LINE_LENGTH,
-//                // then start a newline
-//                //cout << "++col * maxCharLength = " << ((col+1)*maxCharLength) << " -- ";
-//                if (col > MAX_COLUMNS) {
-//                   //cout << "END OF LINE!!" << endl;
-//                   cout << endl;
-//                   col = 1;
-//                }
-//                
-//                string moveString = (string) **listIter;
-//                cout << left << setw(maxCharLength) << moveString << " ";
-// 
-//                // Clean up after your GetAllMoves() call
-//                delete *listIter;
-//                col++;
-//             }
-//             cout << endl;
-//             allMoves.clear();
 			} else if (command.compare("enterMove") == 0) {
             getline(cin, cArg);
-
 
             // Make this move point to a new object.  Use a temporary
             // move in between as to prevent changing the default
@@ -225,6 +179,7 @@ int main(int argc, char **argv) {
             ifstream in(cArg.c_str());
             assert(in.is_open());
             in >> *board;
+
          } else if (command.compare("saveMove") == 0) {
             cin >> cArg;
             ofstream out(cArg.c_str());
@@ -290,11 +245,6 @@ int main(int argc, char **argv) {
          } else if (command.compare("showMoveHist") == 0) {
             cout << "\nMove History: " << endl;
             const list<const Board::Move *> moveHist(board->GetMoveHist());
-//             for (list<const Board::Move *>::const_iterator iter = moveHist.begin();
-//              iter != moveHist.end(); iter++) {
-//                 cout << (string) **iter << ' ';
-//             }
-//             cout << endl;
             PrintList(&moveHist);
          } else if (command.compare("compareKeys") == 0) {
             cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
