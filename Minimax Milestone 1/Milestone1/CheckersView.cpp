@@ -19,5 +19,5 @@ void CheckersView::Draw(ostream &out) {
 
 
 
-   out << rtn;
+   out << "sup nigga";
 }

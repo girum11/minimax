@@ -6,8 +6,7 @@ using namespace std;
 
 vector<OthelloMove *> OthelloMove::mFreeList;
 
-void *OthelloMove::operator new(size_t sz)
-{
+void *OthelloMove::operator new(size_t sz) {
    void *temp;
 
    if (mFreeList.size()) {
@@ -21,34 +20,29 @@ void *OthelloMove::operator new(size_t sz)
    return temp;
 }
 
-void OthelloMove::operator delete(void *p)
-{
+void OthelloMove::operator delete(void *p) {
    mFreeList.push_back((OthelloMove *)p);
 
    mOutstanding--;
 }
 
-bool OthelloMove::operator==(const Board::Move &rhs) const
-{
+bool OthelloMove::operator==(const Board::Move &rhs) const {
    const OthelloMove &oRhs = dynamic_cast<const OthelloMove &>(rhs);
 
    return mRow == oRhs.mRow && mCol == oRhs.mCol;
 }
 
-bool OthelloMove::operator<(const Board::Move &rhs) const
-{
+bool OthelloMove::operator<(const Board::Move &rhs) const {
    const OthelloMove &oRhs = dynamic_cast<const OthelloMove &>(rhs);
 
    return mRow < oRhs.mRow || mRow == oRhs.mRow && mCol < oRhs.mCol;
 }
 
-OthelloMove::operator string() const
-{
+OthelloMove::operator string() const {
    return mRow == -1 && mCol == -1 ? string("Pass") : FString("[%d, %d]", mRow, mCol);
 }
 
-void OthelloMove::operator=(const string &src)
-{
+void OthelloMove::operator=(const string &src) {
    unsigned start = src.find_first_not_of(" \t"), end = src.find_last_not_of(" \t");
    char tkn, tkn2;
    short tRow, tCol;
@@ -68,13 +62,11 @@ void OthelloMove::operator=(const string &src)
    mCol = (char)tCol;
 }
 
-Board::Move *OthelloMove::Clone() const 
-{
+Board::Move *OthelloMove::Clone() const {
    return new OthelloMove(*this);
 }
 
-istream &OthelloMove::Read(istream &is)
-{
+istream &OthelloMove::Read(istream &is) {
    char size, count, dirNum;
    
    mFlipSets.clear();
@@ -90,8 +82,7 @@ istream &OthelloMove::Read(istream &is)
    return is;
 }
 
-ostream &OthelloMove::Write(ostream &os) const
-{
+ostream &OthelloMove::Write(ostream &os) const {
    char count, dirNum, size = mFlipSets.size();
    FlipList::const_iterator itr;
 
