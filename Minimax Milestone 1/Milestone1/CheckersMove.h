@@ -4,7 +4,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
-#include <cctype>
+#include "MyLib.h"
 #include <assert.h>
 #include "Board.h"
 
@@ -62,7 +62,8 @@ protected:
              return;
           }
           
-         assert(isalpha(locIter->first) && isdigit(locIter->second));
+         assert(InRange<char>('A', locIter->first, 'I'));
+         assert(InRange<unsigned int>(1, locIter->second, 9));
       }
    }
 

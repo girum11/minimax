@@ -1,6 +1,7 @@
 #include "MyLib.h"
 #include "CheckersMove.h"
 #include <iostream>
+#include <cctype>
 #include <algorithm>
 
 using namespace std;
@@ -79,7 +80,7 @@ void CheckersMove::operator=(const string &src) {
 
    // Read all the rest of the locations of this move (it can chain jumps in
    // the case of a multiple jump).
-   for (int index = 1; !readAllLocations; index++) {
+   for (index = 1; !readAllLocations && copy.size(); index++) {
 
       // If you need to, resize the vector by a chunk of memory.
       if (index >= locs.capacity()) {
@@ -103,19 +104,22 @@ void CheckersMove::operator=(const string &src) {
       }
       // Otherwise, you read a partial move (or had a bad arrow token).
       else if (res != 3 || arrow[0] != '-' || arrow[1] != '>') {
-          throw BaseException(FString("Bad Checkers move: %s", copy.c_str()));
+          throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
       }
    }
 
-   // Verify that none of the Locations are out of bounds
-   for (LocVector::const_iterator locIter = locs.begin(); 
+   for (LocVector::iterator locIter = locs.begin(); 
     locIter != locs.end(); locIter++) {
 
+      // Ensure that the letters are uppercase
+      locIter->first = toupper(locIter->first);
+      
+      // Verify that none of the Locations are out of bounds
       // TODO: Magic number
       if (!InRange<char>('A', locIter->first, 'I') ||
        !InRange<unsigned int>(1, locIter->second, 9)) {
           throw BaseException(FString("Out of bounds Checkers move: %s", 
-           copy.c_str()));
+           src.c_str()));
       }
    }
 
