@@ -109,11 +109,33 @@ long CheckersBoard::GetValue() const {
 }
 
 void CheckersBoard::ApplyMove(Move *move) {
+   CheckersMove *castedMove = dynamic_cast<CheckersMove *>(move);
+   assert(castedMove != NULL);
+
+   int jumpedPieces = 0; // The number of pieces that move "jumps"
+   
+   // Remove the piece from its original location
+
+   // For each of destination locations of mLocs, assert that those locs 
+   // aren't already taken. (sanity check).  Also assert that non-king pieces
+   // aren't moving backwards.
+
+   // First, check if this move is not a "jump move".  If it's not, then
+   // simply add the piece to the final destination and return.
+
+   // Otherwise, this IS a jump move.  Assume that all mLocs must jump over 
+   // a piece to be valid.  Assert that they all "jump over" a piece (that
+   // is, assert that each of the pieces that they jump is occupied by the other
+   // player and not yourself).
+
+   // Add the final destination piece to its correct bitmask.
+
+   // If you at any point you jumped into the back row, then assert 
+   // that you STOPPED MOVING.  Also, add the piece to the king set.
 
 
-
-
-   assert(mBlackSet & mWhiteSet & mKingSet == 0);
+   // Assert that the two bitmasks don't have any pieces in common.
+   assert(mBlackSet & mWhiteSet == 0);
 }
 
 void CheckersBoard::UndoLastMove() {

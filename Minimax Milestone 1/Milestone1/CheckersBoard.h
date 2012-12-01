@@ -104,6 +104,7 @@ protected:
    std::istream &Read(std::istream &);
    std::ostream &Write(std::ostream &) const;
 
+
    // Quick helper functions for GetCell()
    static inline bool IsEven(char num) { return num % 2; }
    static inline bool IsOdd(char num) { return !IsEven(num); }
@@ -155,7 +156,6 @@ protected:
 
       return mCells + (row*kDim) + (col/2);
    }
-
 
    // Static member datum goes here
    struct CheckersBoardInitializer {

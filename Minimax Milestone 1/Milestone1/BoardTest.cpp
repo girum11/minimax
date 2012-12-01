@@ -17,15 +17,8 @@ using namespace std;
 // Prints a list, but does NOT delete it when it's done.
 void PrintList(const list<const Board::Move *> *moves) {
 
-   // If the list is empty, then drop what you're doing and don't
-   // print the endl in this *if* block, or the required endl for
-   // each turn.  To make up for the required endl though, print one
-   // more out.
-   //
-   // POST-REFACTOR:  No longer need to compensate for the endl that you
-   // didn't print, since you didn't skip the rest of the turn.
+   // If the list is empty, then drop what you're doing.
    if (moves->size() == 0) {
-      // cout << endl;
       return;
    }
 
@@ -47,9 +40,7 @@ void PrintList(const list<const Board::Move *> *moves) {
    for (listIter = moves->begin(); listIter != moves->end(); listIter++) {
       // If adding this next move puts you over LINE_LENGTH,
       // then start a newline
-      //cout << "++col * maxCharLength = " << ((col+1)*maxCharLength) << " -- ";
       if (col > MAX_COLUMNS) {
-         //cout << "END OF LINE!!" << endl;
          cout << endl;
          col = 1;
       }
@@ -171,6 +162,13 @@ int main(int argc, char **argv) {
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
 			} else if (command.compare("applyMove") == 0) {
+
+            // TODO: Make your BoardTest check your GetAllMoves() list before
+            // trying to applyMove, to ensure that you don't have bad test
+            // cases.  Print out the c_str() that you tried to apply and
+            // put it in all caps.  Be sure to comment it out before you handin
+            // though, since checking "GetAllMoves()" every time you applyMove
+            // is slow as balls.
 
             // This version of applyMove gives a clone of the default
             // move to the board.
