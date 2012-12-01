@@ -43,13 +43,21 @@ bool CheckersMove::operator<(const Board::Move &rhs) const {
 }
 
 CheckersMove::operator string() const {
-   // TODO: Write this method out.  It's not as trivial as Othello though.
+   string rtn = "";
 
    // TODO: Be sure to handle the case when the move is equal to the
    // NULL_MOVE macro.  Clint's executable has a blank line output for
    // the first move in the Checkers game.
 
-   return "\n";
+   LocVector::const_iterator locIter = mLocs.begin();
+   rtn += FString("%c%u", locIter->first, locIter->second);
+   locIter++;
+
+   for (; locIter != mLocs.end(); locIter++) {
+      rtn += FString(" -> %c%u", locIter->first, locIter->second);
+   }
+
+   return rtn;
 }
 
 void CheckersMove::operator=(const string &src) {
