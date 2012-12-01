@@ -1,6 +1,7 @@
 #include "MyLib.h"
 #include "CheckersMove.h"
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -51,12 +52,17 @@ CheckersMove::operator string() const {
 }
 
 void CheckersMove::operator=(const string &src) {
-   unsigned start = src.find_first_not_of(" \t"), 
-    end = src.find_last_not_of(" \t");
+   string copy = src;
+   unsigned start = copy.find_first_not_of(" \t"), 
+    end = copy.find_last_not_of(" \t");
    LocVector locs;
-   int index = 0;
+   int index = 0, charsRead = 0;
    static const int kChunkSize = 10;
    bool readAllLocations = false;
+   char arrow[2], trailingGarbage;
+   
+   // Strip all whitespace from the string
+   copy.erase(remove_if(copy.begin(), copy.end(), isspace), copy.end());
 
    // Reserve a chunk of memory so that we can dynamically resize later
    locs.reserve(kChunkSize);
@@ -65,8 +71,11 @@ void CheckersMove::operator=(const string &src) {
    // Read the first location of this move, throwing an exception if there's an
    // error.  You have to read the first location separately because the 
    // expected string doesn't have the "->" in it on the first one
-   if (sscanf(src.c_str(), " %c %u", &locs[0].first, &locs[0].second) != 2)
-      throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
+   if (sscanf(copy.c_str(), "%c%u%n", &locs[0].first, &locs[0].second, &charsRead) != 2)
+      throw BaseException(FString("Bad Checkers move: %s", copy.c_str()));
+
+   // Erase the characters that we read
+   copy.erase(0, charsRead);
 
    // Read all the rest of the locations of this move (it can chain jumps in
    // the case of a multiple jump).
@@ -82,16 +91,19 @@ void CheckersMove::operator=(const string &src) {
 
       // Scan the next Location
       // TODO: Deal with trailing garbage
-      int res = sscanf(src.c_str(), " -> %c%u", 
-       &locs[index].first, &locs[index].second);
+      int res = sscanf(copy.c_str(), "%2c%c%u%n",
+       arrow, &locs[index].first, &locs[index].second, &charsRead);
 
-      // If there is nothing left to scan, then break.
+      // Erase the characters that we read
+      copy.erase(0, charsRead);
+
+      // If there is nothing left to scan, then stop reading in.
       if (res == 0) {
          readAllLocations = true;
       }
-      // Otherwise, you read a partial move.  Break.
-      else if (res != 2) {
-          throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
+      // Otherwise, you read a partial move (or had a bad arrow token).
+      else if (res != 3 || arrow[0] != '-' || arrow[1] != '>') {
+          throw BaseException(FString("Bad Checkers move: %s", copy.c_str()));
       }
    }
 
@@ -103,7 +115,7 @@ void CheckersMove::operator=(const string &src) {
       if (!InRange<char>('A', locIter->first, 'I') ||
        !InRange<unsigned int>(1, locIter->second, 9)) {
           throw BaseException(FString("Out of bounds Checkers move: %s", 
-           src.c_str()));
+           copy.c_str()));
       }
    }
 
