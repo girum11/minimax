@@ -93,9 +93,6 @@ CheckersBoard::CheckersBoard() : mWhoseMove(kBlack),
 
       }
    }
-
-   // Clear out initial mKingSet (there are no kings at the start)
-   mKingSet = 0x0;
 }
 
 CheckersBoard::~CheckersBoard() {

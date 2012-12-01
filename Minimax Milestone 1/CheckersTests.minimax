@@ -1,4 +1,6 @@
 showBoard
 
+enterMove A1->B2
+
 
 quit
