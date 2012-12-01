@@ -75,6 +75,8 @@ CheckersBoard::CheckersBoard() : mWhoseMove(kBlack),
    char row = 'A';
    unsigned col = 1;
 
+   // Nil out the bitmasks at first
+   mBlackSet = mWhiteSet = mKingSet = 0x0;
 
    // Fill up mBlackSet and mWhiteSet
    for (row = 'A'; row <= 'H'; row++) {
@@ -142,6 +144,9 @@ Board *CheckersBoard::Clone() const {
 
 
 Board::Key *CheckersBoard::GetKey() const {
+   // Leave this empty when you first turn in Milestone 1 -- Bender doesn't
+   // check this at all.  That is, be sure to start getting rolling in handins 
+   // BEFORE implementing this.
    return NULL;
 }
 
