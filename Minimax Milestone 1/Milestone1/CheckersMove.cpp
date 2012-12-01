@@ -29,13 +29,15 @@ void CheckersMove::operator delete(void *p) {
 bool CheckersMove::operator==(const Board::Move &rhs) const {
    const CheckersMove &oRhs = dynamic_cast<const CheckersMove &>(rhs);
 
-   return mFrom == oRhs.mFrom && mTo == oRhs.mTo;
+   // return mFrom == oRhs.mFrom && mTo == oRhs.mTo;
+   return false;
 }
 
 bool CheckersMove::operator<(const Board::Move &rhs) const {
    const CheckersMove &oRhs = dynamic_cast<const CheckersMove &>(rhs);
 
-   return mFrom < oRhs.mFrom || mFrom == oRhs.mFrom && mTo < oRhs.mTo;
+   // return mFrom < oRhs.mFrom || mFrom == oRhs.mFrom && mTo < oRhs.mTo;
+   return false;
 }
 
 CheckersMove::operator string() const {
@@ -49,7 +51,61 @@ CheckersMove::operator string() const {
 }
 
 void CheckersMove::operator=(const string &src) {
+   unsigned start = src.find_first_not_of(" \t"), 
+    end = src.find_last_not_of(" \t");
+   LocVector locs;
+   int index = 1;
+   static const int kChunkSize = 10;
+   bool readAllLocations = false;
 
+   locs.resize(kChunkSize);
+
+   // Read the first location of this move, throwing an exception if there's an
+   // error.  You have to read the first location separately because the 
+   // expected string doesn't have the "->" in it on the first one
+   if (sscanf(src.c_str(), " %c %u", locs[0].first, locs[0].second) != 2)
+      throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
+
+   // Read all the rest of the locations of this move (it can chain jumps in
+   // the case of a multiple jump).
+   while (!readAllLocations) {
+
+      // If you need to, resize the vector by a chunk of memory.
+      if (index >= locs.size()) {
+         locs.resize(locs.size() + kChunkSize);
+      }
+
+      // Scan the next Location
+      // TODO: Deal with trailing garbage
+      int res = sscanf(src.c_str(), " -> %c %u", 
+       mLocs[index].first, mLocs[index].second);
+
+      // If there is nothing left to scan, then break.
+      if (res == 0) {
+         readAllLocations = true;
+      }
+      // Otherwise, you read a partial move.  Break.
+      else if (res != 2) {
+          throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
+      }
+   }
+
+   // Verify that none of the Locations are out of bounds
+   for (LocVector::const_iterator locIter = locs.begin(); 
+    locIter != locs.end(); locIter++) {
+
+      // TODO: Magic number
+      if (!InRange<char>('A', locIter->first, 'I') ||
+       !InRange<unsigned int>(1, locIter->second, 9)) {
+          throw BaseException(FString("Out of bounds Checkers move: %s", 
+           src.c_str()));
+      }
+   }
+
+   // At the end (if you made it there without exception), copy the private
+   // locs variable over into the mLocs of this object.
+   mLocs = locs;
+   AssertMe();
 }
 
 Board::Move *CheckersMove::Clone() const {

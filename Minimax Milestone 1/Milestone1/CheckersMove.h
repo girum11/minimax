@@ -8,22 +8,19 @@
 #include <assert.h>
 #include "Board.h"
 
-#define NULL_CHAR -1
-#define NULL_PAIR std::pair<char,char>(NULL_CHAR, NULL_CHAR)
 
 class CheckersMove : public Board::Move {
 public:
 
    enum {};
 
-   typedef std::pair<char,char> CharPair;
+   typedef std::vector<std::pair<char,unsigned int> > LocVector;
 
    // TODO: Inner classes go here if you need them.
 
    friend class CheckersBoard;
 
-   CheckersMove(CharPair from, CharPair to) : 
-    mFrom(from), mTo(to) {
+   CheckersMove(const LocVector &locs) : mLocs(locs) {
       AssertMe();
    }
    virtual ~CheckersMove() {}
@@ -48,20 +45,26 @@ protected:
 
    enum {};
 
-   CharPair mFrom;
-   CharPair mTo;
+   LocVector mLocs;
+//    Location mFrom;
+//    Location mTo;
 
    static std::vector<CheckersMove *> mFreeList;
 
 
    void AssertMe() {
-      // Ensure that this move is valid.
-      //
-      // If it's a null move though, don't bounce it.
-      if (this->mFrom == NULL_PAIR && this->mTo == NULL_PAIR) return;
 
-      assert(isalpha(mFrom.first) && isdigit(mFrom.second));
-      assert(isalpha(mTo.first) && isdigit(mTo.second));
+      // Ensure that this move is valid.
+      for (LocVector::const_iterator locIter = mLocs.begin();
+       locIter != mLocs.end(); locIter++) {
+
+          // If it's a null move though, don't bounce it.
+          if (locIter->first == -1 && locIter->second == -1) {
+             return;
+          }
+          
+         assert(isalpha(locIter->first) && isdigit(locIter->second));
+      }
    }
 
 };
