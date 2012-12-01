@@ -54,31 +54,36 @@ void CheckersMove::operator=(const string &src) {
    unsigned start = src.find_first_not_of(" \t"), 
     end = src.find_last_not_of(" \t");
    LocVector locs;
-   int index = 1;
+   int index = 0;
    static const int kChunkSize = 10;
    bool readAllLocations = false;
 
-   locs.resize(kChunkSize);
+   // Reserve a chunk of memory so that we can dynamically resize later
+   locs.reserve(kChunkSize);
+   locs.resize(1);
 
    // Read the first location of this move, throwing an exception if there's an
    // error.  You have to read the first location separately because the 
    // expected string doesn't have the "->" in it on the first one
-   if (sscanf(src.c_str(), " %c %u", locs[0].first, locs[0].second) != 2)
+   if (sscanf(src.c_str(), " %c %u", &locs[0].first, &locs[0].second) != 2)
       throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
 
    // Read all the rest of the locations of this move (it can chain jumps in
    // the case of a multiple jump).
-   while (!readAllLocations) {
+   for (int index = 1; !readAllLocations; index++) {
 
       // If you need to, resize the vector by a chunk of memory.
-      if (index >= locs.size()) {
-         locs.resize(locs.size() + kChunkSize);
+      if (index >= locs.capacity()) {
+         locs.reserve(locs.capacity() + kChunkSize);
       }
+
+      // Then, resize the vector just enough to fit this new Location
+      locs.resize(locs.size() + 1);
 
       // Scan the next Location
       // TODO: Deal with trailing garbage
-      int res = sscanf(src.c_str(), " -> %c %u", 
-       mLocs[index].first, mLocs[index].second);
+      int res = sscanf(src.c_str(), " -> %c%u", 
+       &locs[index].first, &locs[index].second);
 
       // If there is nothing left to scan, then break.
       if (res == 0) {

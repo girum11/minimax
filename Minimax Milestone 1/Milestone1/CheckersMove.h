@@ -8,7 +8,6 @@
 #include <assert.h>
 #include "Board.h"
 
-
 class CheckersMove : public Board::Move {
 public:
 

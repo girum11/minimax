@@ -1,9 +1,12 @@
 #ifndef CHECKERSBOARD_H
 #define CHECKERSBOARD_H
 
+#include <climits>
 #include <assert.h>
 #include "Board.h"
 #include "MyLib.h"
+
+#define kNull -1
 
 class CheckersMove;
 

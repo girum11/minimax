@@ -1,6 +1,9 @@
 showBoard
 
 enterMove A1->B2
+enterMove A1->B2->C3->B2
+
+showMove
 
 
 quit

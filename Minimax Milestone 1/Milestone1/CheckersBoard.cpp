@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <vector>
 #include <memory.h>
 #include "CheckersDlg.h"
 #include "CheckersView.h"
@@ -128,7 +129,9 @@ void CheckersBoard::GetAllMoves(list<Move *> *moves) const {
 }
 
 Board::Move *CheckersBoard::CreateMove() const {
-   return new CheckersMove(NULL_PAIR, NULL_PAIR);
+   // TODO: Should I watch for using -1 as kNull?  Chars are unsigned, I think...?
+   return new CheckersMove(
+    CheckersMove::LocVector(1, pair<char, unsigned int>(kNull, kNull)));
 }
 
 
