@@ -45,9 +45,8 @@ bool CheckersMove::operator<(const Board::Move &rhs) const {
 CheckersMove::operator string() const {
    string rtn = "";
 
-   // TODO: Be sure to handle the case when the move is equal to the
-   // NULL_MOVE macro.  Clint's executable has a blank line output for
-   // the first move in the Checkers game.
+   // Handling the case when the move is empty.  Clint's executable has a blank 
+   // line output for the first move in the Checkers game.
    if (mLocs.size() == 0) {
       return rtn;
    }
@@ -141,7 +140,7 @@ void CheckersMove::operator=(const string &src) {
 }
 
 Board::Move *CheckersMove::Clone() const {
-   return new CheckersMove(*this);
+   return new CheckersMove(this->mLocs);
 }
 
 istream &CheckersMove::Read(istream &is) {

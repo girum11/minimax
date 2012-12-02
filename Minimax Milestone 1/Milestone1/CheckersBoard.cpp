@@ -67,7 +67,6 @@ void CheckersBoard::StaticInit() {
    }
 }
 
-
 CheckersBoard::CheckersBoard() : mWhoseMove(kBlack), 
  mBlackCount(kStartingPieces), mBlackBackCount(kStartingBackPieces),
  mWhiteCount(kStartingPieces), mWhiteBackCount(kStartingBackPieces) {
@@ -92,7 +91,6 @@ CheckersBoard::CheckersBoard() : mWhoseMove(kBlack),
          else if (row == 'F' || row == 'G' || row == 'H') {
             mWhiteSet |= GetCell(row, col)->mask;
          }
-
       }
    }
 }

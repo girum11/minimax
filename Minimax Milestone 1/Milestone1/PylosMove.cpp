@@ -214,8 +214,7 @@ void PylosMove::operator=(const string &src) {
    AssertMe();
 }
 
-Board::Move *PylosMove::Clone() const
-{
+Board::Move *PylosMove::Clone() const {
    // [Staley] Make this just one line long, a single relatively short 
 	// [Staley] "return" statement.
 	return new PylosMove(mLocs, mType);
@@ -223,8 +222,7 @@ Board::Move *PylosMove::Clone() const
 
 
 // [Staley] release node pointed to by p to the freelist
-ostream &PylosMove::Write(ostream &os) const
-{
+ostream &PylosMove::Write(ostream &os) const {
    char size = mLocs.size();
    short temp;
    int ndx;
@@ -241,8 +239,7 @@ ostream &PylosMove::Write(ostream &os) const
 }
 
 // Staley] Make this work with the (unchanged) Write method above.
-istream &PylosMove::Read(istream &is)
-{
+istream &PylosMove::Read(istream &is) {
    char mLocsSize = -1;
    pair<short, short> tempPair;
 
