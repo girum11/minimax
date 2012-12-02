@@ -147,7 +147,7 @@ void CheckersBoard::ApplyMove(Move *move) {
    if (abs((*locs)[0].first - (*locs)[1].first) == 1 &&
     abs((int)((*locs)[0].second - (*locs)[1].second)) == 1) {
       cout << "Got non-jump move" << endl;
-      HalfPut(GetCell((*locs)[0].first, (*locs)[0].second), mWhoseMove);
+      HalfPut(GetCell((*locs)[1].first, (*locs)[1].second), mWhoseMove);
    }
    // Otherwise, this move IS a jump move.
    else {
