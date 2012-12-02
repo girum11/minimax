@@ -49,13 +49,6 @@ void CheckersBoard::StaticInit() {
          // cout << "Setup cell: " << row << col << "\n";
          cell->name = FString("%c%u", row, col);
 
-         // Set up the directional pointers for mCells.  GetCell() 
-         // automatically returns NULL for any out of bounds values.
-         cell->topLeft = GetCell(row-1, col+1);
-         cell->topRight = GetCell(row+1,col+1);
-         cell->bottomLeft = GetCell(row-1, col-1);
-         cell->bottomRight = GetCell(row-1, col+1);
-
          // Initialize mBlackBackRow
          if (row == 'A') {
             mBlackBackRow |= cell->mask;
@@ -64,6 +57,23 @@ void CheckersBoard::StaticInit() {
          else if (row == 'H') {
             mWhiteBackRow |= cell->mask;
          } 
+      }
+   }
+
+   // Go back and initialize the directional pointers.  (Can't initialize
+   // in the first pass, since not all cells have been created then).
+   nextCell = 0;
+   for (row = 'A'; row <= 'H'; row ++) {
+      for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2, nextCell++) {
+
+         cell = mCells + nextCell;
+
+         // Set up the directional pointers for mCells.  GetCell() 
+         // automatically returns NULL for any out of bounds values.
+         cell->topLeft = GetCell(row+1, col-1);
+         cell->topRight = GetCell(row+1,col+1);
+         cell->bottomLeft = GetCell(row-1, col-1);
+         cell->bottomRight = GetCell(row-1, col+1);
       }
    }
 }
