@@ -46,7 +46,8 @@ void CheckersBoard::StaticInit() {
          cell = mCells + nextCell;
          cell->mask = 1 << nextCell;
 
-         // cout << "GetCell(" << row << col << ")\n";
+         // cout << "Setup cell: " << row << col << "\n";
+         cell->name = FString("%c%u", row, col);
 
          // Set up the directional pointers for mCells.  GetCell() 
          // automatically returns NULL for any out of bounds values.
@@ -228,12 +229,68 @@ void CheckersBoard::UndoLastMove() {
 
 }
 
-void CheckersBoard::GetAllMoves(list<Move *> *moves) const {
-   // Don't forget that the caller of this method retains ownership of
-   // the list<Move *> * that you pass back.  This means that I have to
-   // "new" one.
+void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
+   char row;
+   unsigned int col;
+   CheckersMove::LocVector locs;
+   list<CheckersMove *>::iterator itr;
+   list<CheckersMove *> *castedMoves = reinterpret_cast<list<CheckersMove *>*>(uncastMoves);
+
+   assert(uncastMoves->size() == 0 && castedMoves->size() == 0);
+
+   if (mBlackCount == 0 || mWhiteCount == 0)
+      return;
+
+   for (row = 'A'; row <= 'H'; row++) {
+      for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2) {
+         Cell *cell = GetCell(row, col);
+
+         // For each occupied Cell on the board, inspect the moves it can take
+         if (CellOccupied(row, col, kBlack) && CellContainsKing(row, col)) {
+            cout << "Black King at " << cell->name << endl;
+            cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
+            cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
+            cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
+            cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
+
+         } else if (CellOccupied(row, col, kWhite) && CellContainsKing(row, col)) {
+            cout << "White King at " << cell->name << endl;
+            cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
+            cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
+            cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
+            cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
+
+
+
+         } else if (CellOccupied(row, col, kBlack)) {
+            cout << "Black piece at " << cell->name << endl;
+            cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
+            cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
+            cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
+            cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
+
+            
+
+
+         } else if (CellOccupied(row, col, kWhite)) {
+            cout << "White piece at " << cell->name << endl;
+            cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
+            cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
+            cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
+            cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
+
+
+
+         }
+      }
+   }
+
+
 
 }
+
+
+
 
 Board::Move *CheckersBoard::CreateMove() const {
    return new CheckersMove(CheckersMove::LocVector());

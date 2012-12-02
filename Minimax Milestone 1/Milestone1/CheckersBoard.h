@@ -103,6 +103,8 @@ protected:
       
       // Pointer to the cell to the bottom right of this one, or NULL
       Cell *bottomRight;
+
+      std::string name;  // Formatted name of this Cell
    };
 
    std::istream &Read(std::istream &);
