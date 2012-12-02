@@ -52,6 +52,8 @@ public:
    //
    // "byWhom" expects either kWhite or kBlack.
    bool CellOccupied(int row, int col, int byWhom) const {
+      assert(GetCell(row, col) != NULL);
+      
       Set mask = GetCell(row, col)->mask;
 
       if (byWhom == kWhite) {
@@ -105,6 +107,7 @@ protected:
       Cell *bottomRight;
 
       std::string name;  // Formatted name of this Cell
+      std::pair<char, unsigned int> loc;
    };
 
    std::istream &Read(std::istream &);
@@ -135,7 +138,7 @@ protected:
    void AddAllMovesForPiece(
     std::list<CheckersMove *> *, char, unsigned int, bool, int) const;
 
-   void AddMovesForDirection(Cell *cell) const;
+   void AddMovesForDirection(std::list<CheckersMove *> *, Cell *, Cell *) const;
 
    void AddJumpMovesDFS() const;
 
