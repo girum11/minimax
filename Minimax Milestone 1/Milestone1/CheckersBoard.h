@@ -6,8 +6,6 @@
 #include "Board.h"
 #include "MyLib.h"
 
-#define kNull -1
-
 class CheckersMove;
 
 class CheckersBoard : public Board {

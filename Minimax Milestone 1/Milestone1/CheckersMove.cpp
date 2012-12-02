@@ -48,6 +48,9 @@ CheckersMove::operator string() const {
    // TODO: Be sure to handle the case when the move is equal to the
    // NULL_MOVE macro.  Clint's executable has a blank line output for
    // the first move in the Checkers game.
+   if (mLocs.size() == 0) {
+      return rtn;
+   }
 
    LocVector::const_iterator locIter = mLocs.begin();
    rtn += FString("%c%u", locIter->first, locIter->second);

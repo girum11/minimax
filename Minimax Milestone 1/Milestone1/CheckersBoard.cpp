@@ -238,9 +238,7 @@ void CheckersBoard::GetAllMoves(list<Move *> *moves) const {
 }
 
 Board::Move *CheckersBoard::CreateMove() const {
-   // TODO: Should I watch for using -1 as kNull?  Chars are unsigned, I think...?
-   return new CheckersMove(
-    CheckersMove::LocVector(1, pair<char, unsigned int>(kNull, kNull)));
+   return new CheckersMove(CheckersMove::LocVector());
 }
 
 
