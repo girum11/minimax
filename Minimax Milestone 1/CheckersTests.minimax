@@ -1,5 +1,5 @@
 showBoard
-enterMove A1  ->   B2
+enterMove C3  ->   D4
 applyMove
 showBoard
 
