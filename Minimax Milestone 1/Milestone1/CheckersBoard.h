@@ -132,6 +132,13 @@ protected:
       assert((mBlackSet & mWhiteSet) == 0);
    }
 
+   void AddAllMovesForPiece(
+    std::list<CheckersMove *> *, char, unsigned int, bool, int) const;
+
+   void AddMovesForDirection(Cell *cell) const;
+
+   void AddJumpMovesDFS() const;
+
    // Quick helper functions for GetCell()
    static inline bool IsEven(char num) { return num % 2; }
    static inline bool IsOdd(char num) { return !IsEven(num); }

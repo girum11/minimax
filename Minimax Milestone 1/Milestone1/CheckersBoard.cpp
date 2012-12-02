@@ -242,7 +242,6 @@ void CheckersBoard::UndoLastMove() {
 void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
    char row;
    unsigned int col;
-   CheckersMove::LocVector locs;
    list<CheckersMove *>::iterator itr;
    list<CheckersMove *> *castedMoves = reinterpret_cast<list<CheckersMove *>*>(uncastMoves);
 
@@ -257,48 +256,100 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
 
          // For each occupied Cell on the board, inspect the moves it can take
          if (CellOccupied(row, col, kBlack) && CellContainsKing(row, col)) {
-            cout << "Black King at " << cell->name << endl;
-            cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
-            cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
-            cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
-            cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
-
+//             cout << "Black King at " << cell->name << endl;
+//             cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
+//             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
+//             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
+//             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
+            AddAllMovesForPiece(castedMoves, row, col, true, kBlack);
          } else if (CellOccupied(row, col, kWhite) && CellContainsKing(row, col)) {
-            cout << "White King at " << cell->name << endl;
-            cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
-            cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
-            cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
-            cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
-
-
-
+//             cout << "White King at " << cell->name << endl;
+//             cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
+//             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
+//             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
+//             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
+            AddAllMovesForPiece(castedMoves, row, col, true, kWhite);
          } else if (CellOccupied(row, col, kBlack)) {
-            cout << "Black piece at " << cell->name << endl;
-            cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
-            cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
-            cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
-            cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
-
-            
-
-
+//             cout << "Black piece at " << cell->name << endl;
+//             cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
+//             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
+//             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
+//             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
+            AddAllMovesForPiece(castedMoves, row, col, false, kBlack);
          } else if (CellOccupied(row, col, kWhite)) {
-            cout << "White piece at " << cell->name << endl;
-            cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
-            cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
-            cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
-            cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
-
-
-
+//             cout << "White piece at " << cell->name << endl;
+//             cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
+//             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
+//             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
+//             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
+            AddAllMovesForPiece(castedMoves, row, col, false, kWhite);
          }
       }
    }
-
-
-
 }
 
+// Adds possible moves for a particular piece, in all four directions.
+void CheckersBoard::AddAllMovesForPiece(
+ list<CheckersMove *> *locs, char row, unsigned int col, bool isKing, int whoseMove) const {
+   Cell *cell = GetCell(row, col);
+
+   // In the order above, first see if the Locations are immediately
+   // empty.  If they are, don't recurse.  Instead, just add that
+   // location as a "non-jump" move.  This is the only possible way
+   // that a move can be a "non-jump" move.
+   // 
+   // Otherwise, do a recursive DFS on the possible "jump moves" that
+   // you can do.  Base case is when the Location that you would jump to
+   // is out of bounds, or if the Location that you would jump to is
+   // already occupied.
+
+
+   // Kings should try all four directions
+   if (isKing) {
+      AddMovesForDirection(cell->bottomLeft);
+      AddMovesForDirection(cell->bottomRight);
+      AddMovesForDirection(cell->topLeft);
+      AddMovesForDirection(cell->topRight);
+   }
+   // Black pieces should try topLeft and topRight
+   else if (whoseMove == kBlack) {
+      AddMovesForDirection(cell->topLeft);
+      AddMovesForDirection(cell->topRight);
+   }
+   // White pieces should try bottomLeft and bottomRight
+   else if (whoseMove == kWhite) {
+      AddMovesForDirection(cell->bottomLeft);
+      AddMovesForDirection(cell->bottomRight);
+   } else assert(false);
+}
+
+
+// Attempts to short-circuit the DFS by finding out of bounds and non-jump
+// directions.
+void CheckersBoard::AddMovesForDirection(Cell *cell) const {
+   // If this direction is NULL (that is, out of bounds), then break.
+   if (cell == NULL) {
+      return;
+   }
+   
+   Set allPieces = (mWhiteSet|mBlackSet);
+
+   // If the Cell in this direction is empty, then we found a non=jump move.
+   // Add a non-jump move in this direction to the list of moves, and then return.
+   if ((cell->mask & allPieces) == 0) {
+      // TODO: Add a non-jump move in this direction, and return.
+   }
+   // Otherwise, this direction will yield either a jump move or won't yield
+   // a move at all.  We have to run the recursive DFS in this direction.
+   else {
+      // TODO: Call the recursive DFS to find all possible jump moves in this
+      // direction.
+   }
+}
+
+void CheckersBoard::AddJumpMovesDFS() const {
+
+}
 
 
 
