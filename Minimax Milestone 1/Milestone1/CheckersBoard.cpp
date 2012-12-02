@@ -119,8 +119,8 @@ void CheckersBoard::ApplyMove(Move *move) {
    
 
    // Sanity checks on each destination piece.
-   for (unsigned int i = 1; i < (*locs).size(); ++i) {
-      Cell *cell = GetCell((*locs)[i].first, (*locs)[i].second);
+   for (unsigned int index1 = 1; index1 < (*locs).size(); ++index1) {
+      Cell *cell = GetCell((*locs)[index1].first, (*locs)[index1].second);
       
       // Assert that this cell (where this move wants to go to) isn't already
       // taken.
@@ -130,11 +130,11 @@ void CheckersBoard::ApplyMove(Move *move) {
       if ((originCell->mask & mKingSet) == 0) {
          // Black non-kings should be moving upwards
          if (mWhoseMove == kBlack) {
-            assert((*locs)[i].first > (*locs)[i-1].first);
+            assert((*locs)[index1].first > (*locs)[index1-1].first);
          }
          // White non-kings should be moving downwards
          else if (mWhoseMove == kWhite) {
-            assert((*locs)[i].first < (*locs)[i-1].first);
+            assert((*locs)[index1].first < (*locs)[index1-1].first);
          }
       }
    }
@@ -142,56 +142,57 @@ void CheckersBoard::ApplyMove(Move *move) {
    // Remove the piece from its original location
    HalfTake(GetCell((*locs)[0].first, (*locs)[0].second), mWhoseMove);
 
-   // First, check if this move is a "non-jump move".  If it is, then
-   // simply add the piece to the final destination and return.
+   // First, check if this move is a "non-jump move".  If it is, then don't
+   // do anything (let the rest of applyMove() run its course).
    if (abs((*locs)[0].first - (*locs)[1].first) == 1 &&
     abs((int)((*locs)[0].second - (*locs)[1].second)) == 1) {
       cout << "Got non-jump move" << endl;
-      HalfPut(GetCell((*locs)[1].first, (*locs)[1].second), mWhoseMove);
+      // HalfPut(GetCell((*locs)[1].first, (*locs)[1].second), mWhoseMove);
    }
    // Otherwise, this move IS a jump move.
    else {
-      for (unsigned int i = 1; i < (*locs).size(); ++i) {
+      for (unsigned int index2 = 1; index2 < (*locs).size(); ++index2) {
          Cell *jumpedCell = NULL;
-         Cell *destCell = GetCell((*locs)[i].first, (*locs)[i].second);
+         Cell *destCell = GetCell((*locs)[index2].first, (*locs)[index2].second);
 
          // Assert that this location actually jumps over a piece
-         assert(abs((*locs)[i-1].first - (*locs)[i].first) == 2);
-         assert(abs(((int)(*locs)[i-1].second - (int)(*locs)[i].second) == 2));
+         assert(abs((*locs)[index2-1].first - (*locs)[index2].first) == 2);
+         // cout << "abs() = " << abs(((int)(*locs)[index2-1].second - (int)(*locs)[index2].second));
+         assert(abs(((int)(*locs)[index2-1].second - (int)(*locs)[index2].second)) == 2);
 
          // If you at any point a non-king jumps into the back row, then assert 
          // that it STOPPED MOVING.  Also, add the piece to the king set.
          if ((destCell->mask & mKingSet) == 0) {
-            if (mWhoseMove == kBlack && destCell->mask & mWhiteBackRow) {
-               assert(i == ((*locs).size() - 1));
-               mKingSet &= destCell->mask;
+            if (mWhoseMove == kBlack && (destCell->mask & mWhiteBackRow)) {
+               assert(index2 == ((*locs).size() - 1));
+               mKingSet |= destCell->mask;
             }
-            else if (mWhoseMove == kWhite && destCell->mask & mBlackBackRow) {
-               assert(i == ((*locs).size() - 1));
-               mKingSet &= destCell->mask;
+            else if (mWhoseMove == kWhite && (destCell->mask & mBlackBackRow)) {
+               assert(index2 == ((*locs).size() - 1));
+               mKingSet |= destCell->mask;
             }
          }
 
          // Figure out which cell you jumped
          // North-west jump
-         if ((*locs)[i].first > (*locs)[i-1].first
-          && (*locs)[i].second < (*locs)[i-1].second) {
-            jumpedCell = GetCell((*locs)[i].first - 1, (*locs)[i].second + 1);
+         if ((*locs)[index2].first > (*locs)[index2-1].first
+          && (*locs)[index2].second < (*locs)[index2-1].second) {
+            jumpedCell = GetCell((*locs)[index2].first - 1, (*locs)[index2].second + 1);
          }
          // North-east jump
-         else if ((*locs)[i].first > (*locs)[i-1].first
-          && (*locs)[i].second > (*locs)[i-1].second) {
-            jumpedCell = GetCell((*locs)[i].first - 1, (*locs)[i].second - 1);
+         else if ((*locs)[index2].first > (*locs)[index2-1].first
+          && (*locs)[index2].second > (*locs)[index2-1].second) {
+            jumpedCell = GetCell((*locs)[index2].first - 1, (*locs)[index2].second - 1);
          }
          // South-west jump
-         else if ((*locs)[i].first < (*locs)[i-1].first
-          && (*locs)[i].second < (*locs)[i-1].second) {
-            jumpedCell = GetCell((*locs)[i].first + 1, (*locs)[i].second + 1);
+         else if ((*locs)[index2].first < (*locs)[index2-1].first
+          && (*locs)[index2].second < (*locs)[index2-1].second) {
+            jumpedCell = GetCell((*locs)[index2].first + 1, (*locs)[index2].second + 1);
          } 
          // South-east jump
-         else if ((*locs)[i].first < (*locs)[i-1].first
-          && (*locs)[i].second > (*locs)[i-1].second) {
-            jumpedCell = GetCell((*locs)[i].first + 1, (*locs)[i].second - 1);
+         else if ((*locs)[index2].first < (*locs)[index2-1].first
+          && (*locs)[index2].second > (*locs)[index2-1].second) {
+            jumpedCell = GetCell((*locs)[index2].first + 1, (*locs)[index2].second - 1);
          } else assert(false); 
 
          // Assert that the piece that you jumped over is occupied by the other

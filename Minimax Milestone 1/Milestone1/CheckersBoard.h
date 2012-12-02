@@ -48,7 +48,7 @@ public:
    Board *Clone() const;
    Key *GetKey() const;
 
-   // [Staley] May add a public method for use by PylosView.
+   // [Staley] May add a public method for use by CheckersView.
    // Public helper function that returns true if a cell is occupied
    // by a certain color.
    //
@@ -64,6 +64,12 @@ public:
          assert(false);
          return false;
       }
+   }
+
+   bool CellContainsKing(int row, int col) const {
+      Set mask = GetCell(row,col)->mask;
+
+      return ((mask & this->mKingSet) != 0);
    }
 
    // Option accessor/mutator.  GetOptions returns dynamically allocated

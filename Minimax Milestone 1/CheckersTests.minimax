@@ -1,12 +1,18 @@
-showBoard
 enterMove C3  ->   D4
 applyMove
+doMove f4->e5
+doMove c7->d8
+doMove e5->c3
+doMove c5->d6
+
+doMove f2->e1
+doMove b4->c5
+doMove g3->f2
+doMove a5->b4
+
 showBoard
+doMove c3->a5
 
-showMove
-
-enterMove A1  ->   B2    ->   C3->  B2
-showMove
-
+showBoard
 
 quit

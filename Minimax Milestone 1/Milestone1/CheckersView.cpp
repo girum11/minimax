@@ -36,11 +36,19 @@ void CheckersView::Draw(ostream &out) {
          
          if (IsValidCell(row, col)
           && cb->CellOccupied(row, col, CheckersBoard::kBlack)) {
-            out << "b  ";
+            if (cb->CellContainsKing(row,col)) {
+               out << "B  ";
+            } else {
+               out << "b  ";
+            }
          }
          else if (IsValidCell(row, col)
           && cb->CellOccupied(row, col, CheckersBoard::kWhite)) {
+            if (cb->CellContainsKing(row,col)) {
+               out << "W  ";
+            } else {
                out << "w  ";
+            }
          } else {
             out << ".  ";
          }
