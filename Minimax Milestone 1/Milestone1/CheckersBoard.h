@@ -103,7 +103,28 @@ protected:
 
    std::istream &Read(std::istream &);
    std::ostream &Write(std::ostream &) const;
+   
+   // Helper function to add a piece
+   inline void HalfPut(Cell *cell, int color) {
+      if (color == kBlack) {
+         mBlackSet |= cell->mask;
+      } else if (color == kWhite) {
+         mWhiteSet |= cell->mask;
+      } else assert(false);
 
+      assert(mBlackSet & mWhiteSet == 0);
+   }
+
+   // Helper function to remove a piece.
+   inline void HalfTake(Cell *cell, int color) {
+      if (color == kBlack) {
+         mBlackSet &= ~(cell->mask);
+      } else if (color == kWhite) {
+         mWhiteSet &= ~(cell->mask);
+      } else assert(false);
+
+      assert(mBlackSet & mWhiteSet == 0);
+   }
 
    // Quick helper functions for GetCell()
    static inline bool IsEven(char num) { return num % 2; }
@@ -178,7 +199,7 @@ protected:
    mutable Set mWhiteSet;
    mutable Set mKingSet;
 
-   int mWhoseMove; // Whose move it is, using kWPiece and kBPiece.
+   int mWhoseMove; // Whose move it is.  Can be kBlack or kWhite.
 
    int mBlackCount; // The count of pieces Black has on the board
    int mBlackBackCount; // The count of pieces Black has in his back row

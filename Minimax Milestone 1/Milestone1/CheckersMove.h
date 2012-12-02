@@ -13,7 +13,8 @@ public:
 
    enum {};
 
-   typedef std::vector<std::pair<char,unsigned int> > LocVector;
+   typedef std::pair<char, unsigned int> Location;
+   typedef std::vector<Location> LocVector;
 
    // TODO: Inner classes go here if you need them.
 
@@ -45,8 +46,6 @@ protected:
    enum {};
 
    LocVector mLocs;
-//    Location mFrom;
-//    Location mTo;
 
    static std::vector<CheckersMove *> mFreeList;
 
