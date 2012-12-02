@@ -136,7 +136,7 @@ protected:
    }
 
    void AddAllMovesForPiece(
-    std::list<CheckersMove *> *, char, unsigned int, bool, int) const;
+    std::list<CheckersMove *> *, Cell *, bool, int) const;
 
    void AddMovesForDirection(std::list<CheckersMove *> *, Cell *, Cell *) const;
 

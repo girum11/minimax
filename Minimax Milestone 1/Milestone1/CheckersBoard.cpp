@@ -253,7 +253,7 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
 
    for (row = 'A'; row <= 'H'; row++) {
       for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2) {
-         // Cell *cell = GetCell(row, col);
+         Cell *cell = GetCell(row, col);
 
          // For each occupied Cell on the board, inspect the moves it can take
          if (CellOccupied(row, col, kBlack) && CellContainsKing(row, col)) {
@@ -262,37 +262,36 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
 //             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
 //             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
 //             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
-            AddAllMovesForPiece(castedMoves, row, col, true, kBlack);
+            AddAllMovesForPiece(castedMoves, cell, true, kBlack);
          } else if (CellOccupied(row, col, kWhite) && CellContainsKing(row, col)) {
 //             cout << "White King at " << cell->name << endl;
 //             cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
 //             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
 //             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
 //             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
-            AddAllMovesForPiece(castedMoves, row, col, true, kWhite);
+            AddAllMovesForPiece(castedMoves, cell, true, kWhite);
          } else if (CellOccupied(row, col, kBlack)) {
 //             cout << "Black piece at " << cell->name << endl;
 //             cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
 //             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
 //             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
 //             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
-            AddAllMovesForPiece(castedMoves, row, col, false, kBlack);
+            AddAllMovesForPiece(castedMoves, cell, false, kBlack);
          } else if (CellOccupied(row, col, kWhite)) {
 //             cout << "White piece at " << cell->name << endl;
 //             cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
 //             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
 //             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
 //             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
-            AddAllMovesForPiece(castedMoves, row, col, false, kWhite);
+            AddAllMovesForPiece(castedMoves, cell, false, kWhite);
          }
       }
    }
 }
 
 // Adds possible moves for a particular piece, in all four directions.
-void CheckersBoard::AddAllMovesForPiece(list<CheckersMove *> *moves, char row, 
- unsigned int col, bool isKing, int whoseMove) const {
-   Cell *cell = GetCell(row, col);
+void CheckersBoard::AddAllMovesForPiece(list<CheckersMove *> *moves, Cell *cell, 
+ bool isKing, int whoseMove) const {
    assert(cell != NULL);
 
    // In the order above, first see if the Locations are immediately
@@ -341,7 +340,7 @@ void CheckersBoard::AddMovesForDirection(list<CheckersMove *> *moves,
    // If the Cell in this direction is empty, then we found a non=jump move.
    // Add a non-jump move in this direction to the list of moves, and then return.
    if ((to->mask & allPieces) == 0) {
-      // TODO: Add a non-jump move in this direction, and return.
+      // Add a non-jump move in this direction, and return
       CheckersMove::LocVector locs;
       locs.push_back(from->loc);
       locs.push_back(to->loc);
