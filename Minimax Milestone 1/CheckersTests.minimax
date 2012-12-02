@@ -1,5 +1,8 @@
 showBoard
 enterMove A1  ->   B2
+applyMove
+showBoard
+
 showMove
 
 enterMove A1  ->   B2    ->   C3->  B2

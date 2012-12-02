@@ -119,12 +119,12 @@ void CheckersBoard::ApplyMove(Move *move) {
    
 
    // Sanity checks on each destination piece.
-   for (int i = 1; i < (*locs).size(); ++i) {
+   for (unsigned int i = 1; i < (*locs).size(); ++i) {
       Cell *cell = GetCell((*locs)[i].first, (*locs)[i].second);
       
       // Assert that this cell (where this move wants to go to) isn't already
       // taken.
-      assert(allPieces & cell->mask == 0);
+      assert((allPieces & cell->mask) == 0);
       
       // Assert that non-king pieces aren't moving backwards.
       if ((originCell->mask & mKingSet) == 0) {
@@ -151,7 +151,7 @@ void CheckersBoard::ApplyMove(Move *move) {
    }
    // Otherwise, this move IS a jump move.
    else {
-      for (int i = 1; i < (*locs).size(); ++i) {
+      for (unsigned int i = 1; i < (*locs).size(); ++i) {
          Cell *jumpedCell = NULL;
          Cell *destCell = GetCell((*locs)[i].first, (*locs)[i].second);
 
@@ -161,7 +161,7 @@ void CheckersBoard::ApplyMove(Move *move) {
 
          // If you at any point a non-king jumps into the back row, then assert 
          // that it STOPPED MOVING.  Also, add the piece to the king set.
-         if (destCell->mask & mKingSet == 0) {
+         if ((destCell->mask & mKingSet) == 0) {
             if (mWhoseMove == kBlack && destCell->mask & mWhiteBackRow) {
                assert(i == ((*locs).size() - 1));
                mKingSet &= destCell->mask;
@@ -171,7 +171,6 @@ void CheckersBoard::ApplyMove(Move *move) {
                mKingSet &= destCell->mask;
             }
          }
-
 
          // Figure out which cell you jumped
          // North-west jump
@@ -198,11 +197,11 @@ void CheckersBoard::ApplyMove(Move *move) {
          // Assert that the piece that you jumped over is occupied by the other
          // player and not yourself.  Remove that piece.
          if (mWhoseMove == kBlack) {
-            assert(jumpedCell->mask & mWhiteSet != 0);
+            assert((jumpedCell->mask & mWhiteSet) != 0);
             HalfTake(jumpedCell, kWhite);
 
          } else if (mWhoseMove == kWhite) {
-            assert(jumpedCell->mask & mBlackSet != 0);
+            assert((jumpedCell->mask & mBlackSet) != 0);
             HalfTake(jumpedCell, kBlack);
 
          } else assert(false);
@@ -222,7 +221,7 @@ void CheckersBoard::ApplyMove(Move *move) {
    else assert(false);
 
    // Assert that the two bitmasks don't have any pieces in common.
-   assert(mBlackSet & mWhiteSet == 0);
+   assert((mBlackSet & mWhiteSet) == 0);
 }
 
 void CheckersBoard::UndoLastMove() {

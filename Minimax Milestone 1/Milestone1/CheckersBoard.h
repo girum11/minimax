@@ -112,7 +112,7 @@ protected:
          mWhiteSet |= cell->mask;
       } else assert(false);
 
-      assert(mBlackSet & mWhiteSet == 0);
+      assert((mBlackSet & mWhiteSet) == 0);
    }
 
    // Helper function to remove a piece.
@@ -123,7 +123,7 @@ protected:
          mWhiteSet &= ~(cell->mask);
       } else assert(false);
 
-      assert(mBlackSet & mWhiteSet == 0);
+      assert((mBlackSet & mWhiteSet) == 0);
    }
 
    // Quick helper functions for GetCell()
