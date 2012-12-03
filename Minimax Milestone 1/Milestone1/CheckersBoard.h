@@ -260,6 +260,10 @@ protected:
       return mCells + (row*kDim) + (col/2);
    }
 
+   static inline Cell *GetCell(const std::pair<char, unsigned int> &loc) {
+      return GetCell(loc.first, loc.second);
+   }
+
    // Static member datum goes here
    struct CheckersBoardInitializer {
       CheckersBoardInitializer() {

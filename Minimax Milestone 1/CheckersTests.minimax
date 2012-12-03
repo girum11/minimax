@@ -8,12 +8,18 @@ doMove c5->d6
 doMove f2->e1
 doMove b4->c5
 doMove g3->f2
+showBoard
 doMove a5->b4
-
 showBoard
 doMove c3->a5
 
 showBoard
+undoLastMove 1
+showBoard
+undoLastMove 1
+showBoard
+undoLastMove 1
+
 showVal
 
 quit

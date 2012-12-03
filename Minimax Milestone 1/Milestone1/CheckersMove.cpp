@@ -67,7 +67,7 @@ void CheckersMove::operator=(const string &src) {
    unsigned start = copy.find_first_not_of(" \t"), 
     end = copy.find_last_not_of(" \t");
    LocVector locs;
-   int index = 0, charsRead = 0;
+   unsigned int index = 0, charsRead = 0;
    static const int kChunkSize = 10;
    bool readAllLocations = false;
    char arrow[2], trailingGarbage;
@@ -137,10 +137,16 @@ void CheckersMove::operator=(const string &src) {
    // locs variable over into the mLocs of this object.
    mLocs = locs;
    AssertMe();
+
+   // Set whether or not this is a jump move
+   if (IsJumpMove(&mLocs))
+      mIsJumpMove = true;
+   else
+      mIsJumpMove = false;
 }
 
 Board::Move *CheckersMove::Clone() const {
-   return new CheckersMove(this->mLocs);
+   return new CheckersMove(this->mLocs, false);
 }
 
 istream &CheckersMove::Read(istream &is) {

@@ -269,6 +269,7 @@ void PylosBoard::ApplyMove(Move *move) {
       mBlackReserve += rChange;
    else assert(false);
 
+   // Change whose move it is and keep a track of this move in mMoveHist
    mMoveHist.push_back(move);
    mWhoseMove = -mWhoseMove;
 }

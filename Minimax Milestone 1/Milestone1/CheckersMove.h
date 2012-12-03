@@ -20,7 +20,8 @@ public:
 
    friend class CheckersBoard;
 
-   CheckersMove(const LocVector &locs) : mLocs(locs) {
+   CheckersMove(const LocVector &locs, bool isJump)
+    : mLocs(locs), mIsJumpMove(isJump) {
       AssertMe();
    }
    virtual ~CheckersMove() {}
@@ -46,6 +47,7 @@ protected:
    enum {};
 
    LocVector mLocs;
+   bool mIsJumpMove;
 
    static std::vector<CheckersMove *> mFreeList;
 
@@ -64,6 +66,11 @@ protected:
          assert(InRange<char>('A', locIter->first, 'I'));
          assert(InRange<unsigned int>(1, locIter->second, 9));
       }
+   }
+
+   static inline bool IsJumpMove(LocVector *locs) {
+      return !(abs((*locs)[0].first - (*locs)[1].first) == 1 &&
+       abs((int)((*locs)[0].second - (*locs)[1].second)) == 1);
    }
 
 };

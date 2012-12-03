@@ -163,15 +163,9 @@ void CheckersBoard::ApplyMove(Move *move) {
    // Remove the piece from its original location
    HalfTake(GetCell((*locs)[0].first, (*locs)[0].second), mWhoseMove);
 
-   // First, check if this move is a "non-jump move".  If it is, then don't
-   // do anything (let the rest of applyMove() run its course).
-   if (abs((*locs)[0].first - (*locs)[1].first) == 1 &&
-    abs((int)((*locs)[0].second - (*locs)[1].second)) == 1) {
-      cout << "Got non-jump move" << endl;
-      // HalfPut(GetCell((*locs)[1].first, (*locs)[1].second), mWhoseMove);
-   }
-   // Otherwise, this move IS a jump move.
-   else {
+   // If this move is a "jump move", then you need to do perform some extra
+   // logic to remove cells that you've jumped over.
+   if (castedMove->mIsJumpMove) {
       for (unsigned int index2 = 1; index2 < (*locs).size(); ++index2) {
          Cell *jumpedCell = NULL;
          Cell *destCell = GetCell((*locs)[index2].first, (*locs)[index2].second);
@@ -194,7 +188,8 @@ void CheckersBoard::ApplyMove(Move *move) {
             }
          }
 
-         // Figure out which cell you jumped
+         // Figure out which cell you jumped.
+         // TODO: Refactor this.
          // North-west jump
          if ((*locs)[index2].first > (*locs)[index2-1].first
           && (*locs)[index2].second < (*locs)[index2-1].second) {
@@ -235,20 +230,50 @@ void CheckersBoard::ApplyMove(Move *move) {
     GetCell((*locs)[locs->size()-1].first, (*locs)[locs->size()-1].second);
    HalfPut(destinationCell, mWhoseMove);
 
-   // Change whose move it is
-   if (mWhoseMove == kBlack)
-      mWhoseMove = kWhite;
-   else if (mWhoseMove == kWhite)
-      mWhoseMove = kBlack;
-   else assert(false);
+   // Assert that the two bitmasks don't have any pieces in common.
+   assert((mBlackSet & mWhiteSet) == 0);
+
+   // Change whose move it is and keep a track of this move in mMoveHist
+   mMoveHist.push_back(move);
+   mWhoseMove = -mWhoseMove;
 
    // Assert that the two bitmasks don't have any pieces in common.
    assert((mBlackSet & mWhiteSet) == 0);
 }
 
 void CheckersBoard::UndoLastMove() {
-   // This should basically be ApplyMove() backwards.
+   // Load up the last move in mMoveHist.
+   CheckersMove *moveToUndo = dynamic_cast<CheckersMove *>(mMoveHist.back());
 
+   // Switch whose move it is (early, so that you're taking away the turn
+   // that happened BEFORE this current turn)
+   mWhoseMove = -mWhoseMove;
+
+   // First, regardless of if this move is a jump move or not, HalfPut the 
+   // starting location back in and HalfTake the ending location away.
+   HalfPut(GetCell(moveToUndo->mLocs[0]), mWhoseMove);
+   HalfTake(GetCell(moveToUndo->mLocs[moveToUndo->mLocs.size()-1]), mWhoseMove);
+
+   // If this is a jump move, then HalfPut each of the moves that you jumped
+   // back in.
+   if (moveToUndo->mIsJumpMove) {
+
+      // Iterate over to the second-to-last Location
+      CheckersMove::LocVector::iterator listIter = moveToUndo->mLocs.end();
+      listIter--;
+      listIter--;
+
+      // For every Location in the list that's not the first or last Location
+      // (that is, for every piece that you "jumped"), HalfPut it back in
+      // for the other player.
+      for ( ; listIter != moveToUndo->mLocs.begin(); listIter--) {
+         HalfPut(GetCell(*listIter), -mWhoseMove);
+      }
+   }
+
+   // Destroy history of the move
+   delete moveToUndo;
+   mMoveHist.pop_back();
 }
 
 void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
@@ -276,7 +301,7 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
                CheckersMove::LocVector locs;
                locs.push_back(cell->loc);
                locs.push_back(cell->neighborCells[dir]->loc);
-               CheckersMove *newMove = new CheckersMove(locs);
+               CheckersMove *newMove = new CheckersMove(locs, false);
                castedMoves->push_back(newMove);
             }
             else if (CanJump(cell, dir)) {
@@ -332,13 +357,13 @@ void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves,
    // in any direction, then you've found a jump (or multiple jump) that doens't
    // stop halfway through completion.  Add it to the list of moves.
    if (!foundDeeperJumpBranch) {
-      CheckersMove *newMove = new CheckersMove(locs);
+      CheckersMove *newMove = new CheckersMove(locs, true);
       moves->push_back(newMove);
    }
 }
 
 Board::Move *CheckersBoard::CreateMove() const {
-   return new CheckersMove(CheckersMove::LocVector());
+   return new CheckersMove(CheckersMove::LocVector(), false);
 }
 
 
@@ -378,11 +403,11 @@ void CheckersBoard::SetOptions(const void *opts) {
 }
 
 istream &CheckersBoard::Read(istream &is) {
-
+   // TODO:
    return is;
 }
 
 ostream &CheckersBoard::Write(ostream &os) const { 
-   
+   // TODO:
    return os;
 }
