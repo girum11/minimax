@@ -9,7 +9,7 @@ doMove f2->e1
 doMove b4->c5
 doMove g3->f2
 doMove a5->b4
-doMove c3->a5
+--doMove c3->a5
 
 showBoard
 

@@ -255,34 +255,23 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
       for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2) {
          Cell *cell = GetCell(row, col);
 
-         // For each occupied Cell on the board, inspect the moves it can take
-         if (CellOccupied(row, col, kBlack) && CellContainsKing(row, col)) {
-//             cout << "Black King at " << cell->name << endl;
-//             cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
-//             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
-//             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
-//             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
-            AddAllMovesForPiece(castedMoves, cell, true, kBlack);
-         } else if (CellOccupied(row, col, kWhite) && CellContainsKing(row, col)) {
-//             cout << "White King at " << cell->name << endl;
-//             cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
-//             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
-//             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
-//             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
-            AddAllMovesForPiece(castedMoves, cell, true, kWhite);
-         } else if (CellOccupied(row, col, kBlack)) {
-//             cout << "Black piece at " << cell->name << endl;
-//             cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
-//             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
-//             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
-//             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
+         // For each occupied Cell on the board, inspect the moves it can take.
+         // Black king case.
+         if (mWhoseMove == kBlack && CellOccupied(row, col, kBlack) 
+          && CellContainsKing(row, col)) {
+             AddAllMovesForPiece(castedMoves, cell, true, kBlack);
+         } 
+         // White King case
+         else if (mWhoseMove == kWhite && CellOccupied(row, col, kWhite) 
+          && CellContainsKing(row, col)) {
+             AddAllMovesForPiece(castedMoves, cell, true, kWhite);
+         } 
+         // Black piece case
+         else if (mWhoseMove == kBlack && CellOccupied(row, col, kBlack)) {
             AddAllMovesForPiece(castedMoves, cell, false, kBlack);
-         } else if (CellOccupied(row, col, kWhite)) {
-//             cout << "White piece at " << cell->name << endl;
-//             cout << "Bottom-left: " << (cell->bottomLeft ? cell->bottomLeft->name : "NULL") << endl;
-//             cout << "Bottom-right: " << (cell->bottomRight ? cell->bottomRight->name : "NULL") << endl << endl;
-//             cout << "Top-left: " << (cell->topLeft ? cell->topLeft->name : "NULL") << endl;
-//             cout << "Top-right: " << (cell->topRight ? cell->topRight->name : "NULL") << endl;
+         } 
+         // White piece case
+         else if (mWhoseMove == kWhite && CellOccupied(row, col, kWhite)) {
             AddAllMovesForPiece(castedMoves, cell, false, kWhite);
          }
       }
@@ -352,10 +341,23 @@ void CheckersBoard::AddMovesForDirection(list<CheckersMove *> *moves,
    else {
       // TODO: Call the recursive DFS to find all possible jump moves in this
       // direction.
+
    }
 }
 
-void CheckersBoard::AddJumpMovesDFS() const {
+void CheckersBoard::AddJumpMovesDFS(list<CheckersMove *> *moves, int direction) const {
+
+   // "The target spot" is the spot one space in the direction that you
+   // want to check.
+   // 
+   // Check if the target spot is occupied by the other player's piece.
+   // If it is, then check if the spot behind the target spot is empty.
+   // If it is, then add that move to the list of moves, 
+   // and then recursively recall this function 
+   // from that spot, in the direction that you jumped.
+
+
+
 
 }
 

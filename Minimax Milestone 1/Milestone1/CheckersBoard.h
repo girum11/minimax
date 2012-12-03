@@ -88,6 +88,7 @@ protected:
    
    
    enum { kStartingPieces = 12, kStartingBackPieces = 4 };
+   enum { kSW = 0, kSE = 1, kNW = 2, kNE = 3 };
 
    typedef ulong Set;
 
@@ -140,7 +141,7 @@ protected:
 
    void AddMovesForDirection(std::list<CheckersMove *> *, Cell *, Cell *) const;
 
-   void AddJumpMovesDFS() const;
+   void AddJumpMovesDFS(std::list<CheckersMove *> *, int) const;
 
    // Quick helper functions for GetCell()
    static inline bool IsEven(char num) { return num % 2; }
