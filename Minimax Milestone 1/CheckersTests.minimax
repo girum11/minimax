@@ -14,5 +14,6 @@ showBoard
 doMove c3->a5
 
 showBoard
+showVal
 
 quit

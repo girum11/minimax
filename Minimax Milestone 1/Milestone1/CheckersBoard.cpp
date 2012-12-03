@@ -17,8 +17,8 @@ using namespace std;
 /************************************************************************/
 CheckersBoard::Rules CheckersBoard::mRules;
 CheckersBoard::Cell CheckersBoard::mCells[kNumCells];
-ulong CheckersBoard::mBlackBackRow;
-ulong CheckersBoard::mWhiteBackRow;
+ulong CheckersBoard::mBlackBackSet;
+ulong CheckersBoard::mWhiteBackSet;
 
 BoardClass CheckersBoard::mClass("CheckersBoard",
                                  &CreateCheckersBoard,
@@ -50,11 +50,11 @@ void CheckersBoard::StaticInit() {
 
          // Initialize mBlackBackRow
          if (row == 'A') {
-            mBlackBackRow |= cell->mask;
+            mBlackBackSet |= cell->mask;
          }
          // Initialize mWhiteBackRow
          else if (row == 'H') {
-            mWhiteBackRow |= cell->mask;
+            mWhiteBackSet |= cell->mask;
          } 
       }
    }
@@ -184,11 +184,11 @@ void CheckersBoard::ApplyMove(Move *move) {
          // If you at any point a non-king jumps into the back row, then assert 
          // that it STOPPED MOVING.  Also, add the piece to the king set.
          if ((destCell->mask & mKingSet) == 0) {
-            if (mWhoseMove == kBlack && (destCell->mask & mWhiteBackRow)) {
+            if (mWhoseMove == kBlack && (destCell->mask & mWhiteBackSet)) {
                assert(index2 == ((*locs).size() - 1));
                mKingSet |= destCell->mask;
             }
-            else if (mWhoseMove == kWhite && (destCell->mask & mBlackBackRow)) {
+            else if (mWhoseMove == kWhite && (destCell->mask & mBlackBackSet)) {
                assert(index2 == ((*locs).size() - 1));
                mKingSet |= destCell->mask;
             }

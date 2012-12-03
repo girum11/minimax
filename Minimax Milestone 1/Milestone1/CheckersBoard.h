@@ -118,6 +118,7 @@ protected:
       // Update mBlackCount, mWhiteCount
       // Update mBlackKingCount, mWhiteKingCount
       // Update mBlackBackCount, mWhiteBackCount
+      UpdateBoardValuation(cell, color, 1);
    }
 
    // Helper function to remove a piece.
@@ -134,6 +135,35 @@ protected:
       // Update mBlackCount, mWhiteCount
       // Update mBlackKingCount, mWhiteKingCount
       // Update mBlackBackCount, mWhiteBackCount
+      UpdateBoardValuation(cell, color, -1);
+   }
+
+   void UpdateBoardValuation(Cell *cell, int color, int rChange) {
+      if (color == kBlack) {
+         // Update the overall count
+         mBlackCount += rChange;
+
+         // If the cell was a back row cell, update that.
+         if ((cell->mask & mBlackBackSet) != 0)
+            mBlackBackCount += rChange;
+         
+         // If the cell was a king, update that.  (mKingSet should have already
+         // been updated before this method is called, which it is currently.)
+         if ((cell->mask & mKingSet) != 0)
+            mBlackKingCount += rChange;
+      } else if (color == kWhite) {
+         // Update the overall count
+         mWhiteCount += rChange;
+
+         // If the cell was a back row cell, update that.
+         if ((cell->mask & mWhiteBackSet) != 0)
+            mWhiteBackCount += rChange;
+
+         // If the cell was a king, update that.  (mKingSet should have already
+         // been updated before this method is called, which it is currently.)
+         if ((cell->mask & mKingSet) != 0)
+            mWhiteKingCount += rChange;
+      } else assert(false);
    }
 
    void MultipleJumpDFS(std::list<CheckersMove *> *, 
@@ -241,8 +271,8 @@ protected:
    static Rules mRules; // The static rules object for CheckersBoard
 
    static Cell mCells[kNumCells]; // One Cell for each cell
-   static Set mBlackBackRow; // Static bitmask of the cells of Black's back row
-   static Set mWhiteBackRow; // Static bitmask of the cells of White's back row
+   static Set mBlackBackSet; // Static bitmask of the cells of Black's back row
+   static Set mWhiteBackSet; // Static bitmask of the cells of White's back row
 
    // Bitmasks indicating which cells contain white pieces, black pieces,
    // and Kings.  No-marble cells are 0 in both masks.  Bits are assigned to
