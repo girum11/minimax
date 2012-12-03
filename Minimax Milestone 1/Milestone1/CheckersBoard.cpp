@@ -78,8 +78,9 @@ void CheckersBoard::StaticInit() {
 }
 
 CheckersBoard::CheckersBoard() : mWhoseMove(kBlack), 
- mBlackCount(kStartingPieces), mBlackBackCount(kStartingBackPieces),
- mWhiteCount(kStartingPieces), mWhiteBackCount(kStartingBackPieces) {
+ mBlackCount(kStartingPieces), mBlackKingCount(0), 
+ mBlackBackCount(kStartingBackPieces), mWhiteCount(kStartingPieces), 
+ mWhiteKingCount(0), mWhiteBackCount(kStartingBackPieces) {
    // Just to make sure that I'm covering all my bases with ALL member datum
    assert(mMoveHist.size() == 0);
 
@@ -114,7 +115,20 @@ CheckersBoard::~CheckersBoard() {
 }
 
 long CheckersBoard::GetValue() const {
-   return 0;
+   // TODO: Handle the case where the game is over due to noone being able
+   // to move.
+   
+   // Black is positive, white is negative
+   if (mWhiteCount == 0)
+      return kWinVal;
+   else if (mBlackCount == 0)
+      return -kWinVal;
+   else {
+      return pieceWgt * (mBlackCount - mWhiteCount) + 
+       mRules.kingWgt * (mBlackKingCount - mWhiteKingCount) +
+       mRules.backRowWgt * (mBlackBackCount - mWhiteBackCount) +
+       mRules.moveWgt * mWhoseMove;
+   }
 }
 
 void CheckersBoard::ApplyMove(Move *move) {
@@ -124,7 +138,6 @@ void CheckersBoard::ApplyMove(Move *move) {
    Set allPieces(mBlackSet | mWhiteSet);
    Cell *originCell = GetCell((*locs)[0].first, (*locs)[0].second);
    int jumpedPieces = 0; // The number of pieces that move "jumps"
-   
 
    // Sanity checks on each destination piece.
    for (unsigned int index1 = 1; index1 < (*locs).size(); ++index1) {
