@@ -46,8 +46,6 @@ void CheckersBoard::StaticInit() {
          cell = mCells + nextCell;
          cell->mask = 1 << nextCell;
 
-         // cout << "Setup cell: " << row << col << "\n";
-         cell->name = FString("%c%u", row, col);
          cell->loc = CheckersMove::Location(row, col);
 
          // Initialize mBlackBackRow
@@ -241,181 +239,46 @@ void CheckersBoard::UndoLastMove() {
 }
 
 void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
+   list<CheckersMove *> *castedMoves = reinterpret_cast<list<CheckersMove *>*>(uncastMoves);
    char row;
    unsigned int col;
-   list<CheckersMove *>::iterator itr;
-   list<CheckersMove *> *castedMoves = reinterpret_cast<list<CheckersMove *>*>(uncastMoves);
 
    assert(uncastMoves->size() == 0 && castedMoves->size() == 0);
 
+   // If the game is over, don't construct a list
    if (mBlackCount == 0 || mWhiteCount == 0)
       return;
 
    for (row = 'A'; row <= 'H'; row++) {
       for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2) {
          Cell *cell = GetCell(row, col);
+         assert(cell != NULL);
 
-         
-
-         // For each occupied Cell on the board, inspect the moves it can take.
-         // Black king case.
-         if (mWhoseMove == kBlack && CellOccupied(row, col, kBlack) 
-          && CellContainsKing(row, col)) {
-             AddAllMovesInAllDirections(castedMoves, cell, true);
-         } 
-         // White King case
-         else if (mWhoseMove == kWhite && CellOccupied(row, col, kWhite) 
-          && CellContainsKing(row, col)) {
-             AddAllMovesInAllDirections(castedMoves, cell, true);
-         } 
-         // Black piece case
-         else if (mWhoseMove == kBlack && CellOccupied(row, col, kBlack)) {
-            AddAllMovesInAllDirections(castedMoves, cell, false);
-         } 
-         // White piece case
-         else if (mWhoseMove == kWhite && CellOccupied(row, col, kWhite)) {
-            AddAllMovesInAllDirections(castedMoves, cell, false);
+         for (int dir = 0; dir < kSqr; dir++) {
+            // If a piece can move in a particular direction, then do it.
+            // It can't possibly jump a piece in that direction.
+            if (CanMove(cell, dir)) {
+               // Add a non-jump move in this direction
+               CheckersMove::LocVector locs;
+               locs.push_back(cell->loc);
+               locs.push_back(cell->neighborCells[dir]->loc);
+               CheckersMove *newMove = new CheckersMove(locs);
+               castedMoves->push_back(newMove);
+            }
+            else if (CanJump(cell, dir)) {
+               // Run a DFS on the possible multiple jumps that you can
+               // take.
+               MultipleJumpDFS(castedMoves, CheckersMove::LocVector());
+            }
          }
       }
    }
 }
 
-// Adds possible moves for a particular piece, in all four directions.
-void CheckersBoard::AddAllMovesInAllDirections(list<CheckersMove *> *moves, Cell *cell, 
- bool isKing) const {
-   assert(cell != NULL);
-
-   // In the order above, first see if the Locations are immediately
-   // empty.  If they are, don't recurse.  Instead, just add that
-   // location as a "non-jump" move.  This is the only possible way
-   // that a move can be a "non-jump" move.
-   // 
-   // Otherwise, do a recursive DFS on the possible "jump moves" that
-   // you can do.  Base case is when the Location that you would jump to
-   // is out of bounds, or if the Location that you would jump to is
-   // already occupied.
+void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves, 
+ CheckersMove::LocVector locs) const {
    
-   // Kings should try all four directions
-   if (isKing) {
-      AddMovesInDirection(moves, cell, kSW, isKing);
-      AddMovesInDirection(moves, cell, kSE, isKing);
-      AddMovesInDirection(moves, cell, kNW, isKing);
-      AddMovesInDirection(moves, cell, kNE, isKing);
-   }
-   // Black pieces should try topLeft and topRight
-   else if (mWhoseMove == kBlack) {
-      AddMovesInDirection(moves, cell, kNW, isKing);
-      AddMovesInDirection(moves, cell, kNE, isKing);
-   }
-   // White pieces should try bottomLeft and bottomRight
-   else if (mWhoseMove == kWhite) {
-      AddMovesInDirection(moves, cell, kSW, isKing);
-      AddMovesInDirection(moves, cell, kSE, isKing);
-   } else assert(false);
 }
-
-
-// Attempts to short-circuit the DFS by finding out of bounds and non-jump
-// directions.
-void CheckersBoard::AddMovesInDirection(list<CheckersMove *> *moves, 
- Cell *from, int direction, bool isKing) const {    
-   assert(from != NULL);  
-
-   // If the piece in this direction is NULL (that is, out of bounds), then break.
-   Cell *to = from->neighborCells[direction];
-   if (to == NULL) {
-      return;
-   }
-   
-   Set allPieces = (mWhiteSet|mBlackSet);
-
-   // If the Cell in this direction is empty, then we found a non=jump move.
-   // Add a non-jump move in this direction to the list of moves, and then return.
-   if ((to->mask & allPieces) == 0) {
-      // Add a non-jump move in this direction, and return
-      CheckersMove::LocVector locs;
-      locs.push_back(from->loc);
-      locs.push_back(to->loc);
-      CheckersMove *newMove = new CheckersMove(locs);
-      moves->push_back(newMove);
-   }
-   // Otherwise, this direction will yield either a jump move or won't yield
-   // a move at all.  We have to run the recursive DFS in this direction.
-   else {
-      // Call the recursive DFS to find all possible jump moves in this
-      // direction.
-      CheckersMove::LocVector locs;
-      locs.push_back(from->loc);
-      AddJumpMoves(moves, locs, from, direction);
-   }
-}
-
-// This is the recursive DFS.
-void CheckersBoard::AddJumpMoves(list<CheckersMove *> *moves, 
- CheckersMove::LocVector locs, Cell *from, int direction, bool isKing) const {
-
-//    // "The target spot" is the spot one space in the direction that you
-//    // want to check.
-//    // 
-//    // Check if the target spot is occupied by the other player's piece.
-//    // If it is, then check if the spot behind the target spot is empty.
-//    // If it is, then add that move to the list of moves, 
-//    // and then recursively recall this function 
-//    // from that spot, in the direction that you jumped.
-// 
-//    // Find the cell diagonal to this one.
-//    Cell *diagonalCell = from->neighborCells[direction];
-// 
-//    // Assert that the diagonal cell is not out of bounds (the method that
-//    // calls this method should have already handled that case).
-//    assert(diagonalCell != NULL);
-// 
-//    Cell *diagonalDiagonalCell = diagonalCell->neighborCells[direction];
-// 
-//    // If the diagonalDiagonalCell is out of bounds, then return without adding
-//    // any new moves.
-//    if (diagonalDiagonalCell == NULL) {
-//       return;
-//    }
-//    
-//    // If diagonalCell belongs to the other player and diagonalDiagonalCell
-//    // is empty, then "make the jump" by adding this move to the list of moves,
-//    // and additionally recursively call this function from diagonalDiagonalCell
-//    // for each direction.
-//    if ((mWhoseMove == kBlack && ((diagonalCell->mask & mWhiteSet) != 0)
-//         && ((diagonalDiagonalCell->mask & (mWhiteSet|mBlackSet)) == 0))
-//     || (mWhoseMove == kWhite && ((diagonalCell->mask & mBlackSet) != 0)
-//     && ((diagonalDiagonalCell->mask & (mWhiteSet|mBlackSet)) == 0))) {
-//       // Append the destination location of this jump to the LocVector that's
-//       // being recursively passed around, and then recursively call this
-//       // from the new location for all four directions (for the permissions 
-//       // the piece has).
-//       locs.push_back(diagonalDiagonalCell->loc);
-//       
-//       // Kings should try all four directions
-//       if (isKing) {
-//          AddJumpMoves(moves, locs, diagonalDiagonalCell, kSW, isKing);
-//          AddJumpMoves(moves, locs, diagonalDiagonalCell, kSE, isKing);
-//          AddJumpMoves(moves, locs, diagonalDiagonalCell, kNW, isKing);
-//          AddJumpMoves(moves, locs, diagonalDiagonalCell, kNE, isKing);
-//       }
-//       // Black pieces should try topLeft and topRight
-//       else if (mWhoseMove == kBlack) {
-//          AddJumpMoves(moves, locs, diagonalDiagonalCell, kNW, isKing);
-//          AddJumpMoves(moves, locs, diagonalDiagonalCell, kNE, isKing);
-//       }
-//       // White pieces should try bottomLeft and bottomRight
-//       else if (mWhoseMove == kWhite) {
-//          AddJumpMoves(moves, locs, diagonalDiagonalCell, kSW, isKing);
-//          AddJumpMoves(moves, locs, diagonalDiagonalCell, kSE, isKing);
-//       } else assert(false);
-// 
-//    }
-// 
-
-}
-
-
 
 Board::Move *CheckersBoard::CreateMove() const {
    return new CheckersMove(CheckersMove::LocVector());

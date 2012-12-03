@@ -7,7 +7,6 @@ Class CheckersDlg::mClass("CheckersDlg", &CreateCheckersDlg);
 
 bool CheckersDlg::Run(istream &in, ostream &out, void *data) {
    CheckersBoard::Rules *rules = reinterpret_cast<CheckersBoard::Rules *>(data);
-   char resp;
 
    return false;
 }

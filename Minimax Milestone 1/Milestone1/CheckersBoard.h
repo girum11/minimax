@@ -95,21 +95,9 @@ protected:
    struct Cell {
       Set mask; // Mask with this cell's bit turned on
 
-//       // Pointer to the cell to the top left of this one, or NULL
-//       Cell *topLeft; 
-// 
-//       // Pointer to the cell to the top right of this one, or NULL
-//       Cell *topRight; 
-//       
-//       // Pointer to the cell to the bottom left of this one, or NULL
-//       Cell *bottomLeft;
-//       
-//       // Pointer to the cell to the bottom right of this one, or NULL
-//       Cell *bottomRight;
-
       Cell *neighborCells[kSqr];
 
-      std::string name;  // Formatted name of this Cell
+      // std::string name;  // Formatted name of this Cell
       std::pair<char, unsigned int> loc;
    };
 
@@ -138,15 +126,10 @@ protected:
       assert((mBlackSet & mWhiteSet) == 0);
    }
 
-   void AddAllMovesInAllDirections(
-    std::list<CheckersMove *> *, Cell *, bool) const;
+   void MultipleJumpDFS(std::list<CheckersMove *> *, 
+    std::vector<std::pair<char, unsigned int> >) const;
 
-   void AddMovesInDirection(std::list<CheckersMove *> *, Cell *, int, bool) const;
-
-   void AddJumpMoves(std::list<CheckersMove *> *, CheckersMove::LocVector,
-    Cell *, int, bool) const;
-
-   inline bool CanMove(Cell *cell, int direction) {
+   inline bool CanMove(Cell *cell, int direction) const {
       // Validate that this piece can move in the direction that you
       // want to move in.
       if (!IsValidDirection(cell, direction))
@@ -162,7 +145,7 @@ protected:
       return true;
    }
 
-   inline bool CanJump(Cell *cell, int dir) {
+   inline bool CanJump(Cell *cell, int dir) const {
       // Validate that this piece can move in the direction that you
       // want to move in.
       if (!IsValidDirection(cell, dir))
@@ -193,7 +176,7 @@ protected:
    }
 
    // Validates that a particular cell is allowed to move in a given direction
-   inline bool IsValidDirection(Cell *cell, int direction) {
+   inline bool IsValidDirection(Cell *cell, int direction) const {
       // Black non-kings can only move upwards
       if (mWhoseMove == kBlack && ((mKingSet|cell->mask) == 0)) {
          if (direction == kSW || direction == kSE) {
