@@ -177,22 +177,22 @@ protected:
 
    // Validates that a particular cell is allowed to move in a given direction
    inline bool IsValidDirection(Cell *cell, int direction) const {
+      // Kings can move any direction
+      if ((mKingSet&cell->mask) != 0) {
+         return true;
+      }
       // Black non-kings can only move upwards
-      if (mWhoseMove == kBlack && ((mKingSet|cell->mask) == 0)) {
-         if (direction == kSW || direction == kSE) {
-            return false;
-         }
+      else if (mWhoseMove == kBlack && (cell->mask & mBlackSet) != 0 
+       && (direction == kNW || direction == kNE)) {
+         return true;
       }
-      // White non-kings can only move downards
-      else if (mWhoseMove == kWhite && ((mKingSet|cell->mask) == 0)) {
-         if (direction == kNW || direction == kNE) {
-            return false;
-         }
+      // White non-kings can only move downwards
+      else if (mWhoseMove == kWhite && (cell->mask & mWhiteSet) != 0 
+       && (direction == kSW || direction == kSE)) {
+         return true;
       }
-
-      return true;
+      return false;
    }
-
 
    // Quick helper functions for GetCell()
    static inline bool IsEven(char num) { return num % 2; }
