@@ -259,28 +259,28 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
          // Black king case.
          if (mWhoseMove == kBlack && CellOccupied(row, col, kBlack) 
           && CellContainsKing(row, col)) {
-             AddAllMovesForPiece(castedMoves, cell, true, kBlack);
+             AddAllMovesInAllDirections(castedMoves, cell, true);
          } 
          // White King case
          else if (mWhoseMove == kWhite && CellOccupied(row, col, kWhite) 
           && CellContainsKing(row, col)) {
-             AddAllMovesForPiece(castedMoves, cell, true, kWhite);
+             AddAllMovesInAllDirections(castedMoves, cell, true);
          } 
          // Black piece case
          else if (mWhoseMove == kBlack && CellOccupied(row, col, kBlack)) {
-            AddAllMovesForPiece(castedMoves, cell, false, kBlack);
+            AddAllMovesInAllDirections(castedMoves, cell, false);
          } 
          // White piece case
          else if (mWhoseMove == kWhite && CellOccupied(row, col, kWhite)) {
-            AddAllMovesForPiece(castedMoves, cell, false, kWhite);
+            AddAllMovesInAllDirections(castedMoves, cell, false);
          }
       }
    }
 }
 
 // Adds possible moves for a particular piece, in all four directions.
-void CheckersBoard::AddAllMovesForPiece(list<CheckersMove *> *moves, Cell *cell, 
- bool isKing, int whoseMove) const {
+void CheckersBoard::AddAllMovesInAllDirections(list<CheckersMove *> *moves, Cell *cell, 
+ bool isKing) const {
    assert(cell != NULL);
 
    // In the order above, first see if the Locations are immediately
@@ -295,31 +295,40 @@ void CheckersBoard::AddAllMovesForPiece(list<CheckersMove *> *moves, Cell *cell,
    
    // Kings should try all four directions
    if (isKing) {
-      AddMovesForDirection(moves, cell, cell->bottomLeft);
-      AddMovesForDirection(moves, cell, cell->bottomRight);
-      AddMovesForDirection(moves, cell, cell->topLeft);
-      AddMovesForDirection(moves, cell, cell->topRight);
+//       AddMovesInDirection(moves, cell, cell->bottomLeft);
+//       AddMovesInDirection(moves, cell, cell->bottomRight);
+//       AddMovesInDirection(moves, cell, cell->topLeft);
+//       AddMovesInDirection(moves, cell, cell->topRight);
+      AddMovesInDirection(moves, cell, kSW);
+      AddMovesInDirection(moves, cell, kSE);
+      AddMovesInDirection(moves, cell, kNW);
+      AddMovesInDirection(moves, cell, kNE);
    }
    // Black pieces should try topLeft and topRight
-   else if (whoseMove == kBlack) {
-      AddMovesForDirection(moves, cell, cell->topLeft);
-      AddMovesForDirection(moves, cell, cell->topRight);
+   else if (mWhoseMove == kBlack) {
+//       AddMovesInDirection(moves, cell, cell->topLeft);
+//       AddMovesInDirection(moves, cell, cell->topRight);
+      AddMovesInDirection(moves, cell, kNW);
+      AddMovesInDirection(moves, cell, kNE);
    }
    // White pieces should try bottomLeft and bottomRight
-   else if (whoseMove == kWhite) {
-      AddMovesForDirection(moves, cell, cell->bottomLeft);
-      AddMovesForDirection(moves, cell, cell->bottomRight);
+   else if (mWhoseMove == kWhite) {
+//       AddMovesInDirection(moves, cell, cell->bottomLeft);
+//       AddMovesInDirection(moves, cell, cell->bottomRight);
+      AddMovesInDirection(moves, cell, kSW);
+      AddMovesInDirection(moves, cell, kSE);
    } else assert(false);
 }
 
 
 // Attempts to short-circuit the DFS by finding out of bounds and non-jump
 // directions.
-void CheckersBoard::AddMovesForDirection(list<CheckersMove *> *moves, 
- Cell *from, Cell *to) const {
-   assert(from != NULL);
+void CheckersBoard::AddMovesInDirection(list<CheckersMove *> *moves, 
+ Cell *from, int direction) const {    
+   assert(from != NULL);  
 
-   // If this direction is NULL (that is, out of bounds), then break.
+   // If the piece in this direction is NULL (that is, out of bounds), then break.
+   Cell *to = GetCellInDirection(from, direction);
    if (to == NULL) {
       return;
    }
@@ -345,7 +354,8 @@ void CheckersBoard::AddMovesForDirection(list<CheckersMove *> *moves,
    }
 }
 
-void CheckersBoard::AddJumpMovesDFS(list<CheckersMove *> *moves, int direction) const {
+// This is the recursive DFS.
+void CheckersBoard::AddJumpMoves(list<CheckersMove *> *moves, int direction) const {
 
    // "The target spot" is the spot one space in the direction that you
    // want to check.
@@ -355,6 +365,7 @@ void CheckersBoard::AddJumpMovesDFS(list<CheckersMove *> *moves, int direction) 
    // If it is, then add that move to the list of moves, 
    // and then recursively recall this function 
    // from that spot, in the direction that you jumped.
+
 
 
 

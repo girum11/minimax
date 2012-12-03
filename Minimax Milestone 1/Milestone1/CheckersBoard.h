@@ -136,12 +136,25 @@ protected:
       assert((mBlackSet & mWhiteSet) == 0);
    }
 
-   void AddAllMovesForPiece(
-    std::list<CheckersMove *> *, Cell *, bool, int) const;
+   void AddAllMovesInAllDirections(
+    std::list<CheckersMove *> *, Cell *, bool) const;
 
-   void AddMovesForDirection(std::list<CheckersMove *> *, Cell *, Cell *) const;
+   void AddMovesInDirection(std::list<CheckersMove *> *, Cell *, int) const;
 
-   void AddJumpMovesDFS(std::list<CheckersMove *> *, int) const;
+   void AddJumpMoves(std::list<CheckersMove *> *, int) const;
+
+   static Cell *GetCellInDirection(Cell *cell, int direction) {
+      switch (direction) {
+      case kSW:
+         return cell->bottomLeft;
+      case kSE:
+         return cell->bottomRight;
+      case kNW:
+         return cell->topLeft;
+      case kNE:
+         return cell->topRight;
+      }
+   }
 
    // Quick helper functions for GetCell()
    static inline bool IsEven(char num) { return num % 2; }
