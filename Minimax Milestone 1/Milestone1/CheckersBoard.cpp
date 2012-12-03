@@ -71,10 +71,10 @@ void CheckersBoard::StaticInit() {
 
          // Set up the directional pointers for mCells.  GetCell() 
          // automatically returns NULL for any out of bounds values.
-         cell->topLeft = GetCell(row+1, col-1);
-         cell->topRight = GetCell(row+1,col+1);
-         cell->bottomLeft = GetCell(row-1, col-1);
-         cell->bottomRight = GetCell(row-1, col+1);
+         cell->neighborCells[kSW] = GetCell(row-1, col-1);
+         cell->neighborCells[kSE] = GetCell(row-1, col+1);
+         cell->neighborCells[kNW] = GetCell(row+1, col-1);
+         cell->neighborCells[kNE] = GetCell(row+1,col+1);
       }
    }
 }
@@ -295,10 +295,6 @@ void CheckersBoard::AddAllMovesInAllDirections(list<CheckersMove *> *moves, Cell
    
    // Kings should try all four directions
    if (isKing) {
-//       AddMovesInDirection(moves, cell, cell->bottomLeft);
-//       AddMovesInDirection(moves, cell, cell->bottomRight);
-//       AddMovesInDirection(moves, cell, cell->topLeft);
-//       AddMovesInDirection(moves, cell, cell->topRight);
       AddMovesInDirection(moves, cell, kSW);
       AddMovesInDirection(moves, cell, kSE);
       AddMovesInDirection(moves, cell, kNW);
@@ -306,15 +302,11 @@ void CheckersBoard::AddAllMovesInAllDirections(list<CheckersMove *> *moves, Cell
    }
    // Black pieces should try topLeft and topRight
    else if (mWhoseMove == kBlack) {
-//       AddMovesInDirection(moves, cell, cell->topLeft);
-//       AddMovesInDirection(moves, cell, cell->topRight);
       AddMovesInDirection(moves, cell, kNW);
       AddMovesInDirection(moves, cell, kNE);
    }
    // White pieces should try bottomLeft and bottomRight
    else if (mWhoseMove == kWhite) {
-//       AddMovesInDirection(moves, cell, cell->bottomLeft);
-//       AddMovesInDirection(moves, cell, cell->bottomRight);
       AddMovesInDirection(moves, cell, kSW);
       AddMovesInDirection(moves, cell, kSE);
    } else assert(false);
@@ -328,7 +320,7 @@ void CheckersBoard::AddMovesInDirection(list<CheckersMove *> *moves,
    assert(from != NULL);  
 
    // If the piece in this direction is NULL (that is, out of bounds), then break.
-   Cell *to = GetCellInDirection(from, direction);
+   Cell *to = from->neighborCells[direction];
    if (to == NULL) {
       return;
    }
@@ -348,14 +340,14 @@ void CheckersBoard::AddMovesInDirection(list<CheckersMove *> *moves,
    // Otherwise, this direction will yield either a jump move or won't yield
    // a move at all.  We have to run the recursive DFS in this direction.
    else {
-      // TODO: Call the recursive DFS to find all possible jump moves in this
+      // Call the recursive DFS to find all possible jump moves in this
       // direction.
-
+      AddJumpMoves(moves, from, direction);
    }
 }
 
 // This is the recursive DFS.
-void CheckersBoard::AddJumpMoves(list<CheckersMove *> *moves, int direction) const {
+void CheckersBoard::AddJumpMoves(list<CheckersMove *> *moves, Cell *from, int direction) const {
 
    // "The target spot" is the spot one space in the direction that you
    // want to check.
@@ -366,6 +358,25 @@ void CheckersBoard::AddJumpMoves(list<CheckersMove *> *moves, int direction) con
    // and then recursively recall this function 
    // from that spot, in the direction that you jumped.
 
+   // Find the cell diagonal to this one.
+   Cell *diagonalCell = from->neighborCells[direction];
+
+   // Assert that the diagonal cell is not out of bounds (the method that
+   // calls this method should have already handled that case).
+   assert(diagonalCell != NULL);
+
+   Cell *diagonalDiagonalCell = diagonalCell->neighborCells[direction];
+
+   // If the diagonalDiagonalCell is out of bounds, then return without adding
+   // any new moves.
+   if (diagonalDiagonalCell == NULL) {
+      return;
+   }
+   
+   // If diagonalCell belongs to the other player and diagonalDiagonalCell
+   // is empty, then "make the jump" by adding this move to the list of moves,
+   // and additionally recursively call this function from diagonalDiagonalCell
+   // for each direction.
 
 
 

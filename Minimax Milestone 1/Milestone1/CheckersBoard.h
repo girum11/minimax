@@ -87,7 +87,7 @@ public:
 protected:
    
    
-   enum { kStartingPieces = 12, kStartingBackPieces = 4 };
+   enum { kStartingPieces = 12, kStartingBackPieces = 4, kSqr = 4 };
    enum { kSW = 0, kSE = 1, kNW = 2, kNE = 3 };
 
    typedef ulong Set;
@@ -95,17 +95,19 @@ protected:
    struct Cell {
       Set mask; // Mask with this cell's bit turned on
 
-      // Pointer to the cell to the top left of this one, or NULL
-      Cell *topLeft; 
+//       // Pointer to the cell to the top left of this one, or NULL
+//       Cell *topLeft; 
+// 
+//       // Pointer to the cell to the top right of this one, or NULL
+//       Cell *topRight; 
+//       
+//       // Pointer to the cell to the bottom left of this one, or NULL
+//       Cell *bottomLeft;
+//       
+//       // Pointer to the cell to the bottom right of this one, or NULL
+//       Cell *bottomRight;
 
-      // Pointer to the cell to the top right of this one, or NULL
-      Cell *topRight; 
-      
-      // Pointer to the cell to the bottom left of this one, or NULL
-      Cell *bottomLeft;
-      
-      // Pointer to the cell to the bottom right of this one, or NULL
-      Cell *bottomRight;
+      Cell *neighborCells[kSqr];
 
       std::string name;  // Formatted name of this Cell
       std::pair<char, unsigned int> loc;
@@ -141,20 +143,20 @@ protected:
 
    void AddMovesInDirection(std::list<CheckersMove *> *, Cell *, int) const;
 
-   void AddJumpMoves(std::list<CheckersMove *> *, int) const;
+   void AddJumpMoves(std::list<CheckersMove *> *, Cell *, int) const;
 
-   static Cell *GetCellInDirection(Cell *cell, int direction) {
-      switch (direction) {
-      case kSW:
-         return cell->bottomLeft;
-      case kSE:
-         return cell->bottomRight;
-      case kNW:
-         return cell->topLeft;
-      case kNE:
-         return cell->topRight;
-      }
-   }
+//    static Cell *GetCellInDirection(Cell *cell, int direction) {
+//       switch (direction) {
+//       case kSW:
+//          return cell->bottomLeft;
+//       case kSE:
+//          return cell->bottomRight;
+//       case kNW:
+//          return cell->topLeft;
+//       case kNE:
+//          return cell->topRight;
+//       }
+//    }
 
    // Quick helper functions for GetCell()
    static inline bool IsEven(char num) { return num % 2; }
