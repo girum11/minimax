@@ -242,6 +242,7 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
    list<CheckersMove *> *castedMoves = reinterpret_cast<list<CheckersMove *>*>(uncastMoves);
    char row;
    unsigned int col;
+   bool canJumpAtLeastOnce = false;
 
    assert(uncastMoves->size() == 0 && castedMoves->size() == 0);
 
@@ -257,7 +258,7 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
          for (int dir = 0; dir < kSqr; dir++) {
             // If a piece can move in a particular direction, then do it.
             // It can't possibly jump a piece in that direction.
-            if (CanMove(cell, dir)) {
+            if (!canJumpAtLeastOnce && CanMove(cell, dir)) {
                // Add a non-jump move in this direction
                CheckersMove::LocVector locs;
                locs.push_back(cell->loc);
@@ -269,6 +270,18 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
                // At this point, you're guaranteed to have at least one
                // possible jump that you can make.  Run a DFS on the possible 
                // multiple jumps that you can take.
+
+               // Before you do that, remove any other "non-jump" moves that
+               // you added before you add "jump" moves.
+               if (!canJumpAtLeastOnce) {
+                  for (list<CheckersMove *>::iterator listIter = castedMoves->begin();
+                   listIter != castedMoves->end(); listIter++) {
+                      delete *listIter;
+                  }
+                  castedMoves->clear();
+                  canJumpAtLeastOnce = true;
+               }
+
                // Add the starting location to any possible jumps, since they
                // all would start from this location.
                CheckersMove::LocVector locs;
