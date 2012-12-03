@@ -141,22 +141,75 @@ protected:
    void AddAllMovesInAllDirections(
     std::list<CheckersMove *> *, Cell *, bool) const;
 
-   void AddMovesInDirection(std::list<CheckersMove *> *, Cell *, int) const;
+   void AddMovesInDirection(std::list<CheckersMove *> *, Cell *, int, bool) const;
 
-   void AddJumpMoves(std::list<CheckersMove *> *, Cell *, int) const;
+   void AddJumpMoves(std::list<CheckersMove *> *, CheckersMove::LocVector,
+    Cell *, int, bool) const;
 
-//    static Cell *GetCellInDirection(Cell *cell, int direction) {
-//       switch (direction) {
-//       case kSW:
-//          return cell->bottomLeft;
-//       case kSE:
-//          return cell->bottomRight;
-//       case kNW:
-//          return cell->topLeft;
-//       case kNE:
-//          return cell->topRight;
-//       }
-//    }
+   inline bool CanMove(Cell *cell, int direction) {
+      // Validate that this piece can move in the direction that you
+      // want to move in.
+      if (!IsValidDirection(cell, direction))
+         return false;
+
+      // Ensure that the piece that you want to move towards is inbounds
+      // and isn't already occupied.
+      if (!cell->neighborCells[direction]
+       || (cell->neighborCells[direction]->mask & (mBlackSet|mWhiteSet)) != 0) {
+         return false;
+      }
+
+      return true;
+   }
+
+   inline bool CanJump(Cell *cell, int dir) {
+      // Validate that this piece can move in the direction that you
+      // want to move in.
+      if (!IsValidDirection(cell, dir))
+         return false;
+
+      // Validate that you're actually jumping over a piece (that you're not
+      // trying to jump over a piece that exists out of bounds).
+      if (cell->neighborCells[dir] == NULL)
+         return false;
+
+      // Validate that the piece you're jumping over belongs to the other player
+      if ((mWhoseMove == kBlack && 
+          ((cell->neighborCells[dir]->mask & mWhiteSet) == 0))
+       || (mWhoseMove == kWhite &&
+          ((cell->neighborCells[dir]->mask & mBlackSet) == 0))) {
+         return false;
+      }
+      
+      // Verify that the spot you want to jump into is inbounds
+      // and empty.
+      if (!cell->neighborCells[dir]->neighborCells[dir] ||
+       (cell->neighborCells[dir]->neighborCells[dir]->mask 
+       & (mBlackSet|mWhiteSet)) != 0) {
+          return false;
+      }
+
+      return true;
+   }
+
+   // Validates that a particular cell is allowed to move in a given direction
+   inline bool IsValidDirection(Cell *cell, int direction) {
+      // Black non-kings can only move upwards
+      if (mWhoseMove == kBlack && ((mKingSet|cell->mask) == 0)) {
+         if (direction == kSW || direction == kSE) {
+            return false;
+         }
+      }
+      // White non-kings can only move downards
+      else if (mWhoseMove == kWhite && ((mKingSet|cell->mask) == 0)) {
+         if (direction == kNW || direction == kNE) {
+            return false;
+         }
+      }
+
+      return true;
+   }
+
 
    // Quick helper functions for GetCell()
    static inline bool IsEven(char num) { return num % 2; }
