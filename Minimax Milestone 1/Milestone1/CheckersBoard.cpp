@@ -322,7 +322,6 @@ void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves,
       CheckersMove *newMove = new CheckersMove(locs);
       moves->push_back(newMove);
    }
-
 }
 
 Board::Move *CheckersBoard::CreateMove() const {
@@ -333,8 +332,17 @@ Board::Move *CheckersBoard::CreateMove() const {
 Board *CheckersBoard::Clone() const {
    // [Staley] Think carefully about this one.  You should be able to do it in just
    // [Staley] 5-10 lines.  Don't do needless work
+   CheckersBoard *boardCopy = new CheckersBoard(*this);
 
-   return NULL;
+   list<Move *>::iterator moveHistIter;
+
+   boardCopy->mMoveHist.clear();
+   for (moveHistIter = boardCopy->mMoveHist.begin(); 
+    moveHistIter != boardCopy->mMoveHist.end(); moveHistIter++) {
+      *moveHistIter = (*moveHistIter)->Clone();
+   }
+
+   return boardCopy;
 }
 
 
@@ -348,14 +356,12 @@ Board::Key *CheckersBoard::GetKey() const {
 
 void *CheckersBoard::GetOptions() {
    // The caller of this method owns the object that is returned here.
-
-   return NULL;
+   return new Rules(mRules);
 }
 
 void CheckersBoard::SetOptions(const void *opts) {
    // The caller of this method owns the object that is returned here.
-
-
+   mRules = *reinterpret_cast<const Rules *>(opts);
 }
 
 istream &CheckersBoard::Read(istream &is) {

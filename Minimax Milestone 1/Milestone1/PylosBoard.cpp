@@ -524,7 +524,8 @@ Board *PylosBoard::Clone() const {
    // moveHistory, or else you'll have a shallow copy of the pointers and 
    // not the pointers' data.
    boardCopy->mMoveHist.clear();
-   for (moveHistIter = boardCopy->mMoveHist.begin(); moveHistIter != boardCopy->mMoveHist.end(); moveHistIter++) {
+   for (moveHistIter = boardCopy->mMoveHist.begin(); 
+    moveHistIter != boardCopy->mMoveHist.end(); moveHistIter++) {
       // my old code before I looked at Clint's OthelloBoard::Clone()
       /*PylosMove *castedMove = dynamic_cast<PylosMove *>(*moveHistIter);
       Move *moveCopy = new PylosMove(castedMove->mLocs, castedMove->mType);
