@@ -127,7 +127,7 @@ protected:
    }
 
    void MultipleJumpDFS(std::list<CheckersMove *> *, 
-    std::vector<std::pair<char, unsigned int> >) const;
+    std::vector<std::pair<char, unsigned int> >, Cell *) const;
 
    inline bool CanMove(Cell *cell, int direction) const {
       // Validate that this piece can move in the direction that you
