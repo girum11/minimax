@@ -366,7 +366,7 @@ void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves,
          // this after the recursive call.
          Piece *oldLocation = HalfTake(cell, mWhoseMove);
          Piece *capturedPiece = HalfTake(cell->neighborCells[dir], -mWhoseMove);
-         HalfPut(capturedPiece, cellToJumpInto);
+         HalfPut(oldLocation, cellToJumpInto);
 
          // Add the cell that you would jump over into to the LocVector
          // that you're constructing for this [multiple] jump.
