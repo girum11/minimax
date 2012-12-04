@@ -2,7 +2,7 @@
 showBoard
 keyMoveCount
 
-testRun 7 8000
+testRun 7 10000
 
 showBoard
 keyMoveCount

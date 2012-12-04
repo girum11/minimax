@@ -149,7 +149,6 @@ protected:
       // Remove the cell from mKingSet before you finish
       mKingSet &= ~(cell->mask);
 
-
       // TODO: Does this have to dynamically allocate?
       return new Piece(wasKing, color, cell->loc);
    }

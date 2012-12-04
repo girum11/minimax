@@ -138,7 +138,6 @@ void CheckersBoard::ApplyMove(Move *move) {
    Set allPieces(mBlackSet | mWhiteSet);
    Cell *originCell = GetCell((*locs)[0].first, (*locs)[0].second);
    int jumpedPieces = 0; // The number of pieces that move "jumps"
-   // You have to remember if the piece that you're moving is a king.
    Piece *pieceToMove = NULL;
 
    // Assertions on each destination piece.
@@ -276,6 +275,7 @@ void CheckersBoard::UndoLastMove() {
 
       for (int i = 0; i < numberOfPiecesToPutBack; i++) {
          Piece *pieceToPutBack = mCapturedPieces.back();
+         mCapturedPieces.pop_back();
          Cell *cellToPutItIn = GetCell(pieceToPutBack->loc);
          Put(pieceToPutBack, cellToPutItIn);
 
@@ -424,7 +424,6 @@ Board::Key *CheckersBoard::GetKey() const {
    return NULL;
 }
 
-
 void *CheckersBoard::GetOptions() {
    // The caller of this method owns the object that is returned here.
    return new Rules(mRules);
@@ -436,7 +435,7 @@ void CheckersBoard::SetOptions(const void *opts) {
 }
 
 istream &CheckersBoard::Read(istream &is) {
-   // TODO:
+   // TODO: 
    return is;
 }
 
