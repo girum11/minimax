@@ -162,8 +162,8 @@ void CheckersBoard::ApplyMove(Move *move) {
       }
    }
 
-   // Remove the piece from its original location
-   pieceToMove = HalfTake(GetCell((*locs)[0]), mWhoseMove);
+   // Remove the piece from its original location.
+   pieceToMove = Take(GetCell((*locs)[0]), mWhoseMove);
 
    // If this move is a "jump move", then you need to do perform some extra
    // logic to remove cells that you've jumped over.
@@ -217,7 +217,7 @@ void CheckersBoard::ApplyMove(Move *move) {
          } else assert(false);
 
          // Remove the piece that you jumped over, and save it.
-         Piece *removedPiece = HalfTake(jumpedCell, -mWhoseMove);
+         Piece *removedPiece = Take(jumpedCell, -mWhoseMove);
          mCapturedPieces.push_back(removedPiece);
       }
    }
@@ -225,9 +225,9 @@ void CheckersBoard::ApplyMove(Move *move) {
    // Add the piece to its final destination
    Cell *destinationCell =
     GetCell((*locs)[locs->size()-1].first, (*locs)[locs->size()-1].second);
-   HalfPut(pieceToMove, destinationCell);
+   Put(pieceToMove, destinationCell);
 
-   // If you just HalfPut() into the back row, then this is a "king me" move.
+   // If you just Put() into the back row, then this is a "king me" move.
    // Set the flag for it, and add this cell to the mKingSet bitmask.
    if ((mWhoseMove == kBlack && ((destinationCell->mask & mWhiteBackSet) != 0))
     || (mWhoseMove == kWhite && ((destinationCell->mask & mBlackBackSet) != 0))) {
@@ -257,19 +257,19 @@ void CheckersBoard::UndoLastMove() {
    // that happened BEFORE this current turn)
    mWhoseMove = -mWhoseMove;
 
-   // First, regardless of if this move is a jump move or not, HalfTake the 
-   // ending location away (remembering if it was a King or not) and HalfPut the 
+   // First, regardless of if this move is a jump move or not, Take the 
+   // ending location away (remembering if it was a King or not) and Put the 
    // starting location back in.
-   pieceToMove = HalfTake(destCell, mWhoseMove);
-   HalfPut(pieceToMove, originCell);
+   pieceToMove = Take(destCell, mWhoseMove);
+   Put(pieceToMove, originCell);
 
    // If you're undoing a "king me" move, then un-King the piece that you
-   // HalfPut back in.
+   // Put back in.
    if (moveToUndo->mIsKingMeMove) {
       mKingSet &= ~(originCell->mask);
    }
    
-   // If you're undoing a jump move, then HalfPut each of the moves that you 
+   // If you're undoing a jump move, then Put each of the moves that you 
    // captured back in.
    if (moveToUndo->mIsJumpMove) {
       int numberOfPiecesToPutBack = moveToUndo->mLocs.size() - 1;
@@ -277,7 +277,7 @@ void CheckersBoard::UndoLastMove() {
       for (int i = 0; i < numberOfPiecesToPutBack; i++) {
          Piece *pieceToPutBack = mCapturedPieces.back();
          Cell *cellToPutItIn = GetCell(pieceToPutBack->loc);
-         HalfPut(pieceToPutBack, cellToPutItIn);
+         Put(pieceToPutBack, cellToPutItIn);
 
          // Delete the Piece object once you put it back into the board.
          delete pieceToPutBack;
@@ -356,6 +356,18 @@ void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves,
          cellToJumpInto = cell->neighborCells[dir]->neighborCells[dir];
          foundDeeperJumpBranch = true;
 
+         // TODO: Add a check here that this is not a "king me" move.  If it
+         // is, then cut off this branch from having any deeper branches (set
+         // foundDeeperJumpBranch to false and break before getting to the
+         // recursive call).
+
+         // Temporarily move this piece from the old location to the new 
+         // location, and remove the piece that you jumped over.  Undo all of 
+         // this after the recursive call.
+         Piece *oldLocation = HalfTake(cell, mWhoseMove);
+         Piece *capturedPiece = HalfTake(cell->neighborCells[dir], -mWhoseMove);
+         HalfPut(capturedPiece, cellToJumpInto);
+
          // Add the cell that you would jump over into to the LocVector
          // that you're constructing for this [multiple] jump.
          locs.push_back(cellToJumpInto->loc);
@@ -363,6 +375,14 @@ void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves,
          // Recursive call, using the appended LocVector and the new location
          // that you would jump into.
          MultipleJumpDFS(moves, locs, cellToJumpInto);
+
+         // Clean up after the temporary jump move.
+         Piece *newLocation = HalfTake(cellToJumpInto, mWhoseMove);
+         delete newLocation;
+         HalfPut(capturedPiece, cell->neighborCells[dir]);
+         HalfPut(oldLocation, cell);
+         delete capturedPiece;
+         delete oldLocation;
       }
    }
 

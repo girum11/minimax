@@ -117,7 +117,8 @@ protected:
    std::ostream &Write(std::ostream &) const;
    
    // Helper function to add a piece on the board.
-   inline void HalfPut(Piece *piece, Cell *cell) {
+   // ApplyMove() and UndoLastMove() should use Put() instead of this method.
+   inline void HalfPut(Piece *piece, Cell *cell) const {
       if (piece->color == kBlack) {
          mBlackSet |= cell->mask;
       } else if (piece->color == kWhite) {
@@ -126,12 +127,6 @@ protected:
 
       assert((mBlackSet & mWhiteSet) == 0);
 
-      // TODO: Update board valuation
-      // Update mBlackCount, mWhiteCount
-      // Update mBlackKingCount, mWhiteKingCount
-      // Update mBlackBackCount, mWhiteBackCount
-      UpdateBoardValuation(cell, piece->color, 1);
-
       // If the piece to put down is a king, add the piece to mKingSet
       if (piece->isKing)
          mKingSet |= cell->mask;
@@ -139,19 +134,14 @@ protected:
 
    // Helper function to remove a piece of a specific color.  
    // Returns the Piece that was removed.
-   inline Piece *HalfTake(Cell *cell, int color) {     
+   // ApplyMove() and UndoLastMove() should use Take() instead of this method.
+   inline Piece *HalfTake(Cell *cell, int color) const {     
       // Assert that the bitmasks don't overlap, so that you can safely
       // clear the mask from BOTH bitmasks.
       assert((mBlackSet & mWhiteSet) == 0);
 
       mBlackSet &= ~(cell->mask);
       mWhiteSet &= ~(cell->mask);
-
-      // TODO: Update board valuation
-      // Update mBlackCount, mWhiteCount
-      // Update mBlackKingCount, mWhiteKingCount
-      // Update mBlackBackCount, mWhiteBackCount
-      UpdateBoardValuation(cell, color, -1);
 
       // Figure out if this was a King or not.
       bool wasKing = (cell->mask & mKingSet);
@@ -162,7 +152,18 @@ protected:
       return new Piece(wasKing, color, cell->loc);
    }
 
-   void UpdateBoardValuation(Cell *cell, int color, int rChange) {
+   inline void Put(Piece *piece, Cell *cell) {
+      HalfPut(piece, cell);
+      UpdateBoardValuation(piece, 1);
+   }
+
+   inline Piece *Take(Cell *cell, int color) {
+      Piece *removedPiece = HalfTake(cell, color);
+      UpdateBoardValuation(removedPiece, -1);
+      return removedPiece;
+   }
+
+   void UpdateBoardValuation(Piece *piece, int rChange) {
 //       if (color == kBlack) {
 //          // Update the overall count
 //          mBlackCount += rChange;
@@ -189,17 +190,19 @@ protected:
 //             mWhiteKingCount += rChange;
 //       } else assert(false);
 
-      if (color == kBlack)
-         UBVHelper(&mBlackCount, &mBlackBackCount, &mBlackKingCount, 
-          &mBlackBackSet, cell, rChange);
-      else if (color == kWhite)
-         UBVHelper(&mWhiteCount, &mWhiteBackCount, &mWhiteKingCount,
-          &mWhiteBackSet, cell, rChange);
+      Cell *cell = GetCell(piece->loc.first, piece->loc.second);
+
+      if (piece->color == kBlack)
+         UpdateBoardValuationHelper(&mBlackCount, &mBlackBackCount, 
+          &mBlackKingCount, &mBlackBackSet, cell, rChange);
+      else if (piece->color == kWhite)
+         UpdateBoardValuationHelper(&mWhiteCount, &mWhiteBackCount, 
+          &mWhiteKingCount, &mWhiteBackSet, cell, rChange);
       else assert(false);
    }
 
-   inline void UBVHelper(int *pieceCount, int *backCount, int *kingCount, 
-    Set *backSet, Cell *cell, int rChange) {
+   inline void UpdateBoardValuationHelper(int *pieceCount, int *backCount, 
+    int *kingCount, Set *backSet, Cell *cell, int rChange) {
       // Update the overall count
       *pieceCount += rChange;
 
@@ -216,6 +219,7 @@ protected:
    void MultipleJumpDFS(std::list<CheckersMove *> *, 
     std::vector<std::pair<char, unsigned int> >, Cell *) const;
 
+   // TODO: Refactor this to use a Piece instead of a Cell.
    inline bool CanMove(Cell *cell, int direction) const {
       // Validate that this piece can move in the direction that you
       // want to move in.
@@ -232,6 +236,7 @@ protected:
       return true;
    }
 
+   // TODO: Refactor this to use a Piece instead of a Cell.
    inline bool CanJump(Cell *cell, int dir) const {
       // Validate that this piece can move in the direction that you
       // want to move in.
@@ -263,6 +268,7 @@ protected:
    }
 
    // Validates that a particular cell is allowed to move in a given direction
+   // TODO: Refactor this to use a Piece instead of a Cell.
    inline bool IsValidDirection(Cell *cell, int direction) const {
       // Kings can move any direction
       if ((mKingSet&cell->mask) != 0) {
