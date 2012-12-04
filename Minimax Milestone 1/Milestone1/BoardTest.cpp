@@ -53,6 +53,28 @@ void PrintList(const list<const Board::Move *> *moves) {
    cout << endl;
 }
 
+void ApplyMove(Board *board, Board::Move *move) {
+   // Verify that the move is in GetAllMoves() before applying it.
+   list<Board::Move *> allMoves;
+   board->GetAllMoves(&allMoves);
+   bool foundMove = false;
+
+   for (list<Board::Move *>::iterator listIter = allMoves.begin();
+    listIter != allMoves.end(); listIter++) {
+      if ((*move).operator==(**listIter)) {
+         foundMove = true;
+      }
+      // Clean up after your GetAllMoves() call.
+      delete *listIter;
+   }
+
+   if (!foundMove) {
+      board->ApplyMove(move->Clone());
+   } else {
+      cout << "TRYING TO APPLY AN INVALID MOVE TO THE BOARD!!" << endl;
+   }
+}
+
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
 	Board::Move *move = NULL, *cmpMove = NULL, *temp = NULL;
@@ -172,7 +194,7 @@ int main(int argc, char **argv) {
 
             // This version of applyMove gives a clone of the default
             // move to the board.
-            board->ApplyMove(move->Clone());
+            ApplyMove(board, move);
 			} else if (command.compare("loadBoard") == 0) {
             cin >> cArg;
             ifstream in(cArg.c_str());
@@ -218,9 +240,7 @@ int main(int argc, char **argv) {
 
             delete temp;
 
-            // Apply a clone the move to the board, making the board own the
-            // move clone.
-            board->ApplyMove(move->Clone());
+            ApplyMove(board, move);
 			} else if (command.compare("compareMove") == 0) { 
             getline(cin, cArg);
             cmpMove = board->CreateMove();
