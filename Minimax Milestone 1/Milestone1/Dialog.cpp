@@ -33,22 +33,26 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
          
          // Here, sscanf() the whole line to ensure that no trailing garbage 
          // was inputted
-         getline(in, inputString);
+         if (getline(in, inputString).eof()) {
+            throw BaseException("Unexpected EOF");
+         }
          res = sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
          
-         if (res == 0) {
-            out << "Badly formatted input\n";
-            // Clear out trailingChar
-            for (int i = 0; i < kTrailingCharLength; ++i) trailingChar[i] = '\0';
-            continue;
-         } else if (trailingChar[0] != '\0') {
+         if (trailingChar[0] != '\0') {
             out << "Unexpected garbage after value.\n";
             // Clear out trailingChar
-            for (int i = 0; i < kTrailingCharLength; ++i) trailingChar[i] = '\0';
+            for (int i = 0; i < kTrailingCharLength; ++i) 
+               trailingChar[i] = '\0';
+            continue;
+         } else if (res == 0) {
+            out << "Badly formatted input\n";
+            // Clear out trailingChar
+            for (int i = 0; i < kTrailingCharLength; ++i) 
+               trailingChar[i] = '\0';
             continue;
          }
 
-         // Execute the setter member function
+         // Save the values.
          if (inputValue >= lo && inputValue <= hi) {
             *val = inputValue;
          } else {
