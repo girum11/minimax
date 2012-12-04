@@ -2,31 +2,7 @@
 showBoard
 keyMoveCount
 
--- testRun 7 10000
-
-doMove C3 -> D2       
-doMove F8 -> E7       
-doMove C5 -> D4       
-doMove E7 -> D6       
-doMove C7 -> E5
-doMove F4 -> D6       
-doMove B2 -> C3       
-doMove G3 -> F4       
-doMove B6 -> C5       
-doMove F2 -> E1
-doMove C5 -> E7       
-doMove F6 -> D8       
-doMove A1 -> B2       
-doMove D8 -> C7       
-doMove B8 -> D6
-doMove G7 -> F6       
-doMove D2 -> E3       
-doMove F4 -> D2       
-doMove C1 -> E3       
-doMove H8 -> G7
-doMove c3->d2
-doMove e1->c3->a1
-
+testRun 7 10000
 
 showBoard
 showMoveHist

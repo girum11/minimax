@@ -136,7 +136,7 @@ void CheckersBoard::ApplyMove(Move *move) {
    CheckersMove::LocVector *locs = &castedMove->mLocs;
    assert(castedMove != NULL && castedMove->mLocs.size() >= 2);
    Set allPieces(mBlackSet | mWhiteSet);
-   Cell *originCell = GetCell((*locs)[0].first, (*locs)[0].second);
+   Cell *originCell = GetCell((*locs)[0]);
    int jumpedPieces = 0; // The number of pieces that move "jumps"
    Piece *pieceToMove = NULL;
 
@@ -162,24 +162,24 @@ void CheckersBoard::ApplyMove(Move *move) {
    }
 
    // Remove the piece from its original location.
-   pieceToMove = Take(GetCell((*locs)[0]), mWhoseMove);
+   pieceToMove = Take(originCell, mWhoseMove);
 
    // If this move is a "jump move", then you need to do perform some extra
    // logic to remove cells that you've jumped over.
    if (castedMove->mIsJumpMove) {
       for (unsigned int i = 1; i < (*locs).size(); ++i) {
-         Cell *jumpedCell = NULL;
-         Cell *to = GetCell((*locs)[i]);
+         Cell *jumpedOverCell = NULL;
+         Cell *toCell = GetCell((*locs)[i]);
 
          // Assert that this location actually jumps over a piece
          assert(CheckersMove::IsJump((*locs)[i-1], (*locs)[i]));
 
          // If you at any point a non-king jumps into the back row, then assert 
          // that it STOPPED MOVING.
-         if ((to->mask & mKingSet) == 0) {
-            if (mWhoseMove == kBlack && (to->mask & mWhiteBackSet))
+         if (!pieceToMove->isKing) {
+            if (mWhoseMove == kBlack && (toCell->mask & mWhiteBackSet))
                assert(i == ((*locs).size() - 1));
-            else if (mWhoseMove == kWhite && (to->mask & mBlackBackSet))
+            else if (mWhoseMove == kWhite && (toCell->mask & mBlackBackSet))
                assert(i == ((*locs).size() - 1));
          }
 
@@ -188,35 +188,35 @@ void CheckersBoard::ApplyMove(Move *move) {
          // North-west jump
          if ((*locs)[i].first > (*locs)[i-1].first
           && (*locs)[i].second < (*locs)[i-1].second) {
-            jumpedCell = GetCell((*locs)[i].first - 1, (*locs)[i].second + 1);
+            jumpedOverCell = GetCell((*locs)[i].first - 1, (*locs)[i].second + 1);
          }
          // North-east jump
          else if ((*locs)[i].first > (*locs)[i-1].first
           && (*locs)[i].second > (*locs)[i-1].second) {
-            jumpedCell = GetCell((*locs)[i].first - 1, (*locs)[i].second - 1);
+            jumpedOverCell = GetCell((*locs)[i].first - 1, (*locs)[i].second - 1);
          }
          // South-west jump
          else if ((*locs)[i].first < (*locs)[i-1].first
           && (*locs)[i].second < (*locs)[i-1].second) {
-            jumpedCell = GetCell((*locs)[i].first + 1, (*locs)[i].second + 1);
+            jumpedOverCell = GetCell((*locs)[i].first + 1, (*locs)[i].second + 1);
          } 
          // South-east jump
          else if ((*locs)[i].first < (*locs)[i-1].first
           && (*locs)[i].second > (*locs)[i-1].second) {
-            jumpedCell = GetCell((*locs)[i].first + 1, (*locs)[i].second - 1);
+            jumpedOverCell = GetCell((*locs)[i].first + 1, (*locs)[i].second - 1);
          } else assert(false); 
 
 
          // Assert that the piece that you jumped over is occupied by the other
          // player and not yourself.
          if (mWhoseMove == kBlack) {
-            assert((jumpedCell->mask & mWhiteSet) != 0);
+            assert((jumpedOverCell->mask & mWhiteSet) != 0);
          } else if (mWhoseMove == kWhite) {
-            assert((jumpedCell->mask & mBlackSet) != 0);
+            assert((jumpedOverCell->mask & mBlackSet) != 0);
          } else assert(false);
 
          // Remove the piece that you jumped over, and save it.
-         Piece *removedPiece = Take(jumpedCell, -mWhoseMove);
+         Piece *removedPiece = Take(jumpedOverCell, -mWhoseMove);
          mCapturedPieces.push_back(removedPiece);
       }
    }
@@ -346,49 +346,59 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
 
 void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves, 
  CheckersMove::LocVector locs, Cell *cell) const {
-   Cell *cellToJumpInto = NULL;
+   Cell *destCell = NULL;
    bool foundDeeperJumpBranch = false;
 
-   for (int dir = 0; dir < kSqr; dir++) {
-      if (CanJump(cell, dir)) {
-         // You've found a multiple jump route here.  Set up for your recursive
-         // call to keep searching deeper.
-         cellToJumpInto = cell->neighborCells[dir]->neighborCells[dir];
-         foundDeeperJumpBranch = true;
-
-         // TODO: Add a check here that this is not a "king me" move.  If it
-         // is, then cut off this branch from having any deeper branches (set
-         // foundDeeperJumpBranch to false and break before getting to the
-         // recursive call).
-
-         // Temporarily move this piece from the old location to the new 
-         // location, and remove the piece that you jumped over.  Undo all of 
-         // this after the recursive call.
-         Piece *oldLocation = HalfTake(cell, mWhoseMove);
-         Piece *capturedPiece = HalfTake(cell->neighborCells[dir], -mWhoseMove);
-         HalfPut(oldLocation, cellToJumpInto);
-
-         // Add the cell that you would jump over into to the LocVector
-         // that you're constructing for this [multiple] jump.
-         locs.push_back(cellToJumpInto->loc);
-
-         // Recursive call, using the appended LocVector and the new location
-         // that you would jump into.
-         MultipleJumpDFS(moves, locs, cellToJumpInto);
-
-         // Remove this most recent Location from the LocVector, since you're
-         // going to be reusing this LocVector as you recurse.
-         locs.pop_back();
-
-         // Clean up after the temporary jump move.
-         Piece *newLocation = HalfTake(cellToJumpInto, mWhoseMove);
-         delete newLocation;
-         HalfPut(capturedPiece, cell->neighborCells[dir]);
-         HalfPut(oldLocation, cell);
-         delete capturedPiece;
-         delete oldLocation;
+   // If this moving to this cell a "king me" move, then immediately 
+   // cut off this branch from having any deeper branches (set
+   // foundDeeperJumpBranch to false and break before getting to the
+   // recursive call).
+   if ((cell->mask & mKingSet) == 0) {
+      if ((mWhoseMove == kBlack && (cell->mask & mWhiteBackSet))
+         || (mWhoseMove == kWhite && (cell->mask & mBlackBackSet))) {
+         CheckersMove *newMove = new CheckersMove(locs, true);
+         moves->push_back(newMove);
+         return;
       }
    }
+//    // Otherwise, check all possible routes as usual.
+//    else {
+      for (int dir = 0; dir < kSqr; dir++) {
+         if (CanJump(cell, dir)) {
+            // You've found a multiple jump route here.  Set up for your recursive
+            // call to keep searching deeper.
+            destCell = cell->neighborCells[dir]->neighborCells[dir];
+            foundDeeperJumpBranch = true;
+
+            // Temporarily move this piece from the old location to the new 
+            // location, and remove the piece that you jumped over.  Undo all of 
+            // this after the recursive call.
+            Piece *oldLocation = HalfTake(cell, mWhoseMove);
+            Piece *capturedPiece = HalfTake(cell->neighborCells[dir], -mWhoseMove);
+            HalfPut(oldLocation, destCell);
+
+            // Add the cell that you would jump over into to the LocVector
+            // that you're constructing for this [multiple] jump.
+            locs.push_back(destCell->loc);
+
+            // Recursive call, using the appended LocVector and the new location
+            // that you would jump into.
+            MultipleJumpDFS(moves, locs, destCell);
+
+            // Remove this most recent Location from the LocVector, since you're
+            // going to be reusing this LocVector as you recurse.
+            locs.pop_back();
+
+            // Clean up after the temporary jump move.
+            Piece *newLocation = HalfTake(destCell, mWhoseMove);
+            delete newLocation;
+            HalfPut(capturedPiece, cell->neighborCells[dir]);
+            HalfPut(oldLocation, cell);
+            delete capturedPiece;
+            delete oldLocation;
+         }
+      }
+   // }
 
    // If you get to a branch that is cut off from having any deeper branches
    // in any direction, then you've found a jump (or multiple jump) that doens't
