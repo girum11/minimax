@@ -207,6 +207,7 @@ void CheckersBoard::ApplyMove(Move *move) {
             jumpedCell = GetCell((*locs)[i].first + 1, (*locs)[i].second - 1);
          } else assert(false); 
 
+
          // Assert that the piece that you jumped over is occupied by the other
          // player and not yourself.
          if (mWhoseMove == kBlack) {
@@ -227,8 +228,8 @@ void CheckersBoard::ApplyMove(Move *move) {
    HalfPut(pieceToMove, destinationCell);
 
    // If you just HalfPut() into the back row, then king that piece
-   if ((mWhoseMove == kBlack && (destinationCell->mask & mBlackBackSet) != 0)
-    || (mWhoseMove == kWhite && (destinationCell->mask & mWhiteBackSet) != 0)) {
+   if ((mWhoseMove == kBlack && ((destinationCell->mask & mWhiteBackSet) != 0))
+    || (mWhoseMove == kWhite && ((destinationCell->mask & mBlackBackSet) != 0))) {
       mKingSet |= destinationCell->mask;
    }
 
