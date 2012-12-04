@@ -31,8 +31,7 @@ void CheckersMove::operator delete(void *p) {
 bool CheckersMove::operator==(const Board::Move &rhs) const {
    const CheckersMove &oRhs = dynamic_cast<const CheckersMove &>(rhs);
 
-   // return mFrom == oRhs.mFrom && mTo == oRhs.mTo;
-   return false;
+   return mLocs == oRhs.mLocs;
 }
 
 bool CheckersMove::operator<(const Board::Move &rhs) const {
