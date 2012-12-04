@@ -26,46 +26,46 @@
 
 showBoard
 doMove C7 -> D6
--- doMove F2 -> E3
--- doMove C3 -> D2
--- doMove E3 -> D4
--- doMove C5 -> E3
--- doMove F6 -> E5
--- doMove B6 -> C5
--- doMove E5 -> C7
--- doMove B8 -> D6
--- doMove G5 -> F6
--- doMove E3 -> G5
--- doMove H6 -> F4
--- doMove D6 -> E5
--- doMove F6 -> D4 -> B6
--- doMove A7 -> C5
--- doMove F8 -> E7
--- doMove A5 -> B6
--- doMove G7 -> F6
--- doMove B2 -> C3
--- doMove H4 -> G5
--- doMove D2 -> E3
--- doMove F4 -> D2
--- doMove C3 -> E1
--- doMove E7 -> D8
--- doMove E1 -> F2
--- doMove G1 -> E3
--- doMove A1 -> B2
--- doMove E3 -> D2
--- doMove C1 -> E3
--- doMove D8 -> C7
--- doMove B6 -> D8
--- doMove F6 -> E5
--- doMove E3 -> F2
--- doMove G3 -> E1
--- doMove B2 -> C1
--- doMove G5 -> F6
--- doMove D8 -> E7
--- doMove F6 -> D8
--- doMove A3 -> B2
--- doMove H2 -> G3
--- doMove C1 -> D2
+doMove F2 -> E3
+doMove C3 -> D2
+doMove E3 -> D4
+doMove C5 -> E3
+doMove F6 -> E5
+doMove B6 -> C5
+doMove E5 -> C7
+doMove B8 -> D6
+doMove G5 -> F6
+doMove E3 -> G5
+doMove H6 -> F4
+doMove D6 -> E5
+doMove F6 -> D4 -> B6
+doMove A7 -> C5
+doMove F8 -> E7
+doMove A5 -> B6
+doMove G7 -> F6
+doMove B2 -> C3
+doMove H4 -> G5
+doMove D2 -> E3
+doMove F4 -> D2
+doMove C3 -> E1
+doMove E7 -> D8
+doMove E1 -> F2
+doMove G1 -> E3
+doMove A1 -> B2
+doMove E3 -> D2
+doMove C1 -> E3
+doMove D8 -> C7
+doMove B6 -> D8
+doMove F6 -> E5
+doMove E3 -> F2
+doMove G3 -> E1
+doMove B2 -> C1
+doMove G5 -> F6
+doMove D8 -> E7
+doMove F6 -> D8
+doMove A3 -> B2
+doMove H2 -> G3
+doMove C1 -> D2
 showBoard
 
 
