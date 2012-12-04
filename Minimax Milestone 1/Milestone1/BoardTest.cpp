@@ -55,6 +55,7 @@ void PrintList(const list<const Board::Move *> *moves) {
 
 void ApplyMove(Board *board, Board::Move *move) {
    // Verify that the move is in GetAllMoves() before applying it.
+   // TODO: Remove this verification before you handin.
    list<Board::Move *> allMoves;
    board->GetAllMoves(&allMoves);
    bool foundMove = false;
@@ -71,7 +72,8 @@ void ApplyMove(Board *board, Board::Move *move) {
    if (foundMove) {
       board->ApplyMove(move->Clone());
    } else {
-      cout << "TRYING TO APPLY AN INVALID MOVE TO THE BOARD!!" << endl;
+      cout << "TRYING TO APPLY AN INVALID MOVE TO THE BOARD: "
+       << (string) *move << endl;
    }
 }
 
