@@ -1,8 +1,0 @@
-*** "Shotgun" tests ***
--- Random tests
-showBoard
-testRun 7 12000
-showBoard
-keyMoveCount
-
-quit

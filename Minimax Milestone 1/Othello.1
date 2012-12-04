@@ -1,24 +1,7 @@
 -- 1.) A player with no moves must make a "Pass" move (and we permit Pass only in that case).
-doMove Pass
+showBoard
+enterMove Pass
 testPlay 7 50
-doMove Pass
-doMove [0,6]
-doMove [7,7]
-doMove [6,5]
-doMove [0,5]
-doMove Pass
-doMove [6,7]
-doMove [7,5]
-doMove Pass
-doMove [0,4]
-doMove Pass
-doMove [5,7]
-doMove [5,6]
-doMove Pass
-doMove [7,6]
-doMove Pass
-doMove Pass
-doMove Pass
 undoLastMove 1000
 
 -- 2.) We end the game when both players have just made Pass moves (this game taken from math email online).
@@ -27,17 +10,9 @@ doMove [3,5]
 doMove [2,4]
 doMove [5,5]
 doMove [4,6]
-doMove Pass
-doMove Pass
 doMove [5,3]
-doMove Pass
-doMove Pass
 doMove [6,4]
-doMove Pass
-doMove Pass
 doMove [4,5]
-doMove Pass
-doMove Pass
 doMove [4,2]
 
 showBoard
@@ -64,41 +39,7 @@ keyMoveCount
 
 undoLastMove 1000
 
--- 3.) You may not skip over your own color disc to outflank an opposing disc.  Discs may only be outflanked as a direct result of a move and must afll in the direct line of the disc placed down.
-testPlay 15 30
-doMove [5,4]
-
-showBoard
-showMove
-showVal
-showMoveHist
-keyMoveCount
-
-doMove [3,7]
-
-showBoard
-showMove
-showVal
-showMoveHist
-keyMoveCount
-
-undoLastMove 1
-
-showBoard
-showMove
-showVal
-showMoveHist
-keyMoveCount
-
-doMove [3,1]
-
-showBoard
-showMove
-showVal
-showMoveHist
-keyMoveCount
-
-undoLastMove 100
+-- 3.) You may not skip over your own color disc to outflank an opposing disc.  Discs may only be outflanked as a direct result of a move and must fall in the direct line of the disc placed down.
 
 -- 4.) When it is no longer possble for either player to move, the game is over.  Discs are counted and the player with the majority of his or her color discs on the board is the winner.
 testPlay 15 50
@@ -125,7 +66,7 @@ showVal
 showMoveHist
 keyMoveCount
 
-doMove Pass
+testPlay 1 1
 
 showBoard
 showMove
@@ -133,7 +74,7 @@ showVal
 showMoveHist
 keyMoveCount
 
-doMove Pass
+testPlay 1 1
 
 showBoard
 showMove
@@ -141,7 +82,7 @@ showVal
 showMoveHist
 keyMoveCount
 
-doMove Pass
+testPlay 1 1
 
 showBoard
 showMove
@@ -151,107 +92,88 @@ keyMoveCount
 undoLastMove 100
 
 --5.) A disc may outflank any number of discs in one or more rows in any number of directions at the same time: What if the piece that you're trying to outflank is outside of the board's range?
-doMove [5,4]
-doMove [5,3]
-doMove [6,2]
-doMove [6,3]
-doMove [3,2]
-doMove [7,1]
-doMove [8,0]
-
-showBoard
-showMove
-showVal
-showMoveHist
-keyMoveCount
-
-undoLastMove 40
+  *** (already in string sanity checks)
 
 --6a.) A *badly formed* move is one that disobeys string formats, or that has obvious errors such as out-of-range number values.  The operator=(const std::string &) method detects badly formed moevs and throws an exception when it is passed one.
-doMove someRandomBadInputString
-doMove [7,8]
-doMove [8,7]
-doMove [23049238047239847239847, 2]
-doMove [2, 239084289034729384723984723]
-doMove [2384723984729384723984, 29348723984729384723]
-doMove [-1, 1]
-doMove [1, -1]
-doMove [2.2, 3]
-doMove [2, 3.3]
-doMove [,]
-doMove [3,]
-doMove [,3]
-doMove pass
-doMove pAss
-domove [2,3]
-doMove (2,3]
-doMove [2,3)
-doMove (2,3)
-doMove {2,3]
-doMove [2,3}
-doMove {2,3}
-doMove[2,3]
+enterMove someRandomBadInputString
+enterMove [7,8]
+enterMove [8,7]
+enterMove [23049238047239847239847, 2]
+enterMove [2, 239084289034729384723984723]
+enterMove [2384723984729384723984, 29348723984729384723]
+enterMove [-1, 1]
+enterMove [1, -1]
+enterMove [2.2, 3]
+enterMove [2, 3.3]
+enterMove [,]
+enterMove [3,]
+enterMove [,3]
+enterMove pass
+enterMove pAss
+enterMove [2,3]
+enterMove (2,3]
+enterMove [2,3)
+enterMove (2,3)
+enterMove {2,3]
+enterMove [2,3}
+enterMove {2,3}
+enterMove[2,3]
 -- 6b.) The [1,2] permits spaces anywhere
-doMove 		     [ 	    2   			  ,  		   3   		  ] 
+enterMove 		     [ 	    2   			  ,  		   3   		  ] 
 undoLastMove 1    
-doMove [2,
+enterMove [2,
 3]
-doMove [2,@]
-doMove Pass
+enterMove [2,@]
+enterMove Pass
 
 testPlay 19 30
 undoLastMove 30
 
+--Out of bounds string checks.
+enterMove Pass
+enterMove [0,6]
+enterMove [7,7]
+enterMove [6,5]
+enterMove [0,5]
+enterMove Pass
+enterMove [6,7]
+enterMove [7,5]
+enterMove Pass
+enterMove [0,4]
+enterMove Pass
+enterMove [5,7]
+enterMove [5,6]
+enterMove Pass
+enterMove [7,6]
+enterMove Pass
+enterMove Pass
+enterMove Pass
+
 -- 7.) The operator=(string) method for all games must check for incorrect format including garbage after the end of the move, and for out-of-bounds numerical values.
 -- (out-of-bounds move testing has been done in the test case above)
-doMove [2,3]
+enterMove [2,3]
 undoLastMove 1
-doMove [2,3] asdfasdfasdf
-doMove [2,3]asdf
-doMove [2,3] doMove [2,2]
+enterMove [2,3] asdfasdfasdf
+enterMove [2,3]asdf
+enterMove [2,3] enterMove [2,2]
 undoLastMove 20
-doMove [2,3]doMove [2,2]
+enterMove [2,3]enterMove [2,2]
 undoLastMove 20
 
 -- 8.) Verify that a move is one of those returned by GetAllMoves
-doMove [2,3]
-testPlay 50 50
-showBoard
-doMove [0,0]
-doMove Pass
-doMove [2,5]
-doMove [5,7]
-showBoard
-testPlay 30 50
+  *** (this turned out to not be true at all)
 
-showBoard
-showMove
-showVal
-showMoveHist
-keyMoveCount
-undoLastMove 200
-
--- 9.)  Tests will certainly include moves with various invalid formats and with squares or bowls that are out fo bounds, to fully test your operator=.
-
+-- 9.)  Tests will certainly include moves with various invalid formats and with squares or bowls that are out of bounds, to fully test your operator=.
 **** See Test 6 ***
 
 -- 10.) If a badly formatted Move string is presented to the operator= method, the method throws a BaseException with one fo the contents below where X is the name of the game, and M is the full move string.  If this happens, the method does not modify the move at all.  In other words, it either modifies the move, or throws an exception indicating a bad move string, but not both.
 
 undoLastMove 100
 showMove
-doMove [2,3]
+enterMove [2,3]
 showMove
-doMove[2,2]
+enterMove[2,2]
 showMove
-
-
-quit
-
--- What if I try to continue the game after "quit"?
-undoLastMove 1000
-testPlay 7 20
-
-
 
 -- 11.) Modification of rules (or "options" as the BoardTest language calls them) is done via the CheckersDlg and PylosDlg classes, which engage the user in a dialog to adjust parameters used by teh boards to determine their value (See GetValue).
 
@@ -382,6 +304,7 @@ compareKeys OthelloIbssa
 
 -- 16.) A cell like [0,1] that is both on an edge an one away from an edge counts as "one away from an edge."
 
+undoLastMove 1000
 doMove [2,3]
 doMove [2,2]
 doMove [2,1]
@@ -389,10 +312,22 @@ doMove [1,1]
 doMove [0,1]
 
 showBoard
-showMove
 showVal
-showMoveHist
 keyMoveCount
+
+setOptions
+n
+showVal
+setOptions
+y
+40
+30
+20
+10
+showVal
+setOptions
+n
+showVal
 
 undoLastMove 500
 
@@ -401,7 +336,7 @@ undoLastMove 500
 *** See the file Othello.2 for this test case.
 
 -- 18.) As a special case, if the game is over then GetValue returns winVal if first player has won, -winVal if the second player has won, and 0 in the case of a draw.
-
+undoLastMove 1000
 showVal
 testPlay 39 80
 showVal
@@ -413,6 +348,7 @@ undoLastMove 100
 
 -- 19.) Two OthelloBoard::Keys are equal if all squares have same color of piece (or are both empty) and if the next player to move is the same.
 
+undoLastMove 1000
 testPlay 7 62
 saveBoard OthelloBoardIbssa2
 compareKeys OthelloBoardIbssa2
@@ -422,6 +358,7 @@ undoLastMove 100
 
 -- 20.) OthelloBoard::Key A is "less" than OthelloBoard::Key B if in the first square taht they differ, reading in row-major order, A's value is "less" than B's if we give teh following values to squares:
 
+undoLastMove 1000
 saveBoard OthelloBoardIbssa3
 compareKeys OthelloBoardIbssa3
 doMove [5,4]
@@ -430,7 +367,7 @@ doMove [3,5]
 
 -- 21.) Two OthelloMoves are equal if their row and col are equal.
 
-undoLastMove 100
+undoLastMove 1000
 enterMove [0,0]
 compareMove [0,0]
 compareMove [0.0, 0]

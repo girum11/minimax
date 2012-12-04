@@ -67,14 +67,14 @@ doMove A3 -> B2
 doMove H2 -> G3
 doMove C1 -> D2
 showBoard
--- doMove e1	->c3    	  		  -> a1
+doMove e1	->c3    	  		  -> a1
 
-Right here is a broken case, where I show a White move during Black's turn.
-Also, I'm allowing a black piece to move backwards AND forwards.  That doesn't make sense.
--- showBoard
--- undoLastMove 1
--- doMove e1	->c3    	  		  -> a1		  		
--- showBoard
+-- Right here is a broken case, where I show a White move during Black's turn.
+-- Also, I'm allowing a black piece to move backwards AND forwards.  That doesn't make sense.
+showBoard
+undoLastMove 1
+doMove e1	->c3    	  		  -> a1		  		
+showBoard
 
 
 showVal
