@@ -53,16 +53,9 @@ protected:
 
 
    void AssertMe() {
-
-      // Ensure that this move is valid.
+      // Ensure that each Location used in this move is inbounds.
       for (LocVector::const_iterator locIter = mLocs.begin();
        locIter != mLocs.end(); locIter++) {
-
-          // If it's a null move though, don't bounce it.
-          if (locIter->first == -1 && locIter->second == -1) {
-             return;
-          }
-          
          assert(InRange<char>('A', locIter->first, 'I'));
          assert(InRange<unsigned int>(1, locIter->second, 9));
       }
@@ -70,7 +63,7 @@ protected:
 
    static inline bool IsJump(const Location &loc1, const Location &loc2) {
       return abs(loc1.first - loc2.first) == 2 &&
-       abs((int)(loc1.second - loc2.second)) == 2;
+       abs((int)loc1.second - (int)loc2.second) == 2;
    }
 
 };

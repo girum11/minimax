@@ -146,7 +146,7 @@ void CheckersMove::operator=(const string &src) {
 }
 
 Board::Move *CheckersMove::Clone() const {
-   return new CheckersMove(this->mLocs, false);
+   return new CheckersMove(this->mLocs, mIsJumpMove);
 }
 
 istream &CheckersMove::Read(istream &is) {
