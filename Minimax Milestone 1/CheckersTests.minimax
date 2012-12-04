@@ -1,82 +1,35 @@
--- enterMove C3  ->   D4
--- applyMove
--- doMove f4->e5
--- doMove c7->d8
--- doMove e5->c3
--- doMove b4->d2
--- doMove f2->e1
--- doMove b2->c3
--- doMove f6->e5
--- doMove a1->b2
--- doMove g3->f4
--- doMove c3->d4
--- showBoard
-
--- setOptions
--- n
-
--- setOptions
--- y
--- 500
--- 400
--- 20
-
--- setOptions
--- n
-
+-- "Shotgun" tests (random testing)
 showBoard
-doMove C7 -> D6
-doMove F2 -> E3
-doMove C3 -> D2
-doMove E3 -> D4
-doMove C5 -> E3
-doMove F6 -> E5
-doMove B6 -> C5
-doMove E5 -> C7
+keyMoveCount
+
+-- testRun 7 10000
+
+doMove C3 -> D2       
+doMove F8 -> E7       
+doMove C5 -> D4       
+doMove E7 -> D6       
+doMove C7 -> E5
+doMove F4 -> D6       
+doMove B2 -> C3       
+doMove G3 -> F4       
+doMove B6 -> C5       
+doMove F2 -> E1
+doMove C5 -> E7       
+doMove F6 -> D8       
+doMove A1 -> B2       
+doMove D8 -> C7       
 doMove B8 -> D6
-doMove G5 -> F6
-doMove E3 -> G5
-doMove H6 -> F4
-doMove D6 -> E5
-doMove F6 -> D4 -> B6
-doMove A7 -> C5
-doMove F8 -> E7
-doMove A5 -> B6
-doMove G7 -> F6
-doMove B2 -> C3
-doMove H4 -> G5
-doMove D2 -> E3
-doMove F4 -> D2
-doMove C3 -> E1
-doMove E7 -> D8
-doMove E1 -> F2
-doMove G1 -> E3
-doMove A1 -> B2
-doMove E3 -> D2
-doMove C1 -> E3
-doMove D8 -> C7
-doMove B6 -> D8
-doMove F6 -> E5
-doMove E3 -> F2
-doMove G3 -> E1
-doMove B2 -> C1
-doMove G5 -> F6
-doMove D8 -> E7
-doMove F6 -> D8
-doMove A3 -> B2
-doMove H2 -> G3
-doMove C1 -> D2
-showBoard
-doMove e1	->c3    	  		  -> a1
-
--- Right here is a broken case, where I show a White move during Black's turn.
--- Also, I'm allowing a black piece to move backwards AND forwards.  That doesn't make sense.
-showBoard
-undoLastMove 1
-doMove e1	->c3    	  		  -> a1		  		
-showBoard
+doMove G7 -> F6       
+doMove D2 -> E3       
+doMove F4 -> D2       
+doMove C1 -> E3       
+doMove H8 -> G7
+doMove c3->d2
+doMove e1->c3->a1
 
 
-showVal
+showBoard
+showMoveHist
+keyMoveCount
 
 quit
