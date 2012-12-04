@@ -72,7 +72,8 @@ void CheckersMove::operator=(const string &src) {
    char arrow[2], trailingGarbage;
    
    // Strip all whitespace from the string
-   copy.erase(remove_if(copy.begin(), copy.end(), isspace), copy.end());
+   copy.erase(remove(copy.begin(), copy.end(), ' '), copy.end());
+   copy.erase(remove(copy.begin(), copy.end(), '\t'), copy.end());
 
    // Reserve a chunk of memory so that we can dynamically resize later
    locs.reserve(kChunkSize);

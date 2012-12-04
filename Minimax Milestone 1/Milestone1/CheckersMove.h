@@ -2,6 +2,7 @@
 #define CHECKERSMOVE_H
 
 #include <iostream>
+#include <cstdlib>
 #include <list>
 #include <vector>
 #include "MyLib.h"
@@ -63,8 +64,8 @@ protected:
    }
 
    static inline bool IsJump(const Location &loc1, const Location &loc2) {
-      return abs(loc1.first - loc2.first) == 2 &&
-       abs((int)loc1.second - (int)loc2.second) == 2;
+      return std::abs((int) ((int)loc1.first - (int)loc2.first)) == 2 &&
+       std::abs((int) ((int)loc1.second - (int)loc2.second)) == 2;
    }
 
 };
