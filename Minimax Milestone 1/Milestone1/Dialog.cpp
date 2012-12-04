@@ -44,13 +44,14 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
 
          res = sscanf(inputString.c_str(), " %d %1s", &inputValue, &trailingChar);
          
-         if (trailingChar != '\0') {
-            out << "Unexpected garbage after value.\n";
+         if (res == 0) {
+            out << "Badly formatted input\n";
             // Clear out trailingChar
             trailingChar = '\0';
             continue;
-         } else if (res == 0) {
-            out << "Badly formatted input\n";
+         }
+         else if (trailingChar != '\0') {
+            out << "Unexpected garbage after value.\n";
             // Clear out trailingChar
             trailingChar = '\0';
             continue;
