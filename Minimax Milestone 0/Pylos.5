@@ -386,6 +386,24 @@ enterMove Promote to [1,2] from [2,3] taking [3,2] and [3,2]
 enterMove Play at [3,2] taking [2,2] and [1,0]
 
 
+-- Missing brackets
+doMove Play at [1,
+doMove Play at [0,0] taking [0,0
+doMove Play at [0,0 taking [3,4
+doMove Promote to [1,2] [2,3] [3,2] [2,2]
+doMove Promote to [1,2] from [2,3] taking [3,1
+doMove Play Play at [0,0]
+
+-- ('s and {'s instead of ['s
+enterMove Play at [1,1)
+enterMove Play at [1,1}
+enterMove Play at (1,1]
+enterMove Play at {1,1]
+enterMove Play at [[1,1]
+enterMove Play at [1,1]]
+enterMove Play at [1,1]                                       
+
+
 --12.) BoardTest test:  A bad move string shouldn't change the defualt move.
 -- "If a badly formatted Move string is presented to the operator= method, the method throws a BaseException with one of the contents below where X is the name of the game and M is the full move string.  If this happens, the method does not modify the move at all.  In other words, it either modifies the move, or throws an exception indicating a bad move string, but not both."
 showMove
@@ -726,42 +744,18 @@ y
 showVal
 
 
-49.) Additional Pylos string sanity checks
--- undoLastMove 1000                
-Invalid format sanity checks
--- doMove Prom0te from [0,2] to [1,1]
--- doMove Play at [0,2] to [2,0]
--- doMove Promote at [1,2]
--- doMove Play at [1,0] to [1,2]
--- doMove Promote to [2,2]
--- doMove Play from [1,1] to [1,2] taking [2,3] and [1,2]
--- doMove Promote to [1,2] from [2,3] taking [3,2] and [3,2]
--- doMove Play at [3,2] taking [2,2] and [1,0]
 
-50.) Even more Pylos string sanity checks
--- doMove Play at [1,
--- doMove Play at [0,0] taking [0,0
--- doMove Play at [0,0 taking [3,4
--- doMove Promote to [1,2] [2,3] [3,2] [2,2]
--- doMove Promote to [1,2] from [2,3] taking [3,1
--- doMove Play Play at [0,0]
-
-50.) What if you try to promote a piece onto a square that uses its own (old) position as a base?
--- doMove Play at [1,1]
--- doMove Play at [1,2]
--- doMove Play at [2,1]
--- doMove Play at [2,2]
--- doMove Promote from [1,1] to [1,1]
--- doMove Promote from [2,1] to [1,1]
--- showBoard
-
-51.) What if I try and promote a piece *down* a level instead of *up* a level?
-
-52.) What if I try and promote a piece, but promote it parallel?
+--24.) What if you try to promote a piece onto a square that uses its own (old) position as a base?
+undoLastMove 1000
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [2,1]
+doMove Play at [2,2]
+showBoard
 
 
+*** IF you don't pass Milestone 0, here's where you can start (from Clint's email)
 53.) PylosDlg tests
-
 
 54.) PylosMove comparison tests
 
