@@ -54,25 +54,27 @@ void PrintList(const list<const Board::Move *> *moves) {
 }
 
 void ApplyMove(Board *board, Board::Move *move) {
-   // Verify that the move is in GetAllMoves() before applying it.
-   list<Board::Move *> allMoves;
-   board->GetAllMoves(&allMoves);
-   bool foundMove = false;
+   // TODO: Verify that the move is in GetAllMoves() before applying it.
+//    list<Board::Move *> allMoves;
+//    board->GetAllMoves(&allMoves);
+//    bool foundMove = false;
+// 
+//    for (list<Board::Move *>::iterator listIter = allMoves.begin();
+//     listIter != allMoves.end(); listIter++) {
+//       if ((*move).operator==(**listIter)) {
+//          foundMove = true;
+//       }
+//       // Clean up after your GetAllMoves() call.
+//       delete *listIter;
+//    }
+// 
+//    if (foundMove) {
+//       board->ApplyMove(move->Clone());
+//    } else {
+//       cout << "TRYING TO APPLY AN INVALID MOVE TO THE BOARD!!" << endl;
+//    }
 
-   for (list<Board::Move *>::iterator listIter = allMoves.begin();
-    listIter != allMoves.end(); listIter++) {
-      if ((*move).operator==(**listIter)) {
-         foundMove = true;
-      }
-      // Clean up after your GetAllMoves() call.
-      delete *listIter;
-   }
-
-   if (!foundMove) {
-      board->ApplyMove(move->Clone());
-   } else {
-      cout << "TRYING TO APPLY AN INVALID MOVE TO THE BOARD!!" << endl;
-   }
+   board->ApplyMove(move->Clone());
 }
 
 int main(int argc, char **argv) {

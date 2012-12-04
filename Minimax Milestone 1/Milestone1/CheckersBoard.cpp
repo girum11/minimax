@@ -376,6 +376,10 @@ void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves,
          // that you would jump into.
          MultipleJumpDFS(moves, locs, cellToJumpInto);
 
+         // Remove this most recent Location from the LocVector, since you're
+         // going to be reusing this LocVector as you recurse.
+         locs.pop_back();
+
          // Clean up after the temporary jump move.
          Piece *newLocation = HalfTake(cellToJumpInto, mWhoseMove);
          delete newLocation;
