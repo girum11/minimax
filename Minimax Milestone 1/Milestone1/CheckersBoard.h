@@ -272,7 +272,11 @@ protected:
    // TODO: Refactor this to use a Piece instead of a Cell.
    inline bool IsValidDirection(Cell *cell, int direction) const {
       // Kings can move any direction
-      if ((mKingSet&cell->mask) != 0) {
+      if (mWhoseMove == kBlack && (cell->mask & mBlackSet) != 0 
+       && (mKingSet&cell->mask) != 0) {
+         return true;
+      } else if (mWhoseMove == kWhite && (cell->mask & mWhiteSet) != 0 
+       && (mKingSet&cell->mask) != 0) {
          return true;
       }
       // Black non-kings can only move upwards
