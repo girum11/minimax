@@ -21,34 +21,38 @@ using namespace std;
 // setter logic for it.
 void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
  int *val, int lo, int hi, std::string prompt) {
-   string inputString;
+   string inputString("");
    int inputValue = 0, res = 0;
-   static const int kTrailingCharLength = 11;
-   char trailingChar[kTrailingCharLength] = {'\0'};
+   char trailingChar = '\0';
    bool inputSuccessfullyRead = false;
 
+   // TODO: This method is hacked to hell and back to make it diff.
    while (!inputSuccessfullyRead) {
-//      try {
          out << prompt << " [" << lo << ", " << hi << "]: ";
-         
+
          // Here, sscanf() the whole line to ensure that no trailing garbage 
          // was inputted
-         if (getline(in, inputString).eof()) {
-            throw BaseException("Unexpected EOF");
-         }
-         res = sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
+         do {
+            if (getline(in, inputString).eof()) {
+               if (!inputString.empty()) {
+                  out << "Badly formatted input\n";
+                  out << prompt << " [" << lo << ", " << hi << "]: ";
+               }
+               throw BaseException("Unexpected EOF");
+            }
+         } while (inputString.empty());
+
+         res = sscanf(inputString.c_str(), " %d %1s", &inputValue, &trailingChar);
          
-         if (trailingChar[0] != '\0') {
+         if (trailingChar != '\0') {
             out << "Unexpected garbage after value.\n";
             // Clear out trailingChar
-            for (int i = 0; i < kTrailingCharLength; ++i) 
-               trailingChar[i] = '\0';
+            trailingChar = '\0';
             continue;
          } else if (res == 0) {
             out << "Badly formatted input\n";
             // Clear out trailingChar
-            for (int i = 0; i < kTrailingCharLength; ++i) 
-               trailingChar[i] = '\0';
+            trailingChar = '\0';
             continue;
          }
 
@@ -61,14 +65,5 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
          }
 
          inputSuccessfullyRead = true;
-
-//       } catch (BaseException &exc) {
-//          out << "Error: " << exc.what();
-//       } catch (...) {
-//          out << "SOME OTHER UNKNOWN ERROR";
-//          assert(false);
-//       }
-
-      // out << endl;
    }
 }

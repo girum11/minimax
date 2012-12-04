@@ -396,6 +396,12 @@ int main(int argc, char **argv) {
          // TODO: Do I even need temp?
          delete temp;
 
+         // If someone else passed you an unexpected EOF, then break early
+         if (string("Unexpected EOF").compare(exc.what()) == 0) {
+            cout << endl;
+            return -1;
+         }
+
 		} catch (...) {
          cout << "Got some other exception... " << endl;
       }
@@ -407,10 +413,10 @@ int main(int argc, char **argv) {
 
 	delete board;
 
-   // TODO: If "quit" is the last line of the file, I stil output
+   // TODO: If "quit" is the last line of the file, I still output
    // this error message, even though I shouldn't.
    if (cin.eof())
       cout << "Error: Unexpected EOF" << endl << endl;
 
-	return 0;
+   return 0;
 }
