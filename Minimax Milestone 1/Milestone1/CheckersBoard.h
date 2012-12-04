@@ -92,6 +92,7 @@ protected:
 
    typedef ulong Set;
 
+   // Struct that defines static cells of the CheckersBoard.  Don't change this.
    struct Cell {
       Set mask; // Mask with this cell's bit turned on
 
@@ -101,14 +102,25 @@ protected:
       std::pair<char, unsigned int> loc;
    };
 
+   // Struct that defines non-static Checkers pieces being played on top
+   // of cells.
+   struct Piece {
+      bool isKing;
+      int color;
+      std::pair<char, unsigned int> loc;
+
+      Piece(bool isKing, int color, std::pair<char, unsigned int> loc) : 
+         isKing(isKing), color(color), loc(loc) {}
+   };
+
    std::istream &Read(std::istream &);
    std::ostream &Write(std::ostream &) const;
    
-   // Helper function to add a piece
-   inline void HalfPut(Cell *cell, int color) {
-      if (color == kBlack) {
+   // Helper function to add a piece on the board.
+   inline void HalfPut(Piece *piece, Cell *cell) {
+      if (piece->color == kBlack) {
          mBlackSet |= cell->mask;
-      } else if (color == kWhite) {
+      } else if (piece->color == kWhite) {
          mWhiteSet |= cell->mask;
       } else assert(false);
 
@@ -118,52 +130,87 @@ protected:
       // Update mBlackCount, mWhiteCount
       // Update mBlackKingCount, mWhiteKingCount
       // Update mBlackBackCount, mWhiteBackCount
-      UpdateBoardValuation(cell, color, 1);
+      UpdateBoardValuation(cell, piece->color, 1);
+
+      // If the piece to put down is a king, add the piece to mKingSet
+      if (piece->isKing)
+         mKingSet |= cell->mask;
    }
 
-   // Helper function to remove a piece.
-   inline void HalfTake(Cell *cell, int color) {
-      if (color == kBlack) {
-         mBlackSet &= ~(cell->mask);
-      } else if (color == kWhite) {
-         mWhiteSet &= ~(cell->mask);
-      } else assert(false);
-
+   // Helper function to remove a piece of a specific color.  
+   // Returns the Piece that was removed.
+   inline Piece *HalfTake(Cell *cell, int color) {     
+      // Assert that the bitmasks don't overlap, so that you can safely
+      // clear the mask from BOTH bitmasks.
       assert((mBlackSet & mWhiteSet) == 0);
+
+      mBlackSet &= ~(cell->mask);
+      mWhiteSet &= ~(cell->mask);
 
       // TODO: Update board valuation
       // Update mBlackCount, mWhiteCount
       // Update mBlackKingCount, mWhiteKingCount
       // Update mBlackBackCount, mWhiteBackCount
       UpdateBoardValuation(cell, color, -1);
+
+      // Figure out if this was a King or not.
+      bool wasKing = (cell->mask & mKingSet);
+
+      // Remove the cell from mKingSet before you finish
+      mKingSet &= ~(cell->mask);
+
+      return new Piece(wasKing, color, cell->loc);
    }
 
    void UpdateBoardValuation(Cell *cell, int color, int rChange) {
-      if (color == kBlack) {
-         // Update the overall count
-         mBlackCount += rChange;
+//       if (color == kBlack) {
+//          // Update the overall count
+//          mBlackCount += rChange;
+// 
+//          // If the cell was a back row cell, update that.
+//          if ((cell->mask & mBlackBackSet) != 0)
+//             mBlackBackCount += rChange;
+//          
+//          // If the cell was a king, update that.  (mKingSet should have already
+//          // been updated before this method is called, which it is currently.)
+//          if ((cell->mask & mKingSet) != 0)
+//             mBlackKingCount += rChange;
+//       } else if (color == kWhite) {
+//          // Update the overall count
+//          mWhiteCount += rChange;
+// 
+//          // If the cell was a back row cell, update that.
+//          if ((cell->mask & mWhiteBackSet) != 0)
+//             mWhiteBackCount += rChange;
+// 
+//          // If the cell was a king, update that.  (mKingSet should have already
+//          // been updated before this method is called, which it is currently.)
+//          if ((cell->mask & mKingSet) != 0)
+//             mWhiteKingCount += rChange;
+//       } else assert(false);
 
-         // If the cell was a back row cell, update that.
-         if ((cell->mask & mBlackBackSet) != 0)
-            mBlackBackCount += rChange;
-         
-         // If the cell was a king, update that.  (mKingSet should have already
-         // been updated before this method is called, which it is currently.)
-         if ((cell->mask & mKingSet) != 0)
-            mBlackKingCount += rChange;
-      } else if (color == kWhite) {
-         // Update the overall count
-         mWhiteCount += rChange;
+      if (color == kBlack)
+         UBVHelper(&mBlackCount, &mBlackBackCount, &mBlackKingCount, 
+          &mBlackBackSet, cell, rChange);
+      else if (color == kWhite)
+         UBVHelper(&mWhiteCount, &mWhiteBackCount, &mWhiteKingCount,
+          &mWhiteBackSet, cell, rChange);
+      else assert(false);
+   }
 
-         // If the cell was a back row cell, update that.
-         if ((cell->mask & mWhiteBackSet) != 0)
-            mWhiteBackCount += rChange;
+   inline void UBVHelper(int *pieceCount, int *backCount, int *kingCount, 
+    Set *backSet, Cell *cell, int rChange) {
+      // Update the overall count
+      *pieceCount += rChange;
 
-         // If the cell was a king, update that.  (mKingSet should have already
-         // been updated before this method is called, which it is currently.)
-         if ((cell->mask & mKingSet) != 0)
-            mWhiteKingCount += rChange;
-      } else assert(false);
+      // If the cell was a back row, update that.
+      if ((cell->mask & *backSet) != 0)
+         *backCount += rChange;
+
+      // If the cell was a king, update that.  (mKingSet should have already
+      // been updated before this method is called, which it is currently.)
+      if ((cell->mask & mKingSet) != 0)
+         *kingCount += rChange;
    }
 
    void MultipleJumpDFS(std::list<CheckersMove *> *, 
@@ -295,8 +342,8 @@ protected:
    int mWhiteKingCount; // The count of kings White has on the board
    int mWhiteBackCount;// The count of pieces White has in his back row
 
-
    std::list<Move *> mMoveHist; // History of moves thus far.
+   std::list<Piece *> mCapturedPieces; // Stack of pieces captured.
    
 private:
    static Object *CreateCheckersBoard() { return new CheckersBoard; };

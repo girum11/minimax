@@ -68,9 +68,9 @@ protected:
       }
    }
 
-   static inline bool IsJumpMove(LocVector *locs) {
-      return !(abs((*locs)[0].first - (*locs)[1].first) == 1 &&
-       abs((int)((*locs)[0].second - (*locs)[1].second)) == 1);
+   static inline bool IsJump(const Location &loc1, const Location &loc2) {
+      return abs(loc1.first - loc2.first) == 2 &&
+       abs((int)(loc1.second - loc2.second)) == 2;
    }
 
 };

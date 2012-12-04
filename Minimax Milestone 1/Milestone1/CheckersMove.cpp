@@ -139,7 +139,7 @@ void CheckersMove::operator=(const string &src) {
    AssertMe();
 
    // Set whether or not this is a jump move
-   if (IsJumpMove(&mLocs))
+   if (IsJump(mLocs[0], mLocs[1]))
       mIsJumpMove = true;
    else
       mIsJumpMove = false;

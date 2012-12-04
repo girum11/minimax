@@ -138,10 +138,12 @@ void CheckersBoard::ApplyMove(Move *move) {
    Set allPieces(mBlackSet | mWhiteSet);
    Cell *originCell = GetCell((*locs)[0].first, (*locs)[0].second);
    int jumpedPieces = 0; // The number of pieces that move "jumps"
+   // You have to remember if the piece that you're moving is a king.
+   Piece *pieceToMove = NULL;
 
-   // Sanity checks on each destination piece.
-   for (unsigned int index1 = 1; index1 < (*locs).size(); ++index1) {
-      Cell *cell = GetCell((*locs)[index1].first, (*locs)[index1].second);
+   // Assertions on each destination piece.
+   for (unsigned int index = 1; index < (*locs).size(); ++index) {
+      Cell *cell = GetCell((*locs)[index].first, (*locs)[index].second);
       
       // Assert that this cell (where this move wants to go to) isn't already
       // taken.
@@ -151,84 +153,84 @@ void CheckersBoard::ApplyMove(Move *move) {
       if ((originCell->mask & mKingSet) == 0) {
          // Black non-kings should be moving upwards
          if (mWhoseMove == kBlack) {
-            assert((*locs)[index1].first > (*locs)[index1-1].first);
+            assert((*locs)[index].first > (*locs)[index-1].first);
          }
          // White non-kings should be moving downwards
          else if (mWhoseMove == kWhite) {
-            assert((*locs)[index1].first < (*locs)[index1-1].first);
+            assert((*locs)[index].first < (*locs)[index-1].first);
          }
       }
    }
 
    // Remove the piece from its original location
-   HalfTake(GetCell((*locs)[0].first, (*locs)[0].second), mWhoseMove);
+   pieceToMove = HalfTake(GetCell((*locs)[0]), mWhoseMove);
 
    // If this move is a "jump move", then you need to do perform some extra
    // logic to remove cells that you've jumped over.
    if (castedMove->mIsJumpMove) {
-      for (unsigned int index2 = 1; index2 < (*locs).size(); ++index2) {
+      for (unsigned int i = 1; i < (*locs).size(); ++i) {
          Cell *jumpedCell = NULL;
-         Cell *destCell = GetCell((*locs)[index2].first, (*locs)[index2].second);
+         Cell *to = GetCell((*locs)[i]);
 
          // Assert that this location actually jumps over a piece
-         assert(abs((*locs)[index2-1].first - (*locs)[index2].first) == 2);
-         // cout << "abs() = " << abs(((int)(*locs)[index2-1].second - (int)(*locs)[index2].second));
-         assert(abs(((int)(*locs)[index2-1].second - (int)(*locs)[index2].second)) == 2);
+         assert(CheckersMove::IsJump((*locs)[i-1], (*locs)[i]));
 
          // If you at any point a non-king jumps into the back row, then assert 
-         // that it STOPPED MOVING.  Also, add the piece to the king set.
-         if ((destCell->mask & mKingSet) == 0) {
-            if (mWhoseMove == kBlack && (destCell->mask & mWhiteBackSet)) {
-               assert(index2 == ((*locs).size() - 1));
-               mKingSet |= destCell->mask;
-            }
-            else if (mWhoseMove == kWhite && (destCell->mask & mBlackBackSet)) {
-               assert(index2 == ((*locs).size() - 1));
-               mKingSet |= destCell->mask;
-            }
+         // that it STOPPED MOVING.
+         if ((to->mask & mKingSet) == 0) {
+            if (mWhoseMove == kBlack && (to->mask & mWhiteBackSet))
+               assert(i == ((*locs).size() - 1));
+            else if (mWhoseMove == kWhite && (to->mask & mBlackBackSet))
+               assert(i == ((*locs).size() - 1));
          }
 
-         // Figure out which cell you jumped.
+         // Figure out which cell you jumped over.
          // TODO: Refactor this.
          // North-west jump
-         if ((*locs)[index2].first > (*locs)[index2-1].first
-          && (*locs)[index2].second < (*locs)[index2-1].second) {
-            jumpedCell = GetCell((*locs)[index2].first - 1, (*locs)[index2].second + 1);
+         if ((*locs)[i].first > (*locs)[i-1].first
+          && (*locs)[i].second < (*locs)[i-1].second) {
+            jumpedCell = GetCell((*locs)[i].first - 1, (*locs)[i].second + 1);
          }
          // North-east jump
-         else if ((*locs)[index2].first > (*locs)[index2-1].first
-          && (*locs)[index2].second > (*locs)[index2-1].second) {
-            jumpedCell = GetCell((*locs)[index2].first - 1, (*locs)[index2].second - 1);
+         else if ((*locs)[i].first > (*locs)[i-1].first
+          && (*locs)[i].second > (*locs)[i-1].second) {
+            jumpedCell = GetCell((*locs)[i].first - 1, (*locs)[i].second - 1);
          }
          // South-west jump
-         else if ((*locs)[index2].first < (*locs)[index2-1].first
-          && (*locs)[index2].second < (*locs)[index2-1].second) {
-            jumpedCell = GetCell((*locs)[index2].first + 1, (*locs)[index2].second + 1);
+         else if ((*locs)[i].first < (*locs)[i-1].first
+          && (*locs)[i].second < (*locs)[i-1].second) {
+            jumpedCell = GetCell((*locs)[i].first + 1, (*locs)[i].second + 1);
          } 
          // South-east jump
-         else if ((*locs)[index2].first < (*locs)[index2-1].first
-          && (*locs)[index2].second > (*locs)[index2-1].second) {
-            jumpedCell = GetCell((*locs)[index2].first + 1, (*locs)[index2].second - 1);
+         else if ((*locs)[i].first < (*locs)[i-1].first
+          && (*locs)[i].second > (*locs)[i-1].second) {
+            jumpedCell = GetCell((*locs)[i].first + 1, (*locs)[i].second - 1);
          } else assert(false); 
 
          // Assert that the piece that you jumped over is occupied by the other
-         // player and not yourself.  Remove that piece.
+         // player and not yourself.
          if (mWhoseMove == kBlack) {
             assert((jumpedCell->mask & mWhiteSet) != 0);
-            HalfTake(jumpedCell, kWhite);
-
          } else if (mWhoseMove == kWhite) {
             assert((jumpedCell->mask & mBlackSet) != 0);
-            HalfTake(jumpedCell, kBlack);
-
          } else assert(false);
+
+         // Remove the piece that you jumped over, and save it.
+         Piece *removedPiece = HalfTake(jumpedCell, -mWhoseMove);
+         mCapturedPieces.push_back(removedPiece);
       }
    }
 
    // Add the piece to its final destination
    Cell *destinationCell =
     GetCell((*locs)[locs->size()-1].first, (*locs)[locs->size()-1].second);
-   HalfPut(destinationCell, mWhoseMove);
+   HalfPut(pieceToMove, destinationCell);
+
+   // If you just HalfPut() into the back row, then king that piece
+   if ((mWhoseMove == kBlack && (destinationCell->mask & mBlackBackSet) != 0)
+    || (mWhoseMove == kWhite && (destinationCell->mask & mWhiteBackSet) != 0)) {
+      mKingSet |= destinationCell->mask;
+   }
 
    // Assert that the two bitmasks don't have any pieces in common.
    assert((mBlackSet & mWhiteSet) == 0);
@@ -244,30 +246,32 @@ void CheckersBoard::ApplyMove(Move *move) {
 void CheckersBoard::UndoLastMove() {
    // Load up the last move in mMoveHist.
    CheckersMove *moveToUndo = dynamic_cast<CheckersMove *>(mMoveHist.back());
+   Cell *originCell = GetCell(moveToUndo->mLocs[0]);
+   Cell *destCell = GetCell(moveToUndo->mLocs[moveToUndo->mLocs.size()-1]);
+   Piece *pieceToMove = NULL;
 
    // Switch whose move it is (early, so that you're taking away the turn
    // that happened BEFORE this current turn)
    mWhoseMove = -mWhoseMove;
 
-   // First, regardless of if this move is a jump move or not, HalfPut the 
-   // starting location back in and HalfTake the ending location away.
-   HalfPut(GetCell(moveToUndo->mLocs[0]), mWhoseMove);
-   HalfTake(GetCell(moveToUndo->mLocs[moveToUndo->mLocs.size()-1]), mWhoseMove);
-
+   // First, regardless of if this move is a jump move or not, HalfTake the 
+   // ending location away (remembering if it was a King or not) and HalfPut the 
+   // starting location back in.
+   pieceToMove = HalfTake(destCell, mWhoseMove);
+   HalfPut(pieceToMove, originCell);
+   
    // If this is a jump move, then HalfPut each of the moves that you jumped
    // back in.
    if (moveToUndo->mIsJumpMove) {
+      int numberOfPiecesToPutBack = moveToUndo->mLocs.size() - 1;
 
-      // Iterate over to the second-to-last Location
-      CheckersMove::LocVector::iterator listIter = moveToUndo->mLocs.end();
-      listIter--;
-      listIter--;
+      for (int i = 0; i < numberOfPiecesToPutBack; i++) {
+         Piece *pieceToPutBack = mCapturedPieces.back();
+         Cell *cellToPutItIn = GetCell(pieceToPutBack->loc);
+         HalfPut(pieceToPutBack, cellToPutItIn);
 
-      // For every Location in the list that's not the first or last Location
-      // (that is, for every piece that you "jumped"), HalfPut it back in
-      // for the other player.
-      for ( ; listIter != moveToUndo->mLocs.begin(); listIter--) {
-         HalfPut(GetCell(*listIter), -mWhoseMove);
+         // Delete the Piece object once you put it back into the board.
+         delete pieceToPutBack;
       }
    }
 
