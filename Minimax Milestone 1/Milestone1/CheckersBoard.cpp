@@ -227,10 +227,12 @@ void CheckersBoard::ApplyMove(Move *move) {
     GetCell((*locs)[locs->size()-1].first, (*locs)[locs->size()-1].second);
    HalfPut(pieceToMove, destinationCell);
 
-   // If you just HalfPut() into the back row, then king that piece
+   // If you just HalfPut() into the back row, then this is a "king me" move.
+   // Set the flag for it, and add this cell to the mKingSet bitmask.
    if ((mWhoseMove == kBlack && ((destinationCell->mask & mWhiteBackSet) != 0))
     || (mWhoseMove == kWhite && ((destinationCell->mask & mBlackBackSet) != 0))) {
       mKingSet |= destinationCell->mask;
+      castedMove->mIsKingMeMove = true;
    }
 
    // Assert that the two bitmasks don't have any pieces in common.
@@ -260,9 +262,15 @@ void CheckersBoard::UndoLastMove() {
    // starting location back in.
    pieceToMove = HalfTake(destCell, mWhoseMove);
    HalfPut(pieceToMove, originCell);
+
+   // If you're undoing a "king me" move, then un-King the piece that you
+   // HalfPut back in.
+   if (moveToUndo->mIsKingMeMove) {
+      mKingSet &= ~(originCell->mask);
+   }
    
-   // If this is a jump move, then HalfPut each of the moves that you jumped
-   // back in.
+   // If you're undoing a jump move, then HalfPut each of the moves that you 
+   // captured back in.
    if (moveToUndo->mIsJumpMove) {
       int numberOfPiecesToPutBack = moveToUndo->mLocs.size() - 1;
 

@@ -2,25 +2,31 @@ enterMove C3  ->   D4
 applyMove
 doMove f4->e5
 doMove c7->d8
-showBoard
 doMove e5->c3
-showBoard
-doMove c5->d6
-
+doMove b4->d2
 doMove f2->e1
-doMove b4->c5
-doMove g3->f2
-doMove a5->b4
-showBoard
-doMove c3->a5
+doMove b2->c3
+doMove f6->e5
+doMove a1->b2
+doMove g3->f4
+doMove c3->d4
+
 showBoard
 
+-- Right here, multiple jumps don't work.
+doMove e1->c3
+doMove d4->f6
+doMove c3->a1
+
+
+showBoard
+
+-- Right here, undoing a "king me" move don't un-king the piece.
 undoLastMove 1
 showBoard
-undoLastMove 1
-showBoard
-undoLastMove 1
-showBoard
+
+
+
 
 showVal
 

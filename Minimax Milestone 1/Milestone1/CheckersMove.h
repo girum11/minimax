@@ -21,7 +21,7 @@ public:
    friend class CheckersBoard;
 
    CheckersMove(const LocVector &locs, bool isJump)
-    : mLocs(locs), mIsJumpMove(isJump) {
+    : mLocs(locs), mIsJumpMove(isJump), mIsKingMeMove(false) {
       AssertMe();
    }
    virtual ~CheckersMove() {}
@@ -48,6 +48,7 @@ protected:
 
    LocVector mLocs;
    bool mIsJumpMove;
+   bool mIsKingMeMove;
 
    static std::vector<CheckersMove *> mFreeList;
 
