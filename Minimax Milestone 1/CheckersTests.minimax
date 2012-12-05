@@ -11,12 +11,14 @@ enterMove	 	a3 	 	-> 	 	b4
 showMove
 enterMove a3->b4
 showMove
+enterMove   a 3 ->b4
+showMove
+enterMove  a3-> b 4
+showMove
 
 -- Invalid strings due to whitespace
 enterMove a3- >b4
 enterMove a3 - > b4
-enterMove   a 3 ->b4
-enterMove  a3-> b 4
 enterMove  a3->    b4     d
 
 
