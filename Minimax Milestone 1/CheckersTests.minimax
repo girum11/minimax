@@ -1,13 +1,27 @@
--- Extra 0's
-enterMove a000000000000->b4
-enterMove a3->b0000000000
+doMove c7->d8
+doMove F2 -> E1       
+doMove C5 -> D6       
+doMove F8 -> E7       
+doMove D6 -> F8
+doMove G3 -> F2       
+doMove B8 -> C7       
+doMove H4 -> G3       
+doMove C1 -> D2       
+doMove F4 -> E5
+doMove D8 -> E7       
+doMove F6 -> D8       
+doMove B4 -> C5       
+doMove G5 -> F6       
+doMove A7 -> B8
+doMove E5 -> D6
+doMove C5 -> E7 -> G5 
+doMove H6 -> F4       
+doMove F8 -> H6       
+doMove F2 -> E3
+doMove C3 -> D4       
 
--- Trailing garbage
-enterMove a3->b4 garbage
-enterMove a3->b4garbage
-enterMove a3->b4                          /0
+-- Right here, my GetALlMoves() doesn't display
+showBoard
 
--- Spaces inside arrows
-enterMove a3- >b4
 
 quit
