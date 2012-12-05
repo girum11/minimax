@@ -78,7 +78,7 @@ void CheckersMove::operator=(const string &src) {
    // Read the first location of this move, throwing an exception if there's an
    // error.  You have to read the first location separately because the 
    // expected string doesn't have the "->" in it on the first one
-   res = sscanf(copy.c_str(), " %c%1u%n", 
+   res = sscanf(copy.c_str(), " %c%d%n", 
     &locs[0].first, &locs[0].second, &charsRead);
    if (res != 2)
       throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
@@ -109,7 +109,7 @@ void CheckersMove::operator=(const string &src) {
       locs.resize(locs.size() + 1);
 
       // Scan the next Location
-      res = sscanf(copy.c_str(), " -> %c%1u%n", 
+      res = sscanf(copy.c_str(), " -> %c%d%n", 
        &locs[index].first, &locs[index].second, &charsRead);
 
       // Check if is a malformed location.
