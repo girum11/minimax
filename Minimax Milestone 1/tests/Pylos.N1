@@ -1,0 +1,492 @@
+showVal
+keyMoveCount
+showBoard
+keyMoveCount
+enterMove Play at [1, 1]
+keyMoveCount
+applyMove
+keyMoveCount
+showBoard
+keyMoveCount
+enterMove Playat [1,1]
+keyMoveCount
+enterMove Play at [1,1]
+keyMoveCount
+applyMove
+keyMoveCount
+enterMove  Play at   [ 2 , 1]   
+keyMoveCount
+applyMove
+keyMoveCount
+showMove
+keyMoveCount
+showBoard
+keyMoveCount
+compareMove Play at    [ 1,   2]
+keyMoveCount
+compareMove Play at    [ 2,2]
+keyMoveCount
+compareMove Play at [9, 5]
+keyMoveCount
+compareMove Play at [-1, -1]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove play at [2, 1]
+keyMoveCount
+enterMove play at [2,1]
+keyMoveCount
+doMove Play at [2, 1]
+keyMoveCount
+doMove Play at [1, 2]
+keyMoveCount
+showMove
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [2, 2, ]
+keyMoveCount
+doMove Play at [2, 2]
+keyMoveCount
+showBoard
+keyMoveCount
+compareMove Play at [1, 1]
+keyMoveCount
+enterMove Play at [1,1]
+keyMoveCount
+compareMove Play at [1, 1]
+keyMoveCount
+compareMove Play at [0, 1]
+keyMoveCount
+compareMove Pass
+keyMoveCount
+compareMove Play at [1, 0]
+keyMoveCount
+compareMove Play [3,3]
+keyMoveCount
+compareMove Play at [3,3]
+keyMoveCount
+showMove
+keyMoveCount
+applyMove
+keyMoveCount
+showBoard
+keyMoveCount
+showMoveHist
+keyMoveCount
+undoLastMove 2
+keyMoveCount
+showMoveHist
+keyMoveCount
+showBoard
+keyMoveCount
+showMove
+keyMoveCount
+applyMove
+keyMoveCount
+doMove Play at [2,2 ]
+keyMoveCount
+showMove
+keyMoveCount
+applyMove
+keyMoveCount
+doMove Pla y at [1, 1]
+keyMoveCount
+doMove Play at [1, 1]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [ 0.3 , 3]
+keyMoveCount
+doMove Play at [ 0 , 3]
+keyMoveCount
+showBoard
+keyMoveCount
+undoLastMove 1
+keyMoveCount
+doMove Play at [3, 0]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [3, 3]
+keyMoveCount
+undoLastMove 1
+keyMoveCount
+doMove Play at [0, 0]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove [3, 3]
+keyMoveCount
+doMove Play at [3, 3]
+keyMoveCount
+doMove Play at [0, 1]
+keyMoveCount
+doMove Play at [3, 1]
+keyMoveCount
+doMove Play at [0, 2]
+keyMoveCount
+showBoard
+keyMoveCount
+undoLastMove 1
+keyMoveCount
+showBoard
+keyMoveCount
+enterMove Play at [0, 2]
+keyMoveCount
+applyMove
+keyMoveCount
+showVal
+keyMoveCount
+undoLastMove 1
+keyMoveCount
+showMove
+keyMoveCount
+enterMove Play at [1, 0]
+keyMoveCount
+applyMove
+keyMoveCount
+showBoard
+keyMoveCount
+Promote from [3,1] to [1, 1]
+keyMoveCount
+enterMove Promote from [3,1] to [1, 1]
+keyMoveCount
+applyMove
+keyMoveCount
+enterMove Promote from [3,1] to [6, 6]
+keyMoveCount
+enterMove Promote from [3,1] to [0,0]
+keyMoveCount
+applyMove
+keyMoveCount
+showBoard
+keyMoveCount
+enterMove Play at [0, 2] taking [0, 2] and [0, 3]
+keyMoveCount
+applyMove
+keyMoveCount
+showBoard
+keyMoveCount
+showVal
+keyMoveCount
+saveBoard PylosSave.0
+keyMoveCount
+compareKeys PylosSave.0
+keyMoveCount
+doMove Play at [ 2, 0]
+keyMoveCount
+compareKeys PylosSave.0
+keyMoveCount
+setOptions
+keyMoveCount
+y
+keyMoveCount
+76
+keyMoveCount
+63
+keyMoveCount
+4
+keyMoveCount
+showVal
+keyMoveCount
+showMoveHist
+keyMoveCount
+loadBoard PylosSave.0
+keyMoveCount
+showMoveHist
+keyMoveCount
+showVal
+keyMoveCount
+showBoard
+keyMoveCount
+undoLastMove 2
+keyMoveCount
+showBoard
+keyMoveCount
+undoLastMove 1
+keyMoveCount
+doMove Play at [3, 1]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [2, 3]
+keyMoveCount
+showBoard
+keyMoveCount
+enterMove Play at [3, 2]     taking  [3,0] and[3, 2]
+keyMoveCount
+showMove
+keyMoveCount
+enterMove Play at [3, 2]     taking[3,0]and[3, 2]
+keyMoveCount
+showMove
+keyMoveCount
+enterMove Play at [3, 2]taking[3,0]and[3, 2]
+keyMoveCount
+showMove
+keyMoveCount
+enterMove Play at [3, 2]taking[3,0]and[3, 2]sadf
+keyMoveCount
+enterMove Play at [3,2]taking[3,0]and[3, 2]sadf
+keyMoveCount
+showMove
+keyMoveCount
+applyMove
+keyMoveCount
+showBoard
+keyMoveCount
+enterMove Play at [0, 2]  
+keyMoveCount
+applyMove
+keyMoveCount
+showBoard
+keyMoveCount
+undoLastMove 1
+keyMoveCount
+showMove
+keyMoveCount
+showBoard
+keyMoveCount
+enterMove Play at [1, 0] taking [1, 0]
+keyMoveCount
+applyMove
+keyMoveCount
+showBoard
+keyMoveCount
+showVal
+keyMoveCount
+undoLastMove 1
+keyMoveCount
+showMove
+keyMoveCount
+compareMove Play at [1, 0] taking [0, 1]
+keyMoveCount
+enterMove Play at [1, 0] taking [0, 1]
+keyMoveCount
+applyMove
+keyMoveCount
+doMove Play at [3, 2] taking [3, 2] and 
+keyMoveCount
+doMove Play at [3, 2] taking [3, 3]  
+keyMoveCount
+showBoard
+keyMoveCount
+compareMove Play at [3, 3]
+keyMoveCount
+enterMove Play at [3, 3]
+keyMoveCount
+applyMove
+keyMoveCount
+showBoard
+keyMoveCount
+compareMove Promote from [3, 1] to [2, 2]
+keyMoveCount
+doMove Promote from [3, 1] to [2, 2]
+keyMoveCount
+showBoard
+keyMoveCount
+testPlay 1 3
+keyMoveCount
+showBoard
+keyMoveCount
+testPlay 1 3
+keyMoveCount
+showBoard
+keyMoveCount
+testPlay 1 3
+keyMoveCount
+showBoard
+keyMoveCount
+testPlay 1 7
+keyMoveCount
+showMove
+keyMoveCount
+showVal
+keyMoveCount
+showBoard
+keyMoveCount
+testPlay 1 3
+keyMoveCount
+showBoard
+keyMoveCount
+testPlay 4 5
+keyMoveCount
+showBoard
+keyMoveCount
+testPlay 4 9
+keyMoveCount
+showBoard
+keyMoveCount
+showMove
+keyMoveCount
+showVal
+keyMoveCount
+testPlay 4 85
+keyMoveCount
+showBoard
+keyMoveCount
+showMoveHist
+keyMoveCount
+showVal
+keyMoveCount
+showVal
+keyMoveCount
+showMove
+keyMoveCount
+doMove Promote from [0, 2] to [0, 0]
+keyMoveCount
+showBoard
+keyMoveCount
+showVal
+keyMoveCount
+showMove
+keyMoveCount
+doMove Play at [0, 2]
+keyMoveCount
+showBoard
+keyMoveCount
+showMove
+keyMoveCount
+setOptions
+N
+keyMoveCount
+loadBoard PylosSave.0
+keyMoveCount
+setOptions
+n
+showMove
+keyMoveCount
+applyMove
+keyMoveCount
+showMoveHist
+keyMoveCount
+showBoard
+keyMoveCount
+undoLastMove 43535
+keyMoveCount
+showBoard
+keyMoveCount
+showMoveHist
+keyMoveCount
+doMove Play at [0, 0]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [0, 3]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [1, 1]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [0 ,2]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [2, 2]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [3, 1]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [3, 3]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [2, 3] taking [2, 3] and [3, 0]
+keyMoveCount
+showMoveHist
+keyMoveCount
+undoLastMove 7
+keyMoveCount
+showMoveHist
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [0, 0]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [0, 3]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [1, 0]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [0, 2]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [2, 0]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [1, 3]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [3, 3]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [0, 1]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [3, 2]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [2, 3]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [3, 1]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [1, 1]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [2, 1]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [2, 2]
+keyMoveCount
+showBoard
+keyMoveCount
+doMove Play at [3, 0]
+keyMoveCount
+showBoard
+keyMoveCount
+undoLastMove 1
+keyMoveCount
+testPlay 1 10
+keyMoveCount
+showBoard
+keyMoveCount
+showMoveHist
+keyMoveCount
+undoLastMove 10
+keyMoveCount
+testPlay 2 10
+keyMoveCount
+showBoard
+keyMoveCount
+showMoveHist
+keyMoveCount
+testPlay 3 10
+keyMoveCount
+showBoard
+keyMoveCount
+showMoveHist
+keyMoveCount
+keyMoveCount

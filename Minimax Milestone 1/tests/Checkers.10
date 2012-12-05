@@ -1,0 +1,3 @@
+enterMove A7 -> C5 -> A3
+compareMove A7 -> C5
+quit

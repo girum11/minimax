@@ -1,11 +1,6 @@
--- "Shotgun" tests (random testing)
-showBoard
-keyMoveCount
-
-testRun 7 10000
-
-showBoard
-showMoveHist
-keyMoveCount
+-- Spaces inside arrows
+enterMove a3- >b4
 
 quit
+
+

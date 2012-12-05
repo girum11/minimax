@@ -1,0 +1,38 @@
+testPlay 1 1000
+undoLastMove 1000
+testPlay 2 1000
+undoLastMove 1000
+testPlay 3 1000
+undoLastMove 1000
+testPlay 4 1000
+undoLastMove 1000
+testPlay 5 1000
+undoLastMove 1000
+testPlay 6 1000
+undoLastMove 1000
+testPlay 7 1000
+undoLastMove 1000
+testPlay 8 1000
+undoLastMove 1000
+testPlay 9 1000
+undoLastMove 1000
+testPlay 10 1000
+undoLastMove 1000
+testPlay 11 1000
+undoLastMove 1000
+testPlay 12 1000
+undoLastMove 1000
+testPlay 132 1000
+undoLastMove 1000
+testPlay 142 1000
+undoLastMove 1000
+testPlay 153 1000
+undoLastMove 1000
+testPlay 162 1000
+undoLastMove 1000
+testPlay 1337 1000
+undoLastMove 1000
+testPlay 14 1000
+undoLastMove 1000
+showBoard
+quit

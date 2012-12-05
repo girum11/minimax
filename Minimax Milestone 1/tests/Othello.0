@@ -1,0 +1,811 @@
+
+
+keyMoveCount
+compareMove [   0,    0]
+compareMove [
+compareMove [   0
+compareMove [   0,  
+compareMove [   0,    0
+compareMove [1   , 1]
+compareMove [1   , 1
+compareKeys wah
+compareKeys [0 ,0   ]
+compareKeys [ 0 , 0 ]
+compareKeys [1 0 , 0 ]
+compareKeys [0, 0 ] 1
+compareKeys [0, 0 ] [1,2]	
+compareKeys Pass
+compareKeys Pass hahahah!
+showMoveHist
+keyMoveCount
+showVal
+enterMove [
+enterMove [0
+enterMove [0,
+enterMove [0,2
+enterMove [0,2	]
+applyMove
+doMove [
+doMove [   1
+doMove [   1   ,   
+doMove [   1   ,   3
+doMove [   1   ,   3   ]
+doMove [   1   ,   3   ]
+doMove [   1   ,   3   ]
+doMove [   1   ,   3   ]
+showMove
+doMove                                                            [1,4]
+doMove [3,4]
+doMove [2,4]
+doMove [3,3]
+showMove
+doMove [3,4]
+doMove [4,4]
+doMove [4,3]
+enterMove [2,2]
+saveMove 2.pls
+saveMove 2.pls
+showMove
+applyMove
+enterMove [3,2]
+enterMove [2,3]
+enterMove [3,2]
+compareMove [8,8]
+compareMove wow
+compareMove
+compareMove [0,0]
+compareMove [1,1]
+compareMove [-1,-1]
+compareMove [3,2]
+saveMove 3.pls
+showMove
+applyMove
+applyMove
+showBoard
+enterMove [2,4]
+saveMove 4.pls
+applyMove
+saveBoard 0.pls
+undoLastMove 1
+compareKeys 0.pls
+doMove [2,4]
+showVal
+showMoveHist
+
+doMove [5,5]]
+doMove [5,5
+doMove 5,5]]
+doMove [5,5] hoorah
+doMove [5,5]hoorah
+
+doMove [-5,5]
+doMove [8,0]
+doMove [0,8]
+doMove [8,8]
+showMoveHist
+doMove [0,-1]
+doMove [-1,-1]
+keyMoveCount
+
+doMove [       5,5
+]
+doMove 
+[5,5]
+doMove [5     , 5]
+doMove [5     ,5]
+doMove [5,5]
+doMove [5,4]
+doMove [4,5]
+doMove [4,2]
+doMove [2,2]
+showBoard
+doMove [3,1]
+doMove [5,3]
+doMove [5,2]
+showBoard
+saveBoard 0.pls
+compareKeys 0.pls
+doMove [4,1]
+compareKeys 0.pls
+doMove [5,0]
+doMove [2,3]
+doMove [5,1]
+doMove [2,1]
+doMove [1,2]
+showBoard
+doMove [4,0]
+doMove [3,0]
+doMove [1,5]
+showBoard
+doMove [2,1]
+doMove [3,5]
+doMove [4,6]
+doMove [6,3]
+doMove [7,3]
+doMove [4,7]
+showBoard
+doMove [5,6]
+enterMove [6,2]
+showMove
+applyMove
+doMove [5,7]
+enterMove [1,3]
+showMove
+showBoard
+applyMove
+showMove
+doMove [0,3]
+doMove [2,6]
+doMove [3,6]
+showBoard
+doMove [6,7]
+doMove [2,5]
+doMove [3,7]
+showBoard
+d
+doMove [2,0]
+showVal
+doMove [1,0]
+doMove [0,2]
+doMove [7,2]
+doMove [6,5]
+doMove [7,4]
+doMove [7,5]
+showBoard
+doMove [6,4]
+showVal
+showBoard
+doMove [7,1]
+doMove [1,1]
+doMove [6,1]
+doMove [7,0]
+doMove [6,0]
+doMove [0,5]
+showBoard
+doMove [1,7]
+doMove [2,7]
+doMove [7,7]
+showBoard
+showVal
+doMove [0,4]
+doMove [1,4]
+showBoard
+doMove [1,6]
+doMove [6,6]
+doMove [0,1]
+showBoard
+doMove [0,0]
+doMove [7,6]
+doMove [0,6]
+doMove [0,7]
+showVal
+enterMove Pass
+saveMove Pass.pls
+showMove
+applyMove
+showVal
+doMove [0,7]
+showVal
+loadMove Pass.pls
+applyMove
+doMove Pass
+doMove Pass
+showBoard
+doMove Pass
+doMove Pass
+showBoard
+doMove Pass
+showBoard
+showMoveHist
+doMove Pass
+saveBoard 1.pls
+compareKeys 1.pls
+loadBoard 1.pls
+showMove
+showVal
+showMoveHist
+compareKeys 1.pls
+undoLastMove 1
+showVal
+keyMoveCount
+compareKeys 1.pls
+undoLastMove 1
+showMoveHist
+undoLastMove -5
+undoLastMove 0
+undoLastMove 0 hoorah
+undoLastMove 1000
+showMoveHist
+keyMoveCount
+loadMove 2.pls
+applyMove
+loadMove 3.pls
+loadMove 3.pls hoorah
+applyMove
+undoLastMove 2
+setOptions
+y
+0
+0
+0
+0
+showVal
+undoLastMove 1000
+doMove [3,2]
+doMove [2,4]
+doMove [5,5]
+doMove [5,4]
+doMove [4,5]
+doMove [4,2]
+showBoard
+doMove [2,2]
+doMove [3,1]
+doMove [5,3]
+showBoard
+doMove [5,2]
+doMove [4,1]
+doMove [5,0]
+doMove [2,3]
+doMove [5,1]
+showBoard
+doMove [2,1]
+doMove [1,2]
+showMove
+doMove [4,0]
+doMove [3,0]
+showBoard
+doMove [1,5]
+doMove [2,1]
+showBoard
+doMove [3,5]
+doMove [4,6]
+doMove [6,3]
+doMove [7,3]
+showBoard
+doMove [4,7]
+doMove [5,6]
+doMove [6,2]
+showVal
+showBoard
+doMove [5,7]
+doMove [1,3]
+doMove [0,3]
+showBoard
+doMove [2,6]
+doMove [3,6]
+doMove [6,7]
+doMove [2,5]
+showBoard
+doMove [3,7]
+doMove [2,0]
+doMove [1,0]
+showMove
+doMove [0,2]
+doMove [7,2]
+doMove [6,5]
+showBoard
+doMove [7,4]
+doMove [7,5]
+doMove [6,4]
+showBoard
+doMove [7,1]
+doMove [1,1]
+doMove [6,1]
+doMove [7,0]
+doMove [6,0]
+showBoard
+doMove [0,5]
+doMove [1,7]
+doMove [2,7]
+doMove [7,7]
+
+setOptions
+n
+setOptions
+no
+setOptions showVal
+setOptions
+showVal
+setOptions
+5
+showVal
+setOptions y
+y
+100
+100
+100
+100
+showVal
+undoLastMove 1000
+showVal
+doMove [3,2]
+doMove [2,4]
+showBoard
+doMove [5,5]
+doMove [5,4]
+doMove [4,5]
+doMove [4,2]
+showBoard
+doMove [2,2]
+doMove [3,1]
+showVal
+doMove [5,3]
+showVal
+doMove [5,2]
+doMove [4,1]
+doMove [5,0]
+showVal
+doMove [2,3]
+doMove [5,1]
+doMove [2,1]
+doMove [1,2]
+doMove [4,0]
+doMove [3,0]
+showVal
+doMove [1,5]
+showVal
+doMove [2,1]
+showBoard
+doMove [3,5]
+doMove [4,6]
+showBoard
+doMove [6,3]
+doMove [7,3]
+doMove [4,7]
+doMove [5,6]
+doMove [6,2]
+showVal
+doMove [5,7]
+doMove [1,3]
+doMove [0,3]
+doMove [2,6]
+doMove [3,6]
+
+doMove [6,7]
+doMove [2,5]
+doMove [3,7]
+doMove [2,0]
+doMove [1,0]
+doMove [0,2]
+doMove [7,2]
+showBoard
+doMove [6,5]
+doMove [7,4]
+doMove [7,5]
+showBoard
+doMove [6,4]
+doMove [7,1]
+doMove [1,1]
+doMove [6,1]
+doMove [7,0]
+doMove [6,0]
+doMove [0,5]
+doMove [1,7]
+doMove [2,7]
+doMove [7,7]
+saveMove askmewhy.pls pls
+saveMove askmewhy.pls
+showVal
+setOptions y
+y
+101
+-1
+1 wub wub wub
+1
+101
+-1
+1 wub wub wub
+1
+101
+-1
+1 wub wub wub
+1
+101
+-1
+A
+1 wub wub wub
+1
+showVal
+setOptions
+y
+0
+0
+0
+100
+showVal
+setOptions
+y
+0
+0
+100
+0
+showVal
+setOptions
+y
+0
+100
+0
+0
+showVal
+setOptions
+y
+100
+0
+0
+0
+showVal
+showBoard
+testPlay seed moveCount
+testPlay 1 2
+showBoard
+testPlay 1 2
+showBoard
+testPlay -1 2
+showBoard
+testPlay hamburgers 0
+testPlay A 3
+testPlay 505 abc
+testPlay 505 -1
+testPlay 1337 200000
+testRun 0 10
+testRun a 10
+testRun -1 10
+testRun 0 0
+showBoard
+testRun 0 0
+showBoard
+undoLastMove 1000
+testPlay 10 100
+showBoard
+undoLastMove 1000
+testPlay 10 100
+undoLastMove 3
+enterMove [7,-1]
+applyMove
+undoLastMove 100
+testPlay 9 50
+doMove [7,1]
+enterMove [0,8]
+applyMove
+doMove [7,8]
+enterMove [8,7]
+applyMove
+undoLastMove 100
+doMove [5,4]
+enterMove [ 3                                                           ,5]
+applyMove
+doMove                                                    [2,4]
+	doMove [5,5]
+doMove	[4	,6]
+doMove		[5,	3]
+doMove	[6,4]
+doMove [	4,5]
+doMove	[4,2] TROUBLING
+doMove	[4,2]
+showVal
+applyMove
+enterMove Pass
+showVal
+doMove Pass
+applyMove
+showBoard
+showMoveHist
+keyMoveCount
+undoLastMove 1
+showMoveHist
+keyMoveCount
+undoLastMove 2 FUARK!
+undoLastMove 100
+doMove [5,4]
+doMove [3,5]
+doMove [2,2]
+doMove [5,2]
+doMove [5,3]
+doMove [3,2]
+doMove [4,2]
+showVal
+doMove [5,5]
+doMove [3,6]
+showVal
+doMove [2,5]
+doMove [6,2]
+doMove [4,5]
+doMove [4,6]
+doMove [7,1]
+doMove [7,2]
+doMove [7,3]
+doMove [5,6]
+doMove [3,7]
+doMove [2,4]
+doMove [6,3]
+doMove [6,4]
+showBoard
+doMove [2,3]
+doMove [2,6]
+doMove [7,4]
+doMove [7,5]
+showBoard
+doMove [7,6]
+doMove [6,5]
+doMove [2,7]
+doMove [4,7]
+doMove [5,7]
+showBoard
+loadMove Pass.pls
+applyMove
+doMove Pass
+doMove [5,1]
+doMove [6,0]
+doMove [4,0]
+doMove [6,7]
+doMove [7,7]
+
+doMove [5,0]
+doMove [6,6]
+doMove [3,0]
+showBoard
+doMove [1,2]
+doMove [2,1]
+doMove [1,3]
+showBoard
+doMove [1,4]
+doMove [0,4]
+doMove [1,5]
+doMove [0,5]
+doMove [0,2]
+showBoard
+doMove [1,6]
+doMove [1,7]
+doMove [0,7]
+showVal
+doMove Pass
+doMove [2,0]
+showBoard
+doMove [3,1]
+doMove [4,1]
+showBoard
+doMove [1,0]
+showBoard
+doMove [0,6]
+showBoard
+doMove [1,1]
+compareMove Pass
+doMove [0,3]
+doMove Pass
+doMove [0,1]
+doMove [0,0]
+showBoard
+doMove Pass
+showBoard
+doMove [0,0]
+enterMove [7,0]
+applyMove
+showBoard
+enterMove Pass
+showMove
+applyMove
+showBoard
+doMove [0,0]
+showVal
+doMove [6,1]
+showBoard
+doMove [7,0]
+doMove Pass
+doMove [7,0]
+showVal
+doMove Pass ff
+enterMove Pass 0000
+doMove PassengerSeat
+doMove Pass
+compareMove [3,0]
+doMove Pass
+showVal
+showBoard
+
+undoLastMove 100
+doMove [4,5]
+doMove [5,3]
+doMove [3,2]
+doMove [2,3]
+doMove [2,2]
+showBoard
+doMove [3,5]
+doMove [5,5]
+showBoard
+doMove [4,6]
+doMove [2,5]
+doMove [2,4]
+showVal
+
+doMove [3,6]
+showVal
+doMove [5,6]
+doMove [5,4]
+doMove [4,2]
+showBoard
+doMove [4,7]
+doMove [6,4]
+showBoard
+doMove [1,4]
+doMove [1,3]
+showBoard
+doMove [6,5]
+doMove [5,2]
+showVal
+doMove [0,4]
+doMove [3,1]
+showVal
+doMove [1,2]
+doMove [2,1]
+doMove [7,4]
+
+doMove [0,2]
+doMove [4,1]
+showBoard
+doMove [1,5]
+showBoard
+doMove [0,5]
+doMove [3,0]
+doMove [5,0]
+showVal
+showBoard
+doMove [7,5]
+doMove [7,6]
+showVal
+doMove [2,7]
+doMove [2,6]
+doMove [0,3]
+doMove [3,7]
+doMove [5,7]
+doMove [6,3]
+doMove [1,0]
+doMove [4,0]
+showVal
+doMove [2,0]
+doMove [7,2]
+showBoard
+doMove [6,2]
+doMove [0,1]
+showBoard
+doMove [7,3]
+doMove [7,2]
+doMove [5,1]
+showBoard
+doMove [6,0]
+doMove [6,1]
+doMove [7,0]
+showVal
+doMove [7,1]
+doMove [6,6]
+doMove [1,1]
+showVal
+doMove [0,0]
+doMove [7,7]
+showVal
+doMove [1,7]
+showBoard
+doMove [6,7]
+showBoard
+doMove [1,6]
+showBoard
+doMove [2,7]
+showBoard
+doMove [0,6]
+showVal
+doMove [0,7]
+showVal
+doMove Pass
+doMove [0,6]
+
+setOptions
+y
+8
+3
+16
+1
+showVal
+doMove [0,7]
+showVal
+loadMove Pass.pls
+applyMove
+showVal
+loadMove Pass.pls
+applyMove
+showVal
+keyMoveCount
+enterMove [3,4]
+applyMove
+showBoard
+saveBoard Draw.pls
+loadBoard Draw.pls
+showMove
+keyMoveCount
+enterMove [8,8]
+showMove
+applyMove
+enterMove [-1,-1]
+applyMove
+enterMove [--,--]
+enterMove [3,4]
+applyMove
+showBoard
+undoLastMove 25
+showMoveHist
+keyMoveCount
+showBoard
+enterMove [0, 1]
+applyMove
+undoLastMove 1
+enterMove [1, 0]
+applyMove
+undoLastMove 1
+enterMove [1, 1]
+applyMove
+undoLastMove 1
+enterMove [1, 6]
+applyMove
+undoLastMove 1
+enterMove [1, 7]
+applyMove
+undoLastMove 1
+enterMove [2, 0]
+applyMove
+undoLastMove 1
+enterMove [2, 7]
+applyMove
+undoLastMove 1
+enterMove [4, 0]
+applyMove
+undoLastMove 1
+enterMove [5, 1]
+applyMove
+undoLastMove 1
+enterMove [6, 1]
+applyMove
+undoLastMove 1
+enterMove [6, 2]
+applyMove
+undoLastMove 1
+enterMove [7, 3]
+applyMove
+undoLastMove 1
+applyMove
+enterMove [4,8]
+applyMove
+enterMove [5,8]
+applyMove
+enterMove [8,5]
+applyMove
+enterMove [8,4]
+applyMove
+enterMove Pass
+applyMove
+showBoard
+showBoard
+setOptions
+y
+1 1 1 1
+11111
+11 1 1
+0 0 
+-1
+0
+99
+55
+4
+showBoard
+testRun 1 2
+showBoard
+testRun 1 0
+showBoard
+testRun 1 1
+showBoard
+undoLastMove 0
+showMoveHist
+keyMoveCount
+enterMove [000,001]
+showMove
+enterMove [123,321]
+showMove
+showBoard
+quit

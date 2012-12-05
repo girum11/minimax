@@ -1,0 +1,48 @@
+setOptions y
+y
+101
+-1
+1 wub wub wub
+1
+101
+-1
+1 wub wub wub
+1
+101
+-1
+1 wub wub wub
+1
+101
+-1
+A
+1 wub wub wub
+1
+showVal
+setOptions
+y
+0
+0
+0
+100
+showVal
+setOptions
+y
+0
+0
+100
+0
+showVal
+setOptions
+y
+0
+100
+0
+0
+showVal
+setOptions
+y
+100
+0
+0
+0
+quit

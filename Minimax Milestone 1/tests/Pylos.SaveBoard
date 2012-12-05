@@ -1,0 +1,9 @@
+testPlay 1 5
+saveBoard 1.pls
+showMoveHist
+showBoard
+showVal
+undoLastMove 100
+showBoard
+loadBoard 1.pls
+quit

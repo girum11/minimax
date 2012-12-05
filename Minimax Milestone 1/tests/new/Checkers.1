@@ -1,0 +1,144 @@
+saveBoard DefaultBoard.pls
+compareKeys DefaultBoard.pls
+showMoveHist
+showBoard blah
+showMove
+showVal
+keyMoveCount
+undoLastMove -1 blah
+
+enterMove B4->D2
+showMove
+applyMove
+
+enterMove C35->D45
+showmove
+applyMove
+
+enterMove  F6->e5
+showMove
+applyMove
+
+enterMove C3->D3
+showMove
+applyMove
+
+enterMove C3->d4
+showMove
+applyMove
+
+undoLastMove 0
+
+enterMove F6->E5
+showMove
+applyMove
+
+undoLastMove 2
+showMove
+applyMove
+
+enterMove C3->D4
+applyMove
+
+undoLastMove 1
+applyMove
+undoLastMove 1
+
+enterMove F6->E5
+applyMove
+
+doMove C3->D4
+doMove F6->E5
+doMove D4->G7
+
+#badmoves
+doMOve D4->F7
+doMove D4->E5
+
+doMove D4->F6
+
+   #badmoves
+doMove G7->F6
+doMove G7->E6
+
+doMove G7->E5
+
+   #comparison stuff
+enterMove C5->D4 
+compareMove C5->D6 
+enterMove C5->D6
+compareMove C5->D4
+compareMove C0->d0
+enterMove B2->C1
+compareMove C5->D6
+enterMove C5->D6
+compareMove B2->C1
+compareMove C5->d6
+compareMove G7->H8
+compareMove G7->H9
+compareMove E5->D4
+enterMove E      5    ->      d   4    
+compareMove C5->D6
+enterMove C5->C5
+compareMove C5->C5
+compareMove C5->D6
+compareMove C5->C6
+compareMove C6->C5 blah
+compareMove C    6    ->    C     5   
+showMove
+
+
+doMove C5->D6
+doMove F2->E1
+doMove B2->c3
+doMove G3->F2
+doMove D6->G3
+doMove B4->C5
+doMove H6->G7
+doMove A1->b2
+doMove F4->E3
+
+   #badmove
+enterMove D6->F4
+showMove
+applyMove
+showMove
+compareMove D6->F4->H6
+enterMove D6->F4->H6
+compareMove D6->F4   ->   H6
+compareMove D6->F4   ->
+applyMove
+
+saveBoard Board1.pls
+
+showMoveHist
+undoLastMove 0
+showMoveHist
+undoLastMove 1
+showMoveHist
+undoLastMove 999
+showMoveHist
+
+loadBoard Board1.pls
+showMoveHist
+
+compareKeys DefaultBoard.pls
+
+   #Load/save Move
+enterMove E1->D2
+showMove
+saveMove Move1.pls
+enterMove H4->G5
+loadMove Move1.pls
+showMove
+applyMove
+
+#badMoves
+doMove c3->E1->F1
+doMove c3->E1->G4
+doMove c3->E1->G2
+doMove c3->E1     ->     g   3
+
+showBoard
+quit
+

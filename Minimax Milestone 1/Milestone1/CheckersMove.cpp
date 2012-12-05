@@ -72,6 +72,8 @@ void CheckersMove::operator=(const string &src) {
    char arrow[2], trailingGarbage;
    
    // Strip all whitespace from the string
+   // TODO: This has to go -- I can't just casually strip all whitespace
+   // from the string and have cases like "a3- >b4" pass my code.
    copy.erase(remove(copy.begin(), copy.end(), ' '), copy.end());
    copy.erase(remove(copy.begin(), copy.end(), '\t'), copy.end());
 

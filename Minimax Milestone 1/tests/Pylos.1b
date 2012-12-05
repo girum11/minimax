@@ -1,0 +1,20 @@
+showVal
+doMove [0,0]
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [0,0]
+showMoveHist
+undoLastMove -1
+undoLastMove 0
+showMoveHist
+undoLastMove 1
+doMove Play at [2,0]
+doMove Play at [0,2]
+showBoard
+doMove Play at [3, 0] taking [0, 0] and [1, 0]
+showMove
+showBoard
+undoLastMove 1
+quit

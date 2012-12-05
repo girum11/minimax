@@ -1,0 +1,5 @@
+ testRun 100 57
+ showBoard
+ testRun 100 1
+showBoard
+quit

@@ -1,0 +1,8 @@
+doMove [2,3]
+enterMove [2,2]
+showMove
+showMoveHist
+doMove [2,2]
+showBoard
+showMoveHist
+quit

@@ -1,0 +1,16 @@
+showBoard
+doMove Play at [0, 0]
+doMove Play at [3, 3]
+doMove Play at [0, 1]
+doMove Play at [3, 2]
+doMove Play at [0, 2]
+doMove Play at [2,3]
+doMove Play at [1, 1]
+doMove Play at [2, 2] taking [2, 2] and [3, 2]
+showVal
+enterMove Play at [1, 2]
+showMove
+applyMove
+showMove
+doMove Play at [3,2]
+quit

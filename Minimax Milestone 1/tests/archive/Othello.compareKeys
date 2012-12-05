@@ -1,0 +1,13 @@
+showBoard
+saveBoard yeah
+testPlay 1 1000
+showBoard
+saveBoard yeahboy
+keyMoveCount
+compareKeys yeahboy
+compareKeys yeah
+loadBoard yeah
+keyMoveCount
+compareKeys yeahboy
+compareKeys yeah
+quit

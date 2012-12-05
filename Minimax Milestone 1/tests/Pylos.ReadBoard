@@ -1,0 +1,7 @@
+saveBoard emptyHouse
+testPlay 1 1000
+saveBoard thisHouse
+loadBoard emptyHouse
+laodBoard thisHouse
+showBoard
+quit

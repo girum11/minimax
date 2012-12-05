@@ -1,0 +1,13 @@
+//showBoard
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,3]
+doMove Play at [0,2]
+
+showBoard
+doMove Promote from [0, 3] to [0, 0]
+
+
+showBoard
+quit
+

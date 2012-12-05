@@ -1,0 +1,15 @@
+showVal
+saveBoard yeah
+testPlay 1 1000
+showVal
+saveBoard yeahboy
+undoLastMove 1000
+showVal
+loadBoard yeahboy
+showMoveHist
+showBoard
+loadBoard yeah
+showVal
+showMoveHist
+showBoard
+quit

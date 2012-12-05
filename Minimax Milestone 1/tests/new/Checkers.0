@@ -1,0 +1,378 @@
+showBoard
+showVal
+showMove
+setOptions wtf
+no
+setOptions
+yes
+-1
+-1001
+1000
+setOptions
+y
+-1
+-1001
+500
+keyMoveCount
+setOptions
+y
+500
+250
+20
+
+doMove c1 -> d2
+undoLastMove 1
+doMove c 1  ->   d     2   
+undoLastMove 1
+doMove c1 - > d 2
+doMove c1 -> d2 WTF
+
+doMove c0->d1
+doMove c1->d0
+doMove c1->b2
+doMove c1->d1
+doMove c1->c1
+doMove d1->e2
+showBoard
+
+doMove C1->D2
+doMove F4->e5
+doMove c5->D4
+doMove g3->f4
+doMove c7->d6
+doMove e5->c7
+showBoard
+saveBoard Board1.pls
+doMove b8->d6
+doMove f6->e7
+doMove d2->e3
+doMove e7->c5
+keyMoveCount
+doMove b4->d6
+showBoard
+doMove f4->d2->b4
+doMove a3->c5
+doMove g5->f4
+doMove b2->c3
+showBoard
+doMove H6->g5
+doMove a5->b4
+doMove f8->e7
+showBoard
+showVal
+doMove D6->f8->H6
+doMove f4->e3
+showBoard
+showVal
+doMove H6->f4->d2
+doMove H8->g7
+doMove d4->e5
+doMove H2->g3
+doMove c3->d4
+doMove f2->e1
+doMove d2->c1
+doMove g1->f2
+doMove c5->d6
+doMove H4->g5
+doMove e5->f6
+
+showBoard
+enterMove G7->e5->C3->a5->c7
+showMove
+applyMove
+enterMove G7->e5->c3
+showMove
+applyMove
+showBoard
+doMove G7->e5->c3->a5
+showBoard
+
+doMove c1->d2
+showBoard
+doMove A5->c7->e5
+doMove d2->c3
+doMove g3->f4
+doMove a1->b2
+doMove g5->f6
+doMove c3->b4
+doMove e5->d4
+doMove b4->c3
+doMove d4->c5
+doMove a7->b8
+doMove c5->b6
+showBoard
+
+enterMove b2->c1
+saveBoard Board2.pls
+loadBoard Board1.pls
+showBoard
+setOptions
+y
+1000
+1000
+100
+showVal
+enterMove b8->d6
+loadBoard Board2.pls
+showMove
+showBoard
+enterMove b2->c1
+applyMove
+showBoard
+
+doMove f6->e7
+doMove b8->c7
+doMove b6->d8
+doMove c3->b4
+doMove e7->d6
+doMove b4->a5
+doMove d8->c7
+keyMoveCount
+doMove a5->b4
+doMove c7->b6
+doMove b4->c3
+doMove e1->d2
+showBoard
+doMove d6->c7
+showBoard
+doMove c3->e1->g3->e5->c7->a5
+showBoard
+
+undoLastMove 30
+
+saveBoard Board1.pls
+
+enterMove G7->G7
+applyMove
+enterMove G6->F7
+applyMove
+enterMove G6->G6
+applyMove
+enterMove A-1->A0
+showMove
+applyMove
+enterMove A-1->A-1
+showMove
+applyMove
+enterMove E5->F4
+showMove
+applyMove
+
+doMove g1->f2
+doMove A1->b2
+doMove H4->G5
+doMove E5->F6
+
+keyMoveCount
+
+enterMove G7->E5
+showMove
+applyMove
+
+doMove G7->E5->C3->A1
+doMove C5->d6
+doMove G3->F4
+doMove C1->b2
+
+showBoard
+enterMove A1->C3->A5->c7->e5
+showMove
+applyMove
+
+showBoard
+enterMove A1->C3->A5->C7->e5->g3
+showMove
+applyMove
+
+showBoard
+doMove A1->C3->A5->C7->E5
+showMoveHist
+showBoard
+
+doMove A7->B6
+doMove E5->D4
+doMove B6->C5
+doMove D4->B6
+
+undoLastMove 999999
+
+setOptions
+Yyess
+setOptions
+Nnooo
+showVal
+setOptions
+y
+0
+0
+0
+testRun 50 50
+showBoard
+showVal
+setOptions
+y
+1000
+1000
+100
+testRun 100 50
+showBoard
+showVal
+setOptions
+y
+0
+1000
+0
+testRun 30 50
+showBoard
+showVal
+setOptions
+y
+1000
+0
+100
+testRun 20 50
+showBoard
+showVal
+setOptions
+y
+1000
+1000
+0
+testRun 100 50
+showBoard
+keyMoveCount
+showVal
+setOptions
+y
+0
+0
+100
+testRun 999 50
+showBoard
+showVal
+setOptions
+y
+500 blah
+500
+250 100
+250
+20 blah
+20
+
+undoLastMove 0
+showMoveHist
+showBoard
+testRun 999 0
+showMoveHist
+undoLastMove 99999999
+showMoveHist
+showBoard
+
+testPlay 190 50
+showMoveHist
+showBoard
+doMove H6->F8
+doMove B6->A7
+doMove F8->E7
+doMove B2->A3
+doMove E7->D8
+doMove H2->G3
+doMove D8->E7
+doMove G3->F2
+doMove E7->D8
+doMove F2->E3
+showBoard
+
+saveBoard Board3.pls
+doMove D8->C7
+doMove A3->B4
+doMove G1->H2
+doMove A7->B6
+enterMove C7->A5
+showMove
+applyMove
+doMove C7->A5->c3qui
+showBoard
+setOptions
+y
+1000
+1000
+100
+showVal
+loadBoard Board3.pls
+showVal
+showBoard
+
+doMove D8->E7
+doMove E3->d2
+doMove E7->D8
+doMove D2->C3
+showBoard
+doMove D8->E7
+doMove C3->B4
+doMove E7->D8
+doMove B4->A5
+doMove D8->E7
+doMove G5->F4
+doMove E7->D8
+doMove F4->E3
+keyMoveCount
+doMove D8->E7
+doMove E3->D4
+doMove E7->D8
+doMove D4->C3
+doMove D8->E7
+doMove C3->B2
+doMove E7->D8
+doMove B2->A1
+
+testPlay 10 30
+doMove F2->G3
+doMove A7->B6
+showBoard
+doMove G3->H4
+showBoard
+doMove B2->C3
+doMove H4->G5
+showBoard
+doMove B6->C5
+showBoard
+doMove G5->H6
+doMove C5->D6
+showBoard
+doMove H6->G7
+doMove D6->E5
+doMove G7->H8
+doMove E5->F4
+doMove h8->G7
+showBoard
+doMove F4->G5
+doMove G7->H8
+doMove D4->E5
+doMove H8->g7
+showBoard
+doMove G5->H6
+doMove g7->H8
+doMove E7->F8
+doMove H8->G7
+doMove C3->D4
+doMove G7->H8
+showBoard
+keyMoveCount
+showBoard
+doMove D4->C5
+doMove H8->G7
+doMove C5->D6
+showBoard
+doMove G7->H8
+doMove D6->E7
+doMove H8->G7
+doMove E7->F6
+doMove G7->H9
+doMove G7->H8
+doMove F8->G7
+
+showBoard
+
+quit
+

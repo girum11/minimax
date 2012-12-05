@@ -1,0 +1,232 @@
+showVal
+enterMove Play at [1, 1]
+applyMove
+enterMove Playat [1,1]
+enterMove Play at [1,1]
+applyMove
+enterMove  Play at   [ 2 , 1]   
+applyMove
+showMove
+compareMove Play at    [ 1,   2]
+compareMove Play at    [ 2,2]
+compareMove Play at [9, 5]
+compareMove Play at [-1, -1]
+doMove play at [2, 1]
+enterMove play at [2,1]
+doMove Play at [2, 1]
+doMove Play at [1, 2]
+showMove
+doMove Play at [2, 2, ]
+doMove Play at [2, 2]
+compareMove Play at [1, 1]
+enterMove Play at [1,1]
+compareMove Play at [1, 1]
+compareMove Play at [0, 1]
+compareMove Pass
+compareMove Play at [1, 0]
+compareMove Play [3,3]
+compareMove Play at [3,3]
+showMove
+applyMove
+showMoveHist
+undoLastMove 2
+showMoveHist
+showMove
+applyMove
+doMove Play at [2,2 ]
+showMove
+applyMove
+doMove Pla y at [1, 1]
+doMove Play at [1, 1]
+doMove Play at [ 0.3 , 3]
+doMove Play at [ 0 , 3]
+undoLastMove 1
+doMove Play at [3, 0]
+doMove Play at [3, 3]
+undoLastMove 1
+doMove Play at [0, 0]
+doMove [3, 3]
+doMove Play at [3, 3]
+doMove Play at [0, 1]
+doMove Play at [3, 1]
+doMove Play at [0, 2]
+undoLastMove 1
+enterMove Play at [0, 2]
+applyMove
+showVal
+undoLastMove 1
+showMove
+enterMove Play at [1, 0]
+applyMove
+Promote from [3,1] to [1, 1]
+enterMove Promote from [3,1] to [1, 1]
+applyMove
+enterMove Promote from [3,1] to [6, 6]
+enterMove Promote from [3,1] to [0,0]
+applyMove
+enterMove Play at [0, 2] taking [0, 2] and [0, 3]
+applyMove
+showVal
+saveBoard PylosSave.0
+compareKeys PylosSave.0
+doMove Play at [ 2, 0]
+compareKeys PylosSave.0
+setOptions
+y
+29
+23
+18
+showVal
+showMoveHist
+loadBoard PylosSave.0
+showMoveHist
+showVal
+undoLastMove 2
+undoLastMove 1
+doMove Play at [3, 1]
+doMove Play at [2, 3]
+enterMove Play at [3, 2]     taking  [3,0] and[3, 2]
+showMove
+enterMove Play at [3, 2]     taking[3,0]and[3, 2]
+showMove
+enterMove Play at [3, 2]taking[3,0]and[3, 2]
+showMove
+enterMove Play at [3, 2]taking[3,0]and[3, 2]sadf
+enterMove Play at [3,2]taking[3,0]and[3, 2]sadf
+showMove
+applyMove
+enterMove Play at [0, 2]  
+applyMove
+undoLastMove 1
+showMove
+enterMove Play at [1, 0] taking [1, 0]
+applyMove
+showVal
+undoLastMove 1
+showMove
+compareMove Play at [1, 0] taking [0, 1]
+enterMove Play at [1, 0] taking [0, 1]
+applyMove
+doMove Play at [3, 2] taking [3, 2] and 
+doMove Play at [3, 2] taking [3, 3]  
+compareMove Play at [3, 3]
+enterMove Play at [3, 3]
+applyMove
+compareMove Promote from [3, 1] to [2, 2]
+doMove Promote from [3, 1] to [2, 2]
+testPlay 1 3
+testPlay 1 3
+testPlay 1 3
+testPlay 1 7
+showMove
+showVal
+testPlay 1 3
+testPlay 4 5
+testPlay 4 9
+showMove
+showVal
+testPlay 4 85
+showMoveHist
+showVal
+showVal
+showMove
+doMove Promote from [0, 2] to [0, 0]
+showVal
+showMove
+doMove Play at [0, 2]
+showMove
+setOptions
+N
+loadBoard PylosSave.0
+setOptions
+n
+showMove
+applyMove
+showMoveHist
+undoLastMove 43535
+showMoveHist
+doMove Play at [0, 0]
+doMove Play at [0, 3]
+doMove Play at [1, 1]
+doMove Play at [0 ,2]
+doMove Play at [2, 2]
+doMove Play at [3, 1]
+doMove Play at [3, 3]
+doMove Play at [2, 3] taking [2, 3] and [3, 0]
+showMoveHist
+undoLastMove 7
+showMoveHist
+doMove Play at [0, 0]
+doMove Play at [0, 3]
+doMove Play at [1, 0]
+doMove Play at [0, 2]
+doMove Play at [2, 0]
+doMove Play at [1, 3]
+doMove Play at [3, 3]
+doMove Play at [0, 1]
+doMove Play at [3, 2]
+doMove Play at [2, 3]
+doMove Play at [3, 1]
+doMove Play at [1, 1]
+doMove Play at [2, 1]
+doMove Play at [2, 2]
+showBoard
+showVal
+
+doMove Play at [0,0]
+showBoard
+showVal
+doMove Play at [1,0]
+showBoard
+showVal
+doMove Play at [1,2]
+showBoard
+showVal
+undoLastMove 1
+showBoard
+showVal
+doMove Play at [3,0]
+showBoard
+showVal
+undoLastMove 1
+showBoard
+showVal
+doMove Play at [2,2]
+showBoard
+showVal
+doMove Play at [2,1]
+showBoard
+showVal
+doMove Play at [1,2]
+showBoard
+showVal
+doMove Play at [1, 1]
+showBoard
+showVal
+doMove Play at [0,1]
+showBoard
+showVal
+doMove Play at [1,2]
+showBoard
+showVal
+doMove Play at [0, 2]
+showBoard
+showVal
+doMove Play at [0,0]
+showBoard
+showVal
+doMove Play at [0,1]
+showBoard
+showVal
+doMove Play at [3,0]
+showBoard
+showVal
+doMove Play at [2,0]
+showBoard
+showVal
+doMove Play at [1,0]
+showBoard
+showVal
+doMove Play at [1,1]
+showBoard
+showVal
