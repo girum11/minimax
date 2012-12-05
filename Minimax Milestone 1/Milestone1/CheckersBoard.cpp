@@ -354,7 +354,7 @@ void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves,
    Cell *destCell = NULL;
    bool foundDeeperJumpBranch = false;
 
-   // If this moving to this cell a "king me" move, then immediately 
+   // If moving this to this cell is a "king me" move, then immediately 
    // cut off this branch from having any deeper branches (set
    // foundDeeperJumpBranch to false and break before getting to the
    // recursive call).

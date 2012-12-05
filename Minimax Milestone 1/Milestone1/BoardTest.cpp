@@ -54,27 +54,35 @@ void PrintList(const list<const Board::Move *> *moves) {
 }
 
 void ApplyMove(Board *board, Board::Move *move) {
-   // Verify that the move is in GetAllMoves() before applying it.
-   // TODO: Remove this verification before you handin.
-   list<Board::Move *> allMoves;
-   board->GetAllMoves(&allMoves);
-   bool foundMove = false;
+   bool checkGetAllMoves = false;
+   
+   if (checkGetAllMoves) {
+      // Verify that the move is in GetAllMoves() before applying it.
+      // TODO: Remove this verification before you handin.
+      list<Board::Move *> allMoves;
+      board->GetAllMoves(&allMoves);
+      bool foundMove = false;
 
-   for (list<Board::Move *>::iterator listIter = allMoves.begin();
-    listIter != allMoves.end(); listIter++) {
-      if ((*move).operator==(**listIter)) {
-         foundMove = true;
+      for (list<Board::Move *>::iterator listIter = allMoves.begin();
+       listIter != allMoves.end(); listIter++) {
+         if ((*move).operator==(**listIter)) {
+            foundMove = true;
+         }
+         // Clean up after your GetAllMoves() call.
+         delete *listIter;
       }
-      // Clean up after your GetAllMoves() call.
-      delete *listIter;
-   }
 
-   if (foundMove) {
-      board->ApplyMove(move->Clone());
-   } else {
-      cout << "TRYING TO APPLY AN INVALID MOVE TO THE BOARD: "
-       << (string) *move << endl;
+      if (foundMove) {
+         board->ApplyMove(move->Clone());
+      } else {
+         cout << "TRYING TO APPLY AN INVALID MOVE TO THE BOARD: "
+          << (string) *move << endl;
+      }
    }
+   else {
+      board->ApplyMove(move->Clone());
+   }
+  
 }
 
 int main(int argc, char **argv) {
