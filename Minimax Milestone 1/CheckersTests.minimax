@@ -15,12 +15,12 @@ enterMove  a3->    b4     d
 
 
 -- Only enter one location
--- enterMove a3
--- enterMove a3  ->
--- enterMove a3->b
--- enterMove a->b4
--- enterMove a->3b4
--- enterMove  ->   b4
+enterMove a3
+enterMove a3  ->
+enterMove a3->b
+enterMove a->b4
+enterMove a->3b4
+enterMove  ->   b4
 
 quit
 
