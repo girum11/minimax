@@ -1,5 +1,23 @@
-enterMove a3->b
+-- 2.) Invalid string input checks
+-- Out of bounds strings
+enterMove a1->b0
+enterMove b8->c9
+enterMove h2->i1
+
+-- Decimals for numbers
+enterMove a1.1->b4
+enterMove a1->b2.2
+
+-- Extra 0's
+enterMove a000000000000->b4
+enterMove a3->b0000000000
+
+-- Trailing garbage
+enterMove a3->b4 garbage
+enterMove a3->b4garbage
+enterMove a3->b4                          /0
+
+-- Spaces inside arrows
+enterMove a3- >b4
 
 quit
-
-

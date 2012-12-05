@@ -103,12 +103,12 @@ void CheckersMove::operator=(const string &src) {
       }
 
       // Then, resize the vector just enough to fit this new Location.
-      // TODO: Make sure you don't resize if you iterate through this loop
-      // one last time for trailing whtiespace.
+      // Since I've already made sure that there's at least another "->" left
+      // in the string, I am guaranteed not to increment locs more than what is
+      // needed for the sscanf on the next line.
       locs.resize(locs.size() + 1);
 
       // Scan the next Location
-      // TODO: Deal with trailing garbage
       res = sscanf(copy.c_str(), " -> %c%1u%n", 
        &locs[index].first, &locs[index].second, &charsRead);
 
