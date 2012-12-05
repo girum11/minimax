@@ -12,6 +12,11 @@
 using namespace std;
 
 
+// TODO: Ian had this great idea where you testRun for a large value
+// that runs in the background, diffing against Clint's version as you go.
+// Since you don't have to adhere to a 0.1 second limit, this can catch
+// a lot of SegFault type errors and the sort.
+
 /************************************************************************/
 /* Declare/initialize static member datum here                          */
 /************************************************************************/
