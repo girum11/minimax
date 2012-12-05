@@ -1,34 +1,18 @@
--- Regular valid strings
-doMove C7 -> D6
-doMove F2->E3
-doMove C3-> D2
-doMove E3 ->D4
-
--- Valid strings even with extra whitespace
-enterMove    a3    ->        b4
-showMove
-enterMove	 	a3 	 	-> 	 	b4 	 	
-showMove
-enterMove a3->b4
-showMove
-enterMove   a 3 ->b4
-showMove
-enterMove  a3-> b 4
-showMove
-
--- Invalid strings due to whitespace
-enterMove a3- >b4
-enterMove a3 - > b4
+-- Extra characters in the string
 enterMove  a3->    b4     d
+enterMove aa2->b4
+enterMove a3a -> b4
+enterMove a3->bb4
+enterMove a3->b4b
 
-
--- Only enter one location
+-- Only input one location
 enterMove a3
 enterMove a3  ->
 enterMove a3->b
 enterMove a->b4
 enterMove a->3b4
 enterMove  ->   b4
+
 
 quit
 

@@ -90,6 +90,13 @@ void CheckersMove::operator=(const string &src) {
    // the case of a multiple jump).
    for (index = 1; !readAllLocations && copy.size(); index++) {
 
+      // If there isn't even an arrow in the remainder of the string, then
+      // you certainly have garbage.  If there's an arrow but nothing else
+      // for it to point to, then the 'res' check later will pick it up.
+      if (copy.find_first_of("->") == string::npos) {
+         throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
+      }
+
       // If you need to, resize the vector by a chunk of memory.
       if (index >= locs.capacity()) {
          locs.reserve(locs.capacity() + kChunkSize);
