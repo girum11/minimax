@@ -1,18 +1,4 @@
--- Extra characters in the string
-enterMove  a3->    b4     d
-enterMove aa2->b4
-enterMove a3a -> b4
-enterMove a3->bb4
-enterMove a3->b4b
-
--- Only input one location
-enterMove a3
-enterMove a3  ->
 enterMove a3->b
-enterMove a->b4
-enterMove a->3b4
-enterMove  ->   b4
-
 
 quit
 

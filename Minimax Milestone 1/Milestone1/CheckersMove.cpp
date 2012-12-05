@@ -112,17 +112,19 @@ void CheckersMove::operator=(const string &src) {
       res = sscanf(copy.c_str(), " -> %c%1u%n", 
        &locs[index].first, &locs[index].second, &charsRead);
 
+      // Check if is a malformed location.
+      if (res != 2) {
+          throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
+      }
+      
       // Erase the characters that we read
       copy.erase(0, charsRead);
-
+      
       // If there is nothing left to scan (only whitespace left), then break.
       if (copy.find_first_not_of(" \t") == string::npos) {
          readAllLocations = true;
       }
-      // Or, maybe this is a malformed location.  Error then.
-      else if (res != 2) {
-          throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
-      }
+
    }
 
    // If you only read in one location, then this is an invalid move.
