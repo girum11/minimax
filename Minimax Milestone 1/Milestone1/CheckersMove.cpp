@@ -78,7 +78,7 @@ void CheckersMove::operator=(const string &src) {
    // Read the first location of this move, throwing an exception if there's an
    // error.  You have to read the first location separately because the 
    // expected string doesn't have the "->" in it on the first one
-   if (sscanf(copy.c_str(), " %c%u %n", &locs[0].first, &locs[0].second, &charsRead) != 2)
+   if (sscanf(copy.c_str(), " %c%1u%n", &locs[0].first, &locs[0].second, &charsRead) != 2)
       throw BaseException(FString("Bad Checkers move: %s", copy.c_str()));
 
    // Erase the characters that we read
@@ -93,19 +93,22 @@ void CheckersMove::operator=(const string &src) {
          locs.reserve(locs.capacity() + kChunkSize);
       }
 
-      // Then, resize the vector just enough to fit this new Location
+      // Then, resize the vector just enough to fit this new Location.
+      // TODO: Make sure you don't resize if you iterate through this loop
+      // one last time for trailing whtiespace.
       locs.resize(locs.size() + 1);
 
       // Scan the next Location
       // TODO: Deal with trailing garbage
-      int res = sscanf(copy.c_str(), " -> %c%u %n",
-       &locs[index].first, &locs[index].second, &charsRead);
+      int charsRead2 = 0;
+      int res = sscanf(copy.c_str(), " -> %c%1u%n", 
+       &locs[index].first, &locs[index].second, &charsRead2);
 
       // Erase the characters that we read
-      copy.erase(0, charsRead);
+      copy.erase(0, charsRead2);
 
-      // If there is nothing left to scan, then break.
-      if (copy.empty()) {
+      // If there is nothing left to scan (only whitespace left), then break.
+      if (copy.find_first_not_of(" \t") == string::npos) {
          readAllLocations = true;
       }
       // Or, maybe this is a malformed location.  Error then.
@@ -113,6 +116,8 @@ void CheckersMove::operator=(const string &src) {
           throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
       }
    }
+
+   // If you only read in one location, then you
 
    for (LocVector::iterator locIter = locs.begin(); 
     locIter != locs.end(); locIter++) {

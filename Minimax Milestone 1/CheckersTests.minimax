@@ -1,15 +1,31 @@
 -- Valid strings even with extra whitespace
-enterMove    a3    ->   b4
+enterMove    a3    ->        b4
+showMove
 enterMove	 	a3 	 	-> 	 	b4 	 	
+showMove
+enterMove a3->b4
+showMove
 
 -- Invalid strings due to whitespace
 enterMove a3- >b4
-enterMove a3->b4
+
+// These aren't getting bounced.
 enterMove   a 3 ->b4
+showMove
 enterMove  a3-> b 4
+showMove
 
 -- Bug here: I'm not checking trailing whitespace.
 enterMove  a3->    b4     d
+
+
+-- Only enter one location
+-- enterMove a3
+-- enterMove a3  ->
+-- enterMove a3->b
+-- enterMove a->b4
+-- enterMove a->3b4
+-- enterMove  ->   b4
 
 quit
 
