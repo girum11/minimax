@@ -125,7 +125,10 @@ void CheckersMove::operator=(const string &src) {
       }
    }
 
-   // If you only read in one location, then you
+   // If you only read in one location, then this is an invalid move.
+   if (locs.size() < 2) {
+      throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
+   }
 
    for (LocVector::iterator locIter = locs.begin(); 
     locIter != locs.end(); locIter++) {
