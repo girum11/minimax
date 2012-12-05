@@ -1,3 +1,9 @@
+-- Regular valid strings
+doMove C7 -> D6
+doMove F2->E3
+doMove C3-> D2
+doMove E3 ->D4
+
 -- Valid strings even with extra whitespace
 enterMove    a3    ->        b4
 showMove

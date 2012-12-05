@@ -66,7 +66,7 @@ void CheckersMove::operator=(const string &src) {
    unsigned start = copy.find_first_not_of(" \t"), 
     end = copy.find_last_not_of(" \t");
    LocVector locs;
-   unsigned int index = 0, charsRead = 0;
+   unsigned int index = 0, charsRead = 0, res = 0;
    static const int kChunkSize = 10;
    bool readAllLocations = false;
    char arrow[2], trailingGarbage;
@@ -78,7 +78,9 @@ void CheckersMove::operator=(const string &src) {
    // Read the first location of this move, throwing an exception if there's an
    // error.  You have to read the first location separately because the 
    // expected string doesn't have the "->" in it on the first one
-   if (sscanf(copy.c_str(), " %c[]%1u%n", &locs[0].first, &locs[0].second, &charsRead) != 2)
+   res = sscanf(copy.c_str(), " %c%1u%n", 
+    &locs[0].first, &locs[0].second, &charsRead);
+   if (res != 2)
       throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
 
    // Erase the characters that we read
@@ -100,12 +102,11 @@ void CheckersMove::operator=(const string &src) {
 
       // Scan the next Location
       // TODO: Deal with trailing garbage
-      int charsRead2 = 0;
-      int res = sscanf(copy.c_str(), " -> %c[]%1u%n", 
-       &locs[index].first, &locs[index].second, &charsRead2);
+      res = sscanf(copy.c_str(), " -> %c%1u%n", 
+       &locs[index].first, &locs[index].second, &charsRead);
 
       // Erase the characters that we read
-      copy.erase(0, charsRead2);
+      copy.erase(0, charsRead);
 
       // If there is nothing left to scan (only whitespace left), then break.
       if (copy.find_first_not_of(" \t") == string::npos) {
