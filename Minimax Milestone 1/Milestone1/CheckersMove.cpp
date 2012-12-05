@@ -70,12 +70,6 @@ void CheckersMove::operator=(const string &src) {
    static const int kChunkSize = 10;
    bool readAllLocations = false;
    char arrow[2], trailingGarbage;
-   
-   // Strip all whitespace from the string
-   // TODO: This has to go -- I can't just casually strip all whitespace
-   // from the string and have cases like "a3- >b4" pass my code.
-   copy.erase(remove(copy.begin(), copy.end(), ' '), copy.end());
-   copy.erase(remove(copy.begin(), copy.end(), '\t'), copy.end());
 
    // Reserve a chunk of memory so that we can dynamically resize later
    locs.reserve(kChunkSize);
@@ -84,7 +78,7 @@ void CheckersMove::operator=(const string &src) {
    // Read the first location of this move, throwing an exception if there's an
    // error.  You have to read the first location separately because the 
    // expected string doesn't have the "->" in it on the first one
-   if (sscanf(copy.c_str(), "%c%u%n", &locs[0].first, &locs[0].second, &charsRead) != 2)
+   if (sscanf(copy.c_str(), " %c%u %n", &locs[0].first, &locs[0].second, &charsRead) != 2)
       throw BaseException(FString("Bad Checkers move: %s", copy.c_str()));
 
    // Erase the characters that we read
@@ -104,18 +98,18 @@ void CheckersMove::operator=(const string &src) {
 
       // Scan the next Location
       // TODO: Deal with trailing garbage
-      int res = sscanf(copy.c_str(), "%2c%c%u%n",
-       arrow, &locs[index].first, &locs[index].second, &charsRead);
+      int res = sscanf(copy.c_str(), " -> %c%u %n",
+       &locs[index].first, &locs[index].second, &charsRead);
 
       // Erase the characters that we read
       copy.erase(0, charsRead);
 
-      // If there is nothing left to scan, then stop reading in.
-      if (res == 0) {
+      // If there is nothing left to scan, then break.
+      if (copy.empty()) {
          readAllLocations = true;
       }
-      // Otherwise, you read a partial move (or had a bad arrow token).
-      else if (res != 3 || arrow[0] != '-' || arrow[1] != '>') {
+      // Or, maybe this is a malformed location.  Error then.
+      else if (res != 2) {
           throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
       }
    }
