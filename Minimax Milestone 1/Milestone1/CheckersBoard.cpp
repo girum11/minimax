@@ -139,7 +139,7 @@ long CheckersBoard::GetValue() const {
    
    // First, check if anyone can even move.
    if (movesLeft == 0)
-      return kWinVal * mWhoseMove;
+      return kWinVal * -mWhoseMove;
    // Black is positive, white is negative
    else if ((mWhitePieceCount + mWhiteKingCount) == 0)
       return kWinVal;
