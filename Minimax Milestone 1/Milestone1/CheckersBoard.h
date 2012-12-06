@@ -14,6 +14,7 @@ public:
 
    friend class CheckersMove;
 
+   // Don't change these -- game logic relies on these being -1 and 1
    enum { kWhite = -1, kBlack = 1, kKing = 7 };
    // kHeight is equal to vertical height of the board, measured in Cells.
    // kDim is equal to kHeight / 2 -- the number of actual Cells you can fit

@@ -138,21 +138,19 @@ long CheckersBoard::GetValue() const {
    }
    
    // First, check if anyone can even move.
-   if (allMoves.size() == 0)
-      result = 0;
+   if (movesLeft == 0)
+      return kWinVal * mWhoseMove;
    // Black is positive, white is negative
-   else if ((mWhitePieceCount+mWhiteKingCount) == 0)
-      result = kWinVal;
-   else if ((mBlackPieceCount+mBlackKingCount) == 0)
-      result =  -kWinVal;
+   else if ((mWhitePieceCount + mWhiteKingCount) == 0)
+      return kWinVal;
+   else if ((mBlackPieceCount + mBlackKingCount) == 0)
+      return -kWinVal;
    else {
-      result =  pieceWgt * (mBlackPieceCount - mWhitePieceCount) + 
+      return pieceWgt * (mBlackPieceCount - mWhitePieceCount) + 
        mRules.kingWgt * (mBlackKingCount - mWhiteKingCount) +
        mRules.backRowWgt * (mBlackBackCount - mWhiteBackCount) +
        mRules.moveWgt * mWhoseMove;
    }
-
-   return result;
 }
 
 void CheckersBoard::ApplyMove(Move *move) {
