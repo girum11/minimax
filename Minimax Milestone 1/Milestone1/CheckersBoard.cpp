@@ -120,7 +120,7 @@ void CheckersBoard::Delete() {
 }
 
 long CheckersBoard::GetValue() const {
-   long returnVal = 0;
+   long result = 0;
    int movesLeft = 0;
 
    // Prep to handle the case where the game is over due to noone being able
@@ -139,18 +139,20 @@ long CheckersBoard::GetValue() const {
    
    // First, check if anyone can even move.
    if (allMoves.size() == 0)
-      returnVal = 0;
+      result = 0;
    // Black is positive, white is negative
    else if ((mWhitePieceCount+mWhiteKingCount) == 0)
-      return kWinVal;
+      result = kWinVal;
    else if ((mBlackPieceCount+mBlackKingCount) == 0)
-      return -kWinVal;
+      result =  -kWinVal;
    else {
-      return pieceWgt * (mBlackPieceCount - mWhitePieceCount) + 
+      result =  pieceWgt * (mBlackPieceCount - mWhitePieceCount) + 
        mRules.kingWgt * (mBlackKingCount - mWhiteKingCount) +
        mRules.backRowWgt * (mBlackBackCount - mWhiteBackCount) +
        mRules.moveWgt * mWhoseMove;
    }
+
+   return result;
 }
 
 void CheckersBoard::ApplyMove(Move *move) {
