@@ -83,8 +83,8 @@ void CheckersBoard::StaticInit() {
 }
 
 CheckersBoard::CheckersBoard() : mWhoseMove(kBlack), 
- mBlackCount(kStartingPieces), mBlackKingCount(0), 
- mBlackBackCount(kStartingBackPieces), mWhiteCount(kStartingPieces), 
+ mBlackPieceCount(kStartingPieces), mBlackKingCount(0), 
+ mBlackBackCount(kStartingBackPieces), mWhitePieceCount(kStartingPieces), 
  mWhiteKingCount(0), mWhiteBackCount(kStartingBackPieces) {
    // Just to make sure that I'm covering all my bases with ALL member datum
    assert(mMoveHist.size() == 0);
@@ -124,12 +124,12 @@ long CheckersBoard::GetValue() const {
    // to move.
    
    // Black is positive, white is negative
-   if (mWhiteCount == 0)
+   if ((mWhitePieceCount+mWhiteKingCount) == 0)
       return kWinVal;
-   else if (mBlackCount == 0)
+   else if ((mBlackPieceCount+mBlackKingCount) == 0)
       return -kWinVal;
    else {
-      return pieceWgt * (mBlackCount - mWhiteCount) + 
+      return pieceWgt * (mBlackPieceCount - mWhitePieceCount) + 
        mRules.kingWgt * (mBlackKingCount - mWhiteKingCount) +
        mRules.backRowWgt * (mBlackBackCount - mWhiteBackCount) +
        mRules.moveWgt * mWhoseMove;
@@ -315,7 +315,7 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
    assert(uncastMoves->size() == 0 && castedMoves->size() == 0);
 
    // If the game is over, don't construct a list
-   if (mBlackCount == 0 || mWhiteCount == 0)
+   if (mBlackPieceCount == 0 || mWhitePieceCount == 0)
       return;
 
    for (row = 'A'; row <= 'H'; row++) {

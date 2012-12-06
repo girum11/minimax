@@ -168,7 +168,7 @@ protected:
 
    void RefreshBoardValuation() {
       // Clear out existing values
-      mBlackCount = mWhiteCount = 0;
+      mBlackPieceCount = mWhitePieceCount = 0;
       mBlackKingCount = mWhiteKingCount = 0;
       mBlackBackCount = mWhiteBackCount = 0;
 
@@ -183,7 +183,7 @@ protected:
                if (cell->mask & mKingSet)
                   ++mBlackKingCount;
                else
-                  ++mBlackCount;
+                  ++mBlackPieceCount;
 
                if (row == 'A')
                   ++mBlackBackCount;
@@ -193,7 +193,7 @@ protected:
                if (cell->mask & mKingSet) 
                   ++mWhiteKingCount;
                else
-                  ++mWhiteCount;
+                  ++mWhitePieceCount;
 
                if (row == 'H')
                   ++mWhiteBackCount;
@@ -330,11 +330,11 @@ protected:
 
    int mWhoseMove; // Whose move it is.  Can be kBlack or kWhite.
 
-   int mBlackCount; // The count of pieces Black has on the board
+   int mBlackPieceCount; // The count of pieces Black has on the board
    int mBlackKingCount; // The count of kings Black has on the board
    int mBlackBackCount; // The count of pieces Black has in his back row
 
-   int mWhiteCount; // The count of pieces White has on the board
+   int mWhitePieceCount; // The count of pieces White has on the board
    int mWhiteKingCount; // The count of kings White has on the board
    int mWhiteBackCount;// The count of pieces White has in his back row
 
