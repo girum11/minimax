@@ -323,37 +323,34 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
                castedMoves->push_back(newMove);
             }
             else if (CanJump(cell, dir)) {
-               // At this point, you're guaranteed to have at least one
-               // possible jump that you can make.  Run a DFS on the possible 
-               // multiple jumps that you can take.
-
-               // Before you do that, remove any other "non-jump" moves that
-               // you added before you add "jump" moves.
-               if (!canJumpAtLeastOnce) {
-                  for (list<CheckersMove *>::iterator listIter = castedMoves->begin();
-                   listIter != castedMoves->end(); listIter++) {
-                      delete *listIter;
-                  }
-                  castedMoves->clear();
-                  canJumpAtLeastOnce = true;
-               }
-
-               // If you can jump any piece, then stop what you're doing
+               // If you can jump any piece, then stop what you're doing,
+               // clear out the non-move pieces that you've collected,
                // and step through the rest of the board running the DFS
                // on each Cell.
+               
+               // Clear the board.
+               for (list<CheckersMove *>::iterator listIter = castedMoves->begin();
+                listIter != castedMoves->end(); listIter++) {
+                   delete *listIter;
+               }
+               castedMoves->clear();
+
+               // Step through the rest of the board
                for (char newRow = row; newRow <= 'H'; newRow++) {
-                  for (unsigned int newCol = ((newRow-'A')%2) + 1; newCol <= kWidth; newCol += 2) {
-                     
+                  for (unsigned int newCol = ((newRow-'A')%2) + 1; 
+                   newCol <= kWidth; newCol += 2) {
+                     Cell *newCell = GetCell(newRow, newCol);
+
+                     // Add the starting location to any possible jumps, since they
+                     // all would start from this location.
+                     CheckersMove::LocVector locs;
+                     locs.push_back(newCell->loc);
+                     MultipleJumpDFS(castedMoves, locs, newCell);
                   }
                }
 
-
-
-               // Add the starting location to any possible jumps, since they
-               // all would start from this location.
-//                CheckersMove::LocVector locs;
-//                locs.push_back(cell->loc);
-//                MultipleJumpDFS(castedMoves, locs, cell);
+               // End the method early.
+               return;
             }
          }
       }
@@ -371,7 +368,7 @@ void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves,
    // cut off this branch from having any deeper branches (set
    // foundDeeperJumpBranch to false and break before getting to the
    // recursive call).
-   if ((cell->mask & mKingSet) == 0) {
+   if (locs.size() > 1 && ((cell->mask & mKingSet) == 0)) {
       if ((mWhoseMove == kBlack && (cell->mask & mWhiteBackSet))
          || (mWhoseMove == kWhite && (cell->mask & mBlackBackSet))) {
          CheckersMove *newMove = new CheckersMove(locs, true);
@@ -383,7 +380,7 @@ void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves,
    // Otherwise, check all possible routes as usual, with the exception
    // of routes that have already been checked by the non-recursive function
    // that calls this.
-   for (int dir = startingDir; dir < kSqr; dir++) {
+   for (int dir = 0; dir < kSqr; dir++) {
       if (CanJump(cell, dir)) {
          // You've found a multiple jump route here.  Set up for your recursive
          // call to keep searching deeper.
@@ -422,7 +419,7 @@ void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves,
    // If you get to a branch that is cut off from having any deeper branches
    // in any direction, then you've found a jump (or multiple jump) that doens't
    // stop halfway through completion.  Add it to the list of moves.
-   if (!foundDeeperJumpBranch) {
+   if (!foundDeeperJumpBranch && locs.size() > 1) {
       CheckersMove *newMove = new CheckersMove(locs, true);
       moves->push_back(newMove);
    }
