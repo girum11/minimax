@@ -315,7 +315,8 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
    assert(uncastMoves->size() == 0 && castedMoves->size() == 0);
 
    // If the game is over, don't construct a list
-   if (mBlackPieceCount == 0 || mWhitePieceCount == 0)
+   if ((mBlackPieceCount+mBlackKingCount) == 0 || 
+    (mWhitePieceCount+mWhiteKingCount) == 0)
       return;
 
    for (row = 'A'; row <= 'H'; row++) {

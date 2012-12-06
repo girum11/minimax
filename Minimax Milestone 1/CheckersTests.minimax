@@ -9,28 +9,22 @@ doMove G7 -> F8
 doMove A5 -> B6       
 doMove H8 -> G7       
 doMove B2 -> C1       
-doMove F6 -> E5    
-showBoard  
+doMove F6 -> E5   
 doMove D4 -> F6 -> H8 
-showBoard
 doMove G5 -> F6       
 doMove C7 -> D6       
 doMove H6 -> G7       
 doMove B8 -> C7      
 doMove E7 -> D8       
 doMove A7 -> B8       
-doMove F8 -> E7       
-showBoard
+doMove F8 -> E7  
 doMove D6 -> F8 -> H6 
-showBoard
 doMove G1 -> F2      
 doMove A1 -> B2       
 doMove H2 -> G1       
 doMove C5 -> D4       
 doMove F4 -> E3  
-showBoard     
 doMove D2 -> F4 -> H2
-showBoard
 doMove F2 -> E3       
 doMove D4 -> F2       
 doMove G1 -> E3       
@@ -52,7 +46,7 @@ doMove E3 -> F4
 doMove H4 -> G3   
 
 -- My code breaks here.    
--- doMove F4 -> H2   
+doMove F4 -> H2   
 
 
 showBoard
