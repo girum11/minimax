@@ -75,8 +75,7 @@ void ApplyMove(Board *board, Board::Move *move) {
       if (foundMove) {
          board->ApplyMove(move->Clone());
       } else {
-         cout << "TRYING TO APPLY AN INVALID MOVE TO THE BOARD: "
-          << (string) *move << endl;
+         cout << "Invalid move being applied" << endl;
       }
    }
    else {
@@ -89,7 +88,7 @@ int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
 	Board::Move *move = NULL, *cmpMove = NULL, *temp = NULL;
 	unsigned count = 0;
-	string command, cArg;
+	string command, cArg, tempString;
 	// Many more locals needed
    View *view = NULL;
    Dialog *dialog = NULL;
@@ -277,10 +276,16 @@ int main(int argc, char **argv) {
             PrintList(&moveHist);
          } else if (command.compare("compareKeys") == 0) {
             cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
-            cin >> cArg;
+            cin >> cArg >> tempString;
+            if (!tempString.empty())
+               throw BaseException("Bad compareKeys argument");
             ifstream in(cArg.c_str());
             if (!in.is_open())
                throw BaseException("Bad file in compareKeys");
+
+            // Flush out the rest of the line
+            cin.ignore(INT_MAX, '\n');
+
             in >> *cmpBoard;
 
             // Grab references to the keys so that you can delete them after

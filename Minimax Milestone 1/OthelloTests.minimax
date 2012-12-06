@@ -1,5 +1,4 @@
 
-
 keyMoveCount
 compareMove [   0,    0]
 compareMove [
@@ -10,5 +9,6 @@ compareMove [1   , 1]
 compareMove [1   , 1
 compareKeys wah
 
+compareKeys [0 ,0   ]
 
 quit
