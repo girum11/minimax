@@ -1,0 +1,572 @@
+//do a triple pass
+//play around with setoptions
+saveBoard empty.pls
+compareKeys empty.pls
+compareMove c4->c5->c6->c7->c8->c9
+compareMove c1->d2->c3
+compareMove c1->e3->d5
+compareMove c1->e3->d5
+compareMove c1->a3
+compareMove c1->a3->
+compareMove c1->e3->d5->e7->g5
+showBoard
+enterMove c1->d2
+loadMove IDONOTEXEEST__.xaHA
+saveMove idoexist.pls
+loadMove idoexist.pls pls
+enterMove c1->     d2 d3
+enterMove c2 c2->d3
+enterMove c1->d 2
+enterMove c 1->d 2
+enterMove c                1->d 2
+enterMove c1->d2->e1
+enterMove c1- >d2
+applyMove
+enterMove C1
+enterMove C1->D2
+enterMove Pass
+applyMove
+doMove c1->d2
+undoLastMove 1
+enterMove C1->D1
+showMove
+applyMove
+compareMove C 1->D 1
+compareMove C1->D2
+compareMove C1->D2->H6
+compareMove Pass
+doMove Pass
+doMove c1->d2
+doMove f4->e3
+//try for illegal move on having to capture
+doMove d2->e1
+doMove b2->c1
+doMove c5->d4
+doMove c7->d6
+undoLastMove 100
+
+doMove c1->d2
+doMove f8->e7
+doMove b2->c1
+doMove g7->f8
+doMove a1->b2
+doMove h8->g7
+showBoard
+doMove c7->d8
+doMove f6->e5
+doMove d8->f6->h8
+undoLastMove 1
+doMove d8->f6->h8->e3
+undoLastMove 1
+doMove f4->e5
+doMove c5->d4
+doMove e5->d6
+doMove d2->e3
+showBoard
+doMove c3->d2
+doMove g3->f4
+doMove c3->d2
+doMove h2->g3
+showBoard
+doMove b2->c3
+doMove f4->e5
+doMove a3->b2
+doMove g3->f4
+doMove b6->c7
+doMove h4->g3
+showBoard
+doMove a5->b6
+doMove f2->e1
+doMove b6->c5
+doMove g3->f2
+showVal
+doMove a7->b6
+showVal
+showMove
+//some limitations on the string
+compareMove c4->c5->c6->c7->c8->c9
+compareMove c1->d2->c3
+compareMove c1->e3->d5
+compareMove c1->e3->d5
+compareMove c1->a3
+compareMove c1->a3->
+compareMove c1->e3->d5->e7->g5
+compareMove c1->e3->d5->e7->g5->e3->c1->e3
+enterMove c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3
+applyMove
+showMove
+//stalemate -end (maybe try illegal moves in this state)
+showBoard
+undoLastMove 100
+showBoard
+enterMove c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3
+applyMove
+doMove c1->d2
+doMove f4->e3
+//ignore the have to capture and play normally
+doMove c3->d4
+undoLastMove 1
+doMove f2->e3
+doMove d2->e1
+doMove e3->d2
+//eat the white even though black is ahead of it?
+doMove c3->e1
+//oob
+doMove c7->e8
+doMove c7->d8
+doMove d2->c1
+doMove c3->d2
+showBoard
+doMove f2->e3
+doMove f2->e3
+//do a draughts move of capture backwards
+doMove c1->e3
+doMove f6->e7
+doMove f6->e7
+showBoard
+doMove d8->f6
+showBoard
+doMove g5->e7
+//junk
+doMove b8->c7
+doMove f4->e3
+doMove d2->f4
+showBoard
+doMove g5->e3
+doMove g3->e5
+undoLastMove 3
+doMove h4->g5
+showBoard
+saveBoard wowow.pls
+compareKeys wowow.pls
+doMove e1->f2
+doMove g1->e3
+doMove d2->e1
+doMove g7->f6
+showBoard
+doMove a7->b8
+doMove h8->g7
+undoLastMove 2
+undoLastMove 100
+compareKeys wowow.pls
+compareKeys empty.pls
+loadBoard wowow.pls
+showMove
+doMove c7->D8
+doMove g7->f6
+doMove a7->b8
+doMove f6->e5
+//do a simple jump, not a two step..
+enterMove d8->f6
+applyMove
+doMove d8->f6->h4->j2
+doMove d8->f6->h4->g6
+doMove d8->f6->h4
+showBoard
+doMove g1->f2
+doMove b8->c7
+doMove h8->g7
+doMove c7->d8
+doMove f2->e3
+//multi jump move
+doMove h4->f2
+doMove h4->f2->d4
+doMove h4->f2->d4->f6
+doMove h4->f2->d4->f6->h8->f6
+doMove h4->f2->d4->f6->h8
+showMoveHist
+keyMoveCount
+showMove
+showBoard
+doMove f4->e3
+doMove d2->f4
+doMove f8->e7
+doMove d8->f6
+showBoard
+doMove h2->g3
+doMove f4->h2
+doMove
+doMove h6->g5
+showVal
+doMove f6->H4
+showVal
+showBoard
+showMoveHist
+keyMoveCount
+showVal
+showBoard
+undoLastMove 2
+
+doMove h6->g7
+showBoard
+doMove b2->c3
+showBoard
+doMove g7->e5
+doMove d2->f4
+doMove f8->e7
+doMove d8->f6
+showBoard
+doMove e1->f2
+doMove c1->b2
+doMove a3->c1
+doMove e5->d4
+showVal
+doMove e5->d4
+doMove c3->e5
+showVal
+showMoveHist
+showBoard
+undoLastMove 7
+doMove f6->g5
+doMove g7->f6
+showBoard
+
+doMove c5->d4
+doMove f6->e7
+doMove b6->c5
+doMove g7->f6
+doMove e7->d8
+doMove b2->c3
+doMove c1->b2
+showBoard
+
+doMove a3->c1
+doMove d8->c7
+doMove e1->f
+doMove g7->f6
+doMove e7->d8
+doMove b2->c3
+doMove c1->b2
+testPlay 3 4
+showBoard
+doMove g5->h4
+doMove a7->b8
+doMove e1->f2
+doMove b8->a7
+
+doMove e5->f6
+doMove a7->b8
+doMove d2->e3
+doMove b8->a7
+
+doMove e3->f4
+doMove a7->b8
+doMove c5->d4
+doMove b8->a7
+
+doMove c1->d2
+doMove a7->b8
+doMove a5->b6
+doMove b8->a7
+
+doMove b6->c7
+doMove a7->b8
+doMove a5->b6
+doMove b8->a7
+
+doMove c7->d6
+doMove a7->b8
+doMove f6->g7
+doMove b8->a7
+
+doMove a1->b2
+doMove a7->b8
+doMove h8->g7
+doMove b8->a7
+
+doMove g7->f8
+doMove a7->b8
+doMove f8->e7
+doMove b8->a7
+
+doMove e7->d8
+doMove a7->b8
+doMove d8->b7
+doMove b8->a7
+//lots of moves available, checking
+showBoard
+doMove B2 -> C1 
+showMove
+undoLastMove 1
+doMove B2 -> C3 
+showMove
+undoLastMove 1 
+doMove B4 -> C3 
+showMove
+undoLastMove 1
+doMove B4 -> C5  
+showMove
+showMoveHist
+keyMoveCount
+undoLastMove 1
+doMove D2 -> E1  
+showMove
+undoLastMove 1
+doMove D2 -> E3  
+showMove
+undoLastMove 1
+doMove D4 -> E3  
+showMove
+undoLastMove 1
+doMove D4 -> E5 
+showMove
+undoLastMove 1
+doMove D6 -> E5 
+showMove
+undoLastMove 1
+doMove D6 -> E7 
+showMove
+undoLastMove 1
+doMove D8 -> C7  
+showMove
+undoLastMove 1
+doMove D8 -> E7 
+showMove
+undoLastMove 1
+doMove F2 -> G1 
+showMove
+undoLastMove 1
+doMove F2 -> G3 
+showMove
+undoLastMove 1 
+doMove F4 -> G3  
+showMove
+undoLastMove 1
+doMove F4 -> G5 
+showMove
+undoLastMove 1
+doMove F6 -> G5 
+showMove
+undoLastMove 1
+doMove F6 -> G7  
+showMove
+undoLastMove 1
+doMove H2 -> G1  
+showMove
+undoLastMove 1
+doMove H2 -> G3  
+showMove
+undoLastMove 1
+doMove H4 -> G3  
+showMove
+undoLastMove 1
+doMove H4 -> G5 
+showMove
+undoLastMove 1
+showBoard
+showMoveHist
+keyMoveCount
+doMove d8->c7
+doMove b8->a7
+doMove c7->b6
+showBoard
+saveBoard 9jump.pls
+compareKeys wowow.pls
+compareKeys wowow
+showVal
+//9 jump
+enterMove A7 -> C5 -> A3 -> C1 -> E3 -> C5 -> E7 -> G5 -> E3 -> G1
+compareMove c4->c5->c6->c7->c8->c9
+compareMove c1->d2->c3
+compareMove c1->e3->d5
+compareMove c1->e3->d5
+compareMove c1->a3
+compareMove c1->a3->
+compareMove c1->e3->d5->e7->g5
+compareMove c1->e3->d5->e7->g5->e3->c1->e3
+enterMove c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3
+showMove
+applyMove
+showVal
+showMoveHist
+showBoard
+undoLastMove 1
+enterMove A7 -> C5 -> A3 -> C1 -> E3 -> G1
+showMove
+applyMove
+showBoard
+showVal
+undoLastMove 1
+enterMove A7 -> C5 -> A3 -> C1 -> E3 -> G5 -> E7 -> C5 -> E3 -> G1
+showMove
+applyMove
+showMoveHist
+undoLastMove 1
+enterMove A7 -> C5 -> E3 -> C1 -> A3 -> C5 -> E7 -> G5 -> E3 -> G1
+showMove
+applyMove
+undoLastMove 1
+enterMove A7 -> C5 -> E3 -> G1
+showMove
+applyMove
+showBoard
+showVal
+undoLastMove 1
+enterMove A7 -> C5 -> E3 -> G5 -> E7 -> C5 -> A3 -> C1 -> E3 -> G1
+showMove
+applyMove
+showBoard
+undoLastMove 1
+enterMove A7 -> C5 -> E7 -> G5 -> E3 -> C1 -> A3 -> C5 -> E3 -> G1
+showMove
+applyMove
+undoLastMove 1
+enterMove A7 -> C5 -> E7 -> G5 -> E3 -> C5 -> A3 -> C1 -> E3 -> G1
+showMove
+applyMove
+undoLastMove 1
+enterMove A7 -> C5 -> E7 -> G5 -> E3 -> G1
+showMove
+applyMove
+showBoard
+undoLastMove 1
+testPlay 1 1
+undoLastMove 1
+testPlay A 1
+undoLastMove 1
+testPlay b 1
+undoLastMove 1
+testPlay 1 1
+showBoard
+undoLastMove 1
+enterMove b8 -> d6
+applyMove
+enterMove b8 -> c9
+applyMove
+undoLastMove 2
+enterMove D8->C7
+applyMove
+showBoard
+loadBoard 9jump.pls
+showMove
+compareKeys empty.pls
+showMove
+showBoard
+showMoveHist
+keyMoveCount
+doMove A7 -> C5 -> E7 -> G5 -> E3 -> C5 -> A3 -> C1 -> E3 -> G1
+compareMove c4->c5->c6->c7->c8->c9
+compareMove c1->d2->c3
+compareMove c1->e3->d5
+compareMove c1->e3->d5
+compareMove c1->a3
+compareMove c1->a3->
+compareMove c1->e3->d5->e7->g5
+compareMove c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3
+enterMove c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1->->d5->e7->g5->e3->c1
+saveMove longest.pls
+showMove
+doMove H2->G3
+doMove G1->H2
+doMove H4->g3
+doMove H4->g5
+showVal
+doMove H2->F4->H6
+showMove
+showMoveHist
+showVal
+showBoard
+undoLastMove 2
+doMove g3->f2
+doMove h2->g1
+enterMove h4->i5
+applyMove
+doMove h4->I5
+doMove h4->g3
+doMove G1-> E3
+doMove G3-> f2
+showBoard
+showVal
+//no capture wit kingu~
+doMove e3->g1
+showVal
+showBoard
+undoLastMove 2
+doMove g3->h2
+doMove e3->f2
+doMove h2->g1
+doMove f2->g3
+doMove g1->g2
+testPlay 10 100
+showMoveHist
+keyMoveCount
+compareKeys wowow.pls
+compareKeys 9jump.pls
+compareKeys empty.pls
+
+undoLastMove 1000
+showMoveHist
+keyMoveCount
+compareKeys wowow.pls
+compareKeys 9jump.pls
+compareKeys empty.pls
+testPlay 92 100
+showMoveHist
+keyMoveCount
+compareKeys wowow.pls
+compareKeys 9jump.pls
+compareKeys empty.pls
+showBoard
+undoLastMove 28
+showBoard
+setOptions
+h
+setOptions
+nope
+setOptions
+n
+showVal
+setOptions
+y yessir
+1001
+-1
+1 baba
+1ba
+1000
+1001
+-1
+1 baba
+1ba
+1000
+101
+-1
+1 baba
+1ba
+1000
+1001
+100
+showVal
+loadBoard wowow.pls
+showMove
+showVal
+setOptions
+yep
+1
+2
+3
+showVal
+loadBoard empty.pls
+showMove
+showVal
+setOptions
+yep
+1
+2
+3
+showVal
+loadBoard 9jump.pls
+showVal
+setOptions
+yep
+4
+5
+2
+showVal
+showMove
+showVal
+loadMove longest.pls
+showMove
+setOptions
+yep
+quit
+
