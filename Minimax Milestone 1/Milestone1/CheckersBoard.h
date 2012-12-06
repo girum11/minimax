@@ -29,10 +29,12 @@ public:
       int moveWgt; // Weight of it being your turn
 
       Rules() : kingWgt(300), backRowWgt(100), moveWgt(20) {}
+
+      void EndSwap();
    };
 
    CheckersBoard();
-   ~CheckersBoard();
+   ~CheckersBoard() { Delete(); }
 
    long GetValue() const;
    void ApplyMove(Move *);
@@ -115,6 +117,9 @@ protected:
 
    std::istream &Read(std::istream &);
    std::ostream &Write(std::ostream &) const;
+
+   // Frees all CheckersBoard storage.
+   void Delete();
    
    // Helper function to add a piece on the board.
    // ApplyMove() and UndoLastMove() should use Put() instead of this method.

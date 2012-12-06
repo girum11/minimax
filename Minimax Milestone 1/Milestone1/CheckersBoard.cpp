@@ -111,7 +111,7 @@ CheckersBoard::CheckersBoard() : mWhoseMove(kBlack),
    }
 }
 
-CheckersBoard::~CheckersBoard() {
+void CheckersBoard::Delete() {
    // Clear out mMoveHistory
    list<Move *>::iterator itr;
    for (itr = mMoveHist.begin(); itr != mMoveHist.end(); itr++)
@@ -120,11 +120,28 @@ CheckersBoard::~CheckersBoard() {
 }
 
 long CheckersBoard::GetValue() const {
-   // TODO: Handle the case where the game is over due to noone being able
+   long returnVal = 0;
+   int movesLeft = 0;
+
+   // Prep to handle the case where the game is over due to noone being able
    // to move.
+   // TODO: If my code runs too slow, here's where I can optimize by not
+   // looking up all of the moves every time I showVal.
+   list<Move *> allMoves;
+   GetAllMoves(&allMoves);
+   movesLeft = allMoves.size();
+
+   // Clean up after your GetAllMoves() call.
+   for (list<Move *>::iterator listIter = allMoves.begin();
+    listIter != allMoves.end(); listIter++) {
+       delete *listIter;
+   }
    
+   // First, check if anyone can even move.
+   if (allMoves.size() == 0)
+      returnVal = 0;
    // Black is positive, white is negative
-   if ((mWhitePieceCount+mWhiteKingCount) == 0)
+   else if ((mWhitePieceCount+mWhiteKingCount) == 0)
       return kWinVal;
    else if ((mBlackPieceCount+mBlackKingCount) == 0)
       return -kWinVal;
@@ -478,11 +495,44 @@ void CheckersBoard::SetOptions(const void *opts) {
 }
 
 istream &CheckersBoard::Read(istream &is) {
-   // TODO: 
+
+   int moveCount = -1;
+
+   // Clear out the Default board's existing data
+   Delete();
+
+   // Read in the Rules that the board should use.
+   is.read((char *)&CheckersBoard::mRules, sizeof(CheckersBoard::mRules));
+   CheckersBoard::mRules.EndSwap();
+
+   is.read((char *)&moveCount, sizeof(moveCount));
+   assert(moveCount != -1);  // sanity check to ensure that the read() happened
+   for (int i = 0; i < moveCount; i++) {
+      CheckersMove *newMove = new CheckersMove(CheckersMove::LocVector(), false);
+      is >> *newMove;
+      ApplyMove(newMove);
+   }
+
    return is;
 }
 
 ostream &CheckersBoard::Write(ostream &os) const { 
-   // TODO:
+   Rules rules = mRules;
+   list<Move *>::const_iterator iter;
+   int moveCount = EndianXfer((int)mMoveHist.size());
+
+   rules.EndSwap();
+   os.write((char *)&rules, sizeof(rules));
+
+   os.write((char *)&moveCount, sizeof(moveCount));
+   for (iter = mMoveHist.begin(); iter != mMoveHist.end(); iter++)
+      os << **iter;
+
    return os;
+}
+
+void CheckersBoard::Rules::EndSwap() {
+   this->kingWgt = EndianXfer(this->kingWgt);
+   this->backRowWgt = EndianXfer(this->backRowWgt);
+   this->moveWgt = EndianXfer(this->moveWgt);
 }

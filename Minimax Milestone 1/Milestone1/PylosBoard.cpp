@@ -589,7 +589,7 @@ istream &PylosBoard::Read(istream &is) {
    // Read() is mostly Write() backwards, with a few exceptions.
    // Order's important.
    
-   int mvCount = -1;
+   int moveCount = -1;
 
    // Clear out the Default board's existing data
    Delete();
@@ -598,9 +598,9 @@ istream &PylosBoard::Read(istream &is) {
    is.read((char *)&PylosBoard::mRules, sizeof(PylosBoard::mRules));
    PylosBoard::mRules.EndSwap();
 
-   is.read((char *)&mvCount, sizeof(mvCount));
-   assert(mvCount != -1);  // sanity check to ensure the read() happened
-   for (int i = 0; i < mvCount; i++) {
+   is.read((char *)&moveCount, sizeof(moveCount));
+   assert(moveCount != -1);  // sanity check to ensure the read() happened
+   for (int i = 0; i < moveCount; i++) {
       // Will this mLocs on the RTS still be there, since it's being
       // inserted as a member variable of something on the RTH?
       // Well, mLocs *should* be copy-constructed in.
@@ -613,18 +613,17 @@ istream &PylosBoard::Read(istream &is) {
 }
 
 // Don't change this.  Make Read conform to it.
-ostream &PylosBoard::Write(ostream &os) const
-{
-   Rules rls = mRules;
-   list<Move *>::const_iterator itr;
-   int mvCount = EndianXfer((int)mMoveHist.size());
+ostream &PylosBoard::Write(ostream &os) const {
+   Rules rules = mRules;
+   list<Move *>::const_iterator iter;
+   int moveCount = EndianXfer((int)mMoveHist.size());
 
-   rls.EndSwap();
-   os.write((char *)&rls, sizeof(rls));
+   rules.EndSwap();
+   os.write((char *)&rules, sizeof(rules));
 
-   os.write((char *)&mvCount, sizeof(mvCount));
-   for (itr = mMoveHist.begin(); itr != mMoveHist.end(); itr++)
-      os << **itr;
+   os.write((char *)&moveCount, sizeof(moveCount));
+   for (iter = mMoveHist.begin(); iter != mMoveHist.end(); iter++)
+      os << **iter;
 
    return os;
 }
