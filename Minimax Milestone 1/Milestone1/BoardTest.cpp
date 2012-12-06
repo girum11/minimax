@@ -55,7 +55,7 @@ void PrintList(const list<const Board::Move *> *moves) {
 
 void ApplyMove(Board *board, Board::Move *move) {
    // TODO: Remove this before you handin.
-   bool checkGetAllMoves = false;
+   bool checkGetAllMoves = true;
    
    if (checkGetAllMoves) {
       // Verify that the move is in GetAllMoves() before applying it.
@@ -279,7 +279,8 @@ int main(int argc, char **argv) {
             cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
             cin >> cArg;
             ifstream in(cArg.c_str());
-            assert(in.is_open());
+            if (!in.is_open())
+               throw BaseException("Bad file in compareKeys");
             in >> *cmpBoard;
 
             // Grab references to the keys so that you can delete them after
