@@ -275,17 +275,17 @@ int main(int argc, char **argv) {
             const list<const Board::Move *> moveHist(board->GetMoveHist());
             PrintList(&moveHist);
          } else if (command.compare("compareKeys") == 0) {
-            cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
-            cin >> cArg >> tempString;
-            if (!tempString.empty())
-               throw BaseException("Bad compareKeys argument");
+            getline(cin, cArg);
+
             ifstream in(cArg.c_str());
-            if (!in.is_open())
+            if (!in.is_open()) {
                throw BaseException("Bad file in compareKeys");
+            }
 
             // Flush out the rest of the line
-            cin.ignore(INT_MAX, '\n');
+            cin.ignore(10000, '\n');
 
+            cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
             in >> *cmpBoard;
 
             // Grab references to the keys so that you can delete them after
