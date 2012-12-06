@@ -158,41 +158,75 @@ protected:
    // of the piece is the same as the targetCell?
    inline void Put(Piece *piece, Cell *targetCell) {
       HalfPut(piece, targetCell);
-      UpdateBoardValuation(targetCell, 1, piece->color);
    }
 
    // Take away a piece of a certain color from a cell.
    inline Piece *Take(Cell *cell, int color) {
       Piece *removedPiece = HalfTake(cell, color);
-      UpdateBoardValuation(cell, -1, color);
       return removedPiece;
    }
 
-   void UpdateBoardValuation(Cell *cell, int rChange, int color) {
-      if (color == kBlack)
-         UpdateBoardValuationHelper(&mBlackCount, &mBlackBackCount, 
-          &mBlackKingCount, &mBlackBackSet, cell, rChange);
-      else if (color == kWhite)
-         UpdateBoardValuationHelper(&mWhiteCount, &mWhiteBackCount, 
-          &mWhiteKingCount, &mWhiteBackSet, cell, rChange);
-      else assert(false);
+   void RefreshBoardValuation() {
+      // Clear out existing values
+      mBlackCount = mWhiteCount = 0;
+      mBlackKingCount = mWhiteKingCount = 0;
+      mBlackBackCount = mWhiteBackCount = 0;
+
+      // Add up the 
+      for (char row = 'A'; row <= 'H'; row ++) {
+         for (unsigned int col = ((row-'A')%2) + 1; col <= kWidth; col += 2) {
+            Cell *cell = GetCell(row, col);
+            assert((mWhiteSet & mBlackSet) == 0);
+
+            // Count up mCounts mKingCounts
+            if (cell->mask & mBlackSet) {
+               ++mBlackCount;
+
+               if (cell->mask & mKingSet) {
+
+               }
+            } else if (cell->mask & mWhiteSet) {
+               ++mWhiteCount;
+
+               if (cell->mask & mKingSet) {
+                  ++mWhiteKingCount;
+               }
+            }
+
+            // Count up mBackCounts
+            if (row == 'A' && (cell->mask & mBlackBackSet)) {
+               ++mBlackBackCount;
+            }
+            else if (row == 'H' && (cell->mask & mWhiteBackSet)) {
+               ++mWhiteBackCount;
+            }
+         }
+      }
    }
+      
+//       if (color == kBlack)
+//          UpdateBoardValuationHelper(&mBlackCount, &mBlackBackCount, 
+//           &mBlackKingCount, &mBlackBackSet, cell, rChange);
+//       else if (color == kWhite)
+//          UpdateBoardValuationHelper(&mWhiteCount, &mWhiteBackCount, 
+//           &mWhiteKingCount, &mWhiteBackSet, cell, rChange);
+//       else assert(false);
 
-   inline void UpdateBoardValuationHelper(int *pieceCount, int *backCount, 
-    int *kingCount, Set *backSet, Cell *cell, int rChange) {
 
-      // Update the overall count
-      *pieceCount += rChange;
-
-      // If the cell was a back row, update that.
-      if ((cell->mask & *backSet) != 0)
-         *backCount += rChange;
-
-      // If the cell was a king, update that.  (mKingSet should have already
-      // been updated before this method is called, which it is currently.)
-      if ((cell->mask & mKingSet) != 0)
-         *kingCount += rChange;
-   }
+//    inline void UpdateBoardValuationHelper(int *pieceCount, int *backCount, 
+//     int *kingCount, Set *backSet, Cell *cell, int rChange) {
+// 
+//       // Update the overall count
+//       *pieceCount += rChange;
+// 
+//       // If the cell was a back row, update that.
+//       if ((cell->mask & *backSet) != 0)
+//          *backCount += rChange;
+// 
+//       // If the cell was a king, update that.  (mKingSet should have already
+//       // been updated before this method is called, which it is currently.)
+//       if ((cell->mask & mKingSet) != 0)
+//          *kingCount += rChange;
 
    void MultipleJumpDFS(std::list<CheckersMove *> *, 
     std::vector<std::pair<char, unsigned int> >, Cell *) const;

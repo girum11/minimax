@@ -250,6 +250,9 @@ void CheckersBoard::ApplyMove(Move *move) {
    mMoveHist.push_back(move);
    mWhoseMove = -mWhoseMove;
 
+   // Refresh Board valuation before you finish
+   RefreshBoardValuation();
+
    // Assert that the two bitmasks don't have any pieces in common.
    assert((mBlackSet & mWhiteSet) == 0);
 }
@@ -265,16 +268,18 @@ void CheckersBoard::UndoLastMove() {
    // that happened BEFORE this current turn)
    mWhoseMove = -mWhoseMove;
 
+   // First, regardless of if this move is a jump move or not, Take the 
+   // ending location away and Put the starting location back in.
+   pieceToMove = Take(destCell, mWhoseMove);
+
    // Before you actually call Put() and Take(), check if you're undoing a 
    // "king me" move.  If that's the case,  then un-King the piece that you
    // Put() back in.
    if (moveToUndo->mIsKingMeMove) {
       mKingSet &= ~(originCell->mask);
+      pieceToMove->isKing = false;
    }
 
-   // First, regardless of if this move is a jump move or not, Take the 
-   // ending location away and Put the starting location back in.
-   pieceToMove = Take(destCell, mWhoseMove);
    Put(pieceToMove, originCell);
    
    // If you're undoing a jump move, then Put each of the moves that you 
@@ -296,6 +301,9 @@ void CheckersBoard::UndoLastMove() {
    // Destroy history of the move
    delete moveToUndo;
    mMoveHist.pop_back();
+
+   // Refresh Board valuation before you finish
+   RefreshBoardValuation();
 }
 
 void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {

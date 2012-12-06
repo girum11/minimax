@@ -16,6 +16,7 @@ showBoard
 showVal
 -- This move right here makes me diff against Clint's showVal
 doMove D4 -> F6 -> H4
+undoLastMove 1
 showVal
 showBoard 
 
