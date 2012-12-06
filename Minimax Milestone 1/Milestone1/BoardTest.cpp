@@ -54,11 +54,11 @@ void PrintList(const list<const Board::Move *> *moves) {
 }
 
 void ApplyMove(Board *board, Board::Move *move) {
+   // TODO: Remove this before you handin.
    bool checkGetAllMoves = false;
    
    if (checkGetAllMoves) {
       // Verify that the move is in GetAllMoves() before applying it.
-      // TODO: Remove this verification before you handin.
       list<Board::Move *> allMoves;
       board->GetAllMoves(&allMoves);
       bool foundMove = false;

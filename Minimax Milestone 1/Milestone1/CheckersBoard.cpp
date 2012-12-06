@@ -341,8 +341,8 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
                    newCol <= kWidth; newCol += 2) {
                      Cell *newCell = GetCell(newRow, newCol);
 
-                     // Add the starting location to any possible jumps, since they
-                     // all would start from this location.
+                     // Add the starting location to any possible jumps, since 
+                     // they all would start from this location.
                      CheckersMove::LocVector locs;
                      locs.push_back(newCell->loc);
                      MultipleJumpDFS(castedMoves, locs, newCell);
