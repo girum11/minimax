@@ -510,6 +510,9 @@ istream &CheckersBoard::Read(istream &is) {
    for (int i = 0; i < moveCount; i++) {
       CheckersMove *newMove = new CheckersMove(CheckersMove::LocVector(), false);
       is >> *newMove;
+
+      assert(newMove->mLocs.size() != 0);
+
       ApplyMove(newMove);
    }
 

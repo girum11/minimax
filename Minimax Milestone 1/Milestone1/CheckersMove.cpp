@@ -209,6 +209,10 @@ istream &CheckersMove::Read(istream &is) {
       mLocs[i].second = EndianXfer(mLocs[i].second);
    }
 
+   // Read in boolean flags
+   is.read((char *)&mIsJumpMove, sizeof(mIsJumpMove));
+   is.read((char *)&mIsKingMeMove, sizeof(mIsKingMeMove));
+
    return is;
 }
 
