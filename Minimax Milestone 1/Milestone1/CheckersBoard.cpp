@@ -229,15 +229,19 @@ void CheckersBoard::ApplyMove(Move *move) {
    // Add the piece to its final destination
    Cell *destinationCell =
     GetCell((*locs)[locs->size()-1].first, (*locs)[locs->size()-1].second);
-   Put(pieceToMove, destinationCell);
-
-   // If you just Put() into the back row, then this is a "king me" move.
-   // Set the flag for it, and add this cell to the mKingSet bitmask.
+   
+   // If the piece that you're about to Put() is going to be put into the
+   // opponent's back row, then this is a "king me" move.
+   // Set the flags for it, and add this cell to the mKingSet bitmask.
    if ((mWhoseMove == kBlack && ((destinationCell->mask & mWhiteBackSet) != 0))
     || (mWhoseMove == kWhite && ((destinationCell->mask & mBlackBackSet) != 0))) {
       mKingSet |= destinationCell->mask;
       castedMove->mIsKingMeMove = true;
+      pieceToMove->isKing = true;
    }
+
+   // Add the piece to its final destination.
+   Put(pieceToMove, destinationCell);
 
    // Assert that the two bitmasks don't have any pieces in common.
    assert((mBlackSet & mWhiteSet) == 0);
@@ -261,17 +265,17 @@ void CheckersBoard::UndoLastMove() {
    // that happened BEFORE this current turn)
    mWhoseMove = -mWhoseMove;
 
-   // First, regardless of if this move is a jump move or not, Take the 
-   // ending location away (remembering if it was a King or not) and Put the 
-   // starting location back in.
-   pieceToMove = Take(destCell, mWhoseMove);
-   Put(pieceToMove, originCell);
-
-   // If you're undoing a "king me" move, then un-King the piece that you
-   // Put back in.
+   // Before you actually call Put() and Take(), check if you're undoing a 
+   // "king me" move.  If that's the case,  then un-King the piece that you
+   // Put() back in.
    if (moveToUndo->mIsKingMeMove) {
       mKingSet &= ~(originCell->mask);
    }
+
+   // First, regardless of if this move is a jump move or not, Take the 
+   // ending location away and Put the starting location back in.
+   pieceToMove = Take(destCell, mWhoseMove);
+   Put(pieceToMove, originCell);
    
    // If you're undoing a jump move, then Put each of the moves that you 
    // captured back in.
