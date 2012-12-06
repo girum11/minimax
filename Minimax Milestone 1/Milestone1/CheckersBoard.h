@@ -172,61 +172,35 @@ protected:
       mBlackKingCount = mWhiteKingCount = 0;
       mBlackBackCount = mWhiteBackCount = 0;
 
-      // Add up the 
+      // Count up the values for each type
       for (char row = 'A'; row <= 'H'; row ++) {
          for (unsigned int col = ((row-'A')%2) + 1; col <= kWidth; col += 2) {
             Cell *cell = GetCell(row, col);
             assert((mWhiteSet & mBlackSet) == 0);
 
-            // Count up mCounts
+            // If this cell is currently occupied by a Black piece...
             if (cell->mask & mBlackSet) {
-               ++mBlackCount;
-
-               if (cell->mask & mKingSet) {
+               if (cell->mask & mKingSet)
                   ++mBlackKingCount;
-               }
+               else
+                  ++mBlackCount;
 
-               if (row == 'A') {
+               if (row == 'A')
                   ++mBlackBackCount;
-               }
-            } else if (cell->mask & mWhiteSet) {
-               ++mWhiteCount;
-
-               if (cell->mask & mKingSet) {
+            } 
+            // If this cell is currently occupied by a White piece...
+            else if (cell->mask & mWhiteSet) {
+               if (cell->mask & mKingSet) 
                   ++mWhiteKingCount;
-               }
+               else
+                  ++mWhiteCount;
 
-               if (row == 'H') {
+               if (row == 'H')
                   ++mWhiteBackCount;
-               }
             }
          }
       }
    }
-      
-//       if (color == kBlack)
-//          UpdateBoardValuationHelper(&mBlackCount, &mBlackBackCount, 
-//           &mBlackKingCount, &mBlackBackSet, cell, rChange);
-//       else if (color == kWhite)
-//          UpdateBoardValuationHelper(&mWhiteCount, &mWhiteBackCount, 
-//           &mWhiteKingCount, &mWhiteBackSet, cell, rChange);
-//       else assert(false);
-
-
-//    inline void UpdateBoardValuationHelper(int *pieceCount, int *backCount, 
-//     int *kingCount, Set *backSet, Cell *cell, int rChange) {
-// 
-//       // Update the overall count
-//       *pieceCount += rChange;
-// 
-//       // If the cell was a back row, update that.
-//       if ((cell->mask & *backSet) != 0)
-//          *backCount += rChange;
-// 
-//       // If the cell was a king, update that.  (mKingSet should have already
-//       // been updated before this method is called, which it is currently.)
-//       if ((cell->mask & mKingSet) != 0)
-//          *kingCount += rChange;
 
    void MultipleJumpDFS(std::list<CheckersMove *> *, 
     std::vector<std::pair<char, unsigned int> >, Cell *) const;

@@ -1,37 +1,187 @@
-
+-- END GAME test: Check a large 9 jump move.  Arrange a 9 Kings vs. 1 King endgame, and have the 1 King win in a single jump.
+undoLastMove 1000
 doMove C1 -> D2       
-doMove F4 -> E5       
-doMove D2 -> E1       
-doMove G3 -> F4       
-doMove E1 -> G3
-doMove H4 -> F2       
-doMove C5 -> D4       
 doMove F2 -> E1       
-doMove C7 -> D8       
-doMove G1 -> F2
-doMove D8 -> E7       
-doMove F6 -> D8       
-
+doMove C5 -> D4       
+doMove F8 -> E7       
+doMove B6 -> C5      
+doMove G7 -> F8       
+doMove A5 -> B6       
+doMove H8 -> G7       
+doMove B2 -> C1       
+doMove F6 -> E5    
+showBoard  
+doMove D4 -> F6 -> H8 
+showBoard
+doMove G5 -> F6       
+doMove C7 -> D6       
+doMove H6 -> G7       
+doMove B8 -> C7      
+doMove E7 -> D8       
+doMove A7 -> B8       
+doMove F8 -> E7       
+showBoard
+doMove D6 -> F8 -> H6 
+showBoard
+doMove G1 -> F2      
+doMove A1 -> B2       
+doMove H2 -> G1       
+doMove C5 -> D4       
+doMove F4 -> E3  
+showBoard     
+doMove D2 -> F4 -> H2
+showBoard
+doMove F2 -> E3       
+doMove D4 -> F2       
+doMove G1 -> E3       
+doMove H8 -> G7       
+doMove E3 -> D2      
+doMove C1 -> E3       
+doMove E1 -> D2       
+doMove C3 -> E1       
+doMove F6 -> E7       
+doMove B6 -> C5      
+doMove D8 -> B6       
+doMove G7 -> F8       
+doMove E7 -> D8       
+doMove H2 -> G1       
+doMove D8 -> C7      
+doMove B8 -> D6       
+doMove B6 -> A7       
+doMove E3 -> F4       
+doMove H4 -> G3       
+doMove F4 -> H2      
+doMove A7 -> B8       
+doMove E1 -> F2       
+doMove B8 -> A7       
+doMove F2 -> G3       
+doMove A7 -> B8      
+doMove G3 -> H4       
+doMove B8 -> A7       
+doMove B2 -> C1       
+doMove A7 -> B8       
+doMove C1 -> D2      
+doMove B8 -> A7       
+doMove G1 -> F2       
+doMove A7 -> B8       
+doMove D2 -> E1       
+doMove B8 -> A7      
+doMove F2 -> E3       
+doMove A7 -> B8       
+doMove A3 -> B2       
+doMove B8 -> A7       
+doMove H2 -> G3      
+doMove A7 -> B8       
+doMove H4 -> G5       
+doMove B8 -> A7       
+doMove B2 -> C1       
+doMove A7 -> B8      
+doMove C1 -> D2       
+doMove B8 -> A7       
+doMove E3 -> D4       
+doMove A7 -> B8       
+doMove D6 -> E5      
+doMove B8 -> A7       
+doMove D4 -> E3       
+doMove A7 -> B8       
+doMove E1 -> F2       
+doMove B8 -> A7      
+doMove F2 -> G1       
+doMove A7 -> B8       
+doMove G1 -> H2       
+doMove B8 -> A7       
+doMove D2 -> E1      
+doMove A7 -> B8       
+doMove E1 -> F2       
+doMove B8 -> A7       
+doMove G3 -> F4       
+doMove A7 -> B8      
+doMove H2 -> G3       
+doMove B8 -> A7       
+doMove F2 -> G1       
+doMove A7 -> B8       
+doMove G1 -> H2      
+doMove B8 -> A7       
+doMove E5 -> F6       
+doMove A7 -> B8       
+doMove F6 -> G7       
+doMove B8 -> A7      
+doMove G7 -> H8       
+doMove A7 -> B8       
+doMove F8 -> E7       
+doMove B8 -> A7       
+doMove E7 -> D8      
+doMove A7 -> B8       
+doMove C5 -> D4       
+doMove B8 -> A7       
+doMove D8 -> C7       
+doMove A7 -> B8      
+doMove D4 -> E5       
+doMove B8 -> D6       
+doMove E5 -> F6       
+doMove D6 -> C7       
+doMove B4 -> C3      
+doMove C7 -> B8       
+doMove C3 -> D2       
+doMove B8 -> A7       
+doMove F4 -> E5       
+doMove A7 -> B8      
+doMove G3 -> F4       
+doMove B8 -> A7       
+doMove D2 -> E1       
+doMove A7 -> B8       
+doMove E1 -> F2      
+doMove B8 -> A7       
+doMove H6 -> G7       
+doMove A7 -> B8       
+doMove G7 -> F8       
+doMove B8 -> A7      
+doMove F2 -> G3       
+doMove A7 -> B8       
+doMove F6 -> G7       
+doMove B8 -> A7       
+doMove G7 -> H6      
+doMove A7 -> B8       
+doMove G3 -> H4       
+doMove B8 -> A7       
+doMove E3 -> D2       
+doMove A7 -> B8      
+doMove D2 -> C3       
+doMove B8 -> A7       
+doMove F4 -> E3       
+doMove A7 -> B8       
+doMove H2 -> G3      
+doMove B8 -> A7       
+doMove E5 -> D4       
+doMove A7 -> B8       
+doMove D4 -> C5       
+doMove B8 -> A7      
+doMove G5 -> F4       
+doMove A7 -> B8       
+doMove F4 -> E5       
+doMove B8 -> A7       
+doMove H4 -> G5      
+doMove A7 -> B8       
+doMove G5 -> F6       
+doMove B8 -> A7       
+doMove H6 -> G5       
+doMove A7 -> B8      
+doMove F6 -> E7       
+doMove B8 -> A7       
+doMove H8 -> G7       
+doMove A7 -> B8       
+doMove E7 -> D6      
+doMove B8 -> A7       
+doMove F8 -> E7       
+doMove A7 -> B8    
+-- Right here is where you can arrange for the "one fell swoop"
 showBoard
 showVal
--- This move right here makes me diff against Clint's showVal
-doMove D4 -> F6 -> H4
-undoLastMove 1
+keyMoveCount
+doMove d6->c7
+showBoard
 showVal
-showBoard 
+keyMoveCount
 
-
-
-
--- doMove F4 -> E5       
--- doMove B6 -> C7
--- doMove D8 -> B6       
--- doMove A7 -> C5       
--- doMove E1 -> D2       
--- doMove C3 -> E1 -> G3
--- doMove H2 -> F4
-
-showVal
-showMoveHist
 
 quit
