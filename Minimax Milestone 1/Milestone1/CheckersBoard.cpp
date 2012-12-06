@@ -338,17 +338,30 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
                   canJumpAtLeastOnce = true;
                }
 
+               // If you can jump any piece, then stop what you're doing
+               // and step through the rest of the board running the DFS
+               // on each Cell.
+               for (char newRow = row; newRow <= 'H'; newRow++) {
+                  for (unsigned int newCol = ((newRow-'A')%2) + 1; newCol <= kWidth; newCol += 2) {
+                     
+                  }
+               }
+
+
+
                // Add the starting location to any possible jumps, since they
                // all would start from this location.
-               CheckersMove::LocVector locs;
-               locs.push_back(cell->loc);
-               MultipleJumpDFS(castedMoves, locs, cell);
+//                CheckersMove::LocVector locs;
+//                locs.push_back(cell->loc);
+//                MultipleJumpDFS(castedMoves, locs, cell);
             }
          }
       }
    }
 }
 
+// This method should look for multiple jumps, starting from the cell that you
+// initially jumped into.
 void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves, 
  CheckersMove::LocVector locs, Cell *cell) const {
    Cell *destCell = NULL;
@@ -366,44 +379,45 @@ void CheckersBoard::MultipleJumpDFS(list<CheckersMove *> *moves,
          return;
       }
    }
-//    // Otherwise, check all possible routes as usual.
-//    else {
-      for (int dir = 0; dir < kSqr; dir++) {
-         if (CanJump(cell, dir)) {
-            // You've found a multiple jump route here.  Set up for your recursive
-            // call to keep searching deeper.
-            destCell = cell->neighborCells[dir]->neighborCells[dir];
-            foundDeeperJumpBranch = true;
 
-            // Temporarily move this piece from the old location to the new 
-            // location, and remove the piece that you jumped over.  Undo all of 
-            // this after the recursive call.
-            Piece *oldLocation = HalfTake(cell, mWhoseMove);
-            Piece *capturedPiece = HalfTake(cell->neighborCells[dir], -mWhoseMove);
-            HalfPut(oldLocation, destCell);
+   // Otherwise, check all possible routes as usual, with the exception
+   // of routes that have already been checked by the non-recursive function
+   // that calls this.
+   for (int dir = startingDir; dir < kSqr; dir++) {
+      if (CanJump(cell, dir)) {
+         // You've found a multiple jump route here.  Set up for your recursive
+         // call to keep searching deeper.
+         destCell = cell->neighborCells[dir]->neighborCells[dir];
+         foundDeeperJumpBranch = true;
 
-            // Add the cell that you would jump over into to the LocVector
-            // that you're constructing for this [multiple] jump.
-            locs.push_back(destCell->loc);
+         // Temporarily move this piece from the old location to the new 
+         // location, and remove the piece that you jumped over.  Undo all of 
+         // this after the recursive call.
+         Piece *oldLocation = HalfTake(cell, mWhoseMove);
+         Piece *capturedPiece = HalfTake(cell->neighborCells[dir], -mWhoseMove);
+         HalfPut(oldLocation, destCell);
 
-            // Recursive call, using the appended LocVector and the new location
-            // that you would jump into.
-            MultipleJumpDFS(moves, locs, destCell);
+         // Add the cell that you would jump over into to the LocVector
+         // that you're constructing for this [multiple] jump.
+         locs.push_back(destCell->loc);
 
-            // Remove this most recent Location from the LocVector, since you're
-            // going to be reusing this LocVector as you recurse.
-            locs.pop_back();
+         // Recursive call, using the appended LocVector and the new location
+         // that you would jump into.
+         MultipleJumpDFS(moves, locs, destCell);
 
-            // Clean up after the temporary jump move.
-            Piece *newLocation = HalfTake(destCell, mWhoseMove);
-            delete newLocation;
-            HalfPut(capturedPiece, cell->neighborCells[dir]);
-            HalfPut(oldLocation, cell);
-            delete capturedPiece;
-            delete oldLocation;
-         }
+         // Remove this most recent Location from the LocVector, since you're
+         // going to be reusing this LocVector as you recurse.
+         locs.pop_back();
+
+         // Put the temporary jump back to where it was, and clean up afterwards
+         Piece *newLocation = HalfTake(destCell, mWhoseMove);
+         delete newLocation;
+         HalfPut(capturedPiece, cell->neighborCells[dir]);
+         HalfPut(oldLocation, cell);
+         delete capturedPiece;
+         delete oldLocation;
       }
-   // }
+   }
 
    // If you get to a branch that is cut off from having any deeper branches
    // in any direction, then you've found a jump (or multiple jump) that doens't
