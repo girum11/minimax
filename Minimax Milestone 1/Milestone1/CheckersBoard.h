@@ -178,12 +178,16 @@ protected:
             Cell *cell = GetCell(row, col);
             assert((mWhiteSet & mBlackSet) == 0);
 
-            // Count up mCounts mKingCounts
+            // Count up mCounts
             if (cell->mask & mBlackSet) {
                ++mBlackCount;
 
                if (cell->mask & mKingSet) {
                   ++mBlackKingCount;
+               }
+
+               if (row == 'A') {
+                  ++mBlackBackCount;
                }
             } else if (cell->mask & mWhiteSet) {
                ++mWhiteCount;
@@ -191,14 +195,10 @@ protected:
                if (cell->mask & mKingSet) {
                   ++mWhiteKingCount;
                }
-            }
 
-            // Count up mBackCounts
-            if (row == 'A' && (cell->mask & mBlackBackSet)) {
-               ++mBlackBackCount;
-            }
-            else if (row == 'H' && (cell->mask & mWhiteBackSet)) {
-               ++mWhiteBackCount;
+               if (row == 'H') {
+                  ++mWhiteBackCount;
+               }
             }
          }
       }
