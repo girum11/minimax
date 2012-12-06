@@ -153,50 +153,26 @@ protected:
       return new Piece(wasKing, color, cell->loc);
    }
 
-   inline void Put(Piece *piece, Cell *cell) {
-      HalfPut(piece, cell);
-      UpdateBoardValuation(piece, 1);
+   // Put a piece from one cell to another
+   // TODO: Should I put an assert here that ensures that the location
+   // of the piece is the same as the targetCell?
+   inline void Put(Piece *piece, Cell *targetCell) {
+      HalfPut(piece, targetCell);
+      UpdateBoardValuation(targetCell, 1, piece->color);
    }
 
+   // Take away a piece of a certain color from a cell.
    inline Piece *Take(Cell *cell, int color) {
       Piece *removedPiece = HalfTake(cell, color);
-      UpdateBoardValuation(removedPiece, -1);
+      UpdateBoardValuation(cell, -1, color);
       return removedPiece;
    }
 
-   void UpdateBoardValuation(Piece *piece, int rChange) {
-//       if (color == kBlack) {
-//          // Update the overall count
-//          mBlackCount += rChange;
-// 
-//          // If the cell was a back row cell, update that.
-//          if ((cell->mask & mBlackBackSet) != 0)
-//             mBlackBackCount += rChange;
-//          
-//          // If the cell was a king, update that.  (mKingSet should have already
-//          // been updated before this method is called, which it is currently.)
-//          if ((cell->mask & mKingSet) != 0)
-//             mBlackKingCount += rChange;
-//       } else if (color == kWhite) {
-//          // Update the overall count
-//          mWhiteCount += rChange;
-// 
-//          // If the cell was a back row cell, update that.
-//          if ((cell->mask & mWhiteBackSet) != 0)
-//             mWhiteBackCount += rChange;
-// 
-//          // If the cell was a king, update that.  (mKingSet should have already
-//          // been updated before this method is called, which it is currently.)
-//          if ((cell->mask & mKingSet) != 0)
-//             mWhiteKingCount += rChange;
-//       } else assert(false);
-
-      Cell *cell = GetCell(piece->loc.first, piece->loc.second);
-
-      if (piece->color == kBlack)
+   void UpdateBoardValuation(Cell *cell, int rChange, int color) {
+      if (color == kBlack)
          UpdateBoardValuationHelper(&mBlackCount, &mBlackBackCount, 
           &mBlackKingCount, &mBlackBackSet, cell, rChange);
-      else if (piece->color == kWhite)
+      else if (color == kWhite)
          UpdateBoardValuationHelper(&mWhiteCount, &mWhiteBackCount, 
           &mWhiteKingCount, &mWhiteBackSet, cell, rChange);
       else assert(false);
@@ -204,6 +180,7 @@ protected:
 
    inline void UpdateBoardValuationHelper(int *pieceCount, int *backCount, 
     int *kingCount, Set *backSet, Cell *cell, int rChange) {
+
       // Update the overall count
       *pieceCount += rChange;
 

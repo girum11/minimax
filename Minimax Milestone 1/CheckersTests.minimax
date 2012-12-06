@@ -1,0 +1,19 @@
+doMove C1 -> D2       
+doMove F2 -> E1       
+doMove B2 -> C1       
+doMove F6 -> E7       
+doMove C7 -> D6
+doMove F4 -> E3       
+doMove D2 -> F4       
+doMove G3 -> E5 -> C7 
+doMove B8 -> D6       
+doMove G5 -> F4
+
+-- Doing this move diff against Clint's exec
+showBoard
+showVal
+doMove A7 -> B8
+showBoard
+showVal
+
+quit
