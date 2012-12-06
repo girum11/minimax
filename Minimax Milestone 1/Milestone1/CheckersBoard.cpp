@@ -95,9 +95,13 @@ CheckersBoard::CheckersBoard() : mWhoseMove(kBlack),
 }
 
 void CheckersBoard::Delete() {
-   // Clear out and fill up the board.
-   // Nil out the bitmasks at first
+   
+   // Reset the member datum to their default values.
    mBlackSet = mWhiteSet = mKingSet = 0x0;
+   mWhoseMove = kBlack;
+   mBlackPieceCount = mWhitePieceCount = kStartingPieces;
+   mBlackKingCount = mWhiteKingCount = 0;
+   mBlackBackCount = mWhiteBackCount = 0;
 
    // Fill up mBlackSet and mWhiteSet
    for (char row = 'A'; row <= 'H'; row++) {
@@ -115,10 +119,17 @@ void CheckersBoard::Delete() {
    }
 
    // Clear out mMoveHistory
-   list<Move *>::iterator itr;
-   for (itr = mMoveHist.begin(); itr != mMoveHist.end(); itr++)
-      delete *itr;
+   list<Move *>::iterator moveIter;
+   for (moveIter = mMoveHist.begin(); moveIter != mMoveHist.end(); moveIter++)
+      delete *moveIter;
    mMoveHist.clear();
+
+   // Clear out mCapturedPieces.
+   for (list<Piece *>::iterator pieceIter = mCapturedPieces.begin(); 
+    pieceIter != mCapturedPieces.end(); pieceIter++) {
+       delete *pieceIter;
+   }
+   mCapturedPieces.clear();
 }
 
 long CheckersBoard::GetValue() const {

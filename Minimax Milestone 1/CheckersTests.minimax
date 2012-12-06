@@ -1,61 +1,54 @@
--- Test for :  Saving the board should load up those options.
 undoLastMove 1000
-
--- Do some moves.
-doMove C5 -> D6       
+doMove C7 -> D6       
 doMove F4 -> E3       
+doMove B8 -> C7       
+doMove G5 -> F4       
+doMove C3 -> D4
+doMove E3 -> D2       
+doMove C1 -> E3 -> G5
+doMove  H6 -> F4       
+doMove D4 -> E3       
+doMove F2 -> D4
+doMove  C5 -> E3 -> G5
+doMove  G1 -> F2       
+doMove B2 -> C1       
+doMove F2 -> E3       
+doMove A3 -> B2
+doMove  E3 -> D4       
 doMove B4 -> C5       
 doMove F8 -> E7       
-doMove D6 -> F8
-doMove E3 -> D2       
-doMove C3 -> E1       
+doMove C5 -> E3       
+doMove E7 -> C5
+doMove  B6 -> D4       
 doMove G3 -> F4       
-doMove E1 -> G3       
-doMove H4 -> F2
-doMove C1 -> D2       
-doMove F4 -> E3       
-doMove D2 -> F4       
-doMove G5 -> E3       
-doMove B2 -> C3
-doMove F6 -> E5       
-doMove A3 -> B4       
-doMove F2 -> E1       
-doMove C5 -> D4       
-doMove E3 -> C5 -> A3
-doMove B6 -> C5       
-doMove G1 -> F2       
-doMove C7 -> D8       
-doMove H6 -> G5       
-doMove F8 -> H6
-doMove H8 -> G7       
-doMove H6 -> F8       
-doMove H2 -> G1       
-doMove C3 -> D2
-
+doMove A7 -> B6       
+doMove F4 -> D2       
+doMove C1 -> E3
+doMove  H4 -> G3       
+doMove E3 -> F2       
+doMove G3 -> E1       
+doMove G5 -> H6
+showMoveHist
 showVal
 saveBoard test0
-undoLastMove 1000
-showBoard
-loadBoard test0
-showBoard
-
-
-
 showVal
 setOptions
 y
 100
 90
 80
-showVal
-
--- Do some more moves.
-doMove e1->c3
-doMove a7->b6
-doMove e5->d6
-doMove c5->e7
-doMove f2->e1
-
+       
+	   
+doMove F6 -> E5
+doMove  H6 -> F8       
+doMove E5 -> C3       
+doMove B2 -> D4       
+doMove E1 -> D2       
+doMove A5 -> B4
+doMove  D2 -> C1       
+doMove F8 -> G7       
+doMove H8 -> F6       
+doMove C7 -> D8
 showVal
 setOptions
 y

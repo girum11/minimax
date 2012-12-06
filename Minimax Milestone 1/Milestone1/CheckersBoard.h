@@ -120,7 +120,7 @@ protected:
    std::ostream &Write(std::ostream &) const;
 
    // Helper function to fill up the CheckersBoard for a new game.
-   void FillBoard();
+   void ResetBoard();
 
    // Frees all CheckersBoard storage.
    void Delete();
