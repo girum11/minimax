@@ -183,7 +183,7 @@ protected:
                ++mBlackCount;
 
                if (cell->mask & mKingSet) {
-
+                  ++mBlackKingCount;
                }
             } else if (cell->mask & mWhiteSet) {
                ++mWhiteCount;
