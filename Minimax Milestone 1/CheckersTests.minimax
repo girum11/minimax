@@ -41,35 +41,35 @@ showBoard
 
 
 
--- showVal
--- setOptions
--- y
--- 100
--- 90
--- 80
--- showVal
+showVal
+setOptions
+y
+100
+90
+80
+showVal
 
-Do some more moves.
--- doMove e1->c3
--- doMove a7->b6
--- doMove e5->d6
--- doMove c5->e7
--- doMove f2->e1
+-- Do some more moves.
+doMove e1->c3
+doMove a7->b6
+doMove e5->d6
+doMove c5->e7
+doMove f2->e1
 
--- showVal
--- setOptions
--- y
--- 40
--- 30
--- 40
--- showVal
--- loadBoard test0
--- showVal
--- setOptions
--- y
--- 40
--- 30
--- 40
--- showVal
+showVal
+setOptions
+y
+40
+30
+40
+showVal
+loadBoard test0
+showVal
+setOptions
+y
+40
+30
+40
+showVal
 
 quit

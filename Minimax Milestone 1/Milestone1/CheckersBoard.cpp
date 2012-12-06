@@ -89,15 +89,19 @@ CheckersBoard::CheckersBoard() : mWhoseMove(kBlack),
    // Just to make sure that I'm covering all my bases with ALL member datum
    assert(mMoveHist.size() == 0);
 
-   char row = 'A';
-   unsigned col = 1;
+   // Call the "Delete()" method, which really is just a housecleaning method
+   // that fills up the CheckersBoard with the right initial pieces.
+   Delete();
+}
 
+void CheckersBoard::Delete() {
+   // Clear out and fill up the board.
    // Nil out the bitmasks at first
    mBlackSet = mWhiteSet = mKingSet = 0x0;
 
    // Fill up mBlackSet and mWhiteSet
-   for (row = 'A'; row <= 'H'; row++) {
-      for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2) {
+   for (char row = 'A'; row <= 'H'; row++) {
+      for (unsigned int col = ((row-'A')%2) + 1; col <= kWidth; col += 2) {
 
          // Fill up initial mBlackSet
          if (row == 'A' || row == 'B' || row == 'C') {
@@ -109,9 +113,7 @@ CheckersBoard::CheckersBoard() : mWhoseMove(kBlack),
          }
       }
    }
-}
 
-void CheckersBoard::Delete() {
    // Clear out mMoveHistory
    list<Move *>::iterator itr;
    for (itr = mMoveHist.begin(); itr != mMoveHist.end(); itr++)

@@ -119,6 +119,9 @@ protected:
    std::istream &Read(std::istream &);
    std::ostream &Write(std::ostream &) const;
 
+   // Helper function to fill up the CheckersBoard for a new game.
+   void FillBoard();
+
    // Frees all CheckersBoard storage.
    void Delete();
    
