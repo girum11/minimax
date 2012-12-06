@@ -1,19 +1,36 @@
-doMove C1 -> D2       
-doMove F2 -> E1       
-doMove B2 -> C1       
-doMove F6 -> E7       
-doMove C7 -> D6
-doMove F4 -> E3       
-doMove D2 -> F4       
-doMove G3 -> E5 -> C7 
-doMove B8 -> D6       
-doMove G5 -> F4
 
--- Doing this move diff against Clint's exec
+doMove C1 -> D2       
+doMove F4 -> E5       
+doMove D2 -> E1       
+doMove G3 -> F4       
+doMove E1 -> G3
+doMove H4 -> F2       
+doMove C5 -> D4       
+doMove F2 -> E1       
+doMove C7 -> D8       
+doMove G1 -> F2
+doMove D8 -> E7       
+doMove F6 -> D8       
+
 showBoard
 showVal
-doMove A7 -> B8
-showBoard
+-- This move right here makes me diff against Clint's showVal
+doMove D4 -> F6 -> H4
 showVal
+showBoard 
+
+
+
+
+-- doMove F4 -> E5       
+-- doMove B6 -> C7
+-- doMove D8 -> B6       
+-- doMove A7 -> C5       
+-- doMove E1 -> D2       
+-- doMove C3 -> E1 -> G3
+-- doMove H2 -> F4
+
+showVal
+showMoveHist
 
 quit
