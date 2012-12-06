@@ -131,7 +131,6 @@ int main(int argc, char **argv) {
    dialog = dynamic_cast<Dialog *>(dialogClass->NewInstance());
    assert(board != NULL && view != NULL && dialog != NULL);
    move = board->CreateMove();
-   cmpMove = board->CreateMove();
 
    if (board == NULL || view == NULL || dialog == NULL) {
       cout << "Failed to create classes or objects" << endl;
@@ -253,6 +252,7 @@ int main(int argc, char **argv) {
             ApplyMove(board, move);
 			} else if (command.compare("compareMove") == 0) { 
             getline(cin, cArg);
+            cmpMove = board->CreateMove();
             *cmpMove = cArg.c_str();
 
             // Figure out which move is greater
@@ -276,6 +276,7 @@ int main(int argc, char **argv) {
             PrintList(&moveHist);
          } else if (command.compare("compareKeys") == 0) {
             cin >> cArg;
+
             ifstream in(cArg.c_str());
             if (!in.is_open()) {
                throw BaseException("Bad file in compareKeys");
@@ -283,9 +284,6 @@ int main(int argc, char **argv) {
 
             // Flush out the rest of the line
             cin.ignore(10000, '\n');
-
-            // Delete old cmpBoard
-            delete cmpBoard;
 
             cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
             in >> *cmpBoard;
