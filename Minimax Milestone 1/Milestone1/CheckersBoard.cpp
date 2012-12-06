@@ -461,9 +461,9 @@ Board *CheckersBoard::Clone() const {
 
 
 Board::Key *CheckersBoard::GetKey() const {
-   // Leave this empty when you first turn in Milestone 1 -- Bender doesn't
-   // check this at all.  That is, be sure to start getting rolling in handins 
-   // BEFORE implementing this.
+   // TODO: Leave this empty when you first turn in Milestone 1 -- Bender 
+   // doesn't check this at all.  That is, be sure to start getting rolling 
+   // in handins BEFORE implementing this.
    return NULL;
 }
 

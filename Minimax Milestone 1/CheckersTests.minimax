@@ -43,9 +43,7 @@ doMove D8 -> C7
 doMove B8 -> D6       
 doMove B6 -> A7       
 doMove E3 -> F4       
-doMove H4 -> G3   
-
--- My code breaks here.    
+doMove H4 -> G3
 doMove F4 -> H2   
 
 
