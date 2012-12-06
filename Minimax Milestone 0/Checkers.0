@@ -2,9 +2,12 @@
 showBoard
 keyMoveCount
 
-testRun 7 10000
+testPlay 1 1000
+
+-- testRun 7 10000
 
 showBoard
+showMoveHist
 keyMoveCount
 
 quit

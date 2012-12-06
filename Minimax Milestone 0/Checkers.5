@@ -1,1 +1,539 @@
--- Deal with upper case and lower case string input.  Also deal with lots of spaces in between your tokens.-- Test where you the GetAllMoves() jump move DFS breaks off into two different recursive branches.undoLastMove 1000doMove C7 -> D6doMove F2 -> E3doMove C3 -> D2doMove E3 -> D4doMove C5 -> E3doMove F6 -> E5doMove B6 -> C5doMove E5 -> C7doMove B8 -> D6doMove G5 -> F6doMove E3 -> G5doMove H6 -> F4doMove D6 -> E5doMove F6 -> D4 -> B6doMove A7 -> C5doMove F8 -> E7doMove A5 -> B6doMove G7 -> F6doMove B2 -> C3doMove H4 -> G5doMove D2 -> E3doMove F4 -> D2doMove C3 -> E1doMove E7 -> D8doMove E1 -> F2doMove G1 -> E3doMove A1 -> B2doMove E3 -> D2doMove C1 -> E3doMove D8 -> C7doMove B6 -> D8doMove F6 -> E5doMove E3 -> F2doMove G3 -> E1doMove B2 -> C1doMove G5 -> F6doMove D8 -> E7doMove F6 -> D8doMove A3 -> B2doMove H2 -> G3doMove C1 -> D2showBoarddoMove e1  			-> c3   -> a1showBoarddoMove e1	->c3    	  		  -> a1-- Right here is a broken case for my code, where I show a White move during Black's turn.-- Also, I'm allowing a black piece to move backwards AND forwards.  That doesn't make sense.showBoardundoLastMove 1doMove e1	->c3    	  		  -> a1		  		showBoardundoLastMove 1000-- Get 100% coverage on compareMove-- Test showMoveHist-- "SetOptions is a gold mine for bugs"--1.) Checking for the case where a King jumps around and lands back into the same spot.--2.) In a multiple jump, the jumping piece or king can change directions, jumping first in one direction and then in another direction.--15.) You cannot jump the same piece twice in the same move--13.) (when jumping pieces, you remove the jumped pieces from the board).--3.) Players alternate moves in Checkers-- 4.) The player who cannot move, because he has no pieces, or because all of his pieces are blocked, loses the game-- a.) Player can't move and loses-- b.) Player has no pieces and loses-- 5.) A piece which is not a king can move one square, diagonally, forward, as in the diagram at the right.-- 6.) A king can move one square diagonally, forward or backward.-- 7a.) A piece (piece) can only move to a vacant square.-- 7b.) A piece (king) can only move to a vacant square.-- 8a.) You can capture an opopnent's piece by jumping over it, diagonally, to the adjacent vacant square beyond it.  The three squares must be lined up (diagonally adjacent) as in the diagram at the left: your jumping piece (piece), opponent's piece (piece), empty square.-- 8b.) You can capture an opopnent's piece by jumping over it, diagonally, to the adjacent vacant square beyond it.  The three squares must be lined up (diagonally adjacent) as in the diagram at the left: your jumping piece (piece), opponent's piece (king), empty square.-- 9.) A king can jump diagonally, forward or backward.-- 10.) A piece which is not a king, can only jump diagonally forward.-- 8c.) You can capture an opopnent's piece by jumping over it, diagonally, to the adjacent vacant square beyond it.  The three squares must be lined up (diagonally adjacent) as in the diagram at the left: your jumping piece (king), opponent's piece (piece), empty square.--11.) A multiple jump must be completed, you cannot stop part way through a multiple jump.--8d.) You can capture an opopnent's piece by jumping over it, diagonally, to the adjacent vacant square beyond it.  The three squares must be lined up (diagonally adjacent) as in the diagram at the left: your jumping piece (king), opponent's piece (king), empty square.--8e.) Ensure that you can't jump over a player over the board, or into a non-empty square.-- 12.) You can only jump one piece with any given jump-- 13.) When jumping pieces, you remove jumped pieces from the board.-- 14.) You cannot jump your own piece (tested with King trying to jump own piece backwards).-- 15.) If you can jump, you must.-- 16.) A piece that has just kinged, cannot continue jumping pieces, until the next move.-- 17.) When a piece reaches the last row, it becomes a King.-- 18.) You can make only one move per turn.  You must move.-- 19.) Red [black in our case] moves first.-- 20.) Normal pieces can't move backwards-- 21.) A *badly formed* move is one that disobeys string formats, or that has obvious errors such as out-of-range number values.  The operator=(const std::string &) method detects badly formed moves and throws an exception when it is passed one.-- 22.) Must test for incorrect format including garbage after the end of the move-- 23.) "->" is surrounded optionally by blanks-- 24.) Verify that each move is in the list of GetAllMoves-- 25.) If a badly formatted Move string is presented to the operator= method, the method throws a BaseException with one of the contents below where X is the name of the game, and M is the full move string.  If this happens, the method does not modify the move at all.  In other words, it either modifies the move, or throws an exception indicating a bad move strnig, but not both.-- 26.) Modification of rules (or "options" as the BoardTest language calls them) is done via the CheckersDlg and PylosDlg classes, which engage the user in a dialog to adjust the parameters used by the boards to determine their value.-- 27.) A "y" is the only acceptable "yes" answer.  It may be followed by arbitrary garbage on the reply line without error.-- 28.) The user must [intput] a valid integer falling within the inclusive ranges given when you run the model program.  Checkers rules comprise a weight for the values of the kinged piece [0,1000], for the value of a of a piece on the back row [0,1000] and for having the next move [0,100].-- 29.) The integer must be on a line by itself -- trailing nonwhitespace garbage is unacceptable and generates an error indicating there is extra garbage on the line.-- 30.) Checkers weight is determined by using a weight of 100 for each piece ont he board (negative for white, who plays second) or a special king weight (again negative for white) for each king piece and each piece on a back row, plus a final added weight for which side has the move.-- 31.) As a special case, if the game is over then GetValue returns winVal if first player has won, -winVal if the second player has won.-- 32.) Two CheckersBoard::Keys are equal if all squares have same color of piece (or are both empty).-- 33.) Two CheckersBoard::Keys are equal if all squares have the same type of piece (king or nonKing).-- 34.) One square is less than another if its row is less.-- 35.) One square is less than another if its row is the same and its column is less.-- 36.) Move A is less than move B if A is a strict prefix of B.-- 37.) ApplyMove does not clear the current move.  A showMove call after applyMove still shows the move.-- 38.) compareKeys tests: Note that since compareKeys requires loading a board, the command has the side effect of changing board options to those stored in boardFile.-- 39.) Whenever the static weights are changed all existing boards of the current board class must automatically reflect the change in the return of GetValue-- 40.) testPlay test: End the loop early and without complaint if the game reaches its end.-- 41.) Check against invalid string input-- Out of bounds stringsenterMove a1->b0enterMove b8->c9enterMove h2->i1-- Invalid move stringsenterMove a1->a2enterMove a2->a2enterMove c2->d3enterMove d5->e4-- Check a 8 or 9 jump move-- Check a move where you jump into a backrow and then attempt to jump backwards as a king.-- compareMove test:  Multiple jump comparison with equivalent moves save for one extra last jump-- Verify that tabs in strings aren't invalid strings.enterMove a1 		-> b2quit-- This will be the Checkers test case that ensures that a lack of a "quit" command doesn't blow the entire program up.
+--1.)What if the GetAllMoves jump DFS can branch off in two different directions?
+undoLastMove 1000
+doMove C7 -> D6
+doMove F2 -> E3
+doMove C3 -> D2
+doMove E3 -> D4
+doMove C5 -> E3
+doMove F6 -> E5
+doMove B6 -> C5
+doMove E5 -> C7
+doMove B8 -> D6
+doMove G5 -> F6
+doMove E3 -> G5
+doMove H6 -> F4
+doMove D6 -> E5
+doMove F6 -> D4 -> B6
+doMove A7 -> C5
+doMove F8 -> E7
+doMove A5 -> B6
+doMove G7 -> F6
+doMove B2 -> C3
+doMove H4 -> G5
+doMove D2 -> E3
+doMove F4 -> D2
+doMove C3 -> E1
+doMove E7 -> D8
+doMove E1 -> F2
+doMove G1 -> E3
+doMove A1 -> B2
+doMove E3 -> D2
+doMove C1 -> E3
+doMove D8 -> C7
+doMove B6 -> D8
+doMove F6 -> E5
+doMove E3 -> F2
+doMove G3 -> E1
+doMove B2 -> C1
+doMove G5 -> F6
+doMove D8 -> E7
+doMove F6 -> D8
+doMove A3 -> B2
+doMove H2 -> G3
+doMove C1 -> D2
+showBoard
+doMove e1         -> c3   -> a1
+undoLastMove 1
+showBoard
+doMove e1   ->c3             -> a1
+
+showBoard
+undoLastMove 1
+doMove e1   ->c3             -> a1           
+showBoard
+undoLastMove 1000
+
+
+-- Various old tests from CheckersTests.minimax
+enterMove C3  ->   D4
+applyMove
+doMove f4->e5
+doMove c7->d8
+doMove e5->c3
+doMove b4->d2
+doMove f2->e1
+doMove b2->c3
+doMove f6->e5
+doMove a1->b2
+doMove g3->f4
+doMove c3->d4
+showBoard
+
+setOptions
+n
+
+setOptions
+y
+500
+400
+20
+
+setOptions
+n
+
+-- More old tests from CheckersTests.minimax
+doMove c7->d8
+doMove F2 -> E1       
+doMove C5 -> D6       
+doMove F8 -> E7       
+doMove D6 -> F8
+doMove G3 -> F2       
+doMove B8 -> C7       
+doMove H4 -> G3       
+doMove C1 -> D2       
+doMove F4 -> E5
+doMove D8 -> E7       
+doMove F6 -> D8       
+doMove B4 -> C5       
+doMove G5 -> F6       
+doMove A7 -> B8
+doMove E5 -> D6
+doMove C5 -> E7 -> G5 
+doMove H6 -> F4       
+doMove F8 -> H6       
+doMove F2 -> E3
+doMove C3 -> D4       
+-- Right here, my GetALlMoves() used to not display
+showBoard 
+doMove E3 -> C1       
+doMove H6 -> G5       
+doMove F4 -> E3     
+doMove D4 -> F2 -> H4
+showBoard
+undoLastMove 25
+testPlay 10 25
+showMoveHist
+showBoard
+-- My GetAllMoves() used to not return this move as valid.
+doMove h8->g7
+doMove a3->b4
+showBoard
+doMove c1->a3
+showBoard
+undoLastMove 1
+showBoard
+undoLastMove 1000
+showBoard
+
+
+-- 2.) Invalid string input checks
+-- Out of bounds strings
+enterMove a1->b0
+enterMove b8->c9
+enterMove h2->i1
+
+-- Decimals for numbers
+enterMove a1.1->b4
+enterMove a1->b2.2
+
+-- Extra 0's
+enterMove a000000000000->b4
+enterMove a3->b0000000000
+
+-- Trailing garbage
+enterMove a3->b4 garbage
+enterMove a3->b4garbage
+enterMove a3->b4                          /0
+
+-- Spaces inside arrows
+enterMove a3- >b4
+
+-- 3.) Check a move where you jump into a backrow and then attempt to jump backwards as a king.
+undoLastMove 1000
+testPlay 10 25
+showMoveHist
+doMove h8->g7
+doMove a3->b4
+showBoard
+doMove c1->a3
+showBoard
+undoLastMove 1000
+
+-- 4.) compareMove test:  What if you have two moves that have different lengths, but are otherwise equal to each other?
+enterMove a1->b2->c3
+compareMove a1->b2->c3->d4
+
+enterMove a1->b2->c3->d4
+compareMove a1->b2->c3
+
+-- Test for compareMove: 100% test coverage.
+enterMove a3->b4->c5
+compareMove a3->b3->c5
+compareMove a3->b4->c5
+compareMove a3->b5->c5
+compareMove a3->b4->c5->c5
+compareMove a3->b4
+compareMove a3->b3->c5->
+compareMove a3->b3->c5- >
+compareMove a3->b3->c5->->
+
+-- Test for :  Ensure that changing the options immediately changes the board values.
+undoLastMove 1000
+testPlay 34 20
+showBoard
+showVal
+setOptions
+n
+showVal
+setOptions
+y
+50
+40
+20
+showVal
+testPlay 23 20
+showVal
+undoLastMove 30
+showVal
+setOptions
+y
+20
+40
+50
+showVal
+setOptions
+n
+
+-- Test for :  Saving the board should load up those options.
+undoLastMove 1000
+testPlay 58 29
+showVal
+saveBoard test0
+showVal
+setOptions
+y
+100
+90
+80
+showVal
+testPlay 5 10
+showVal
+setOptions
+y
+40
+30
+40
+showVal
+loadBoard test0
+showVal
+setOptions
+y
+40
+30
+40
+showVal
+
+-- Test showMoveHist:  Loading the board should load a new moveHist.
+undoLastMove 1000
+showMoveHist
+testPlay 34 1
+showMoveHist
+testPlay 23 10
+showMoveHist
+saveBoard test1
+showMoveHist
+undoLastMove 1000
+showMoveHist
+testPlay 50 20
+showMoveHist
+loadBoard test1
+showMoveHist
+showBoard
+
+-- Ensure that upper case and lower case string input are both valid.
+enterMove a1->B2
+enterMove A1->b2
+enterMove a1->b2
+
+-- Verify that tabs in strings aren't invalid strings.
+enterMove a1      -> b2
+enterMove A1->B2                 ->c3
+
+-- END GAME tests
+
+-- END GAME test: Check a large 9 jump move.  Arrange a 9 Kings vs. 1 King endgame, and have the 1 King win in a single jump.
+undoLastMove 1000
+doMove C1 -> D2       
+doMove F2 -> E1       
+doMove C5 -> D4       
+doMove F8 -> E7       
+doMove B6 -> C5      
+doMove G7 -> F8       
+doMove A5 -> B6       
+doMove H8 -> G7       
+doMove B2 -> C1       
+doMove F6 -> E5    
+showBoard  
+doMove D4 -> F6 -> H8 
+showBoard
+doMove G5 -> F6       
+doMove C7 -> D6       
+doMove H6 -> G7       
+doMove B8 -> C7      
+doMove E7 -> D8       
+doMove A7 -> B8       
+doMove F8 -> E7       
+showBoard
+doMove D6 -> F8 -> H6 
+showBoard
+doMove G1 -> F2      
+doMove A1 -> B2       
+doMove H2 -> G1       
+doMove C5 -> D4       
+doMove F4 -> E3  
+showBoard     
+doMove D2 -> F4 -> H2
+showBoard
+doMove F2 -> E3       
+doMove D4 -> F2       
+doMove G1 -> E3       
+doMove H8 -> G7       
+doMove E3 -> D2      
+doMove C1 -> E3       
+doMove E1 -> D2       
+doMove C3 -> E1       
+doMove F6 -> E7       
+doMove B6 -> C5      
+doMove D8 -> B6       
+doMove G7 -> F8       
+doMove E7 -> D8       
+doMove H2 -> G1       
+doMove D8 -> C7      
+doMove B8 -> D6       
+doMove B6 -> A7       
+doMove E3 -> F4       
+doMove H4 -> G3       
+doMove F4 -> H2      
+doMove A7 -> B8       
+doMove E1 -> F2       
+doMove B8 -> A7       
+doMove F2 -> G3       
+doMove A7 -> B8      
+doMove G3 -> H4       
+doMove B8 -> A7       
+doMove B2 -> C1       
+doMove A7 -> B8       
+doMove C1 -> D2      
+doMove B8 -> A7       
+doMove G1 -> F2       
+doMove A7 -> B8       
+doMove D2 -> E1       
+doMove B8 -> A7      
+doMove F2 -> E3       
+doMove A7 -> B8       
+doMove A3 -> B2       
+doMove B8 -> A7       
+doMove H2 -> G3      
+doMove A7 -> B8       
+doMove H4 -> G5       
+doMove B8 -> A7       
+doMove B2 -> C1       
+doMove A7 -> B8      
+doMove C1 -> D2       
+doMove B8 -> A7       
+doMove E3 -> D4       
+doMove A7 -> B8       
+doMove D6 -> E5      
+doMove B8 -> A7       
+doMove D4 -> E3       
+doMove A7 -> B8       
+doMove E1 -> F2       
+doMove B8 -> A7      
+doMove F2 -> G1       
+doMove A7 -> B8       
+doMove G1 -> H2       
+doMove B8 -> A7       
+doMove D2 -> E1      
+doMove A7 -> B8       
+doMove E1 -> F2       
+doMove B8 -> A7       
+doMove G3 -> F4       
+doMove A7 -> B8      
+doMove H2 -> G3       
+doMove B8 -> A7       
+doMove F2 -> G1       
+doMove A7 -> B8       
+doMove G1 -> H2      
+doMove B8 -> A7       
+doMove E5 -> F6       
+doMove A7 -> B8       
+doMove F6 -> G7       
+doMove B8 -> A7      
+doMove G7 -> H8       
+doMove A7 -> B8       
+doMove F8 -> E7       
+doMove B8 -> A7       
+doMove E7 -> D8      
+doMove A7 -> B8       
+doMove C5 -> D4       
+doMove B8 -> A7       
+doMove D8 -> C7       
+doMove A7 -> B8      
+doMove D4 -> E5       
+doMove B8 -> D6       
+doMove E5 -> F6       
+doMove D6 -> C7       
+doMove B4 -> C3      
+doMove C7 -> B8       
+doMove C3 -> D2       
+doMove B8 -> A7       
+doMove F4 -> E5       
+doMove A7 -> B8      
+doMove G3 -> F4       
+doMove B8 -> A7       
+doMove D2 -> E1       
+doMove A7 -> B8       
+doMove E1 -> F2      
+doMove B8 -> A7       
+doMove H6 -> G7       
+doMove A7 -> B8       
+doMove G7 -> F8       
+doMove B8 -> A7      
+doMove F2 -> G3       
+doMove A7 -> B8       
+doMove F6 -> G7       
+doMove B8 -> A7       
+doMove G7 -> H6      
+doMove A7 -> B8       
+doMove G3 -> H4       
+doMove B8 -> A7       
+doMove E3 -> D2       
+doMove A7 -> B8      
+doMove D2 -> C3       
+doMove B8 -> A7       
+doMove F4 -> E3       
+doMove A7 -> B8       
+doMove H2 -> G3      
+doMove B8 -> A7       
+doMove E5 -> D4       
+doMove A7 -> B8       
+doMove D4 -> C5       
+doMove B8 -> A7      
+doMove G5 -> F4       
+doMove A7 -> B8       
+doMove F4 -> E5       
+doMove B8 -> A7       
+doMove H4 -> G5      
+doMove A7 -> B8       
+doMove G5 -> F6       
+doMove B8 -> A7       
+doMove H6 -> G5       
+doMove A7 -> B8      
+doMove F6 -> E7       
+doMove B8 -> A7       
+doMove H8 -> G7       
+doMove A7 -> B8       
+doMove E7 -> D6      
+doMove B8 -> A7       
+doMove F8 -> E7       
+doMove A7 -> B8    
+-- Right here is where you can arrange for the "one fell swoop"
+showBoard
+showVal
+keyMoveCount
+doMove d6->c7
+showBoard
+showVal
+keyMoveCount
+-- Attempt to do each one of those moves, showing values each time.
+doMove B8 -> D6 -> B4 -> D2 -> F4 -> D6 -> F8 -> H6 -> F4 -> H2
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+doMove B8 -> D6 -> B4 -> D2 -> F4 -> H2                        
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+doMove B8 -> D6 -> B4 -> D2 -> F4 -> H6 -> F8 -> D6 -> F4 -> H2
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+doMove B8 -> D6 -> F4 -> D2 -> B4 -> D6 -> F8 -> H6 -> F4 -> H2
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+doMove B8 -> D6 -> F4 -> H2                                    
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+doMove B8 -> D6 -> F4 -> H6 -> F8 -> D6 -> B4 -> D2 -> F4 -> H2
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+doMove B8 -> D6 -> F8 -> H6 -> F4 -> D2 -> B4 -> D6 -> F4 -> H2
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+doMove B8 -> D6 -> F8 -> H6 -> F4 -> D6 -> B4 -> D2 -> F4 -> H2
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+doMove B8 -> D6 -> F8 -> H6 -> F4 -> H2 
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+
+--.) More string sanity checks
+-- String sanity check: Valid strings even with extra whitespace
+enterMove    a3    ->        b4
+showMove
+enterMove	 	a3 	 	-> 	 	b4 	 	
+showMove
+enterMove a3->b4
+showMove
+enterMove   a 3 ->b4
+showMove
+enterMove  a3-> b 4
+showMove
+
+-- String sanity check: Invalid strings due to whitespace
+enterMove a3- >b4
+enterMove a3 - > b4
+
+-- Extra characters in the string / trailing garbage
+enterMove  a3->    b4     d
+enterMove aa2->b4
+enterMove a3a -> b4
+enterMove a3->bb4
+enterMove a3->b4b
+
+-- Only input one location
+enterMove a3
+enterMove a3  ->
+enterMove a3->b
+enterMove a->b4
+enterMove a->3b4
+enterMove  ->   b4
+
+
+
+
+"setOptions is a gold mine for bugs"
+
+
+Tests for compareKeys
+
+
+
+quit
+
+

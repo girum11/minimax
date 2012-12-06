@@ -91,10 +91,10 @@ showMoveHist
 keyMoveCount
 undoLastMove 100
 
---5.) A disc may outflank any number of discs in one or more rows in any number of directions at the same time: What if the piece that you're trying to outflank is outside of the board's range?
+-- 5.) A disc may outflank any number of discs in one or more rows in any number of directions at the same time: What if the piece that you're trying to outflank is outside of the board's range?
   *** (already in string sanity checks)
 
---6a.) A *badly formed* move is one that disobeys string formats, or that has obvious errors such as out-of-range number values.  The operator=(const std::string &) method detects badly formed moevs and throws an exception when it is passed one.
+-- 6a.) A *badly formed* move is one that disobeys string formats, or that has obvious errors such as out-of-range number values.  The operator=(const std::string &) method detects badly formed moevs and throws an exception when it is passed one.
 enterMove someRandomBadInputString
 enterMove [7,8]
 enterMove [8,7]
@@ -129,7 +129,7 @@ enterMove Pass
 testPlay 19 30
 undoLastMove 30
 
---Out of bounds string checks.
+-- Out of bounds string checks.
 enterMove Pass
 enterMove [0,6]
 enterMove [7,7]
@@ -183,12 +183,21 @@ setOptions
 noooooooooooooooooooo
 setOptions
 Y
-setOptions maybe?
+setOptions
 yesplease
+blah1
+blah2
+blah3
+
+
+
+blah4
+
+quit
 
 -- 12.) The user must enter a valid integer falling within the inclusive ranges given when you run the model program.
 
-setOptions aspdfioausp dfioasu fpaiosu dfpoasiu df
+setOptions
 y
 23894723
 -1
@@ -218,7 +227,7 @@ brokencode
 0.3
 0
 
-setOptions nyuka
+setOptions
 y
 
 23894723

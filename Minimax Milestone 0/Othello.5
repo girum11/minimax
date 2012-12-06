@@ -297,22 +297,106 @@ n
 
 
 
--- 30.) I need more "GUI" input sanity checks on the strings that have been inputted.
+-- compareMove needs 100% test coverage.
+enterMove [3,3]
+compareMove [2,3]
+compareMove [3,3]
+compareMove [3,4]
 
 
--- Get 100% coverage on compareMove
+-- setOptions test:  Ensure that changing the options immediately changes the board values.
+undoLastMove 1000
+testPlay 34 20
+showBoard
+showVal
+setOptions
+n
+showVal
+setOptions
+y
+54
+42
+25
+15
+showVal
+testPlay 23 20
+showVal
+undoLastMove 30
+showVal
+setOptions
+y
+21
+42
+53
+36
+showVal
+setOptions
+n
 
--- Test showMoveHist
 
--- "SetOptions is a gold mine for bugs"
+-- setOptions test:  Saving the board should load up those options.
+undoLastMove 1000
+testPlay 58 29
+showVal
+saveBoard test0
+showVal
+setOptions
+y
+102
+94
+85
+52
+showVal
+testPlay 5 10
+showVal
+setOptions
+y
+43
+34
+12
+56
+showVal
+loadBoard test0
+showVal
+setOptions
+y
+42
+33
+13
+55
+showVal
 
--- Verify that tabs in strings are still valid strings.
+
+-- Ensure that spaces/tabs in moves do/don't bounce (string)=
+enterMove 		  	[  	  		2 ,  		 	  4  		]  		
+enterMove    [    3   ,   5   ]   
+
+-- Test showMoveHist:  Loading the board should load a new moveHist.
+undoLastMove 1000
+showMoveHist
+testPlay 34 1
+showMoveHist
+testPlay 23 10
+showMoveHist
+saveBoard test1
+showMoveHist
+undoLastMove 1000
+showMoveHist
+testPlay 50 20
+showMoveHist
+loadBoard test1
+showMoveHist
+showBoard
 
 
--- 31.) END GAME tests
 
+-- showMoveHist test
 
+-- compareKeys tests
 
+-- "setOptions is a gold mine for bugs"
+
+-- END GAME tests
 
 
 
