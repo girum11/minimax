@@ -162,13 +162,53 @@ Board::Move *CheckersMove::Clone() const {
    return new CheckersMove(this->mLocs, mIsJumpMove);
 }
 
-istream &CheckersMove::Read(istream &is) {
-   // TODO:
-   return is;
+ostream &CheckersMove::Write(ostream &os) const {
+   // Must save the following data:
+   //    mLocs
+   //    mIsJumpMove
+   //    mIsKingMeMove
+   int ndx = 0;
+   char size = mLocs.size();
+   pair<char, unsigned int> tempPair;
+   bool tempBool;
+
+   // Write out mLocs's size and mLocs itself
+   os.write((char *)&size, sizeof(size));
+   for (ndx = 0; ndx < mLocs.size(); ++ndx) {
+      tempPair.first = EndianXfer(mLocs[ndx].first);
+      os.write((char *)&tempPair.first, sizeof(tempPair.first));
+      tempPair.second = EndianXfer(mLocs[ndx].second);
+      os.write((char *)&tempPair.second, sizeof(tempPair.second));
+   }
+
+   // Write out boolean flags
+   os.write((char *)&mIsJumpMove, sizeof(mIsJumpMove));
+   os.write((char *)&mIsKingMeMove, sizeof(mIsJumpMove));
+
+   return os;
 }
 
-ostream &CheckersMove::Write(ostream &os) const {
-   // TODO:
-   return os;
+istream &CheckersMove::Read(istream &is) {
+   // Must read the following data:
+   //    mLocs
+   //    mIsJumpMove
+   //    mIsKingMeMove
+   int i = 0;
+   char mLocsSize = -1;
+   pair<char, unsigned int> tempPair;
+
+   // Read in mLocs's size and mLocs itself
+   is.read((char *)&mLocsSize, sizeof(mLocsSize));
+   assert(mLocsSize != -1);  // sanity check to ensure mLocsSize was read().
+   mLocs.resize(mLocsSize);
+   for (i = 0; i < mLocsSize; ++i) {
+
+      is.read((char *)&mLocs[i].first, sizeof(mLocs[i].first));
+      mLocs[i].first = EndianXfer(mLocs[i].first);
+      is.read((char *)&mLocs[i].second, sizeof(mLocs[i].second));
+      mLocs[i].second = EndianXfer(mLocs[i].second);
+   }
+
+   return is;
 }
 
