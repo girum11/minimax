@@ -37,8 +37,7 @@ bool CheckersMove::operator==(const Board::Move &rhs) const {
 bool CheckersMove::operator<(const Board::Move &rhs) const {
    const CheckersMove &oRhs = dynamic_cast<const CheckersMove &>(rhs);
 
-   // return mFrom < oRhs.mFrom || mFrom == oRhs.mFrom && mTo < oRhs.mTo;
-   return false;
+   return mLocs < oRhs.mLocs;
 }
 
 CheckersMove::operator string() const {
