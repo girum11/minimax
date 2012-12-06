@@ -1,11 +1,30 @@
--- Test out saveMove and loadMove as well as you can
-enterMove a2->b2->a2->b3->e3
-saveMove move0
-enterMove e3->b5
-showMove
-loadMove move0
-showMove
-
-showBoard
+-- Test for :  Saving the board should load up those options.
+undoLastMove 1000
+testPlay 58 29
 showVal
+saveBoard test0
+showVal
+setOptions
+y
+100
+90
+80
+showVal
+testPlay 5 10
+showVal
+setOptions
+y
+40
+30
+40
+showVal
+loadBoard test0
+showVal
+setOptions
+y
+40
+30
+40
+showVal
+
 quit
