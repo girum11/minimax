@@ -87,7 +87,7 @@ void ApplyMove(Board *board, Board::Move *move) {
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
 	Board::Move *move = NULL;
-	unsigned count = 0;
+	int count = 0;
 	string command, cArg, tempString;
 	// Many more locals needed
    View *view = NULL;
@@ -144,6 +144,11 @@ int main(int argc, char **argv) {
 		try {
 			if (command.compare("undoLastMove") == 0) {
 				cin >> count;
+
+            if (count < 0) {
+               throw BaseException(
+                "Must have a nonnegative count for undoLastMove");
+            }
 
 				if (count > board->GetMoveHist().size())
 					count = board->GetMoveHist().size();

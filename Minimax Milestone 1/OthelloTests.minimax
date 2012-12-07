@@ -1,18 +1,8 @@
 
-keyMoveCount
-compareMove [   0,    0]
-compareMove [
-compareMove [   0
-compareMove [   0,  
-
-compareMove [   0,    0
-compareKeys wah
-compareMove [1   , 1]
-compareMove [1   , 1
+undoLastMove 1
 showMoveHist
-keyMoveCount
-showVal
-enterMove [
+
+undoLastMove -5
 
 quit
 
