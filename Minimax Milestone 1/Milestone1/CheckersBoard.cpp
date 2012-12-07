@@ -491,10 +491,18 @@ Board *CheckersBoard::Clone() const {
 
 
 Board::Key *CheckersBoard::GetKey() const {
-   // TODO: Leave this empty when you first turn in Milestone 1 -- Bender 
-   // doesn't check this at all.  That is, be sure to start getting rolling 
-   // in handins BEFORE implementing this.
-   return NULL;
+//    TODO: Leave this empty when you first turn in Milestone 1 -- Bender 
+//       // doesn't check this at all.  That is, be sure to start getting rolling 
+//       // in handins BEFORE implementing this.
+//       return NULL;
+   BasicKey<4> *rtn = new BasicKey<4>();
+
+   rtn->vals[0] = mWhoseMove == kWhite;
+   rtn->vals[1] = mBlackSet;
+   rtn->vals[2] = mWhiteSet;
+   rtn->vals[3] = mKingSet;
+
+   return rtn;
 }
 
 void *CheckersBoard::GetOptions() {
