@@ -166,7 +166,7 @@ void PylosMove::operator=(const string &src) {
       for (int i = 0; i < 11; ++i) wd1[i] = '\0';
 
       res = sscanf(src.c_str(), " Promote from [ %hd, %hd ] to [ %hd, %hd %c "
-       "%6s [ %hd , %hd %c %3s [ %hd, %hd %c %1s", &p2.first, &p2.second, &p1.first,
+       "%6s [ %hd , %hd %c %3s [ %hd , %hd %c %1s", &p2.first, &p2.second, &p1.first,
        &p1.second, &brack1, wd1, &p3.first, &p3.second, &brack2, wd2, &p4.first,
        &p4.second, &brack3, wd3);
 
