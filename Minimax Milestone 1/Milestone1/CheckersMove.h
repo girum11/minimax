@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <cctype>
 #include <list>
 #include <vector>
 #include "MyLib.h"
@@ -53,6 +54,18 @@ protected:
 
    static std::vector<CheckersMove *> mFreeList;
 
+   inline void CastToUpperAndVerify(Location *loc, std::string src) {
+      // Cast to upper
+      loc->first = toupper(loc->first);
+
+      // Verify that none of the Locations are out of bounds
+      // TODO: Magic number
+      if (!InRange<char>('A', loc->first, 'I') ||
+       !InRange<unsigned int>(1, loc->second, 9)) {
+          throw BaseException(FString("Out of bounds Checkers move: %s", 
+           src.c_str()));
+      }
+   }
 
    void AssertMe() {
       // Ensure that each Location used in this move is inbounds.

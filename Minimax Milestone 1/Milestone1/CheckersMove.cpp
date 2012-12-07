@@ -81,6 +81,7 @@ void CheckersMove::operator=(const string &src) {
     &locs[0].first, &locs[0].second, &charsRead);
    if (res != 2)
       throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
+   CastToUpperAndVerify(&locs[0], src);
 
    // Erase the characters that we read
    copy.erase(0, charsRead);
@@ -118,6 +119,8 @@ void CheckersMove::operator=(const string &src) {
       
       // Erase the characters that we read
       copy.erase(0, charsRead);
+
+      CastToUpperAndVerify(&locs[index], src);
       
       // If there is nothing left to scan (only whitespace left), then break.
       if (copy.find_first_not_of(" \t") == string::npos) {
@@ -129,21 +132,6 @@ void CheckersMove::operator=(const string &src) {
    // If you only read in one location, then this is an invalid move.
    if (locs.size() < 2) {
       throw BaseException(FString("Bad Checkers move: %s", src.c_str()));
-   }
-
-   for (LocVector::iterator locIter = locs.begin(); 
-    locIter != locs.end(); locIter++) {
-
-      // Ensure that the letters are uppercase
-      locIter->first = toupper(locIter->first);
-      
-      // Verify that none of the Locations are out of bounds
-      // TODO: Magic number
-      if (!InRange<char>('A', locIter->first, 'I') ||
-       !InRange<unsigned int>(1, locIter->second, 9)) {
-          throw BaseException(FString("Out of bounds Checkers move: %s", 
-           src.c_str()));
-      }
    }
 
    // At the end (if you made it there without exception), copy the private
