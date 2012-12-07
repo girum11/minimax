@@ -1,0 +1,8 @@
+testPlay 1 1000
+testRun 1 1
+testPlay 1 1
+showBoard
+testRun 1 200
+showMoveHist
+showBoard
+quit

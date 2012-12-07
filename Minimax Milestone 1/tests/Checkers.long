@@ -1,0 +1,7 @@
+showBoard
+testRun 7 1000000
+showBoard
+showMoveHist
+keyMoveCount
+quit
+

@@ -1,0 +1,14 @@
+//showBoard
+doMove Play at [0,0]
+doMove Play at [3,3]
+doMove Play at [0,1]
+doMove Play at [3,2]
+doMove Play at [1,0]
+doMove Play at [3,1]
+enterMove Play at [0,2]
+showMove
+applyMove
+//doMove Play at [0,2]
+//showMoveHist
+showBoard
+quit

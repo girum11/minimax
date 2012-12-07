@@ -1,0 +1,147 @@
+doMove Play at [0,0]
+doMove Play at [3, 3]
+doMove Play at [ 1,0 ]
+doMove Play at [2,3]
+doMove Play at [3,0]
+doMove Play at [0,3]
+doMove Play at [3,1]
+doMove Play at [0,2]
+doMove Play at [2,0] taking [2,0]
+doMove Play at [0,1]
+doMove Play at [2,0] taking [2,0]
+doMove Play at [1,1]
+keyMoveCount
+doMove Play at [2,0] taking [2,0]
+doMove Play at [1,2]
+doMove Play at [2,0] taking [2,0]
+doMove Play at [3,2]
+doMove Play at [2,0] taking [2,0]
+doMove Play at [1,3]
+doMove Play at [2,0] taking [0,0] and [2,0]
+doMove Play at [0,0]
+doMove Play at [2,0]
+
+keyMoveCount
+
+doMove Play at [2,2] taking [0,0] and [2,2]
+doMove Play at [0,0] taking [0,0]
+doMove Play at [2,2]
+doMove Play at [0,0] taking [0,0]
+doMove Play at [0,2]
+doMove Play at [0,0] taking [0,0]
+doMove Play at [1,2]
+doMove Play at [0,0] taking [0,0] and [3,1]
+doMove Play at [3,1]
+doMove Play at [0,0] taking [0,0]
+doMove Play at [0,1]
+doMove Play at [0,0]
+showBoard
+
+doMove Play at [2,1] taking [3,3]
+doMove Play at [0,0]
+showBoard
+doMove Play at [3,3] taking [3,3]
+doMove Play at [1,0]
+doMove Play at [3,3] taking [3,3]
+doMove Play at [2,0]
+doMove Play at [3,3] taking [3,3]
+doMove Play at [1,1]
+doMove Play at [3,3] taking [3,3]
+showMoveHist
+doMove Play at [2,1]
+doMove Play at [3,3]
+showBoard
+undoLastMove 3
+showBoard
+
+doMove Play at [3,3] taking [3,2] and [3,3]
+doMove Play at [3,2]
+doMove Play at [3,3] taking [3,3]
+doMove Play at [2,1]
+doMove Play at [3,3]
+keyMoveCount
+doMove Play at [2,2] taking [2,2]
+doMove Play at [2,2]
+showBoard
+undoLastMove 10
+showBoard
+
+doMove Play at [2,0] taking [2,0]
+doMove Play at [3,3] taking [3,2] and [3,3]
+doMove Play at [2,0] taking [2,0]
+doMove Play at [3,3] taking [3,1] and [3,3]
+doMove Play at [3,1]
+doMove Play at [3,3] taking [3,3]
+doMove Play at [3,2]
+doMove Play at [3,3] taking [3,3]
+keyMoveCount
+doMove Play at [1,1]
+doMove Play at [3,3] taking [3,3]
+doMove Play at [2,1]
+doMove Play at [3,3] taking [3,3]
+doMove Play at [2,0]
+doMove Play at [3,3] taking [3,3]
+showBoard
+doMove Play at [0,0]
+doMove Play at [3,3] taking [3,3]
+doMove Play at [1,0]
+doMove Play at [3,3] taking [3,3]
+doMove Play at [0,1]
+showBoard
+doMove Play at [3,3]
+doMove Play at [2,2] taking [2,2]
+doMove Play at [2,2]
+showBoard
+doMove Play at [1,1]
+showBoard
+
+undoLastMove 1
+
+doMove Play at [1,1] taking [1,1]
+showBoard
+doMove Play at [1,1]
+showBoard
+
+undoLastMove 2
+doMove Play at [1,1] taking [0,0] and [1,1]
+showBoard
+doMove Play at [0,0]
+showBoard
+
+undoLastMove 1
+doMove Promote from [2,2] to [0,0]
+showBoard
+doMove Play at [2,2] taking [1,0] and [2,2]
+showBoard
+doMove Play at [2,2]
+showBoard
+
+undoLastMove 3
+enterMove Play at [0,0]
+showMove
+
+showMoveHist
+saveBoard Board1.pls
+undoLastMove 50
+enterMove Play at [1, 3] taking [  0, 1] and [ 0,3]
+showMove
+applyMove
+enterMove Play at [2,0] taking [0,0]
+showMove
+loadBoard Board1.pls
+showMove
+
+enterMove Play at [1,1]
+showMove
+showMoveHist
+applyMove
+
+keyMoveCount
+undoLastMove 999999
+showBoard
+showMove
+showMoveHist
+keyMoveCount
+
+quit
+

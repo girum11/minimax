@@ -1,0 +1,1001 @@
+--1.) Board valuation test:  Ensure that kWinVal shows when a player runs out of spheres.
+
+doMove Play at [0, 1]                
+doMove Play at [0, 0]
+doMove Play at [2, 1]                
+doMove Play at [1, 2]
+doMove Play at [0, 3]                
+doMove Play at [1, 3]
+doMove Play at [2, 3]                
+doMove Play at [2, 2]
+doMove Play at [2, 0]                
+doMove Play at [0, 2]
+doMove Promote from [2, 0] to [0, 2] 
+doMove Promote from [0, 0] to [1, 2]
+doMove Play at [0, 0]                
+doMove Play at [3, 3]
+doMove Play at [1, 1]
+
+doMove Play at [3,2] taking [3,2] and [3,3]
+
+
+showBoard
+showVal
+testPlay 88 5
+showVal
+showBoard
+showVal
+testPlay 88 5
+showVal
+showBoard
+undoLastMove 1000
+
+-- 2a.) PylosMove tests:  coverage of all the different types of moves.
+-- "When one or more squares of spheres are formed on the board or at higher levels, a player can choose to stack one of his spheres on it; when it is his turn to play, he then has a choice between:"
+-- Set up the sphere
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [1,0]
+doMove Play at [1,1]
+
+-- Choice 1: Play a piece on top of the sphere
+doMove Play at [0,0]
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+
+-- (construct black sphere)
+doMove Play at [2,0]
+doMove Play at [0,2]
+doMove Play at [3,0]
+doMove Play at [1,2]
+
+-- Choice 2: Promote a piece
+doMove Promote from [3,0] to [0,0]
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+
+-- (fill up the rest of the bottom level to ensure that I can't move from one square to a different square)
+doMove Play at [0,3]
+doMove Play at [1,3]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,1]
+doMove Play at [3,2]
+doMove Play at [3,3]
+doMove Play at [0,0]
+doMove Play at [2,0]
+
+-- 2b.) Ensure that a sphere on the board cannot be moved if it is already supporting another sphere.
+showBoard
+showVal
+keyMoveCount
+
+-- 3a.) Square alignemnt tests -- code coverage.
+-- "A player who makes a square of spheres in his own colour can immediately take back NONE of his spheres and put them back in his reserve."
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [2,2]
+doMove Play at [0,1]
+doMove Play at [2,3]
+doMove Play at [1,0]
+doMove Play at [3,2]
+
+doMove Play at [1,1]
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+
+-- 3b.) 
+-- "A player who makes a square of spheres in his own colour can immediately take back ONE of his spheres and put them back in his reserve."
+doMove Play at [1,1] taking [0,0]
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+
+-- 3c.) 
+-- "A player who makes a square of spheres in his own colour can immediately take back TWO of his spheres and put them back in his reserve."
+doMove Play at [1,1] taking [0,0] and [0,1]
+showBoard
+showVal
+keyMoveCount
+undoLastMove 1
+
+
+-- 4a.) What if you have two alignments being created at the same time, but of different players?
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [1,3]
+doMove Play at [0,1]
+doMove Play at [2,3]
+doMove Play at [0,2]
+doMove Play at [3,3]
+
+showBoard
+showVal
+keyMoveCount
+
+testPlay 7 3
+showBoard
+showVal
+undoLastMove 3
+
+doMove Play at [2,1]
+-- 4b.) Ensure that a Spot can be played and removed in the same turn, by both players in succession.
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+doMove Play at [0,3] taking [0,3]
+undoLastMove 1000
+
+
+--5.) Ensure that an alignment that's missing a space [e.g. WW_W] doesn't work.
+-- An alignment shouldn't allow you to take the other player's pieces.
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [3,0]
+doMove Play at [0,1]
+doMove Play at [3,1]
+showBoard
+undoLastMove 1000
+
+
+--6a.) Creating an alignment with pieces that aren't yours shouldn't work.
+undoLastMove 1000
+doMove Play at [1,1]
+doMove Play at [3,3]
+doMove Play at [0,2]
+doMove Play at [2,1]
+doMove Play at [0,0]
+doMove Play at [2,2]
+showBoard
+--6b.) An alignment shouldn't allow you to remove a piece that supports another piece, even if the piece belongs to the other player. 
+doMove Play at [1,0]
+doMove Play at [3,2]
+doMove Play at [0,1]
+doMove Play at [0,0]
+doMove Play at [2,3]
+doMove Play at [0,3]
+showBoard
+
+
+
+--7.) Making several squares of spheres his own colour by putting on one sphere only allows the player to withdraw one or two of his spheres, and does NOT give duplicate possible takeback moves.
+undoLastMove 1000
+doMove Play at [0,1]
+doMove Play at [1,2]
+doMove Play at [0,2]
+doMove Play at [1,3]
+doMove Play at [0,3]
+doMove Play at [2,3]
+doMove Play at [1,0]
+doMove Play at [3,2]
+doMove Play at [2,0]
+doMove Play at [3,3]
+doMove Play at [3,0]
+showBoard
+
+doMove Play at [3,1]
+showBoard
+
+
+--8.) Code coverage for all possible valid alignments.
+--8a.) 4 spheres of the same colour in line on the first level
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,3]
+doMove Play at [2,0]
+doMove Play at [2,3]
+showBoard
+
+undoLastMove 1000
+
+--8b.) 3 spheres of the same colour in line on the second level
+undoLastMove 1000
+-- (fill up the bottom level)
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [1,3]
+doMove Play at [2,0]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,0]
+doMove Play at [3,1]
+doMove Play at [3,2]
+doMove Play at [3,3]
+
+doMove Play at [0,0]
+doMove Play at [2,0]
+doMove Play at [0,1]
+doMove Play at [2,1]
+
+showBoard
+
+--8c.) A square alignment
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,3]
+doMove Play at [0,1]
+doMove Play at [1,3]
+doMove Play at [1,0]
+doMove Play at [3,3]
+showBoard
+
+undoLastMove 1000
+
+
+--9a.) What if you make an alignment on the second level, and then remove two blocks, but removing the first one makes it so that the second block's isn't supporting the first block?
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [1,3]
+doMove Play at [2,0]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,0]
+doMove Play at [3,1]
+doMove Play at [3,2]
+doMove Play at [3,3]
+
+showBoard
+doMove Play at [0,0]
+doMove Play at [2,0]
+doMove Play at [0,1]
+doMove Play at [2,1]
+
+--9b.) What if you "take" two blocks that have the same "name"?
+doMove Play at [0,2] taking [0,0] and [0,0]
+doMove Play at [2,2] taking [2,2] and [3,3]
+showBoard
+
+undoLastMove 1000
+
+--10.) Verify that play is over when one player has no marbles in his reserve after his move is complete.  Slowly step to the last move.
+undoLastMove 1000
+testPlay 77 75
+showBoard
+keyMoveCount
+showVal
+testPlay 77 25
+showBoard
+keyMoveCount
+showVal
+testPlay 77 25
+showBoard
+keyMoveCount
+showVal
+testPlay 77 25
+showBoard
+keyMoveCount
+showVal
+testPlay 77 15
+showBoard
+keyMoveCount
+showVal
+testPlay 77 25
+showBoard
+keyMoveCount
+showVal
+undoLastMove 1000
+
+--11.) PylosMove operator=(string) sanity checks.
+-- "A *badly formed* move is one that disobeys string formats, or that has obvious errors such as out-of-range number values.  The operator=(const std::string &) method detects badly formed moves and throws an exception when it is passed one.
+
+undoLastMove 1000
+
+-- Out of bounds move.
+enterMove Play at [0,-1]
+enterMove Play at [-1,0]
+enterMove Play at [0,4]
+enterMove Play at [4,0]
+
+-- Floating point cells
+enterMove Play at [0.00, 0]
+enterMove Play at [0,0.00]
+
+-- Extra zeroes in move.
+showBoard
+doMove Play at [00000000,2]
+undoLastMove 1
+
+-- Garbage characters.
+showBoard
+enterMove Play at someRandomBadInputString
+enterMove Play at [7,8]
+enterMove Play at [8,7]
+enterMove Play at [23049238047239847239847, 2]
+enterMove Play at [1, 239084289034729384723984723]
+enterMove Play at [2384723984729384723984, 29348723984729384723]
+enterMove Play at [-1, 2]
+enterMove Play at [1, -2]
+enterMove Play at [1.2, 2]
+enterMove Play at [1, 2.3]
+enterMove Play at [,]
+enterMove Play at [1,]
+enterMove Play at [,2]
+enterMove Play at [1,2]
+enterMove Play at (1,2]
+enterMove Play at [1,2)
+enterMove Play at (1,2)
+enterMove Play at {1,2]
+enterMove Play at [1,2}
+enterMove Play at {1,2}
+enterMove Play at [1,@]
+
+-- Whitespace inside keywords
+enterMove Pl ay at [0, 2]      
+enterMove Pro mote from [0, 0] to [0, 2]
+enterMove Promote fr om [0, 0] to [0, 2]
+enterMove Promote fro		m [0, 0] to [0, 2]
+enterMove Promote from [0, 0] t		o [0, 2]
+enterMove Pro   mote from [0, 0] to [0, 2]
+
+-- Whitespace only required between adjacent words:
+-- "Whitespace must appear between adjacent words (e.g. "Play at") but is not required elsewhere."
+enterMove Playat [1,2]
+showBoard
+doMove Play at[1,2]
+undoLastMove 1
+enterMove Promote from[1,2]to[0,0]taking[2,2]and[1,1]
+
+-- Ensure that you can input the same thing over and over again
+enterMove Play at [0,0] taking [0,0] and [0,0]
+enterMove Promote from [0,0] to [0,0] taking [0,0] and [0,0]
+
+-- Test trailing garbage
+enterMove Play at [0,0] taking [0,0]0 and [0,0]
+enterMove Play at [0,0] taking [0,0] and [0,0] and [0,0]
+enterMove Play at [0,0] taking [0,0]garbage
+enterMove Play at [0,0] taking [0,0] and [0,0]garbage
+
+-- Additional arbitrary whitespace
+-- "Additional arbitrary whitespace may appear anywhere within the string or at its ends except inside of the words Promote, Play, from, taking, to at and and."
+showBoard
+doMove    		  Play   					  at 		   [ 		 1  , 		 2			] 	
+undoLastMove 1
+showBoard
+
+-- Mixed keywords
+enterMove Play at [0,2] to [2,0]
+enterMove Promote at [1,2]
+enterMove Play at [1,0] to [1,2]
+enterMove Promote to [2,2]
+enterMove Play from [1,1] to [1,2] taking [2,3] and [1,2]
+enterMove Promote to [1,2] from [2,3] taking [3,2] and [3,2]
+enterMove Play at [3,2] taking [2,2] and [1,0]
+
+
+-- Missing brackets
+doMove Play at [1,
+doMove Play at [0,0] taking [0,0
+doMove Play at [0,0 taking [3,4
+doMove Promote to [1,2] [2,3] [3,2] [2,2]
+doMove Promote to [1,2] from [2,3] taking [3,1
+doMove Play Play at [0,0]
+
+-- ('s and {'s instead of ['s
+enterMove Play at [1,1)
+enterMove Play at [1,1}
+enterMove Play at (1,1]
+enterMove Play at {1,1]
+enterMove Play at [[1,1]
+enterMove Play at [1,1]]
+enterMove Play at [1,1]                                       
+
+
+--12.) BoardTest test:  A bad move string shouldn't change the defualt move.
+-- "If a badly formatted Move string is presented to the operator= method, the method throws a BaseException with one of the contents below where X is the name of the game and M is the full move string.  If this happens, the method does not modify the move at all.  In other words, it either modifies the move, or throws an exception indicating a bad move string, but not both."
+showMove
+keyMoveCount
+enterMove Play at [0,2] taking [0,0] and [0,0]
+showMove
+keyMoveCount
+enterMove Play at [0,2] taking [0,0] and [4,4]
+showMove
+keyMoveCount
+
+--13.) OthelloDlg trailing garbage tests.
+setOptions
+n
+setOptions
+noooooooooooooooooooo
+setOptions
+Y
+setOptions maybe?
+nah
+
+-- "A "y" is the only acceptable "yes" answer.  It may be followed by arbitrary garbage on the reply line without error."
+setOptions pretty please????
+yeah, sure
+
+-- The user must [input] a valid integer falling within the inclusive ranges given when you run the model program.  The integer must be on a line by itself -- trailing nonwhitespace garbage is unacceptable and geenerates an error indicating there is extra garbage on the line.
+100
+20 6
+20
+6
+
+setOptions
+y
+100
+20
+6 asdf
+6
+
+setOptions
+y
+100 20 6
+100
+20
+6
+
+--14.) Verify that using OthelloDlg changes the Board's valuation.
+undoLastMove 1000
+testPlay 99 50
+showVal
+testPlay 99 50
+showVal
+
+setOptions
+y
+50
+10
+2
+
+showVal
+undoLastMove 1000
+showVal
+testPlay 99 50
+showMoveHist
+showVal
+testPlay 99 50
+showVal
+
+
+--15.) OthelloDlg sanity checks.
+setOptions
+y
+
+-- marble weight sanity
+1.1
+-1
+0
+100
+
+-- level weight sanity
+1.1
+-1
+0
+50
+
+-- free weight sanity
+1.1
+-1
+0
+20
+
+
+--16.) OthelloDlg limits checks
+--16a.) Marble weight must be between 1 and 1000 inclusive.  
+setOptions
+y
+0
+1001
+1
+0
+0
+
+--16b.) Level weight must be nonnegative and less than marble weight.  
+setOptions
+y
+100
+-40
+- 40
+100
+99
+50
+
+--16c.) Free weight must be nonnegative, less than marble weight, and even
+setOptions
+y
+100
+50
+-40
+52
+49
+48
+
+
+--17.) Board valuation tests:  Endgame values.
+-- As a special case, if the game is over then GetValue returns winVal if first player has won and -winVal if the second player has won.
+showVal
+showBoard
+testPlay 56 200
+showVal
+showBoard
+
+undoLastMove 10000
+testPlay 57 200
+showVal
+showBoard
+
+
+--18.) compareKeys tests:  Test board values, as well as mWhoseMove, and 
+-- "Two PylosBoard::Keys are equal if all squares on their represented boards have the same contents, and it's the same player's turn to move."
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [1,3]
+doMove Play at [0,1]
+doMove Play at [2,3]
+doMove Play at [0,2]
+doMove Play at [3,3]
+doMove Play at [0,3]
+undoLastMove 1
+doMove Play at [0,3] taking [0,0] and [0,3]
+undoLastMove 1
+doMove Play at [1,1]
+undoLastMove 1
+doMove Play at [2,1]
+saveBoard PylosBoardIbssa0
+
+--19.) compareKeys test: Try to setOptions before and after compareKeys and see if compareKeys changed them.
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [1,3]
+doMove Play at [0,1]
+doMove Play at [2,3]
+doMove Play at [0,2]
+doMove Play at [3,3]
+doMove Play at [0,3]
+undoLastMove 1
+doMove Play at [0,3] taking [0,0] and [0,3]
+undoLastMove 1
+doMove Play at [1,1]
+undoLastMove 1
+doMove Play at [2,1]
+setOptions
+y
+50
+40
+30
+saveBoard PylosBoardIbssa0
+setOptions
+y
+100
+20
+6
+compareKeys PylosBoardIbssa0
+setOptions
+n
+compareKeys PylosBoardIbssa0
+setOptions
+n
+doMove Play at [0,3] taking [0,3]
+compareKeys PylosBoardIbssa0
+doMove Play at [0,3] taking [0,3]
+compareKeys PylosBoardIbssa0
+doMove Play at [0,3] taking [0,3]
+compareKeys PylosBoardIbssa0
+doMove Play at [0,3] taking [0,3]
+compareKeys PylosBoardIbssa0
+
+testPlay 8 10
+compareKeys PylosBoardIbssa0
+
+
+-- "Key A is "less" than Key B if A next player is lower than B's next player (black is "lower" than white")"
+undoLastMove 1000
+saveBoard PylosBoardIbssa1
+doMove Play at [0,0]
+compareKeys PylosBoardIbssa1
+saveBoard PylosBoardIbssa2
+doMove Play at [0,1]
+compareKeys PylosBoardIbssa2
+
+
+-- "Key A is "less" than Key B if both have the same next player, then: In the last cell, in level-major, row-submajor, column-minor order, at which one has a white cell and the other does not, then the one with the white cell is larger."
+undoLastMove 1000
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [0,3]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [1,3]
+doMove Play at [2,0]
+doMove Play at [2,1]
+doMove Play at [2,2]
+doMove Play at [2,3]
+doMove Play at [3,0]
+doMove Play at [3,1]
+saveBoard PylosBoardIbssa3
+doMove Play at [3,2]
+compareKeys PylosBoardIbssa3
+doMove Play at [3,3]
+compareKeys PylosBoardIbssa3
+doMove Play at [0,0]
+doMove Play at [0,1]
+doMove Play at [0,2]
+doMove Play at [1,0]
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [2,0]
+saveBoard PylosBoardIbssa4
+doMove Play at [2,1]
+compareKeys PylosBoardIbssa4
+doMove Play at [2,2]
+compareKeys PylosBoardIbssa4
+undoLastMove 1000
+
+
+
+--19.) PylosMove comparison tests
+-- Moves are equal if they are the same type and have exactly the same squares.
+enterMove Play at [1,1]
+compareMove Play at [1,1]
+compareMove Play at [0,1]
+compareMove Play at [1,1,1]
+compareMove Play at [1,1] taking [1,1]
+compareMove Play at [1,1] taking [1,1] and [1,1]
+compareMove Promote from [1,1] to [1,1]
+compareMove Promote from [1,1] to [2,2] taking [1,1] and [2,2]
+
+-- Length comparisons
+enterMove Promote from [1,1] to [2,2] taking [1,1]
+compareMove Promote from [1,1] to [2,2] taking [1,1] and [2,2]
+
+enterMove Promote from [1,1] to [2,2] taking [1,1] and [2,2]
+compareMove Promote from [1,1] to [2,2] taking [2,2] and [1,1]
+compareMove Promote from [1,1] to [2,2] taking [1,1]
+
+enterMove Play at [1,1] taking [1,1]
+compareMove Play at [1,1]
+compareMove Play at [1,1] taking[1,1]
+
+--20.) PylosMove::(string) tests.
+showMove
+enterMove Play at [0,  00 ]
+showMove
+enterMove Play at [0000000000000000000000, 0000000000000000000]
+enterMove Play at [8, 8]
+enterMove Play at [0, 1]
+showMove
+
+enterMove Play at [-1, -1]
+showMove
+enterMove Pass
+showMove
+enterMove Passs
+showMove
+enterMove Pass sdf
+showMove
+
+--21.) BoardTest test:  applyMove shouldn't clear the move.
+undoLastMove 200
+enterMove Play at [4,0]
+applyMove
+showMove
+enterMove Play at [2,3]
+applyMove
+showMove
+undoLastMove 200
+showMove
+
+--22.) compareKeys tests: Calling this command should change the Options.
+-- "Note that since compareKeys requires loading a board, the command has the side effect of changing board options to those stored in boardFile."
+undoLastMove 200
+testPlay 88 38
+saveBoard PylosBoardIbssa5
+compareKeys PylosBoardIbssa5
+enterMove Play at [1,0]
+compareKeys PylosBoardIbssa5
+setOptions
+y
+4
+3
+2
+compareKeys PylosBoardIbssa5
+
+testPlay 8 34
+compareKeys PylosBoardIbssa5
+setOptions
+y
+20
+10
+4
+compareKeys PylosBoardIbssa5
+undoLastMove 34
+compareKeys PylosBoardIbssa5
+loadBoard PylosBoardIbssa4
+compareKeys PylosBoardIbssa5
+
+
+--23.) Board valuation / setOptions tests: Verify that changing the options IMMEDIATELY changes the board's valuation.
+-- "Whenever the static weights are changed all existing boards of the current board class must automatically reflect the change in the return of GetValue."
+undoLastMove 100
+testPlay 34 39
+showVal
+setOptions
+y
+50
+20
+4
+showVal
+
+
+
+--24.) What if you try to promote a piece onto a square that uses its own (old) position as a base?
+undoLastMove 1000
+doMove Play at [1,1]
+doMove Play at [1,2]
+doMove Play at [2,1]
+doMove Play at [2,2]
+showBoard
+
+
+
+--25.) compareMove test:  Multiple jump comparison with equivalent moves save for one extra last jump
+enterMove Play at [1,2] taking [2,2]
+compareMove Play at [1,2] taking [2,2] and [3,3]
+compareMove Play at [1,2]
+
+--26.) compareMove tests:  100% test coverage;
+enterMove Play at [0,0] taking [1,1]
+
+compareMove Play at [0,0] taking [1,1]
+compareMove Play at [0,1] taking [1,1]
+compareMove Play at [1,0] taking [1,1]
+
+compareMove Play at [0,0] taking [0,1]
+compareMove Play at [0,0] taking [2,1]
+compareMove Play at [0,0] taking [1,0]
+compareMove Play at [0,0] taking [1,2]
+
+compareMove Play at [0,0] taking [1,1] and [2,2]
+compareMove Play at [0,0]
+
+
+enterMove Promote from [0,0] to [1,1] taking [2,2]
+
+compareMove Promote from [0,0] to [1,1] taking [2,2]
+compareMove Promote from [1,0] to [1,1] taking [2,2]
+compareMove Promote from [0,1] to [1,1] taking [2,2]
+
+compareMove Promote from [0,0] to [1,2] taking [2,2]
+compareMove Promote from [0,0] to [2,1] taking [2,2]
+
+compareMove Promote from [0,0] to [1,1] taking [1,2]
+compareMove Promote from [0,0] to [1,1] taking [2,1]
+
+compareMove Promote from [0,0] to [1,1]
+compareMove Promote from [0,0] to [1,1] taking [2,2] and [2,2]
+
+
+
+--27.) Verify that tabs in strings are still valid strings.
+enterMove Play  	 at  	 [ 	 	1 	 , 	 2 	 	]  	 	taking 	  [ 	 2 	 	 , 	 	2 		] 	 	
+
+
+--28.) setOptions test:  Ensure that changing the options immediately changes the board values.
+undoLastMove 1000
+testPlay 34 20
+showBoard
+showVal
+setOptions
+n
+showVal
+setOptions
+y
+60
+30
+10
+showVal
+testPlay 23 20
+showVal
+undoLastMove 30
+showVal
+setOptions
+y
+50
+40
+30
+showVal
+setOptions
+n
+
+--29.) setOptions test:  Saving the board should load up those options.
+undoLastMove 1000
+testPlay 58 29
+showVal
+saveBoard test0
+showVal
+setOptions
+y
+100
+50
+20
+showVal
+testPlay 5 10
+showVal
+setOptions
+y
+50
+20
+10
+showVal
+loadBoard test0
+showVal
+setOptions
+y
+50
+20
+10
+showVal
+
+--30.) showMoveHist test:  Loading the board should load a new moveHist.
+undoLastMove 1000
+showMoveHist
+testPlay 34 1
+showMoveHist
+testPlay 23 10
+showMoveHist
+saveBoard test1
+showMoveHist
+undoLastMove 1000
+showMoveHist
+testPlay 50 20
+showMoveHist
+loadBoard test1
+showMoveHist
+showBoard
+
+--31.) (string) null value sanity checks
+enterMove Play at [0,]
+enterMove Play at [,0]
+enterMove Play at [,]
+
+-- 32.) END GAME tests:  Test cases where you have a LONG list of possible moves.
+--a.) Case where the bottom level is almost full of white pieces.
+undoLastMove 1000
+doMove Play at [0, 0]               
+doMove Play at [3, 0]              
+doMove Play at [0, 1]               
+doMove Play at [3, 2]              
+doMove Play at [0, 2]               
+doMove Play at [3, 1]              
+doMove Play at [0, 3]               
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [1, 0]               
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [1, 1]               
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [1, 2]               
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [1, 3]               
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [2, 0]               
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [2, 1]               
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [2, 2]               
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [2, 3]    
+showBoard         
+-- Both players can call this move, so repeat it and verify that their keys are different.  
+doMove Play at [3, 3] taking [3, 3]
+showBoard
+showVal
+saveBoard test0
+doMove Play at [3, 3] taking [3, 3]
+showBoard
+showVal
+compareKeys test0
+-- Verify that keyMoveCount is correct when you can play the same move over and over again.
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [3, 3] taking [3, 3]
+doMove Play at [3, 3] taking [3, 3]
+keyMoveCount
+showBoard
+
+--b.) Case where the bottom level is completely full of white pieces, with a black alignment on top of it.
+doMove Play at [3,3] taking [3,2] and [3,3]
+doMove Play at [3,3]
+doMove Play at [0,0]
+doMove Play at [3,2]
+doMove Play at [0,1]
+
+-- End game real quick, just to verify
+doMove Play at [1,2]
+showBoard
+showVal
+undoLastMove 5
+
+doMove Play at [3,3] taking [3,3]
+showBoard
+showVal
+doMove Play at [0,0]
+showBoard
+showVal
+doMove Play at [3,3] taking [3,3]
+showBoard
+showVal
+doMove Play at [0,1]
+showBoard
+showVal
+doMove Play at [3,3] taking [3,3]
+showBoard
+showVal
+doMove Play at [0,2] taking [0,2] and [3,0]
+showBoard
+showVal
+doMove Play at [3,3] taking [3,3]
+showBoard
+showVal
+doMove Play at [0,2] taking [0,2] and [3,1]
+showBoard
+showVal
+doMove Play at [3,0]
+showBoard
+showVal
+doMove Play at [0,2] taking [0,2]
+showBoard
+showVal
+doMove Play at [3,1]
+showBoard
+showVal
+doMove Play at [0,2] taking [0,2]
+showBoard
+showVal
+
+-- End game real quick, to verify
+doMove Play at [3,2]
+showBoard
+showVal
+
+
+
+-- END GAME tests
+
+-- "SetOptions is a gold mine for bugs"
+
+-- compareMove tests
+
+-- compareKeys tests
+
+-- showMoveHist tests.
+
+
+
+-- I need more "GUI" input sanity checks on the strings that have been inputted.
+
+
+
+
+
+
+quit

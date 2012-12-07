@@ -1,0 +1,3 @@
+*** "Shotgun" tests ***
+-- Random tests
+testRun 7 10000

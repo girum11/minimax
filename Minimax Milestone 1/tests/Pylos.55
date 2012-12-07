@@ -1,5 +1,5 @@
-saveBoard empty.pls
-compareKey empty.pls
+saveBoard empty.pls.new3
+compareKeys empty.pls.new3
 showMoveHist
 keyMoveCount
 keyMoveCount
@@ -15,9 +15,9 @@ doMove Play at [1,3]
 doMove Play at [2,0]
 doMove Play at [2,1]
 doMove Play at [2,2]
-loadMove IDONOTEXEEST__.xaHA
-saveMove idoexist.pls
-loadMove idoexist.pls pls
+loadMove IDONOTEXEEST__.xaHA.new3
+saveMove idoexist.pls.new3
+loadMove idoexist.pls.new3 pls.new3
 doMove Play at [2,3]
 doMove Play at [3,0]
 doMove Play at [3,1]
@@ -78,7 +78,7 @@ undoLastMove 1
 showVal
 showMoveHist
 keyMoveCount
-testRun seed stepCount
+// testRun seed stepCount
 setOptions
 yeaaaaaaaaaaaaaaaaaaa!
 -8
@@ -128,14 +128,14 @@ y
 1000
 999
 998
-saveBoard yeah.pls
+saveBoard yeah.pls.new3
 showVal
 showMoveHist
 keyMoveCount
 undoLastMove 100
 showMoveHist
 keyMoveCount
-testPlay -1 1000
+// testPlay -1 1000
 showBoard
 showVal
 showMoveHist
@@ -148,7 +148,7 @@ y
 showBoard
 undoLastMove 100
 doMove Play at [0,0]
-saveMove waitup.pls
+saveMove waitup.pls.new3
 keyMoveCount
 doMove Play at [0,1]
 doMove Play at [0,2]
@@ -170,7 +170,7 @@ showVal
 showMove
 enterMove Play at [0,0]
 compareMove  Play at [0,0]
-loadMove waitup.pls
+loadMove waitup.pls.new3
 showMove
 setOptions
 y
@@ -180,9 +180,9 @@ y
 showVal
 showMoveHist
 keyMoveCount
-compareKey yeah.pls
-loadBoard yeah.pls
-compareKey empty.pls
+compareKeys yeah.pls.new3
+loadBoard yeah.pls.new3
+compareKeys empty.pls.new3
 setOptions
 y
 800

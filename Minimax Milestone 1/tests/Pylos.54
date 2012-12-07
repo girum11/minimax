@@ -12,14 +12,14 @@ y
 1000
 999
 998
-saveBoard yeah.pls
+saveBoard yeah.pls.new6
 showVal
 showMoveHist
 keyMoveCount
 undoLastMove 100
 showMoveHist
 keyMoveCount
-testPlay -1 1000
+// testPlay -1 1000
 showBoard
 showVal
 showMoveHist

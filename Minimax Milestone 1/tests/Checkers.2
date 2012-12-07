@@ -1,880 +1,246 @@
-enterMove c2->d4
-compareMove a1->a1
-compareMove a1->a2
-compareMove a1->a3
-compareMove b1->d4
-compareMove b2->d4
-compareMove b3->d4
-compareMove c2->d4
-compareMove c3->d4
-compareMove c1->d4
-compareMove c2->d5
-compareMove c2->d6
-compareMove c2->d3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
+--1.) Checking for the case where a King jumps around and lands back into the same spot.
+--2.) In a multiple jump, the jumping piece or king can change directions, jumping first in one direction and then in another direction.
+testPlay 90 30
+doMove d6->f4->h2
+doMove g5->f6
+doMove b6->c7
+doMove f6->e5
+doMove c7->d8
+doMove e5->d6
+doMove c1->d2
+doMove d6->c7
+doMove c3->d4
+doMove c7->b8
+doMove a1->b2
+doMove b8->a7
+doMove a3->b4
+doMove a7->b6
+doMove h2->g3
+doMove b6->a7
+doMove g3->f4
+doMove a7->b6
+doMove d8->e7
+doMove f8->d6
+doMove f4->g3
+doMove d6->c7
+doMove g3->h2
+doMove c7->b8
+doMove h2->g3
+doMove b8->a7
+doMove g3->h2
+doMove a7->b8
+doMove h2->g3
+doMove b8->c7
+doMove g3->h2
+doMove c7->d6
+doMove b6->c5
+doMove h2->g3
+doMove b6->c5
+doMove g3->h2
+doMove c5->a3->c1->e3->c5
+doMove c5->a3->c1->e3->c5
+doMove c5->a3
 
-enterMove a1->d4
-compareMove a1->a1
-compareMove a1->a2
-compareMove a1->a3
-compareMove a2->a3
-compareMove a0->a3
-compareMove a3->d5
-compareMove a3->d6
-compareMove a3->d3
-compareMove c2->d4
-compareMove c3->d4
-compareMove c1->d4
-compareMove c2->d5
-compareMove c2->d6
-compareMove c2->d3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove a7->a1
-compareMove a7->a2
-compareMove a8->a3
-compareMove c9->d4
-compareMove c3->d4
-compareMove c1->d4
-compareMove c2->d5
-compareMove c2->d6
-compareMove c2->d3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
+--15.) You cannot jump the same piece twice in the same move
+undoLastMove 1
+doMove c5->a3->c1->e3->c5->a3
 
+--13.) (when jumping pieces, you remove the jumped pieces from the board).
+doMove b4->a3
+doMove b2->a3
+doMove d2->e3
+doMove b4->c3
 
-enterMove c7->d4
-compareMove a1->a1
-compareMove a1->a2
-compareMove a1->a3
-compareMove a2->a3
-compareMove a0->a3
-compareMove a3->d5
-compareMove a3->d6
-compareMove a3->d3
-compareMove c2->d4
-compareMove c3->d4
-compareMove c1->d4
-compareMove c2->d5
-compareMove c2->d6
-compareMove c2->d3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove a7->a1
-compareMove a7->a2
-compareMove a8->a3
-compareMove c9->d4
-compareMove c3->d4
-compareMove c1->d4
-compareMove c2->d5
-compareMove c2->d6
-compareMove c2->d3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove c1->a3
-compareMove d2->d3
-compareMove d7->a3
-compareMove d1->a3
-compareMove d8->a3
-compareMove d1->a3
-compareMove d3->a3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
+showBoard
+showMove
+showVal
+showMoveHist
+keyMoveCount
+testPlay 7 777
+showBoard
 
-enterMove c4->c5->c6->c7->c8->c9
+--3.) Players alternate moves in Checkers
+doMove c1->d2 doMove c3->d4
+doMove c1->d2
+doMove c3->d4
+undoLastMove 100
 
-compareMove c3->c5->c6->c7->c8->c9
-compareMove c5->c6->c7->c8->c8->c9
-compareMove c2->c3->c7->c8->c8->c9
-compareMove c4->c3->c7->c8->c8->c8
-compareMove c4->c3->c7->c8->c8->c6
-compareMove c4->c3->c7->c8->c8->d1
-compareMove c4->c3->c7->c8->c8->d9
-compareMove c4->c3->c7->c8->c8->c9
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c2->c3->c7->a8->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a 1->D 1
-compareMove a1->D2
-compareMove a1->D2->H6
-compareMove aass
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
+-- 4.) The player who cannot move, because he has no pieces, or because all of his pieces are blocked, loses the game
+-- a.) Player can't move and loses
+testPlay 98 44
+doMove d2->e1
+showBoard
+showVal
+doMove d4->c5
+showBoard
+showVal
 
-enterMove H1->e3->d5
-compareMove H1->e3->d5
-compareMove H2->e3->d5
-compareMove H0->e3->d5
-compareMove H4->e3->d5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a 1->D 1
-compareMove a1->D2
-compareMove a1->D2->H6
-compareMove aass
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
+-- b.) Player has no pieces and loses
+undoLastMove 100
+testPlay 98 43
+doMove d8->c7
+doMove d2->e3
+showBoard
+showVal
+doMove f2->d4
+showBoard
+showVal
 
+-- 5.) A piece which is not a king can move one square, diagonally, forward, as in the diagram at the right.
+undoLastMove 100
+showBoard
+doMove c3->d2
+undoLastMove 1
+doMove c3->d4
+doMove f6->e5
+undoLastMove 1
+doMove f6->e7
+showBoard
 
-enterMove F1->e3->d5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a 1->D 1
-compareMove a1->D2
-compareMove a1->D2->H6
-compareMove aass
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
+-- 6.) A king can move one square diagonally, forward or backward.
+undoLastMove 100
+testPlay 100 30
+showBoard
+doMove h6->g5
+doMove e7->d8
+doMove g5->h4
+undoLastMove 1
+doMove g5->h6
+undoLastMove 1
+doMove g5->f4
+undoLastMove 1
+doMove g5->f6
+showBoard
 
-enterMove F4->e3->d5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a 1->D 1
-compareMove a1->D2
-compareMove a1->D2->H6
-compareMove aass
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
+-- 7a.) A piece (piece) can only move to a vacant square.
+showBoard
+doMove c5->d6
+showBoard
 
+-- 7b.) A piece (king) can only move to a vacant square.
+showBoard
+doMove g7->f8
+showBoard
 
-enterMove F4->e6->d3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a 1->D 1
-compareMove a1->D2
-compareMove a1->D2->H6
-compareMove aass
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
+-- 8a.) You can capture an opopnent's piece by jumping over it, diagonally, to the adjacent vacant square beyond it.  The three squares must be lined up (diagonally adjacent) as in the diagram at the left: your jumping piece (piece), opponent's piece (piece), empty square.
+doMove d8->c7
+doMove b5->d4
+doMove b6->c7
+doMove b6->d8
+showBoard
 
+-- 8b.) You can capture an opopnent's piece by jumping over it, diagonally, to the adjacent vacant square beyond it.  The three squares must be lined up (diagonally adjacent) as in the diagram at the left: your jumping piece (piece), opponent's piece (king), empty square.
+doMove g3->f4
+doMove d6->e7
+doMove f8->d6
+doMove c5->e7
+doMove f2->e1
+doMove f6->e5
+doMove f4->d6
+showBoard
+-- 9.) A king can jump diagonally, forward or backward.
+-- 10.) A piece which is not a king, can only jump diagonally forward.
+doMove e7->c5
+showBoard
+doMove b2->c3
+doMove d6->f8
+showBoard
 
-enterMove a1->a1
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a 1->D 1
-compareMove a1->D2
-compareMove a1->D2->H6
-compareMove aass
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
+-- 8c.) You can capture an opopnent's piece by jumping over it, diagonally, to the adjacent vacant square beyond it.  The three squares must be lined up (diagonally adjacent) as in the diagram at the left: your jumping piece (king), opponent's piece (piece), empty square.
+doMove d6->c7
+doMove c3->d4
+doMove c7->b8
+showBoard
+doMove g7->f6
+doMove b8->a7
+doMove f6->e5
+doMove a7->b6
+doMove e5->f4
+showBoard
+doMove b6->a5
+doMove f4->e3
 
-enterMove H1->a1
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a 1->D 1
-compareMove a1->D2
-compareMove a1->D2->H6
-compareMove aass
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
+--11.) A multiple jump must be completed, you cannot stop part way through a multiple jump.
+doMove a5->c3
+showBoard
+doMove a5->c3->e5
+showBoard
 
-enterMove H7->H7
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a 1->D 1
-compareMove a1->D2
-compareMove a1->D2->H6
-compareMove aass
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
+--8d.) You can capture an opopnent's piece by jumping over it, diagonally, to the adjacent vacant square beyond it.  The three squares must be lined up (diagonally adjacent) as in the diagram at the left: your jumping piece (king), opponent's piece (king), empty square.
+doMove e3->d4
+doMove e5->c3
+showBoard
 
-enterMove H7->H7->H7
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a 1->D 1
-compareMove a1->D2
-compareMove a1->D2->H6
-compareMove aass
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
+--8e.) Ensure that you can't jump over a player over the board, or into a non-empty square.
+doMove e7->f6
+doMove c3->b2
+doMove f6->g5
+doMove b2->d0
+doMove g1->f2
+doMove a3->c1
+showBoard
 
-enterMove D5->D5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove H1->a3
-compareMove H1->a3->
-compareMove H1->e3->d5->e7->g5
-compareMove C 1->D 1
-compareMove C1->D2
-compareMove C1->D2->H6
-compareMove Pass
-compareMove H4->c5->c6->c7->c8->c9
-compareMove H1->d2->c3
-compareMove H1->e3->d5
-compareMove c1->e3->d5
-compareMove h1->a3
-compareMove H1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c1->e3->d5->e7->g5->e3->c1->e3
-compareMove H4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove I1->e3->d5->e7->g5
-compareMove I1->e3->d5->e7->g5->e3->c1->e3
-compareMove c4->c5->c6->c7->c8->c9
-compareMove c1->d2->c3
-compareMove c1->e3->d5
-compareMove c1->e3->d5
-compareMove c1->a3
-compareMove c1->a3->
-compareMove c1->e3->d5->e7->g5
-compareMove c4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a 1->D 1
-compareMove a1->D2
-compareMove a1->D2->H6
-compareMove aass
-compareMove a4->c5->c6->c7->c8->c9
-compareMove I1->d2->c3
-compareMove a1->e3->d5
-compareMove I1->e3->d5
-compareMove I1->a3
-compareMove I1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove I4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
-compareMove a1->e3->d5->e7->g5->e3->c1->e3
-compareMove a4->c5->c6->c7->c8->c9
-compareMove a1->d2->c3
-compareMove a1->e3->d5
-compareMove a1->e3->d5
-compareMove a1->a3
-compareMove a1->a3->
-compareMove a1->e3->d5->e7->g5
+-- 12.) You can only jump one piece with any given jump
+undoLastMove 1000
+doMove c3->d2
+doMove f2->e3
+doMove c7->d8
+doMove f6->e7
+doMove d8->f6
+doMove g5->e7
+doMove d2->g5
+
+-- 13.) When jumping pieces, you remove jumped pieces from the board.
+
+*** See test 1 for this test ***
+
+-- 14.) You cannot jump your own piece (tested with King trying to jump own piece backwards).
+doMove d8->e7
+showBoard
+doMove b2->c3
+doMove e7->f8
+doMove c3->d4
+doMove f8->g7
+doMove d4->e3
+-- 17.) When a piece reaches the last row, it becomes a King.
+doMove g7->h8
+showBoard
+doMove e3->g1
+showBoard
+
+-- 15.) If you can jump, you must.
+doMove e3->d4
+doMove g5->h6
+doMove f2->e3
+doMove c1->d2
+showBoard
+doMove d4->c5
+showBoard
+
+-- 16.) A piece that has just kinged, cannot continue jumping pieces, until the next move.
+undoLastMove 100
+testPlay 46 20
+doMove f8->h6->f4
+
+-- 17.) If you have a choice of jumps, you can choose among them, regardless of whether some of them are multiple, or not.
+undoLastMove 1
+doMove h2->g1
+doMove b8->c7
+doMove h6->g5
+doMove f8->h6
+doMove h8->g7
+showBoard
+doMove h6->f8
+undoLastMove 1
+doMove h6->f4
+doMove h6->f4->h2
+
+-- 18.) You can make only one move per turn.  You must move.
+doMove e3->f4
+showBoard
+
+-- 19.) Red [black in our case] moves first.
+undoLastMove 100
+doMove f2->e3
+
+-- This will be the Checkers test case that ensures that a lack of a "quit" command doesn't blow the entire program up.

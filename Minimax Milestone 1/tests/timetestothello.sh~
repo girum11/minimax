@@ -1,0 +1,1 @@
+time "../milestone1/clintsExec" OthelloBoard < "./Othello."$1

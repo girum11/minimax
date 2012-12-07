@@ -1,3 +1,5 @@
-testRun 2 300000
+*** I already passed a very long testRun, so I'm commenting this out. ***
+
+// testRun 2 300000
 showBoard
 quit

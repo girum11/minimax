@@ -1,36 +1,5 @@
-undoLastMove 200
-testPlay 88 38
-saveBoard PylosBoardIbssa5
-compareKeys PylosBoardIbssa5
-enterMove Play at [1,0]
-compareKeys PylosBoardIbssa5
-setOptions
-y
-4
-4
-3
-2
-compareKeys PylosBoardIbssa5
-testPlay 8 34
-compareKeys PylosBoardIbssa5
-
-
-setOptions
-y
-6
-7
-8
-2
-1
-0
-
-
-compareKeys PylosBoardIbssa5
-undoLastMove 34
-compareKeys PylosBoardIbssa5
-
-*** Bug here.
-loadBoard PylosBoardIbssa4
--- compareKeys PylosBoardIbssa5
+saveBoard empty.pls.new2
+compareKeys empty.pls.new2
+showMoveHist
 
 quit

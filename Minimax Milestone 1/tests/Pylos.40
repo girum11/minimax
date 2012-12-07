@@ -1,0 +1,23 @@
+doMove Play at [0,0]
+
+doMove Play at [0,1]
+
+doMove Play at [1,0]
+
+doMove Play at [0,2]
+showVal     
+
+doMove Play at [2,0]
+showVal
+
+doMove Play at [1,1]
+showVal
+
+doMove Promote from [2, 0] to [0, 0]
+showVal
+undoLastMove 100
+testPlay 2 100
+undoLastMove 1
+showBoard
+showVal
+quit
