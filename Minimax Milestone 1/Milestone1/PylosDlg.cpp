@@ -70,7 +70,7 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
             getline(in, inputString);
          } while (inputString == "");
          
-         res = sscanf(inputString.c_str(), " %4u %1s", &inputValue, trailingChar);
+         res = sscanf(inputString.c_str(), " %4d %1s", &inputValue, trailingChar);
 
          if (res == 0) {
             out << "Badly formatted input\n";

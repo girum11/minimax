@@ -235,7 +235,10 @@ int main(int argc, char **argv) {
             cin.ignore(10000, '\n');
 
             ofstream out(cArg.c_str());
-            assert(out.is_open());
+
+            if (!out.is_open())
+               throw BaseException("Bad file in saveMove");
+
             out << *move;
          } else if (command.compare("loadMove") == 0) {
             cin >> cArg;
@@ -243,7 +246,10 @@ int main(int argc, char **argv) {
             cin.ignore(10000, '\n');
 
             ifstream in(cArg.c_str());
-            assert(in.is_open());
+            
+            if (!in.is_open())
+               throw BaseException("Bad file in loadMove");
+
             in >> *move;
          } else if (command.compare("setOptions") == 0) {
             // Flush until '\n'
