@@ -1,0 +1,62 @@
+doMove c1->d2
+
+saveBoard empty.pls
+compareKeys empty.pls
+
+undoLastMove 100
+showBoard
+-- enterMove c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3->d5->e7->g5->e3->c1->e3
+applyMove
+doMove c1->d2
+doMove f4->e3
+//ignore the have to capture and play normally
+doMove c3->d4
+undoLastMove 1
+doMove f2->e3
+doMove d2->e1
+doMove e3->d2
+//eat the white even though black is ahead of it?
+doMove c3->e1
+//oob
+doMove c7->e8
+doMove c7->d8
+doMove d2->c1
+doMove c3->d2
+showBoard
+doMove f2->e3
+doMove f2->e3
+//do a draughts move of capture backwards
+doMove c1->e3
+doMove f6->e7
+doMove f6->e7
+showBoard
+doMove d8->f6
+showBoard
+doMove g5->e7
+//junk
+doMove b8->c7
+doMove f4->e3
+doMove d2->f4
+showBoard
+doMove g5->e3
+doMove g3->e5
+undoLastMove 3
+doMove h4->g5
+showBoard
+saveBoard wowow.pls
+compareKeys wowow.pls
+doMove e1->f2
+doMove g1->e3
+doMove d2->e1
+doMove g7->f6
+doMove a7->b8
+doMove h8->g7
+undoLastMove 2
+undoLastMove 100
+showBoard
+compareKeys wowow.pls
+compareKeys empty.pls
+loadBoard wowow.pls
+showMove
+
+quit
