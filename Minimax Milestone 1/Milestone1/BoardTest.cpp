@@ -86,7 +86,7 @@ void ApplyMove(Board *board, Board::Move *move) {
 
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
-	Board::Move *move = NULL, *cmpMove = NULL;
+	Board::Move *move = NULL;
 	unsigned count = 0;
 	string command, cArg, tempString;
 	// Many more locals needed
@@ -131,7 +131,6 @@ int main(int argc, char **argv) {
    dialog = dynamic_cast<Dialog *>(dialogClass->NewInstance());
    assert(board != NULL && view != NULL && dialog != NULL);
    move = board->CreateMove();
-   cmpMove = NULL;
 
    if (board == NULL || view == NULL || dialog == NULL) {
       cout << "Failed to create classes or objects" << endl;
@@ -265,18 +264,14 @@ int main(int argc, char **argv) {
             }
 			} else if (command.compare("compareMove") == 0) { 
             getline(cin, cArg);
-            Board::Move *temp = NULL;
+            Board::Move *cmpMove = NULL;
 
             // Make this move point to a new object.  Use a temporary
             // move in between as to prevent changing the default
             // move if operator=() fails.
             try {               
-               temp = board->CreateMove();
-               (*temp).operator=(cArg.c_str());
-            
-               // Delete the old move
-               delete move;
-               move = temp->Clone();
+               cmpMove = board->CreateMove();
+               (*cmpMove).operator=(cArg.c_str());
                
                // Figure out which move is greater
                string result;
@@ -290,38 +285,11 @@ int main(int argc, char **argv) {
 
                cout << result << endl;
 
-               delete temp;
                delete cmpMove;
             } catch (BaseException &e) {
-               delete temp;
                delete cmpMove;
                throw BaseException(e);
             }
-
-//             Make this move point to a new object.  Use a temporary
-//                         // move in between as to prevent changing the default
-//                         // move if operator=() fails.
-//                         temp = board->CreateMove();
-//                         (*temp).operator=(cArg.c_str());
-//                         
-//                         // Delete the old move
-//                         cmpMove = temp->Clone();
-
-//             // Figure out which move is greater
-//             string result;
-//             if (*move == *cmpMove)
-//                result = "Moves are equal";
-//             else if (*move < *cmpMove)
-//                result = "Current move is less than entered move";
-//             else if (!(*move < *cmpMove || *move == *cmpMove))
-//                result = "Current move is greater than entered move";
-//             else assert(false);
-// 
-//             cout << result << endl;
-// 
-//             // Clean up
-//             delete temp;
-//             delete cmpMove;
          } else if (command.compare("showMoveHist") == 0) {
             cout << "\nMove History: " << endl;
             const list<const Board::Move *> moveHist(board->GetMoveHist());
@@ -457,10 +425,6 @@ int main(int argc, char **argv) {
          }
 		} catch (BaseException &exc) {
 			cout << "Error: " << exc.what() << endl;
-         
-         // clean up after temp in case operator=() caught an error
-         // TODO: Do I even need temp?
-         // delete temp;
 
          // If someone else passed you an unexpected EOF, then break early
          if (string("Unexpected EOF").compare(exc.what()) == 0) {
