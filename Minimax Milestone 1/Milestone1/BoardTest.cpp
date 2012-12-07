@@ -183,14 +183,18 @@ int main(int argc, char **argv) {
             // Make this move point to a new object.  Use a temporary
             // move in between as to prevent changing the default
             // move if operator=() fails.
-            temp = board->CreateMove();
-            (*temp).operator=(cArg.c_str());
+            try {               
+               temp = board->CreateMove();
+               (*temp).operator=(cArg.c_str());
             
-            // Delete the old move
-            delete move;
-            move = temp->Clone();
-
-            delete temp;
+               // Delete the old move
+               delete move;
+               move = temp->Clone();
+               
+               delete temp;
+            } catch (BaseException &e) {
+               delete temp;
+            }
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
 			} else if (command.compare("applyMove") == 0) {
@@ -241,16 +245,20 @@ int main(int argc, char **argv) {
             // Make this move point to a new object.  Use a temporary
             // move in between as to prevent changing the default
             // move if operator=() fails.
-            temp = board->CreateMove();
-            (*temp).operator=(cArg.c_str());
+            try {               
+               temp = board->CreateMove();
+               (*temp).operator=(cArg.c_str());
             
-            // Delete the old move
-            delete move;
-            move = temp->Clone();
+               // Delete the old move
+               delete move;
+               move = temp->Clone();
+               
+               delete temp;
 
-            delete temp;
-
-            ApplyMove(board, move);
+               ApplyMove(board, move);
+            } catch (BaseException &e) {
+               delete temp;
+            }
 			} else if (command.compare("compareMove") == 0) { 
             getline(cin, cArg);
             
@@ -416,7 +424,7 @@ int main(int argc, char **argv) {
          
          // clean up after temp in case operator=() caught an error
          // TODO: Do I even need temp?
-         delete temp;
+         // delete temp;
 
          // If someone else passed you an unexpected EOF, then break early
          if (string("Unexpected EOF").compare(exc.what()) == 0) {

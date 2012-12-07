@@ -1,13 +1,14 @@
 
 keyMoveCount
 compareMove [   0,    0]
--- compareMove [
--- compareMove [   0
--- compareMove [   0,  
+compareMove [
+compareMove [   0
+compareMove [   0,  
+
 compareMove [   0,    0
+compareKeys wah
 compareMove [1   , 1]
 compareMove [1   , 1
-compareKeys wah
 showMoveHist
 keyMoveCount
 showVal
