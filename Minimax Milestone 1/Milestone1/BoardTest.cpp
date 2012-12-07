@@ -157,13 +157,6 @@ int main(int argc, char **argv) {
 
 				while (count-- > 0)
 					board->UndoLastMove();
-			} else if (command.compare("saveBoard") == 0) {
-				cin >> cArg;
-
-            cin.ignore(10000, '\n');
-
-				ofstream out(cArg.c_str());
-				out << *board;
 			} else if (command.compare("showVal") == 0) {
 				cout << "Value: " << board->GetValue() << endl;
 			} else if (command.compare("showBoard") == 0) {
@@ -220,15 +213,28 @@ int main(int argc, char **argv) {
             // This version of applyMove gives a clone of the default
             // move to the board.
             ApplyMove(board, move);
+			} else if (command.compare("saveBoard") == 0) {
+				cin >> cArg;
+
+            cin.ignore(10000, '\n');
+
+				ofstream out(cArg.c_str());
+
+            if (!out.is_open())
+               throw BaseException("Bad file in saveBoard");
+
+				out << *board;
 			} else if (command.compare("loadBoard") == 0) {
             cin >> cArg;
 
             cin.ignore(10000, '\n');
 
             ifstream in(cArg.c_str());
-            assert(in.is_open());
-            in >> *board;
 
+            if (!in.is_open())
+               throw BaseException("Bad file in loadBoard");
+
+            in >> *board;
          } else if (command.compare("saveMove") == 0) {
             cin >> cArg;
 

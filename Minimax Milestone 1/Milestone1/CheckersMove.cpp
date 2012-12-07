@@ -170,6 +170,7 @@ ostream &CheckersMove::Write(ostream &os) const {
    }
 
    // Write out boolean flags
+   // I could have a bug here, due to booleans not being EndianXfer()'d
    os.write((char *)&mIsJumpMove, sizeof(mIsJumpMove));
    os.write((char *)&mIsKingMeMove, sizeof(mIsJumpMove));
 
