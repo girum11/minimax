@@ -145,6 +145,8 @@ int main(int argc, char **argv) {
 			if (command.compare("undoLastMove") == 0) {
 				cin >> count;
 
+            cin.ignore(10000, '\n');
+
             if (count < 0) {
                throw BaseException(
                 "Must have a nonnegative count for undoLastMove");
@@ -157,6 +159,9 @@ int main(int argc, char **argv) {
 					board->UndoLastMove();
 			} else if (command.compare("saveBoard") == 0) {
 				cin >> cArg;
+
+            cin.ignore(10000, '\n');
+
 				ofstream out(cArg.c_str());
 				out << *board;
 			} else if (command.compare("showVal") == 0) {
@@ -217,17 +222,26 @@ int main(int argc, char **argv) {
             ApplyMove(board, move);
 			} else if (command.compare("loadBoard") == 0) {
             cin >> cArg;
+
+            cin.ignore(10000, '\n');
+
             ifstream in(cArg.c_str());
             assert(in.is_open());
             in >> *board;
 
          } else if (command.compare("saveMove") == 0) {
             cin >> cArg;
+
+            cin.ignore(10000, '\n');
+
             ofstream out(cArg.c_str());
             assert(out.is_open());
             out << *move;
          } else if (command.compare("loadMove") == 0) {
             cin >> cArg;
+
+            cin.ignore(10000, '\n');
+
             ifstream in(cArg.c_str());
             assert(in.is_open());
             in >> *move;
