@@ -301,14 +301,18 @@ protected:
       // (I drew up a diagram of this in my binder)
       row -= 'A';
       col -= 1;
+
+      row = kWidth - row - 1;
       
-      // Invalid square.  Row and Col must either both be odd or both be even 
-      // to be valid.
-      if (!((IsEven(row) && IsEven(col)) || (IsOdd(row) && IsOdd(col)))) {
+      // Invalid square.  Row and Col must either be odd/even or even/odd,
+      // respectively.
+      if (!((IsEven(row) && IsOdd(col)) || (IsOdd(row) && IsEven(col)))) {
          return NULL;
       }
 
-      return mCells + (row*kDim) + (col/2);
+      int offset = (row*kDim) + (col/2);
+
+      return mCells + offset;
    }
 
    static inline Cell *GetCell(const std::pair<char, unsigned int> &loc) {

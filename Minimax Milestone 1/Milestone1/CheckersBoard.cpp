@@ -44,7 +44,7 @@ void CheckersBoard::StaticInit() {
    int nextCell = 0;
 
    // Initialize mCells, mBlackBackRow and mWhiteBackRow
-   for (row = 'A'; row <= 'H'; row++) {
+   for (row = 'H'; row >= 'A'; row--) {
       for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2, nextCell++) {
       
          // Initialize cell->mask
@@ -70,7 +70,7 @@ void CheckersBoard::StaticInit() {
    for (row = 'A'; row <= 'H'; row ++) {
       for (col = ((row-'A')%2) + 1; col <= kWidth; col += 2, nextCell++) {
 
-         cell = mCells + nextCell;
+         cell = GetCell(row, col);
 
          // Set up the directional pointers for mCells.  GetCell() 
          // automatically returns NULL for any out of bounds values.
