@@ -1,8 +1,13 @@
 
-undoLastMove 1
-showMoveHist
-
-undoLastMove -5
+showVal
+showBoard
+testPlay seed moveCount
+testPlay 1 2
+showBoard
+testPlay 1 2
+showBoard
+testPlay -1 2
+showBoard
 
 quit
 

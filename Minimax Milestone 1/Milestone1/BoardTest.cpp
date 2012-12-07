@@ -349,11 +349,15 @@ int main(int argc, char **argv) {
             delete cmpKey;
             delete cmpBoard;
          } else if (command.compare("testPlay") == 0) {
-            int seed = 0;
-            unsigned moveCount = 0, selectedMove = 0;
+            int seed = -1, moveCount = -1, selectedMove = 0;
             
             // Take a seed and moveCount, and apply the seed
             cin >> seed >> moveCount;
+            cin.ignore(10000, '\n');
+
+            if (seed < 0 || moveCount < 0)
+               throw BaseException("Bad arguments for testPlay/testRun");
+
             srand(seed);
 
             while (moveCount-- > 0) {
@@ -386,11 +390,15 @@ int main(int argc, char **argv) {
                allMoves.clear();
             }
          } else if (command.compare("testRun") == 0) {
-            int seed = 0;
-            unsigned stepCount = 0, selectedMove = 0, movesToRetract = 0;
+            int seed = -1, stepCount = -1, selectedMove = 0, movesToRetract = 0;
             
             // Take a seed and moveCount, and apply the seed
             cin >> seed >> stepCount;
+            cin.ignore(10000, '\n');
+
+            if (seed < 0 || stepCount < 0)
+               throw BaseException("Bad arguments for testPlay/testRun");
+
             srand(seed);
 
             while (stepCount-- > 0) {
