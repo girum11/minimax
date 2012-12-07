@@ -305,7 +305,6 @@ protected:
       // Invalid square.  Row and Col must either both be odd or both be even 
       // to be valid.
       if (!((IsEven(row) && IsEven(col)) || (IsOdd(row) && IsOdd(col)))) {
-
          return NULL;
       }
 
