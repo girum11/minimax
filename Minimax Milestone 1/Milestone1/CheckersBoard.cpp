@@ -132,8 +132,12 @@ void CheckersBoard::Delete() {
    mCapturedPieces.clear();
 }
 
+// TODO: Refactor this to not use loops here.
+// "Compute the values for Pylos and Checkers incrementally, updating when 
+// moves are made.  You should have no loops in GetValue.  This will be much 
+// faster than recomputing the value, and will affect the speed of your minimax 
+// algorithm later."
 long CheckersBoard::GetValue() const {
-   long result = 0;
    int movesLeft = 0;
 
    // Prep to handle the case where the game is over due to noone being able
@@ -150,10 +154,10 @@ long CheckersBoard::GetValue() const {
        delete *listIter;
    }
    
-   // First, check if anyone can even move.
+   // First, check if anyone can even move.  The player who's stuck on his
+   // turn is the one who lost, so the other player must have won.
    if (movesLeft == 0)
       return kWinVal * -mWhoseMove;
-   // Black is positive, white is negative
    else if ((mWhitePieceCount + mWhiteKingCount) == 0)
       return kWinVal;
    else if ((mBlackPieceCount + mBlackKingCount) == 0)

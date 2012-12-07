@@ -199,7 +199,7 @@ void PylosBoard::PutMarble(Spot *trg) {
    assert((mWhite & mBlack) == 0x0);
 
    // Update mLevelLead and mFreeLead
-   UpdateBoardValuation();
+   // UpdateBoardValuation();
 }
 
 void PylosBoard::TakeMarble(Spot *trg) {
@@ -215,11 +215,15 @@ void PylosBoard::TakeMarble(Spot *trg) {
    assert((mWhite & mBlack) == 0x0);
 
    // Update mLevelLead and mFreeLead
-   UpdateBoardValuation();
+   // UpdateBoardValuation();
 }
 
 void PylosBoard::UpdateBoardValuation() {
-   // Update mLevelLead and mFreeLead
+
+   // It should never be true that both players ran out of pieces.
+   assert(!(mWhiteReserve == 0 && mBlackReserve == 0));
+
+   // Go through all pieces and update mLevelLead and mFreeLead
    Set allPieces(mWhite|mBlack);
    mLevelLead = mFreeLead = 0;
    for (int level = 0; level < kDim; level++) {
@@ -269,6 +273,8 @@ void PylosBoard::ApplyMove(Move *move) {
       mBlackReserve += rChange;
    else assert(false);
 
+   UpdateBoardValuation();
+
    // Change whose move it is and keep a track of this move in mMoveHist
    mMoveHist.push_back(move);
    mWhoseMove = -mWhoseMove;
@@ -309,6 +315,8 @@ void PylosBoard::UndoLastMove() {
       mBlackReserve += rChange;
    } else assert(false);
 
+   UpdateBoardValuation();
+
    // Destroy history of the move
    delete moveToUndo;
    mMoveHist.pop_back();
@@ -324,6 +332,8 @@ void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const {
 
    assert(uncastMoves->size() == 0 && castedMoves->size() == 0);
 
+   // Short-circuit out if one of the players has no more marbles.  The player
+   // whose move it is currently should be the winner.
    if (mWhiteReserve == 0 || mBlackReserve == 0)
       return;
 
@@ -696,8 +706,35 @@ void PylosBoard::Rules::EndSwap() {
    this->marbleWgt = EndianXfer(this->marbleWgt);
 }
 
+// TODO: Refactor this to not use loops here.
+// "Compute the values for Pylos and Checkers incrementally, updating when 
+// moves are made.  You should have no loops in GetValue.  This will be much 
+// faster than recomputing the value, and will affect the speed of your minimax 
+// algorithm later."
 long PylosBoard::GetValue() const {
-   if (mWhiteReserve == 0)
+   int movesLeft = 0;
+
+   // Prep to handle the case where the game is over due to noone being able
+   // to move.
+   // TODO: If my code runs too slow, here's where I can optimize by not
+   // looking up all of the moves every time I showVal.
+   list<Move *> allMoves;
+   GetAllMoves(&allMoves);
+   movesLeft = allMoves.size();
+
+   // Clean up after your GetAllMoves() call.
+   for (list<Move *>::iterator listIter = allMoves.begin();
+    listIter != allMoves.end(); listIter++) {
+       delete *listIter;
+   }
+   
+   // First, check if anyone can even move.  The player who's stuck on his moves
+   // with no moves left is the one who allowed the other player to exhaust
+   // his reserve marbles (GetAllMoves() short-circuits if a player has no more
+   // marbles).
+   if (movesLeft == 0)
+      return kWinVal * mWhoseMove;
+   else if (mWhiteReserve == 0)
       return -kWinVal;
    else if (mBlackReserve == 0)
       return kWinVal;
