@@ -86,7 +86,7 @@ void ApplyMove(Board *board, Board::Move *move) {
 
 int main(int argc, char **argv) {
 	Board *board = NULL, *cmpBoard = NULL;
-	Board::Move *move = NULL, *cmpMove = NULL, *temp = NULL;
+	Board::Move *move = NULL, *cmpMove = NULL;
 	unsigned count = 0;
 	string command, cArg, tempString;
 	// Many more locals needed
@@ -179,6 +179,7 @@ int main(int argc, char **argv) {
             allMoves.clear();
 			} else if (command.compare("enterMove") == 0) {
             getline(cin, cArg);
+            Board::Move *temp = NULL;
 
             // Make this move point to a new object.  Use a temporary
             // move in between as to prevent changing the default
@@ -194,6 +195,7 @@ int main(int argc, char **argv) {
                delete temp;
             } catch (BaseException &e) {
                delete temp;
+               throw BaseException(e);
             }
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
@@ -241,6 +243,7 @@ int main(int argc, char **argv) {
             cout << "Value: " << board->GetValue() << endl;
          } else if (command.compare("doMove") == 0) {
             getline(cin, cArg);
+            Board::Move *temp = NULL;
 
             // Make this move point to a new object.  Use a temporary
             // move in between as to prevent changing the default
@@ -258,34 +261,67 @@ int main(int argc, char **argv) {
                ApplyMove(board, move);
             } catch (BaseException &e) {
                delete temp;
+               throw BaseException(e);
             }
 			} else if (command.compare("compareMove") == 0) { 
             getline(cin, cArg);
-            
+            Board::Move *temp = NULL;
+
             // Make this move point to a new object.  Use a temporary
             // move in between as to prevent changing the default
             // move if operator=() fails.
-            temp = board->CreateMove();
-            (*temp).operator=(cArg.c_str());
+            try {               
+               temp = board->CreateMove();
+               (*temp).operator=(cArg.c_str());
             
-            // Delete the old move
-            cmpMove = temp->Clone();
+               // Delete the old move
+               delete move;
+               move = temp->Clone();
+               
+               // Figure out which move is greater
+               string result;
+               if (*move == *cmpMove)
+                  result = "Moves are equal";
+               else if (*move < *cmpMove)
+                  result = "Current move is less than entered move";
+               else if (!(*move < *cmpMove || *move == *cmpMove))
+                  result = "Current move is greater than entered move";
+               else assert(false);
 
-            // Figure out which move is greater
-            string result;
-            if (*move == *cmpMove)
-               result = "Moves are equal";
-            else if (*move < *cmpMove)
-               result = "Current move is less than entered move";
-            else if (!(*move < *cmpMove || *move == *cmpMove))
-               result = "Current move is greater than entered move";
-            else assert(false);
+               cout << result << endl;
 
-            cout << result << endl;
+               delete temp;
+               delete cmpMove;
+            } catch (BaseException &e) {
+               delete temp;
+               delete cmpMove;
+               throw BaseException(e);
+            }
 
-            // Clean up
-            delete temp;
-            delete cmpMove;
+//             Make this move point to a new object.  Use a temporary
+//                         // move in between as to prevent changing the default
+//                         // move if operator=() fails.
+//                         temp = board->CreateMove();
+//                         (*temp).operator=(cArg.c_str());
+//                         
+//                         // Delete the old move
+//                         cmpMove = temp->Clone();
+
+//             // Figure out which move is greater
+//             string result;
+//             if (*move == *cmpMove)
+//                result = "Moves are equal";
+//             else if (*move < *cmpMove)
+//                result = "Current move is less than entered move";
+//             else if (!(*move < *cmpMove || *move == *cmpMove))
+//                result = "Current move is greater than entered move";
+//             else assert(false);
+// 
+//             cout << result << endl;
+// 
+//             // Clean up
+//             delete temp;
+//             delete cmpMove;
          } else if (command.compare("showMoveHist") == 0) {
             cout << "\nMove History: " << endl;
             const list<const Board::Move *> moveHist(board->GetMoveHist());
