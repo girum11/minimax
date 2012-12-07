@@ -8,7 +8,10 @@ compareMove [   0,    0
 compareMove [1   , 1]
 compareMove [1   , 1
 compareKeys wah
-
-compareKeys [0 ,0   ]
+showMoveHist
+keyMoveCount
+showVal
+enterMove [
 
 quit
+

@@ -131,6 +131,7 @@ int main(int argc, char **argv) {
    dialog = dynamic_cast<Dialog *>(dialogClass->NewInstance());
    assert(board != NULL && view != NULL && dialog != NULL);
    move = board->CreateMove();
+   cmpMove = NULL;
 
    if (board == NULL || view == NULL || dialog == NULL) {
       cout << "Failed to create classes or objects" << endl;
@@ -252,8 +253,15 @@ int main(int argc, char **argv) {
             ApplyMove(board, move);
 			} else if (command.compare("compareMove") == 0) { 
             getline(cin, cArg);
-            cmpMove = board->CreateMove();
-            *cmpMove = cArg.c_str();
+            
+            // Make this move point to a new object.  Use a temporary
+            // move in between as to prevent changing the default
+            // move if operator=() fails.
+            temp = board->CreateMove();
+            (*temp).operator=(cArg.c_str());
+            
+            // Delete the old move
+            cmpMove = temp->Clone();
 
             // Figure out which move is greater
             string result;
@@ -268,8 +276,8 @@ int main(int argc, char **argv) {
             cout << result << endl;
 
             // Clean up
+            delete temp;
             delete cmpMove;
-
          } else if (command.compare("showMoveHist") == 0) {
             cout << "\nMove History: " << endl;
             const list<const Board::Move *> moveHist(board->GetMoveHist());
