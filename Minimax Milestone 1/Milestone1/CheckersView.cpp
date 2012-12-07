@@ -24,6 +24,7 @@ void CheckersView::Draw(ostream &out) {
    unsigned int col = 1;
    const CheckersBoard *cb = dynamic_cast<const CheckersBoard *>(mModel);
    assert(cb != NULL);  // TODO: Yank this.
+   cb->AssertMe();  // TODO: Yank this.
 
    // Print the header
    out << setw(16) << "White" << endl << endl;

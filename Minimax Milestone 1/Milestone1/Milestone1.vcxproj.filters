@@ -74,9 +74,6 @@
     <ClCompile Include="Board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BoardTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -117,6 +114,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CheckersDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

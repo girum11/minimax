@@ -588,15 +588,15 @@ istream &PylosBoard::Read(istream &is) {
    // Assigned reading for this: http://cplusplus.com/doc/tutorial/files/
    // Read() is mostly Write() backwards, with a few exceptions.
    // Order's important.
-   
+   Rules temp;
    int moveCount = -1;
 
    // Clear out the Default board's existing data
    Delete();
 
    // Read in the Rules that the board should use.
-   is.read((char *)&PylosBoard::mRules, sizeof(PylosBoard::mRules));
-   PylosBoard::mRules.EndSwap();
+   is.read((char *)&temp, sizeof(Rules));
+   temp.EndSwap();
 
    is.read((char *)&moveCount, sizeof(moveCount));
    assert(moveCount != -1);  // sanity check to ensure the read() happened
@@ -608,6 +608,8 @@ istream &PylosBoard::Read(istream &is) {
       is >> *newMove;
       ApplyMove(newMove);
    }
+
+   SetOptions(&temp);
 
    return is;
 }

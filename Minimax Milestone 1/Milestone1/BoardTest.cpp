@@ -78,6 +78,8 @@ void ApplyMove(Board *board, Board::Move *move) {
          cout << "Invalid move being applied" << endl;
       }
    }
+   // If the 'checkAllMoves' flag isn't set, just apply the move 
+   // to the board without second thought.
    else {
       board->ApplyMove(move->Clone());
    }
@@ -325,7 +327,8 @@ int main(int argc, char **argv) {
             cout << "\nMove History: " << endl;
             const list<const Board::Move *> moveHist(board->GetMoveHist());
             PrintList(&moveHist);
-         } else if (command.compare("compareKeys") == 0) {
+         } 
+         else if (command.compare("compareKeys") == 0) {
             cin >> cArg;
 
             ifstream in(cArg.c_str());
@@ -337,6 +340,9 @@ int main(int argc, char **argv) {
             cin.ignore(10000, '\n');
 
             cmpBoard = dynamic_cast<Board *>(boardClass->NewInstance());
+
+            assert(cmpBoard != NULL);
+
             in >> *cmpBoard;
 
             // Grab references to the keys so that you can delete them after
