@@ -35,7 +35,7 @@ public:
    };
 
    CheckersBoard();
-   ~CheckersBoard() { Reset(); }
+   ~CheckersBoard() { Delete(); }
 
    long GetValue() const;
    void ApplyMove(Move *);
@@ -85,7 +85,7 @@ public:
       assert((mBlackSet & mWhiteSet) == 0);
    }
 
-   // Arrange for this to be called at static initialization time, to set up
+   // TODO: Arrange for this to be called at static initialization time, to set up
    // the static mWhiteBackRow and mBlackBackRow
    static void StaticInit();
 
@@ -127,7 +127,7 @@ protected:
    void ResetBoard();
 
    // Frees all CheckersBoard storage.
-   void Reset();
+   void Delete();
    
    // Helper function to add a piece on the board.
    // ApplyMove() and UndoLastMove() should use Put() instead of this method.

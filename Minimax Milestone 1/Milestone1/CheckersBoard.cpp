@@ -11,6 +11,12 @@
 
 using namespace std;
 
+
+// TODO: Ian had this great idea where you testRun for a large value
+// that runs in the background, diffing against Clint's version as you go.
+// Since you don't have to adhere to a 0.1 second limit, this can catch
+// a lot of SegFault type errors and the sort.
+
 /************************************************************************/
 /* Declare/initialize static member datum here                          */
 /************************************************************************/
@@ -85,17 +91,17 @@ CheckersBoard::CheckersBoard() : mWhoseMove(kBlack),
 
    // Call the "Delete()" method, which really is just a housecleaning method
    // that fills up the CheckersBoard with the right initial pieces.
-   Reset();
+   Delete();
 }
 
-void CheckersBoard::Reset() {
+void CheckersBoard::Delete() {
    
    // Reset the member datum to their default values.
    mBlackSet = mWhiteSet = mKingSet = 0x0;
    mWhoseMove = kBlack;
    mBlackPieceCount = mWhitePieceCount = kStartingPieces;
    mBlackKingCount = mWhiteKingCount = 0;
-   mBlackBackCount = mWhiteBackCount = kStartingBackPieces;
+   mBlackBackCount = mWhiteBackCount = 0;
 
    // Fill up mBlackSet and mWhiteSet
    for (char row = 'A'; row <= 'H'; row++) {
@@ -173,11 +179,6 @@ void CheckersBoard::ApplyMove(Move *move) {
    int jumpedPieces = 0; // The number of pieces that move "jumps"
    Piece *pieceToMove = NULL;
 
-   // Remove the piece from its original location.  Do it immediately so that
-   // your assert() of the destination pieces doesn't bug in the case where
-   // you land back into your original spot.
-   pieceToMove = Take(originCell, mWhoseMove);
-
    // Assertions on each destination piece.
    for (unsigned int index = 1; index < (*locs).size(); ++index) {
       Cell *cell = GetCell((*locs)[index].first, (*locs)[index].second);
@@ -199,10 +200,12 @@ void CheckersBoard::ApplyMove(Move *move) {
       }
    }
 
+   // Remove the piece from its original location.
+   pieceToMove = Take(originCell, mWhoseMove);
+
    // If this move is a "jump move", then you need to do perform some extra
    // logic to remove cells that you've jumped over.
-   // if (castedMove->mIsJumpMove) {
-   if (CheckersMove::IsJump(castedMove->mLocs[0], castedMove->mLocs[1])) {
+   if (castedMove->mIsJumpMove) {
       for (unsigned int i = 1; i < (*locs).size(); ++i) {
          Cell *jumpedOverCell = NULL;
          Cell *toCell = GetCell((*locs)[i]);
@@ -315,8 +318,7 @@ void CheckersBoard::UndoLastMove() {
    
    // If you're undoing a jump move, then Put each of the moves that you 
    // captured back in.
-   // if (moveToUndo->mIsJumpMove) {
-   if (CheckersMove::IsJump(moveToUndo->mLocs[0], moveToUndo->mLocs[1])) {
+   if (moveToUndo->mIsJumpMove) {
       int numberOfPiecesToPutBack = moveToUndo->mLocs.size() - 1;
 
       for (int i = 0; i < numberOfPiecesToPutBack; i++) {
@@ -515,22 +517,23 @@ void CheckersBoard::SetOptions(const void *opts) {
 
 istream &CheckersBoard::Read(istream &is) {
 
-   int mvCount;
+   int moveCount = -1;
 
-   Reset();
+   // Clear out the Default board's existing data
+   Delete();
 
-   is.read((char *) &mRules.kingWgt, sizeof(int));
-   is.read((char *) &mRules.backRowWgt, sizeof(int));
-   is.read((char *) &mRules.moveWgt, sizeof(int));
-   mRules.EndSwap();
+   // Read in the Rules that the board should use.
+   is.read((char *)&CheckersBoard::mRules, sizeof(CheckersBoard::mRules));
+   CheckersBoard::mRules.EndSwap();
 
-   is.read((char *) &mvCount, sizeof(int));
-   mvCount = EndianXfer(mvCount);
+   is.read((char *)&moveCount, sizeof(moveCount));
+   assert(moveCount != -1);  // sanity check to ensure that the read() happened
+   for (int i = 0; i < moveCount; i++) {
+      CheckersMove *newMove = new CheckersMove(CheckersMove::LocVector(), false);
+      is >> *newMove;
 
-   Board::Move *newMove = NULL;
-   for (int i = 0; i < mvCount; i++) {
-      newMove = CreateMove();
-      is >> *dynamic_cast<CheckersMove *>(newMove);
+      assert(newMove->mLocs.size() != 0);
+
       ApplyMove(newMove);
    }
 
@@ -538,16 +541,14 @@ istream &CheckersBoard::Read(istream &is) {
 }
 
 ostream &CheckersBoard::Write(ostream &os) const { 
-Rules rls = mRules;
-   int mvCount = EndianXfer((int) mMoveHist.size());
-   std::list<Board::Move *>::const_iterator iter;
+   Rules rules = mRules;
+   list<Move *>::const_iterator iter;
+   int moveCount = EndianXfer((int)mMoveHist.size());
 
-   rls.EndSwap();
-   os.write((char *) &rls.kingWgt, sizeof(int));
-   os.write((char *) &rls.backRowWgt, sizeof(int));
-   os.write((char *) &rls.moveWgt, sizeof(int));
+   rules.EndSwap();
+   os.write((char *)&rules, sizeof(rules));
 
-   os.write((char *) &mvCount, sizeof(int));
+   os.write((char *)&moveCount, sizeof(moveCount));
    for (iter = mMoveHist.begin(); iter != mMoveHist.end(); iter++)
       os << **iter;
 

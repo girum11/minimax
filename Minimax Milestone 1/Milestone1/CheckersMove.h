@@ -18,14 +18,19 @@ public:
    typedef std::pair<char, unsigned int> Location;
    typedef std::vector<Location> LocVector;
 
+   // TODO: Inner classes go here if you need them.
+
    friend class CheckersBoard;
 
-   // TODO: Refactor mIsJumpMove and mIsKingMeMove out altogether.
    CheckersMove(const LocVector &locs, bool isJump)
     : mLocs(locs), mIsJumpMove(isJump), mIsKingMeMove(false) {
       AssertMe();
    }
    virtual ~CheckersMove() {}
+
+
+   // TODO: Extra member functions go here if you need them.
+
 
    bool operator==(const Board::Move &rhs) const; 
    bool operator<(const Board::Move &rhs) const;
@@ -35,12 +40,6 @@ public:
    
    void operator delete(void *p);
    void *operator new(size_t sz);
-
-   // Little helper function to tell you if this move is a jump or not.
-   static inline bool IsJump(const Location &loc1, const Location &loc2) {
-      return std::abs((int) ((int)loc1.first - (int)loc2.first)) == 2 &&
-       std::abs((int) ((int)loc1.second - (int)loc2.second)) == 2;
-   }
 
 protected:
 
@@ -60,6 +59,7 @@ protected:
       loc->first = toupper(loc->first);
 
       // Verify that none of the Locations are out of bounds
+      // TODO: Magic number
       if (!InRange<char>('A', loc->first, 'I') ||
        !InRange<unsigned int>(1, loc->second, 9)) {
           throw BaseException(FString("Out of bounds Checkers move: %s", 
@@ -74,6 +74,11 @@ protected:
          assert(InRange<char>('A', locIter->first, 'I'));
          assert(InRange<unsigned int>(1, locIter->second, 9));
       }
+   }
+
+   static inline bool IsJump(const Location &loc1, const Location &loc2) {
+      return std::abs((int) ((int)loc1.first - (int)loc2.first)) == 2 &&
+       std::abs((int) ((int)loc1.second - (int)loc2.second)) == 2;
    }
 
 };

@@ -43,32 +43,32 @@ doMove c7->b8
 doMove a1->b2
 doMove b8->a7
 doMove a3->b4
-doMove a7->b6
--- doMove h2->g3
--- doMove b6->a7
--- doMove g3->f4
 -- doMove a7->b6
--- doMove d8->e7
--- doMove f8->d6
--- doMove f4->g3
--- doMove d6->c7
--- doMove g3->h2
--- doMove c7->b8
--- doMove h2->g3
--- doMove b8->a7
--- doMove g3->h2
--- doMove a7->b8
--- doMove h2->g3
--- doMove b8->c7
--- doMove g3->h2
--- doMove c7->d6
--- doMove b6->c5
--- doMove h2->g3
--- doMove b6->c5
--- doMove g3->h2
--- doMove c5->a3->c1->e3->c5
--- doMove c5->a3->c1->e3->c5
--- doMove c5->a3
+doMove h2->g3
+doMove b6->a7
+doMove g3->f4
+doMove a7->b6
+doMove d8->e7
+doMove f8->d6
+doMove f4->g3
+doMove d6->c7
+doMove g3->h2
+doMove c7->b8
+doMove h2->g3
+doMove b8->a7
+doMove g3->h2
+doMove a7->b8
+doMove h2->g3
+doMove b8->c7
+doMove g3->h2
+doMove c7->d6
+doMove b6->c5
+doMove h2->g3
+doMove b6->c5
+doMove g3->h2
+doMove c5->a3->c1->e3->c5
+doMove c5->a3->c1->e3->c5
+doMove c5->a3
 
 15.) You cannot jump the same piece twice in the same move
 -- undoLastMove 1
