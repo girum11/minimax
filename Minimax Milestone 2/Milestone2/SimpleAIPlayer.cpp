@@ -33,70 +33,70 @@ using namespace std;
 void SimpleAIPlayer::Minimax(Board *brd, int level, long min, long max,
  BestMove *res, Book *bk, int dbg)
 {
-   list<Board::Move *> moves;
-   list<Board::Move *>::iterator mItr;
-   BestMove subRes(0, 0, level, 1);
-   const Board::Key *key = 0;
-   Book::iterator itr;
-   pair<Book::iterator, bool> insRes;
-
-   assert(level >= 1);
-
-   if (bk && (itr = bk->find(key = brd->GetKey())) != bk->end()
-    && ________________________________) {
-    
-      *res = _____________;
-      res->numBoards = 1;
-   }
-   else {
-      brd->GetAllMoves(&moves);
-      *res = subRes;
-      res->value = moves.size() == 0 ? ____________________________ :
-       (brd->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
-
-      for (mItr = moves.begin(); ____________ && mItr != moves.end(); mItr++) {
-
-         brd->ApplyMove(*mItr);
-
-         if (level == 1)
-            subRes.value = brd->GetValue();
-         else
-            Minimax(brd, level-1, min, max, &subRes, bk, dbg);
-
-         if (brd->GetWhoseMove() == 1 && ___________________) {
-            res->value = min = subRes.value;
-            res->SetBestMove(_______________________);
-         }
-         else if (brd->GetWhoseMove() == 0 && __________________) {
-            res->value = max = subRes.value;
-            res->SetBestMove(_______________________);
-         }
-
-         if (dbg > 0) {
-            for (int cnt = level-1; cnt > 0; cnt--)
-               cout << "   ";
-            cout << "Move " << (string)**mItr << " nets " << subRes.value
-             << " min/max is " << min << "/" << max << endl;
-         }
-
-         brd->UndoLastMove();
-         res->numBoards += subRes.numBoards;
-      }
-
-      for (; mItr != moves.end(); mItr++)
-      
-         _______________________;
-
-      if (bk && level >= SAVE_LEVEL && _________________ && res->bestMove) {
-         insRes = bk->insert(_____________________________);
-         if (insRes.second)
-            key = 0;
-         else if (_______________________________________) {
-            (*insRes.first).second = *res;
-         } 
-      }
-   }
-   delete key;
+//    list<Board::Move *> moves;
+//    list<Board::Move *>::iterator mItr;
+//    BestMove subRes(0, 0, level, 1);
+//    const Board::Key *key = 0;
+//    Book::iterator itr;
+//    pair<Book::iterator, bool> insRes;
+// 
+//    assert(level >= 1);
+// 
+//    if (bk && (itr = bk->find(key = brd->GetKey())) != bk->end()
+//     && ________________________________) {
+//     
+//       *res = _____________;
+//       res->numBoards = 1;
+//    }
+//    else {
+//       brd->GetAllMoves(&moves);
+//       *res = subRes;
+//       res->value = moves.size() == 0 ? ____________________________ :
+//        (brd->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
+// 
+//       for (mItr = moves.begin(); ____________ && mItr != moves.end(); mItr++) {
+// 
+//          brd->ApplyMove(*mItr);
+// 
+//          if (level == 1)
+//             subRes.value = brd->GetValue();
+//          else
+//             Minimax(brd, level-1, min, max, &subRes, bk, dbg);
+// 
+//          if (brd->GetWhoseMove() == 1 && ___________________) {
+//             res->value = min = subRes.value;
+//             res->SetBestMove(_______________________);
+//          }
+//          else if (brd->GetWhoseMove() == 0 && __________________) {
+//             res->value = max = subRes.value;
+//             res->SetBestMove(_______________________);
+//          }
+// 
+//          if (dbg > 0) {
+//             for (int cnt = level-1; cnt > 0; cnt--)
+//                cout << "   ";
+//             cout << "Move " << (string)**mItr << " nets " << subRes.value
+//              << " min/max is " << min << "/" << max << endl;
+//          }
+// 
+//          brd->UndoLastMove();
+//          res->numBoards += subRes.numBoards;
+//       }
+// 
+//       for (; mItr != moves.end(); mItr++)
+//       
+//          _______________________;
+// 
+//       if (bk && level >= SAVE_LEVEL && _________________ && res->bestMove) {
+//          insRes = bk->insert(_____________________________);
+//          if (insRes.second)
+//             key = 0;
+//          else if (_______________________________________) {
+//             (*insRes.first).second = *res;
+//          } 
+//       }
+//    }
+//    delete key;
 }
 
 

@@ -7,8 +7,9 @@
 #include "Class.h"
 #include "BestMove.h"
 #include "MyLib.h"
+#include "Board.h"
 
-class Book : [FILL IN Base Class] {
+class Book : std::map<const Board::Key *, BestMove> {
 public:
 	Book() : mLevel(0) {}
    virtual ~Book();
