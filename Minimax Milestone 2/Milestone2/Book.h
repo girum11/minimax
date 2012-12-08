@@ -7,8 +7,13 @@
 #include "Class.h"
 #include "BestMove.h"
 #include "MyLib.h"
+#include "Board.h"
 
-class Book : [FILL IN Base Class] {
+
+// [Staley] Book works just like an STL map (think derivation), mapping const 
+// [Staley] Key pointers (like those you get back from GetKey) to BestMoves.  
+// [Staley] You’ll find the TCmpPtr template from MyLib.h useful here
+class Book : public std::map<const Board::Key *, BestMove> {
 public:
 	Book() : mLevel(0) {}
    virtual ~Book();

@@ -10,6 +10,48 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\BasicKey.h" />
+    <ClInclude Include="..\BestMove.h" />
+    <ClInclude Include="..\Board.h" />
+    <ClInclude Include="..\Book.h" />
+    <ClInclude Include="..\CheckersBoard.h" />
+    <ClInclude Include="..\CheckersDlg.h" />
+    <ClInclude Include="..\CheckersMove.h" />
+    <ClInclude Include="..\CheckersView.h" />
+    <ClInclude Include="..\Class.h" />
+    <ClInclude Include="..\Dialog.h" />
+    <ClInclude Include="..\MyLib.h" />
+    <ClInclude Include="..\OthelloBoard.h" />
+    <ClInclude Include="..\OthelloDlg.h" />
+    <ClInclude Include="..\OthelloMove.h" />
+    <ClInclude Include="..\OthelloView.h" />
+    <ClInclude Include="..\PylosBoard.h" />
+    <ClInclude Include="..\PylosDlg.h" />
+    <ClInclude Include="..\PylosMove.h" />
+    <ClInclude Include="..\PylosView.h" />
+    <ClInclude Include="..\SimpleAIPlayer.h" />
+    <ClInclude Include="..\View.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Board.cpp" />
+    <ClCompile Include="..\BoardTest.cpp" />
+    <ClCompile Include="..\CheckersBoard.cpp" />
+    <ClCompile Include="..\CheckersDlg.cpp" />
+    <ClCompile Include="..\CheckersMove.cpp" />
+    <ClCompile Include="..\CheckersView.cpp" />
+    <ClCompile Include="..\Class.cpp" />
+    <ClCompile Include="..\Dialog.cpp" />
+    <ClCompile Include="..\OthelloBoard.cpp" />
+    <ClCompile Include="..\OthelloDlg.cpp" />
+    <ClCompile Include="..\OthelloMove.cpp" />
+    <ClCompile Include="..\OthelloView.cpp" />
+    <ClCompile Include="..\PylosBoard.cpp" />
+    <ClCompile Include="..\PylosDlg.cpp" />
+    <ClCompile Include="..\PylosMove.cpp" />
+    <ClCompile Include="..\PylosView.cpp" />
+    <ClCompile Include="..\SimpleAIPlayer.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9E0413DA-FF3F-4667-918C-D1E12B1F5728}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -75,17 +117,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\BestMove.h" />
-    <ClInclude Include="..\Board.h" />
-    <ClInclude Include="..\Book.h" />
-    <ClInclude Include="..\Dialog.h" />
-    <ClInclude Include="..\SimpleAIPlayer.h" />
-    <ClInclude Include="..\View.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\SimpleAIPlayer.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

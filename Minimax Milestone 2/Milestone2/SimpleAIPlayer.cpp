@@ -62,12 +62,12 @@ void SimpleAIPlayer::Minimax(Board *board, // The original board you're
                              long min, // The min before you're "uninterested" 
                              long max, // The max before you're "uninterested"
                              BestMove *res, // Current bestMove object that you fill
-                             Book *book = NULL, // Map<Key
-                             int dbg = 0) {
+                             Book *book, // Map<Key
+                             int dbg) {
    list<Board::Move *> moves;
    list<Board::Move *>::iterator mItr;
    BestMove subRes(0, 0, level, 1);
-   const Board::Key *key = 0;
+   const Board::Key *key;
    Book::iterator itr;
    pair<Book::iterator, bool> insRes;
 
