@@ -169,10 +169,13 @@ ostream &CheckersMove::Write(ostream &os) const {
       os.write((char *)&tempPair.second, sizeof(tempPair.second));
    }
 
-   // Write out boolean flags
-   // I could have a bug here, due to booleans not being EndianXfer()'d
-   os.write((char *)&mIsJumpMove, sizeof(mIsJumpMove));
-   os.write((char *)&mIsKingMeMove, sizeof(mIsJumpMove));
+//    // Write out boolean flags
+//    // I could have a bug here, due to booleans not being EndianXfer()'d
+//    // TODO: I can't read/write these booleans due to the spec making me
+//    // not have them, but I *can* safely omit writing them, since I'd
+//    // regenerate them from calling ApplyMove on each move that *is* written.
+//    os.write((char *)&mIsJumpMove, sizeof(mIsJumpMove));
+//    os.write((char *)&mIsKingMeMove, sizeof(mIsJumpMove));
 
    return os;
 }
@@ -198,9 +201,9 @@ istream &CheckersMove::Read(istream &is) {
       mLocs[i].second = EndianXfer(mLocs[i].second);
    }
 
-   // Read in boolean flags
-   is.read((char *)&mIsJumpMove, sizeof(mIsJumpMove));
-   is.read((char *)&mIsKingMeMove, sizeof(mIsKingMeMove));
+//    Read in boolean flags
+//    is.read((char *)&mIsJumpMove, sizeof(mIsJumpMove));
+//    is.read((char *)&mIsKingMeMove, sizeof(mIsKingMeMove));
 
    return is;
 }
