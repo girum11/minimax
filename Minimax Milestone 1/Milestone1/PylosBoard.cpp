@@ -107,7 +107,7 @@ void PylosBoard::StaticInit() {
    // Initialize mSets
    // [Staley] Add cell mask to horizontal/vertical alignments if relevant
    int setNum = 0;
-   // There cannot be alignments on the top two levels
+   // There cannot be horizontal/vertical alignments on the top two levels
    for (level = 0; level < kDim - 2; level++) {
       // Step across this level's grid diagonally
       for (int rowcol = 0; rowcol < kDim - level; rowcol++) {
@@ -126,7 +126,8 @@ void PylosBoard::StaticInit() {
       }
    }
 
-   // [Staley] Add cell masks to square alignments
+   // [Staley] Add cell masks to square alignments.  All levels can potentially
+   // have square alignments, except for the very top level.
    for (level = 0; level < kDim - 1; level++) {
       for (row = 0; row < kDim - level; row++) {
          for (col = 0; col < kDim - level; col++) {
