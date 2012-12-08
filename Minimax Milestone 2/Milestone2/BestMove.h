@@ -12,7 +12,7 @@ struct BestMove {
    long depth;            // Levels of minimax that were used to get move
    long numBoards;        // Number of boards explored to get move
 
-   BestMove() : move(0), value(0), depth(0), numBoards(0) {}
+   BestMove() : move(NULL), value(0), depth(0), numBoards(0) {}
    BestMove(Board::Move *mv, long val, int dpt, long brds)
     : move(mv), value(val), depth(dpt), numBoards(brds) {}
    

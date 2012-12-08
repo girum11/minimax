@@ -1,8 +1,12 @@
 
 #include "Class.h"
+#include "Book.h"
 #include "Board.h"
 
 using namespace std;
+
+void ConstructBookFile(int bookDepth);
+
 
 // [Staley] Write a program “MakeBook” that works like the sample executable 
 // [Staley] provided.  MakeBook prompts for and accepts a single line of input 
@@ -81,26 +85,25 @@ int main() {
    Board *board = NULL;
    int minimaxLevel = -1, bookDepth = -1;
    string fileName("");
+   Book *transpositionTable = NULL, *bookFile = NULL;
+   
 
    // First, prompt the user for a SINGLE LINE OF INPUT of the following usage:
-   //       BoardClass minimaxLevel bookDepth fileName
+   //             BoardClass minimaxLevel bookDepth fileName
 
 
-   // Use reflection to figure out which Board you have, or give an error
+   // Use reflection to instantiate the correct board, or give an error
    // message if that BoardClass type doesn't exist.
 
-   // Then, figure out if the board that you were given can benefit from using a
+   // Figure out if the board that you were given can benefit from using a
    // transposition table.  Use the UseTranspositionTable() method from
    // BoardClass.
 
-   // Create the "book file."  This file is simply the initial 'dictionary' of
-   // good initial moves to play.
-   // To construct it, you should do a DFS on the initial Board configuration,
-   // where each node is a Board configuration, and "exploring" the node
-   // consists of calling the Minimax() method on that node to fill in what
-   // that configuration's bestMove is, using the lookahead specified from the
-   // user in our prompt from the beginning.  Run the DFS of Board configs 
-   // down to depth of 'bookDepth' (also specified by the user from before).
+   // If this board benefits from using a transposition table, then instantiate
+   // transpositionTable to be a new empty Book.  Otherwise, leave it NULL.
+
+   // Create the "book file."
+   ConstructBookFile(bookDepth);
 
 
    // When the book is complete (after you finish running the DFS), write it
@@ -118,4 +121,17 @@ int main() {
 
 
    return 0;
+}
+
+
+void ConstructBookFile(int bookDepth) {
+   
+
+   // To do so, run a DFS on the initial Board configuration, where each node 
+   // is a Board configuration, and "exploring" the node consists of calling 
+   // the Minimax() method on that node to fill in what that configuration's 
+   // bestMove is, using the lookahead specified from the user in our prompt 
+   // from the beginning.  Run the DFS of Board configs down to depth of 
+   // 'bookDepth' (also specified by the user from before).
+
 }

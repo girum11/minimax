@@ -63,7 +63,7 @@ Response:
 
 /* 
 Hint: 
-   The conditional "min < max" probably appears exactly twice in the code. 
+   The conditional "min < max" probably appears twice in the code. 
 */
 
 /*
@@ -83,26 +83,45 @@ void SimpleAIPlayer::Minimax(Board *board, int level, long min, long max,
  BestMove *bestMove, Book *book, int debugFlag) {
    list<Board::Move *> moves;
    list<Board::Move *>::iterator moveIter;
-   BestMove subRes(0, 0, level, 1);
+   BestMove subBestMove(NULL, 0, level, 1);
    const Board::Key *key = 0;
    Book::iterator bookIter;
    pair<Book::iterator, bool> insRes;
 
+   // [Staley] Level 0 computations aren’t worth it since a call of GetValue is 
+   // [Staley] usually quicker than a book lookup.
+   // [Me] So, ensure that MakeBook doesn't call this method with level == 0.
    assert(level >= 1);
 
-   // First, try and lookup if this move already exists in the book that we
-   // were given.  
-   // This should only apply if the game we're playing benefits from using
-   // a transposition table.
+// [Staley] On each minimax call, we consult the transposition table for any 
+// [Staley] lookahead level above 0 (which is always done by directly calling 
+// [Staley] GetValue, as in the code skeleton I supplied). If the table has a 
+// [Staley] precomputed best move with level at least as deep as the one you 
+// [Staley] need, then use it. 
+// [Staley] Likewise, save the result of any minimax computations of level 1 
+// [Staley] or greater in the book . And, 
+// [Staley] very importantly, we update the table even if it already has a key 
+// [Staley] for the board you’re computing, if your new computation is for a 
+// [Staley] deeper lookahead level than the one in the book.
+
+   // [Filled blank] Consult the transposition table to see if we 
    if (book && (bookIter = book->find(key = board->GetKey())) != book->end()
     && ________________________________) {
     
-      *bestMove = _____________;
+      // [Filled blank] If we find the bestMove in the transposition table,
+      // then set the bestMove straightaway.
+      *bestMove = (*bookIter).second; 
       bestMove->numBoards = 1;
    }
    else {
+
       board->GetAllMoves(&moves);
-      *bestMove = subRes;
+
+      // Fill up bestMove -- assume that the bestMove for this node is
+      // an empty BestMove.
+      *bestMove = subBestMove;
+
+      // If there are no more moves for this node, then 
       bestMove->value = moves.size() == 0 ? ____________________________ :
        (board->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
 
@@ -112,28 +131,28 @@ void SimpleAIPlayer::Minimax(Board *board, int level, long min, long max,
          board->ApplyMove(*moveIter);
 
          if (level == 1)
-            subRes.value = board->GetValue();
+            subBestMove.value = board->GetValue();
          else
-            Minimax(board, level-1, min, max, &subRes, book, debugFlag);
+            Minimax(board, level-1, min, max, &subBestMove, book, debugFlag);
 
          if (board->GetWhoseMove() == 1 && ___________________) {
-            bestMove->value = min = subRes.value;
+            bestMove->value = min = subBestMove.value;
             bestMove->SetBestMove(_______________________);
          }
          else if (board->GetWhoseMove() == 0 && __________________) {
-            bestMove->value = max = subRes.value;
+            bestMove->value = max = subBestMove.value;
             bestMove->SetBestMove(_______________________);
          }
 
          if (debugFlag > 0) {
             for (int cnt = level-1; cnt > 0; cnt--)
                cout << "   ";
-            cout << "Move " << (string)**moveIter << " nets " << subRes.value
+            cout << "Move " << (string)**moveIter << " nets " << subBestMove.value
              << " min/max is " << min << "/" << max << endl;
          }
 
          board->UndoLastMove();
-         bestMove->numBoards += subRes.numBoards;
+         bestMove->numBoards += subBestMove.numBoards;
       }
 
       for (; moveIter != moves.end(); moveIter++)
