@@ -85,10 +85,9 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
    // one you need."
    if (tTable && (bookIter = tTable->find(key = board->GetKey())) != tTable->end()
     && (*bookIter).second.depth >= minimaxLevel) {
-    
       // [Filled blank] If we find the bestMove in the transposition table,
       // then set the bestMove straightaway.
-      *bestMove = (*bookIter).second; 
+      *bestMove = (*bookIter).second;
       bestMove->numBoards = 1;
    }
    else {

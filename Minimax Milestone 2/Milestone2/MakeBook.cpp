@@ -1,4 +1,5 @@
 
+#include <assert.h>
 #include "Class.h"
 #include "Book.h"
 #include "Board.h"
@@ -11,12 +12,12 @@ using namespace std;
 // [Staley] provided.  MakeBook prompts for and accepts a single line of input 
 // [Staley] of the form:
 // [Staley] 
-// [Staley] BoardClass minimaxLevel bookDepth fileName
+// [Staley] BoardClass minimaxDepth bookDepth fileName
 // [Staley] 
 // [Staley] MinimaxLevel is the minimax lookahead to use when determining a 
 // [Staley] best move for each board key.  BookDepth indicates how many boards 
 // [Staley] to generate.  Specifically, it tells how many halfmoves from the 
-// [Staley] starting board should be covered by the bookFile file.  A minimaxLevel 
+// [Staley] starting board should be covered by the bookFile file.  A minimaxDepth 
 // [Staley] of 5 and a bookDepth of 2 indicate that you should generate a best 
 // [Staley] move for the initial board and all boards reachable from it in two 
 // [Staley] halfmoves (something like 257 boards for Pylos), and that for each 
@@ -60,7 +61,7 @@ using namespace std;
 // [Staley] A hint on how to duplicate my key count:  When I analyze a board, I 
 // [Staley] first get a key for it.  Then I output the current move/key count, 
 // [Staley] and then I analyze the board using the key.
-int main(int argc, char **argv) {
+int main() {
    // Restrictions:
    // 1. Your entire MakeBook.cpp can be at most 90 lines  (mine is 75).
    // Use the 'smartcount' bin in your CPE305 folder to measure this.
@@ -82,25 +83,25 @@ int main(int argc, char **argv) {
    // TODO: Pylos and Checkers need to incrementally increment the board value.
    const BoardClass *boardClass = NULL;
    Board *board = NULL;
-   int minimaxLevel = -1, bookDepth = -1;
+   int minimaxDepth = -1, bookDepth = -1;
    string boardType(""), filename("");
    Book bookFile;
    
    // First, prompt the user for commands of the following usage:
    cout << "Enter boardType, level, depth, and filename: ";
-   cin >> boardType >> minimaxLevel, bookDepth, filename;
+   cin >> boardType >> minimaxDepth, bookDepth, filename;
 
    // Use reflection to instantiate the correct board, or give an error
    // message if that BoardClass type doesn't exist.
-   if ((boardClass = BoardClass::ForName(argv[1])) == NULL
+   if ((boardClass = BoardClass::ForName(boardType)) == NULL
     || (board = dynamic_cast<Board *>(boardClass->NewInstance())) == NULL) {
-      cout << "Unknown type " << argv[1] << endl;
+      cout << "Unknown type " << boardType << endl;
       return -1;
    }
 
    // Create the "bookFile file."
    ConstructBookFileDFS(board, &bookFile, boardClass->UseTransposition(), 
-    0, bookDepth);
+    minimaxDepth, 0, bookDepth);
 
    // When the bookFile is complete (after you finish running the DFS), write it
    // to a binary "bookFile file" having the specified fileName.
@@ -125,26 +126,37 @@ int main(int argc, char **argv) {
 void ConstructBookFileDFS(Board *board,
                           Book *bookFile,
                           bool useX, // True if this BoardClass uses an XTable.
+                          int minimaxDepth,
                           int currentDepth, 
                           int bookDepth) 
 {
-   // Get all of the children nodes.
+   // Grab all of the possible moves (each move corresponds to a child node)
    list<Board::Move *> allMoves;
    board->GetAllMoves(&allMoves);
    
-   
+
    for (list<Board::Move *>::iterator moveIter = allMoves.begin();
     moveIter != allMoves.end(); moveIter++) {
-      // The DFS should call itself until (currentDepth > bookDepth), not calling 
-      // Minimax() until this is true.
-      if (currentDepth < bookDepth) {
 
+      // Apply the move to the board.
+      board->ApplyMove(*moveIter);
+
+      // The DFS should step down the tree in a depth-first manner until 
+      // it reaches its desired bookDepth level.  It shouldn't call Minimax() 
+      // until this is true.
+      if (currentDepth < bookDepth) {
+         ConstructBookFileDFS(board, bookFile, useX, currentDepth+1, bookDepth);
       }
-      else {
+      else if (currentDepth == bookDepth) {
          // Once you're ready to call Minimax(), create a new tTable for that
          // particular Minimax call (quoted from "Transposition Table" email).
+         SimpleAIPlayer::Minimax(board, bookDepth, 
+         
+      } else assert(false);
 
-      }
+      // Undo the move from the board.
+      board->UndoLastMove();
+
    }
    
    
