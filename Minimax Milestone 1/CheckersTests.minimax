@@ -1,3 +1,90 @@
+-- 20.) Normal pieces can't move backwards
+showBoard
+doMove c1->d2
+doMove f6->e7
+doMove d2->c1
+doMove c3->d4
+doMove e7->f6
+
+-- 21.) A *badly formed* move is one that disobeys string formats, or that has obvious errors such as out-of-range number values.  The operator=(const std::string &) method detects badly formed moves and throws an exception when it is passed one.
+undoLastMove 1000
+doMove someRandomBadInputString -> d2
+doMove c1 -> asdf 
+doMove c1->c2
+doMove c2->d1
+doMove c1->d1
+doMove c1->d0
+doMove b8->c9
+-- 22.) Must test for incorrect format including garbage after the end of the move
+doMove c1->d2 asdfa asdfasdf
+doMove c1->d230948230948234
+doMove c112938092384234->d2
+doMove c-1 -> d2
+doMove c1 -> d-2
+doMove c1.1 -> d2
+doMove c1 -> d2.2
+doMove ->
+doMove c1 ->
+doMove -> d2
+-- 23.) "->" is surrounded optionally by blanks
+doMove		  c1 				->    d2
+undoLastMove 1    
+doMove c1 ->
+d2
+doMove c1 -> d@
+testPlay 19 30
+undoLastMove 30
+doMove C1->d2
+undoLastMove 1
+
+-- 24.) Verify that each move is in the list of GetAllMoves
+ *** See Checkers.4 ***
+ 
+-- 25.) If a badly formatted Move string is presented to the operator= method, the method throws a BaseException with one of the contents below where X is the name of the game, and M is the full move string.  If this happens, the method does not modify the move at all.  In other words, it either modifies the move, or throws an exception indicating a bad move strnig, but not both.
+showMove
+enterMove c1->c2
+showMove
+enterMove c1->d2 sonn
+showMove
+
+-- 26.) Modification of rules (or "options" as the BoardTest language calls them) is done via the CheckersDlg and PylosDlg classes, which engage the user in a dialog to adjust the parameters used by the boards to determine their value.
+setOptions
+n
+setOptions
+noooooooooooooooooooo
+setOptions
+Y
+setOptions maybe?
+nah
+
+-- 27.) A "y" is the only acceptable "yes" answer.  It may be followed by arbitrary garbage on the reply line without error.
+setOptions pretty please????
+yeah, sure
+
+-- 28.) The user must enter a valid integer falling within the inclusive ranges given when you run the model program.  Checkers rules comprise a weight for the values of the kinged piece [0,1000], for the value of a of a piece on the back row [0,1000] and for having the next move [0,100].
+setOptions aspdfioausp dfioasu fpaiosu dfpoasiu df
+y
+23894723
+-1
+brokencode
+1001
+0.3
+0
+
+23894723
+-1
+brokencode
+1001
+0.3
+0
+
+23894723
+-1
+brokencode
+101
+0.3
+0
+
 -- 29.) The integer must be on a line by itself -- trailing nonwhitespace garbage is unacceptable and generates an error indicating there is extra garbage on the line.
 setOptions
 yes
@@ -19,5 +106,42 @@ y
 100
 20
 6
+
+-- 30.) Checkers weight is determined by using a weight of 100 for each piece ont he board (negative for white, who plays second) or a special king weight (again negative for white) for each king piece and each piece on a back row, plus a final added weight for which side has the move.
+
+*** See Checkers.4 ***
+
+-- 31.) As a special case, if the game is over then GetValue returns winVal if first player has won, -winVal if the second player has won.
+undoLastMove 1000
+testPlay 10 100
+showVal
+undoLastMove 1000
+testPlay 11 100
+showVal
+
+-- 32.) Two CheckersBoard::Keys are equal if all squares have same color of piece (or are both empty).
+undoLastMove 1000
+saveBoard CheckersBoardIbssa0
+compareKeys CheckersBoardIbssa0
+doMove c1->d2
+compareKeys CheckersBoardIbssa0
+
+-- 33.) Two CheckersBoard::Keys are equal if all squares have the same type of piece (king or nonKing).
+testPlay 64 40
+doMove f2->e1
+doMove c3->d4
+doMove e1->d2
+doMove d4->e3
+doMove d2->c1
+doMove e3->f2
+doMove c1->b2
+doMove f2->g1
+saveBoard CheckersBoardIbssa1
+-- compareKeys CheckersBoardIbssa1
+-- doMove b2->a1
+-- doMove g1->h2
+-- doMove a1->b2
+-- doMove h2->g1
+-- compareKeys CheckersBoardIbssa1
 
 quit
