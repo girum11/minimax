@@ -65,100 +65,100 @@ Hint:
 
 void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
  BestMove *bestMove, Book *tTable, int debugFlag) {
-   list<Board::Move *> moves;
-   list<Board::Move *>::iterator moveIter;
-
-   // A BestMove object containing the BestMove for the node below you
-   BestMove subBestMove(NULL, 0, minimaxLevel, 1);
-   const Board::Key *key = 0;
-   Book::iterator bookIter;
-   pair<Book::iterator, bool> insRes;
-
-   // [Staley] Level 0 computations aren’t worth it since a call of GetValue is 
-   // [Staley] usually quicker than a tTable lookup.
-   // [Me] So, ensure that MakeBook doesn't call this method with minimaxLevel == 0.
-   assert(minimaxLevel >= 1);
-
-   // Before we begin "exploring" this node, first consult the transposition 
-   // table to see if we already have a precomputed best move for its
-   // board configuration [Filled blank] "with minimaxLevel at least as deep as the 
-   // one you need."
-   if (tTable && (bookIter = tTable->find(key = board->GetKey())) != tTable->end()
-    && (*bookIter).second.depth >= minimaxLevel) {
-      // [Filled blank] If we find the bestMove in the transposition table,
-      // then set the bestMove straightaway.
-      *bestMove = (*bookIter).second;
-      bestMove->numBoards = 1;
-   }
-   else {
-      // To begin "exploring" this node, first figure out what the list of
-      // possible moves is, so that you can construct the nodes at the minimaxLevel
-      // below you (one node created per Move).
-      board->GetAllMoves(&moves);
-
-      // Fill up bestMove -- assume that the bestMove for this node is an empty 
-      // BestMove.
-      *bestMove = subBestMove;
-
-      // Edge case: If this node is an end-game node, then set this bestMove's 
-      // value to be the appropriate kWinVal.
-      // [Filled blank] Otherwise, bestMove->value should just stay the same.
-      bestMove->value = moves.size() == 0 ? bestMove->value :
-       (board->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
-
-      // Iterate through each of the possible moves, [Filled blank] provided
-      // that the limits for this node haven't collided yet.
-      for (moveIter = moves.begin(); min < max && moveIter != moves.end(); 
-       moveIter++) {
-
-         board->ApplyMove(*moveIter);
-
-         // Base case.  
-         if (minimaxLevel == 1)
-            subBestMove.value = board->GetValue();
-         else
-            Minimax(board, minimaxLevel-1, min, max, &subBestMove, tTable, debugFlag);
-
-         if (board->GetWhoseMove() == 1 && ___________________) {
-            bestMove->value = min = subBestMove.value;
-            bestMove->SetBestMove(_______________________);
-         }
-         else if (board->GetWhoseMove() == 0 && __________________) {
-            bestMove->value = max = subBestMove.value;
-            bestMove->SetBestMove(_______________________);
-         }
-
-         if (debugFlag > 0) {
-            for (int cnt = minimaxLevel-1; cnt > 0; cnt--)
-               cout << "   ";
-            cout << "Move " << (string)**moveIter << " nets " << subBestMove.value
-             << " min/max is " << min << "/" << max << endl;
-         }
-
-         board->UndoLastMove();
-         bestMove->numBoards += subBestMove.numBoards;
-      }
-
-      for (; moveIter != moves.end(); moveIter++)
-      
-         _______________________;
-
-
-// [Staley] Likewise, save the result of any minimax computations of minimaxLevel 1 
-// [Staley] or greater in the tTable . And, very importantly, we update the table 
-// [Staley] even if it already has a key for the board you’re computing, if 
-// [Staley] your new computation is for a deeper lookahead minimaxLevel than the one 
-// [Staley] in the tTable.
-      if (tTable && minimaxLevel >= SAVE_LEVEL && _________________ && bestMove->move) {
-         insRes = tTable->insert(_____________________________);
-         if (insRes.second)
-            key = 0;
-         else if (_______________________________________) {
-            (*insRes.first).second = *bestMove;
-         } 
-      }
-   }
-   delete key;
+//    list<Board::Move *> moves;
+//    list<Board::Move *>::iterator moveIter;
+// 
+//    // A BestMove object containing the BestMove for the node below you
+//    BestMove subBestMove(NULL, 0, minimaxLevel, 1);
+//    const Board::Key *key = 0;
+//    Book::iterator bookIter;
+//    pair<Book::iterator, bool> insRes;
+// 
+//    // [Staley] Level 0 computations aren’t worth it since a call of GetValue is 
+//    // [Staley] usually quicker than a tTable lookup.
+//    // [Me] So, ensure that MakeBook doesn't call this method with minimaxLevel == 0.
+//    assert(minimaxLevel >= 1);
+// 
+//    // Before we begin "exploring" this node, first consult the transposition 
+//    // table to see if we already have a precomputed best move for its
+//    // board configuration [Filled blank] "with minimaxLevel at least as deep as the 
+//    // one you need."
+//    if (tTable && (bookIter = tTable->find(key = board->GetKey())) != tTable->end()
+//     && (*bookIter).second.depth >= minimaxLevel) {
+//       // [Filled blank] If we find the bestMove in the transposition table,
+//       // then set the bestMove straightaway.
+//       *bestMove = (*bookIter).second;
+//       bestMove->numBoards = 1;
+//    }
+//    else {
+//       // To begin "exploring" this node, first figure out what the list of
+//       // possible moves is, so that you can construct the nodes at the minimaxLevel
+//       // below you (one node created per Move).
+//       board->GetAllMoves(&moves);
+// 
+//       // Fill up bestMove -- assume that the bestMove for this node is an empty 
+//       // BestMove.
+//       *bestMove = subBestMove;
+// 
+//       // Edge case: If this node is an end-game node, then set this bestMove's 
+//       // value to be the appropriate kWinVal.
+//       // [Filled blank] Otherwise, bestMove->value should just stay the same.
+//       bestMove->value = moves.size() == 0 ? bestMove->value :
+//        (board->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
+// 
+//       // Iterate through each of the possible moves, [Filled blank] provided
+//       // that the limits for this node haven't collided yet.
+//       for (moveIter = moves.begin(); min < max && moveIter != moves.end(); 
+//        moveIter++) {
+// 
+//          board->ApplyMove(*moveIter);
+// 
+//          // Base case.  
+//          if (minimaxLevel == 1)
+//             subBestMove.value = board->GetValue();
+//          else
+//             Minimax(board, minimaxLevel-1, min, max, &subBestMove, tTable, debugFlag);
+// 
+//          if (board->GetWhoseMove() == 1 && ___________________) {
+//             bestMove->value = min = subBestMove.value;
+//             bestMove->SetBestMove(_______________________);
+//          }
+//          else if (board->GetWhoseMove() == 0 && __________________) {
+//             bestMove->value = max = subBestMove.value;
+//             bestMove->SetBestMove(_______________________);
+//          }
+// 
+//          if (debugFlag > 0) {
+//             for (int cnt = minimaxLevel-1; cnt > 0; cnt--)
+//                cout << "   ";
+//             cout << "Move " << (string)**moveIter << " nets " << subBestMove.value
+//              << " min/max is " << min << "/" << max << endl;
+//          }
+// 
+//          board->UndoLastMove();
+//          bestMove->numBoards += subBestMove.numBoards;
+//       }
+// 
+//       for (; moveIter != moves.end(); moveIter++)
+//       
+//          _______________________;
+// 
+// 
+// // [Staley] Likewise, save the result of any minimax computations of minimaxLevel 1 
+// // [Staley] or greater in the tTable . And, very importantly, we update the table 
+// // [Staley] even if it already has a key for the board you’re computing, if 
+// // [Staley] your new computation is for a deeper lookahead minimaxLevel than the one 
+// // [Staley] in the tTable.
+//       if (tTable && minimaxLevel >= SAVE_LEVEL && _________________ && bestMove->move) {
+//          insRes = tTable->insert(_____________________________);
+//          if (insRes.second)
+//             key = 0;
+//          else if (_______________________________________) {
+//             (*insRes.first).second = *bestMove;
+//          } 
+//       }
+//    }
+//    delete key;
 }
 
 

@@ -11,6 +11,7 @@ BestMove::BestMove(const BestMove &mv) {
 
 const BestMove &BestMove::operator=(const BestMove &mv) {
    // TODO
+   
 }
    
 BestMove::~BestMove() {

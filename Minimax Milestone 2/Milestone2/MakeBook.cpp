@@ -1,12 +1,20 @@
 
 #include <assert.h>
+#include <climits>
+#include <iostream>
 #include "Class.h"
 #include "Book.h"
 #include "Board.h"
+#include "SimpleAIPlayer.h";
 
 using namespace std;
 
-
+void ConstructBookFileDFS(Board *board,
+                          Book *bookFile,
+                          bool useX, // True if this BoardClass uses an XTable.
+                          int minimaxDepth,
+                          int currentDepth, 
+                          int bookDepth);
 
 // [Staley] Write a program “MakeBook” that works like the sample executable 
 // [Staley] provided.  MakeBook prompts for and accepts a single line of input 
@@ -103,14 +111,11 @@ int main() {
    ConstructBookFileDFS(board, &bookFile, boardClass->UseTransposition(), 
     minimaxDepth, 0, bookDepth);
 
-   // When the bookFile is complete (after you finish running the DFS), write it
+   // TODO: When the bookFile is complete (after you finish running the DFS), write it
    // to a binary "bookFile file" having the specified fileName.
    
 
 
-   // More hints for this are given in the spec.  E.g: Be sure to keep track of 
-   // all the Keys you've collected thus far to avoid entering the same Key 
-   // twice into the bookFile.
    
 
 
@@ -145,21 +150,28 @@ void ConstructBookFileDFS(Board *board,
       // it reaches its desired bookDepth level.  It shouldn't call Minimax() 
       // until this is true.
       if (currentDepth < bookDepth) {
-         ConstructBookFileDFS(board, bookFile, useX, currentDepth+1, bookDepth);
+         ConstructBookFileDFS(board, bookFile, useX, minimaxDepth, 
+          currentDepth+1, bookDepth);
       }
       else if (currentDepth == bookDepth) {
          // Once you're ready to call Minimax(), create a new tTable for that
          // particular Minimax call (quoted from "Transposition Table" email).
-         SimpleAIPlayer::Minimax(board, bookDepth, 
-         
+         BestMove bestMove;
+
+         SimpleAIPlayer::Minimax(board, minimaxDepth, LONG_MIN, LONG_MAX, 
+          &bestMove, useX ? &Book() : NULL);
+
+         // Once you finish running the Minimax for that node, add the
+         // bestMove that you got into your bookFile.
+         if (!bookFile->insert(pair<const Board::Key *, BestMove>(
+          board->GetKey(), bestMove)).second) {
+             cout << "Duplicate. No book entry." << endl;
+         }
       } else assert(false);
 
       // Undo the move from the board.
       board->UndoLastMove();
-
    }
-   
-   
    
    // TODO: Should it call Minimax() at leaf nodes?  That is, should I be
    // using GetAllMoves() to calculate if a node is a leaf node here in the DFS?
