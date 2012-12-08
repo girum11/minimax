@@ -42,7 +42,7 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
             }
          } while (inputString.empty());
 
-         res = sscanf(inputString.c_str(), " %d %1s", &inputValue, &trailingChar);
+         res = sscanf(inputString.c_str(), " %d %c", &inputValue, &trailingChar);
          
          if (res == 0) {
             out << "Badly formatted input\n";
