@@ -80,73 +80,73 @@ Hint:
 
 void SimpleAIPlayer::Minimax(Board *board, int level, long min, long max,
  BestMove *bMove, Book *book, int debugFlag) {
-   list<Board::Move *> moves;
-   list<Board::Move *>::iterator moveIter;
-   BestMove subRes(0, 0, level, 1);
-   const Board::Key *key = 0;
-   Book::iterator bookIter;
-   pair<Book::iterator, bool> insRes;
-
-   assert(level >= 1);
-
-   // Base case.
-   // If 
-   if (book && (bookIter = book->find(key = board->GetKey())) != book->end()
-    && ________________________________) {
-    
-      *bMove = _____________;
-      bMove->numBoards = 1;
-   }
-   else {
-      board->GetAllMoves(&moves);
-      *bMove = subRes;
-      bMove->value = moves.size() == 0 ? ____________________________ :
-       (board->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
-
-      for (moveIter = moves.begin(); ____________ && moveIter != moves.end(); 
-       moveIter++) {
-
-         board->ApplyMove(*moveIter);
-
-         if (level == 1)
-            subRes.value = board->GetValue();
-         else
-            Minimax(board, level-1, min, max, &subRes, book, debugFlag);
-
-         if (board->GetWhoseMove() == 1 && ___________________) {
-            bMove->value = min = subRes.value;
-            bMove->SetBestMove(_______________________);
-         }
-         else if (board->GetWhoseMove() == 0 && __________________) {
-            bMove->value = max = subRes.value;
-            bMove->SetBestMove(_______________________);
-         }
-
-         if (debugFlag > 0) {
-            for (int cnt = level-1; cnt > 0; cnt--)
-               cout << "   ";
-            cout << "Move " << (string)**moveIter << " nets " << subRes.value
-             << " min/max is " << min << "/" << max << endl;
-         }
-
-         board->UndoLastMove();
-         bMove->numBoards += subRes.numBoards;
-      }
-
-      for (; moveIter != moves.end(); moveIter++)
-      
-         _______________________;
-
-      if (book && level >= SAVE_LEVEL && _________________ && bMove->bestMove) {
-         insRes = book->insert(_____________________________);
-         if (insRes.second)
-            key = 0;
-         else if (_______________________________________) {
-            (*insRes.first).second = *bMove;
-         } 
-      }
-   }
-   delete key;
+//    list<Board::Move *> moves;
+//    list<Board::Move *>::iterator moveIter;
+//    BestMove subRes(0, 0, level, 1);
+//    const Board::Key *key = 0;
+//    Book::iterator bookIter;
+//    pair<Book::iterator, bool> insRes;
+// 
+//    assert(level >= 1);
+// 
+//    // Base case.
+//    // If we were given a book
+//    if (book && (bookIter = book->find(key = board->GetKey())) != book->end()
+//     && ________________________________) {
+//     
+//       *bMove = _____________;
+//       bMove->numBoards = 1;
+//    }
+//    else {
+//       board->GetAllMoves(&moves);
+//       *bMove = subRes;
+//       bMove->value = moves.size() == 0 ? ____________________________ :
+//        (board->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
+// 
+//       for (moveIter = moves.begin(); ____________ && moveIter != moves.end(); 
+//        moveIter++) {
+// 
+//          board->ApplyMove(*moveIter);
+// 
+//          if (level == 1)
+//             subRes.value = board->GetValue();
+//          else
+//             Minimax(board, level-1, min, max, &subRes, book, debugFlag);
+// 
+//          if (board->GetWhoseMove() == 1 && ___________________) {
+//             bMove->value = min = subRes.value;
+//             bMove->SetBestMove(_______________________);
+//          }
+//          else if (board->GetWhoseMove() == 0 && __________________) {
+//             bMove->value = max = subRes.value;
+//             bMove->SetBestMove(_______________________);
+//          }
+// 
+//          if (debugFlag > 0) {
+//             for (int cnt = level-1; cnt > 0; cnt--)
+//                cout << "   ";
+//             cout << "Move " << (string)**moveIter << " nets " << subRes.value
+//              << " min/max is " << min << "/" << max << endl;
+//          }
+// 
+//          board->UndoLastMove();
+//          bMove->numBoards += subRes.numBoards;
+//       }
+// 
+//       for (; moveIter != moves.end(); moveIter++)
+//       
+//          _______________________;
+// 
+//       if (book && level >= SAVE_LEVEL && _________________ && bMove->bestMove) {
+//          insRes = book->insert(_____________________________);
+//          if (insRes.second)
+//             key = 0;
+//          else if (_______________________________________) {
+//             (*insRes.first).second = *bMove;
+//          } 
+//       }
+//    }
+//    delete key;
 }
 
 

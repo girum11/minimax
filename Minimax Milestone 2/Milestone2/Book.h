@@ -12,7 +12,10 @@
 class Book : public std::map<const Board::Key *, BestMove> {
 public:
 	Book() : mLevel(0) {}
-   virtual ~Book();
+
+   // TODO: Is an empty implementation for the virtual desctructor correct here?
+   virtual ~Book() {}
+   // virtual ~Book();
 
    int GetLevel()          {return mLevel;}
    void SetLevel(int val)  {mLevel = val;}
