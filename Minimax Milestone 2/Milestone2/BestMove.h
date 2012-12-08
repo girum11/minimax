@@ -7,7 +7,7 @@
 // Since it has ownership of a dynamic object, it requires a copy
 // constructor, operator=, and destructor.
 struct BestMove {
-   Board::Move *move; // The best move to take (owned by the BestMove)
+   Board::Move *move;     // The best move to take (owned by the BestMove)
    long value;            // The board value that will result from the move
    long depth;            // Levels of minimax that were used to get move
    long numBoards;        // Number of boards explored to get move

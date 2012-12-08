@@ -5,15 +5,26 @@
 using namespace std;
 
 
-BestMove::BestMove(const BestMove &mv) {
-   // TODO
+/* A class that has dynamic memory inside it that *it* owns is required to 
+   specify its copy constructor, operator=(), and destructor.  */
+
+BestMove::BestMove(const BestMove &src) {
+   move = src.move ? move->Clone() : NULL;
+
+   value = src.value;
+   depth = src.depth;
+   numBoards = src.numBoards;
 }
 
-const BestMove &BestMove::operator=(const BestMove &mv) {
-   // TODO
-   
+const BestMove &BestMove::operator=(const BestMove &src) {
+   delete move;
+   move = src.move ? move->Clone() : NULL;
+
+   value = src.value;
+   depth = src.depth;
+   numBoards = src.numBoards;
 }
    
 BestMove::~BestMove() {
-   // TODO
+   delete move;
 }
