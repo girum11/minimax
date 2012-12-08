@@ -20,6 +20,7 @@ public:
 
    friend class CheckersBoard;
 
+   // TODO: Refactor mIsJumpMove and mIsKingMeMove out altogether.
    CheckersMove(const LocVector &locs, bool isJump)
     : mLocs(locs), mIsJumpMove(isJump), mIsKingMeMove(false) {
       AssertMe();
@@ -34,6 +35,12 @@ public:
    
    void operator delete(void *p);
    void *operator new(size_t sz);
+
+   // Little helper function to tell you if this move is a jump or not.
+   static inline bool IsJump(const Location &loc1, const Location &loc2) {
+      return std::abs((int) ((int)loc1.first - (int)loc2.first)) == 2 &&
+       std::abs((int) ((int)loc1.second - (int)loc2.second)) == 2;
+   }
 
 protected:
 
@@ -67,11 +74,6 @@ protected:
          assert(InRange<char>('A', locIter->first, 'I'));
          assert(InRange<unsigned int>(1, locIter->second, 9));
       }
-   }
-
-   static inline bool IsJump(const Location &loc1, const Location &loc2) {
-      return std::abs((int) ((int)loc1.first - (int)loc2.first)) == 2 &&
-       std::abs((int) ((int)loc1.second - (int)loc2.second)) == 2;
    }
 
 };
