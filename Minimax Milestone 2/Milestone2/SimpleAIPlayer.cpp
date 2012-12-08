@@ -104,9 +104,9 @@ void SimpleAIPlayer::Minimax(Board *board, int level, long min, long max,
 // [Staley] for the board you’re computing, if your new computation is for a 
 // [Staley] deeper lookahead level than the one in the book.
 
-   // [Filled blank] Consult the transposition table to see if we already
-   // have a precomputed best move "with level at least as deep as the one
-   // you need."
+   // Consult the transposition table to see if we already have a precomputed 
+   // best move [Filled blank] "with level at least as deep as the one you 
+   // need."
    if (book && (bookIter = book->find(key = board->GetKey())) != book->end()
     && (*bookIter).second.depth >= level) {
     
@@ -119,14 +119,19 @@ void SimpleAIPlayer::Minimax(Board *board, int level, long min, long max,
 
       board->GetAllMoves(&moves);
 
-      // Fill up bestMove -- assume that the bestMove for this node is
-      // an empty BestMove.
+      // Fill up bestMove -- assume that the bestMove for this node is an empty 
+      // BestMove.
       *bestMove = subBestMove;
 
-      // If there are no more moves for this node, then 
-      bestMove->value = moves.size() == 0 ? ____________________________ :
+      // If there are no longer any possible moves to be played 
+      // at this node's board configuration, then set this bestMove's value
+      // to be the appropriate kWinVal.  
+      // [Filled blank] Otherwise, bestMove->value should just stay the same.
+      bestMove->value = moves.size() == 0 ? bestMove->value :
        (board->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
 
+      // Iterate through each of the possible moves.
+      // [Filled blank] Ensure that min < max though?
       for (moveIter = moves.begin(); ____________ && moveIter != moves.end(); 
        moveIter++) {
 
