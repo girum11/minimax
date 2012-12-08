@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 // Preconditions: 
 // bMove points to a BestMove object, which may have NULL for its current 
 // bestMove.  Any 'bMove->value' V such that V <= min or V >= max is 
@@ -25,9 +24,9 @@ using namespace std;
 // be found, and bMove->bestMove will indicate the first move where this fact 
 // was uncovered.
 // 
-// If 'board' is an endgame board, then  bMove->value will be winVal, 0 or -winVal, 
-// and bMove->bestMove will be NULL since there is no move from an endgame 
-// position.  Otherwise, bMove->bestMove will provide the best move.  
+// If 'board' is an endgame board, then  bMove->value will be winVal, 0 or 
+// -winVal, and bMove->bestMove will be NULL since there is no move from an 
+// endgame position.  Otherwise, bMove->bestMove will provide the best move.  
 //
 // 'bMove->bestReply' gives the best answering move to bMove->bestMove, or NULL 
 // if bMove->bestMove ends the game.  
@@ -44,6 +43,41 @@ using namespace std;
 // and will have updated any entries for which deeper results were computed 
 // during the call.
 
+/* 
+Emailed question:
+   I'm a little confused about the transposition table for the minimax 
+   milestone.
+   Namely, when do we "create a new empty transposition table (Book) at the top  
+   of each minimax exploration" (does this happen within the Minimax call, or 
+   from MakeBook right before we call Minimax). When would we create another 
+   transposition table?
+   I think I'm mostly confused how that table interacts (or doesn't interact)    
+   with the Book that MakeBook will eventually write out. There's only one 
+   "MakeBook Book" ever, right?
+
+Response:
+   The transposition table is distinct from the book, and it should be 
+   created at the top (before topmost call) of each recursive minimmax 
+   computation.
+*/
+
+/* 
+Hint: 
+   The conditional "min < max" probably appears exactly twice in the code. 
+*/
+
+/*
+Hint:
+   This algorithm is probably a double-recursive algorithm, I think. 
+*/
+
+/*
+Hint:
+   If you are having trouble debugging, then recall that the MakeBook.cpp spec
+   comments describe how you can set up a "debug" flag to help you debug.  It's
+   not required, but it will help if you get stuck debugging.
+*/
+
 void SimpleAIPlayer::Minimax(Board *board, int level, long min, long max,
  BestMove *bMove, Book *book, int debugFlag) {
    list<Board::Move *> moves;
@@ -55,7 +89,8 @@ void SimpleAIPlayer::Minimax(Board *board, int level, long min, long max,
 
    assert(level >= 1);
 
-   // 
+   // Base case.
+   // If 
    if (book && (bookIter = book->find(key = board->GetKey())) != book->end()
     && ________________________________) {
     
@@ -68,7 +103,8 @@ void SimpleAIPlayer::Minimax(Board *board, int level, long min, long max,
       bMove->value = moves.size() == 0 ? ____________________________ :
        (board->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
 
-      for (moveIter = moves.begin(); ____________ && moveIter != moves.end(); moveIter++) {
+      for (moveIter = moves.begin(); ____________ && moveIter != moves.end(); 
+       moveIter++) {
 
          board->ApplyMove(*moveIter);
 
