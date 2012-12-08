@@ -220,8 +220,10 @@ void PylosBoard::TakeMarble(Spot *trg) {
 
 void PylosBoard::UpdateBoardValuation() {
 
-   // It should never be true that both players ran out of pieces.
-   assert(!(mWhiteReserve == 0 && mBlackReserve == 0));
+   // TODO: A player can win if he puts down the topmost marble.  Then, both
+   // players will be out of marbles in their reserve.  Thus, this assert 
+   // is totally invalid.
+   // assert(!(mWhiteReserve == 0 && mBlackReserve == 0));
 
    // Go through all pieces and update mLevelLead and mFreeLead
    Set allPieces(mWhite|mBlack);
@@ -598,15 +600,14 @@ istream &PylosBoard::Read(istream &is) {
    // Assigned reading for this: http://cplusplus.com/doc/tutorial/files/
    // Read() is mostly Write() backwards, with a few exceptions.
    // Order's important.
-   Rules temp;
    int moveCount = -1;
 
    // Clear out the Default board's existing data
    Delete();
 
    // Read in the Rules that the board should use.
-   is.read((char *)&temp, sizeof(Rules));
-   temp.EndSwap();
+   is.read((char *)&PylosBoard::mRules, sizeof(Rules));
+   mRules.EndSwap();
 
    is.read((char *)&moveCount, sizeof(moveCount));
    assert(moveCount != -1);  // sanity check to ensure the read() happened
@@ -616,26 +617,25 @@ istream &PylosBoard::Read(istream &is) {
       // Well, mLocs *should* be copy-constructed in.
       PylosMove *newMove = new PylosMove(PylosMove::LocVector(),0);
       is >> *newMove;
+
       ApplyMove(newMove);
    }
-
-   SetOptions(&temp);
 
    return is;
 }
 
 // Don't change this.  Make Read conform to it.
 ostream &PylosBoard::Write(ostream &os) const {
-   Rules rules = mRules;
-   list<Move *>::const_iterator iter;
-   int moveCount = EndianXfer((int)mMoveHist.size());
+   Rules rls = mRules;
+   list<Move *>::const_iterator itr;
+   int mvCount = EndianXfer((int)mMoveHist.size());
 
-   rules.EndSwap();
-   os.write((char *)&rules, sizeof(rules));
+   rls.EndSwap();
+   os.write((char *)&rls, sizeof(rls));
 
-   os.write((char *)&moveCount, sizeof(moveCount));
-   for (iter = mMoveHist.begin(); iter != mMoveHist.end(); iter++)
-      os << **iter;
+   os.write((char *)&mvCount, sizeof(mvCount));
+   for (itr = mMoveHist.begin(); itr != mMoveHist.end(); itr++)
+      os << **itr;
 
    return os;
 }
@@ -727,7 +727,7 @@ long PylosBoard::GetValue() const {
     listIter != allMoves.end(); listIter++) {
        delete *listIter;
    }
-   
+
    // First, check if anyone can even move.  The player who's stuck on his moves
    // with no moves left is the one who allowed the other player to exhaust
    // his reserve marbles (GetAllMoves() short-circuits if a player has no more

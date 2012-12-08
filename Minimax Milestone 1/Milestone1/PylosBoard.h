@@ -234,6 +234,7 @@ protected:
    int mLevelLead;    // [Staley] Amount by which white leads in terms of marble level
    int mFreeLead;     // [Staley] Amount of promoteable marbles white has over black.
 
+
    // [Staley] History of moves leading to this point.
    std::list<Move *> mMoveHist;
    

@@ -154,7 +154,7 @@ void PylosMove::operator=(const string &src) {
          temp.push_back(p2);
          temp.push_back(p3);
       } else if (res == EOF)
-         throw BaseException(FString("Unexpected EOF????????"));
+         throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
       else
          throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
    }
@@ -191,7 +191,7 @@ void PylosMove::operator=(const string &src) {
           temp.push_back(p3);
           temp.push_back(p4);
       } else if (res == EOF)
-         throw BaseException(FString("Unexpected EOF????????"));
+         throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
       else
          throw BaseException(FString("Bad Pylos move: %s", src.c_str()));
    }
@@ -221,12 +221,13 @@ Board::Move *PylosMove::Clone() const {
 }
 
 
-// [Staley] release node pointed to by p to the freelist
-ostream &PylosMove::Write(ostream &os) const {
+// release node pointed to by p to the freelist
+ostream &PylosMove::Write(ostream &os) const
+{
    char size = mLocs.size();
    short temp;
    int ndx;
-   
+
    os.write((char *)&mType, sizeof(mType));
    os.write((char *)&size, sizeof(size));
    for (ndx = 0; ndx < size; ndx++) {
@@ -234,9 +235,10 @@ ostream &PylosMove::Write(ostream &os) const {
       os.write((char *)&temp, sizeof(short));
       temp = EndianXfer(mLocs[ndx].second);
       os.write((char *)&temp, sizeof(short));
-   }      
+   }
    return os;
 }
+
 
 // Staley] Make this work with the (unchanged) Write method above.
 istream &PylosMove::Read(istream &is) {
