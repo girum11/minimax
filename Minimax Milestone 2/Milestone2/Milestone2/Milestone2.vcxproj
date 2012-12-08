@@ -36,7 +36,6 @@
   <ItemGroup>
     <ClCompile Include="..\BestMove.cpp" />
     <ClCompile Include="..\Board.cpp" />
-    <ClCompile Include="..\BoardTest.cpp" />
     <ClCompile Include="..\Book.cpp" />
     <ClCompile Include="..\CheckersBoard.cpp" />
     <ClCompile Include="..\CheckersDlg.cpp" />

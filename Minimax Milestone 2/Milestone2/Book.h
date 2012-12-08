@@ -9,7 +9,7 @@
 #include "MyLib.h"
 #include "Board.h"
 
-class Book : std::map<const Board::Key *, BestMove> {
+class Book : public std::map<const Board::Key *, BestMove> {
 public:
 	Book() : mLevel(0) {}
    virtual ~Book();

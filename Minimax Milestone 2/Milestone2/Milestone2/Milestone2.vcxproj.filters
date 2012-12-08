@@ -83,9 +83,6 @@
     <ClCompile Include="..\Board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\BoardTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\CheckersBoard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
