@@ -734,6 +734,8 @@ long PylosBoard::GetValue() const {
    // with no moves left is the one who allowed the other player to exhaust
    // his reserve marbles (GetAllMoves() short-circuits if a player has no more
    // marbles).
+   // TODO: Does this line of code actually do anything?  Since a player who
+   // can't move is always...
    if (movesLeft == 0)
       return kWinVal * mWhoseMove;
    else if (mWhiteReserve == 0)
