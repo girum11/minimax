@@ -1,26 +1,153 @@
--- 32.) Two CheckersBoard::Keys are equal if all squares have same color of piece (or are both empty).
-undoLastMove 1000
-saveBoard CheckersBoardIbssa0
-compareKeys CheckersBoardIbssa0
-doMove c1->d2
-compareKeys CheckersBoardIbssa0
 
--- 33.) Two CheckersBoard::Keys are equal if all squares have the same type of piece (king or nonKing).
-testPlay 64 40
-doMove f2->e1
-doMove c3->d4
-doMove e1->d2
-doMove d4->e3
-doMove d2->c1
-doMove e3->f2
-doMove c1->b2
-doMove f2->g1
-saveBoard CheckersBoardIbssa1
-compareKeys CheckersBoardIbssa1
-doMove b2->a1
-doMove g1->h2
-doMove a1->b2
-doMove h2->g1
-compareKeys CheckersBoardIbssa1
 
-quit
+-- 29.) The integer must be on a line by itself -- trailing nonwhitespace garbage is unacceptable and generates an error indicating there is extra garbage on the line.
+setOptions
+yes
+100
+20 6
+20
+6
+
+setOptions
+y
+100
+20
+6 asdf
+6
+
+setOptions
+y
+100 20 6
+100
+20
+6
+
+30.) Checkers weight is determined by using a weight of 100 for each piece ont he board (negative for white, who plays second) or a special king weight (again negative for white) for each king piece and each piece on a back row, plus a final added weight for which side has the move.
+
+-- *** See Checkers.4 ***
+
+31.) As a special case, if the game is over then GetValue returns winVal if first player has won, -winVal if the second player has won.
+-- undoLastMove 1000
+-- testPlay 10 100
+-- showVal
+-- undoLastMove 1000
+-- testPlay 11 100
+-- showVal
+
+32.) Two CheckersBoard::Keys are equal if all squares have same color of piece (or are both empty).
+-- undoLastMove 1000
+-- saveBoard CheckersBoardIbssa0
+-- compareKeys CheckersBoardIbssa0
+-- doMove c1->d2
+-- compareKeys CheckersBoardIbssa0
+
+33.) Two CheckersBoard::Keys are equal if all squares have the same type of piece (king or nonKing).
+-- testPlay 64 40
+-- doMove f2->e1
+-- doMove c3->d4
+-- doMove e1->d2
+-- doMove d4->e3
+-- doMove d2->c1
+-- doMove e3->f2
+-- doMove c1->b2
+-- doMove f2->g1
+-- saveBoard CheckersBoardIbssa1
+-- compareKeys CheckersBoardIbssa1
+-- doMove b2->a1
+-- doMove g1->h2
+-- doMove a1->b2
+-- doMove h2->g1
+-- compareKeys CheckersBoardIbssa1
+
+34.) One square is less than another if its row is less.
+-- enterMove b2->c3
+-- compareMove b2->c3
+-- compareMove a2->c3
+-- compareMove a2->b3
+
+35.) One square is less than another if its row is the same and its column is less.
+-- compareMove b1->c3
+-- compareMove a3->c2
+
+36.) Move A is less than move B if A is a strict prefix of B.
+-- enterMove c1->d3
+-- compareMove c1->d3->c5
+-- enterMove c1->d3->c5
+compareMove c1->d3
+
+37.) ApplyMove does not clear the current move.  A showMove call after applyMove still shows the move.
+-- undoLastMove 1000
+-- showMove
+-- enterMove c1->d2
+-- showMove
+-- applyMove
+-- showMove
+-- doMove c1->d4
+-- showMove
+
+38.) compareKeys tests: Note that since compareKeys requires loading a board, the command has the side effect of changing board options to those stored in boardFile.
+-- undoLastMove 200
+-- testPlay 88 38
+-- saveBoard CheckersBoardIbssa2
+-- compareKeys CheckersBoardIbssa2
+-- showBoard
+-- enterMove b2->c1
+-- compareKeys CheckersBoardIbssa2
+-- setOptions
+-- y
+-- 4
+-- 4
+-- 4
+-- 4
+-- compareKeys CheckersBoardIbssa2
+
+-- testPlay 8 34
+-- compareKeys CheckersBoardIbssa2
+-- setOptions
+-- y
+-- 6
+-- 7
+-- 8
+-- 7
+-- compareKeys CheckersBoardIbssa2
+-- undoLastMove 34
+-- compareKeys CheckersBoardIbssa2
+-- loadBoard CheckersBoardIbssa2
+-- compareKeys CheckersBoardIbssa2
+
+39.) Whenever the static weights are changed all existing boards of the current board class must automatically reflect the change in the return of GetValue
+
+-- undoLastMove 100
+-- testPlay 34 39
+-- showVal
+
+-- setOptions
+-- y
+-- 76
+-- 7
+-- 5
+
+-- showVal
+
+40.) testPlay test: End the loop early and without complaint if the game reaches its end.
+-- testPlay 54 1000
+
+41.) Check against invalid string input
+-- undoLastMove
+-- doMove c1 _> d2
+-- doMove c1 >- d2
+-- doMove c1 --> d2
+-- doMove c1 ->> d2
+-- doMove [2,3]
+-- doMove [c1,d2]
+
+
+
+
+
+-- quit
+
+
+What if I try to continue the game after "quit"?
+-- undoLastMove 1000
+-- testPlay 7 20
