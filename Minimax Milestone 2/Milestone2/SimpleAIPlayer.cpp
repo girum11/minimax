@@ -6,8 +6,8 @@
 using namespace std;
 
 // Preconditions: 
-// bMove points to a BestMove object, which may have NULL for its current 
-// bestMove.  Any 'bMove->value' V such that V <= min or V >= max is 
+// bestMove points to a BestMove object, which may have NULL for its current 
+// move.  Any 'bestMove->value' V such that V <= min or V >= max is 
 // "uninteresting" to the caller.  
 // 
 // 'level' is always >= 1 and indicates how deeply to probe. (Note that this 
@@ -19,24 +19,24 @@ using namespace std;
 //
 // 
 // Postconditions: 
-// 'bMove->value' indicates the result of the minimax search. If 
-// bMove->value <= min or bMove->value >= max then no "interesting" move could 
-// be found, and bMove->bestMove will indicate the first move where this fact 
+// 'bestMove->value' indicates the result of the minimax search. If 
+// bestMove->value <= min or bestMove->value >= max then no "interesting" move could 
+// be found, and bestMove->move will indicate the first move where this fact 
 // was uncovered.
 // 
-// If 'board' is an endgame board, then  bMove->value will be winVal, 0 or 
-// -winVal, and bMove->bestMove will be NULL since there is no move from an 
-// endgame position.  Otherwise, bMove->bestMove will provide the best move.  
+// If 'board' is an endgame board, then  bestMove->value will be winVal, 0 or 
+// -winVal, and bestMove->move will be NULL since there is no move from an 
+// endgame position.  Otherwise, bestMove->move will provide the best move.  
 //
-// 'bMove->bestReply' gives the best answering move to bMove->bestMove, or NULL 
-// if bMove->bestMove ends the game.  
+// 'bestMove->bestReply' gives the best answering move to bestMove->move, or NULL 
+// if bestMove->move ends the game.  
 // 
-// 'bMove->numBoards' gives the number of boards examined during the minimax 
+// 'bestMove->numBoards' gives the number of boards examined during the minimax 
 // computation, including the root board. 
 // 
 // *board is left in the same state as it was when the call commenced.  
 // 
-// 'bMove->value' gives the minimax computed value for *board.  
+// 'bestMove->value' gives the minimax computed value for *board.  
 // 
 // *book will contain new entries for any board configurations that were 
 // computed during the call, with depth greater than or equal to SAVE_LEVEL, 
@@ -68,7 +68,8 @@ Hint:
 
 /*
 Hint:
-   This algorithm is probably a double-recursive algorithm, I think. 
+   The optimal move for each board is determined by calling Minimax with the 
+   lookahead specified, so in fact MakeBook uses double-recursion. 
 */
 
 /*
@@ -79,74 +80,76 @@ Hint:
 */
 
 void SimpleAIPlayer::Minimax(Board *board, int level, long min, long max,
- BestMove *bMove, Book *book, int debugFlag) {
-//    list<Board::Move *> moves;
-//    list<Board::Move *>::iterator moveIter;
-//    BestMove subRes(0, 0, level, 1);
-//    const Board::Key *key = 0;
-//    Book::iterator bookIter;
-//    pair<Book::iterator, bool> insRes;
-// 
-//    assert(level >= 1);
-// 
-//    // Base case.
-//    // If we were given a book
-//    if (book && (bookIter = book->find(key = board->GetKey())) != book->end()
-//     && ________________________________) {
-//     
-//       *bMove = _____________;
-//       bMove->numBoards = 1;
-//    }
-//    else {
-//       board->GetAllMoves(&moves);
-//       *bMove = subRes;
-//       bMove->value = moves.size() == 0 ? ____________________________ :
-//        (board->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
-// 
-//       for (moveIter = moves.begin(); ____________ && moveIter != moves.end(); 
-//        moveIter++) {
-// 
-//          board->ApplyMove(*moveIter);
-// 
-//          if (level == 1)
-//             subRes.value = board->GetValue();
-//          else
-//             Minimax(board, level-1, min, max, &subRes, book, debugFlag);
-// 
-//          if (board->GetWhoseMove() == 1 && ___________________) {
-//             bMove->value = min = subRes.value;
-//             bMove->SetBestMove(_______________________);
-//          }
-//          else if (board->GetWhoseMove() == 0 && __________________) {
-//             bMove->value = max = subRes.value;
-//             bMove->SetBestMove(_______________________);
-//          }
-// 
-//          if (debugFlag > 0) {
-//             for (int cnt = level-1; cnt > 0; cnt--)
-//                cout << "   ";
-//             cout << "Move " << (string)**moveIter << " nets " << subRes.value
-//              << " min/max is " << min << "/" << max << endl;
-//          }
-// 
-//          board->UndoLastMove();
-//          bMove->numBoards += subRes.numBoards;
-//       }
-// 
-//       for (; moveIter != moves.end(); moveIter++)
-//       
-//          _______________________;
-// 
-//       if (book && level >= SAVE_LEVEL && _________________ && bMove->bestMove) {
-//          insRes = book->insert(_____________________________);
-//          if (insRes.second)
-//             key = 0;
-//          else if (_______________________________________) {
-//             (*insRes.first).second = *bMove;
-//          } 
-//       }
-//    }
-//    delete key;
+ BestMove *bestMove, Book *book, int debugFlag) {
+   list<Board::Move *> moves;
+   list<Board::Move *>::iterator moveIter;
+   BestMove subRes(0, 0, level, 1);
+   const Board::Key *key = 0;
+   Book::iterator bookIter;
+   pair<Book::iterator, bool> insRes;
+
+   assert(level >= 1);
+
+   // First, try and lookup if this move already exists in the book that we
+   // were given.  
+   // This should only apply if the game we're playing benefits from using
+   // a transposition table.
+   if (book && (bookIter = book->find(key = board->GetKey())) != book->end()
+    && ________________________________) {
+    
+      *bestMove = _____________;
+      bestMove->numBoards = 1;
+   }
+   else {
+      board->GetAllMoves(&moves);
+      *bestMove = subRes;
+      bestMove->value = moves.size() == 0 ? ____________________________ :
+       (board->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
+
+      for (moveIter = moves.begin(); ____________ && moveIter != moves.end(); 
+       moveIter++) {
+
+         board->ApplyMove(*moveIter);
+
+         if (level == 1)
+            subRes.value = board->GetValue();
+         else
+            Minimax(board, level-1, min, max, &subRes, book, debugFlag);
+
+         if (board->GetWhoseMove() == 1 && ___________________) {
+            bestMove->value = min = subRes.value;
+            bestMove->SetBestMove(_______________________);
+         }
+         else if (board->GetWhoseMove() == 0 && __________________) {
+            bestMove->value = max = subRes.value;
+            bestMove->SetBestMove(_______________________);
+         }
+
+         if (debugFlag > 0) {
+            for (int cnt = level-1; cnt > 0; cnt--)
+               cout << "   ";
+            cout << "Move " << (string)**moveIter << " nets " << subRes.value
+             << " min/max is " << min << "/" << max << endl;
+         }
+
+         board->UndoLastMove();
+         bestMove->numBoards += subRes.numBoards;
+      }
+
+      for (; moveIter != moves.end(); moveIter++)
+      
+         _______________________;
+
+      if (book && level >= SAVE_LEVEL && _________________ && bestMove->move) {
+         insRes = book->insert(_____________________________);
+         if (insRes.second)
+            key = 0;
+         else if (_______________________________________) {
+            (*insRes.first).second = *bestMove;
+         } 
+      }
+   }
+   delete key;
 }
 
 
