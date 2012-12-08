@@ -104,9 +104,11 @@ void SimpleAIPlayer::Minimax(Board *board, int level, long min, long max,
 // [Staley] for the board you’re computing, if your new computation is for a 
 // [Staley] deeper lookahead level than the one in the book.
 
-   // [Filled blank] Consult the transposition table to see if we 
+   // [Filled blank] Consult the transposition table to see if we already
+   // have a precomputed best move "with level at least as deep as the one
+   // you need."
    if (book && (bookIter = book->find(key = board->GetKey())) != book->end()
-    && ________________________________) {
+    && (*bookIter).second.depth >= level) {
     
       // [Filled blank] If we find the bestMove in the transposition table,
       // then set the bestMove straightaway.

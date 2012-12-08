@@ -134,4 +134,9 @@ void ConstructBookFile(int bookDepth) {
    // from the beginning.  Run the DFS of Board configs down to depth of 
    // 'bookDepth' (also specified by the user from before).
 
+
+// [Staley] On each minimax call, we consult the transposition table for any 
+// [Staley] lookahead level above 0 (which is always done by directly calling 
+// [Staley] GetValue, as in the code skeleton I supplied).
+
 }
