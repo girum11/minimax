@@ -220,10 +220,11 @@ void PylosBoard::TakeMarble(Spot *trg) {
 
 void PylosBoard::UpdateBoardValuation() {
 
-   // TODO: A player can win if he puts down the topmost marble.  Then, both
-   // players will be out of marbles in their reserve.  Thus, this assert 
-   // is totally invalid.
-   // assert(!(mWhiteReserve == 0 && mBlackReserve == 0));
+   // A player can never actually put down the final marble, since you have
+   // to fill up Level 2 to place the marble.  Filling up Level 2 would
+   // drain the other player's marbles, ending the game.  Thus, it should never
+   // be true that both players have 0 marbles.
+   assert(!(mWhiteReserve == 0 && mBlackReserve == 0));
 
    // Go through all pieces and update mLevelLead and mFreeLead
    Set allPieces(mWhite|mBlack);
