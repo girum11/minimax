@@ -139,11 +139,11 @@ void CheckersMove::operator=(const string &src) {
    mLocs = locs;
    AssertMe();
 
-   // Set whether or not this is a jump move
-   if (IsJump(mLocs[0], mLocs[1]))
-      mIsJumpMove = true;
-   else
-      mIsJumpMove = false;
+//    Set whether or not this is a jump move
+//          if (IsJump(mLocs[0], mLocs[1]))
+//             mIsJumpMove = true;
+//          else
+//             mIsJumpMove = false;
 }
 
 Board::Move *CheckersMove::Clone() const {
@@ -151,66 +151,94 @@ Board::Move *CheckersMove::Clone() const {
 }
 
 ostream &CheckersMove::Write(ostream &os) const {
-   // Must save the following data:
-   //    mLocs
-   //    mIsJumpMove
-   //    mIsKingMeMove
-   int ndx = 0;
-   char size = mLocs.size();
-   pair<char, unsigned int> tempPair;
-   bool tempBool;
+//    // Must save the following data:
+//    //    mLocs
+//    //    mIsJumpMove
+//    //    mIsKingMeMove
+//    int ndx = 0;
+//    char size = mLocs.size();
+//    pair<char, unsigned int> tempPair;
+//    bool tempBool;
+// 
+//    // Write out mLocs's size and mLocs itself
+//    os.write((char *)&size, sizeof(size));
+//    for (ndx = 0; ndx < mLocs.size(); ++ndx) {
+//       tempPair.first = EndianXfer(mLocs[ndx].first);
+//       os.write((char *)&tempPair.first, sizeof(tempPair.first));
+//       tempPair.second = EndianXfer(mLocs[ndx].second);
+//       os.write((char *)&tempPair.second, sizeof(tempPair.second));
+//    }
+// 
+//    // Write out boolean flags
+//    // I could have a bug here, due to booleans not being EndianXfer()'d
+//    // TODO: I can't read/write these booleans due to the spec making me
+//    // not have them, but I *can* safely omit writing them, since I'd
+//    // regenerate them from calling ApplyMove on each move that *is* written.
+//    // Refactoring these out involves making my ApplyMove() and UndoMove() logic 
+//    // use some new helper methods called  CanJumpInAtLeastOneDirection() and 
+//    // IsKingMeMove(), as opposed to using boolean flags.
+//    os.write((char *)&mIsJumpMove, sizeof(mIsJumpMove));
+//    os.write((char *)&mIsKingMeMove, sizeof(mIsJumpMove));
+// 
+//    return os;
 
-   // Write out mLocs's size and mLocs itself
-   os.write((char *)&size, sizeof(size));
-   for (ndx = 0; ndx < mLocs.size(); ++ndx) {
-      tempPair.first = EndianXfer(mLocs[ndx].first);
-      os.write((char *)&tempPair.first, sizeof(tempPair.first));
-      tempPair.second = EndianXfer(mLocs[ndx].second);
-      os.write((char *)&tempPair.second, sizeof(tempPair.second));
+   int size = mLocs.size();
+
+   // Number of steps in the move, row/col pairs giving the position of each
+   // step
+   os.write((char *) &size, sizeof(int));
+
+   for (unsigned int i = 0; i < size; i++) {
+      os.write((char *) &mLocs[i].first, sizeof(char));
+      os.write((char *) &mLocs[i].second, sizeof(unsigned int));
    }
 
-   // Write out boolean flags
-   // I could have a bug here, due to booleans not being EndianXfer()'d
-   // TODO: I can't read/write these booleans due to the spec making me
-   // not have them, but I *can* safely omit writing them, since I'd
-   // regenerate them from calling ApplyMove on each move that *is* written.
-   // Refactoring these out involves making my ApplyMove() and UndoMove() logic 
-   // use some new helper methods called  CanJumpInAtLeastOneDirection() and 
-   // IsKingMeMove(), as opposed to using boolean flags.
-   os.write((char *)&mIsJumpMove, sizeof(mIsJumpMove));
-   os.write((char *)&mIsKingMeMove, sizeof(mIsJumpMove));
-
    return os;
+
 }
 
 istream &CheckersMove::Read(istream &is) {
-   // Must read the following data:
-   //    mLocs
-   //    mIsJumpMove
-   //    mIsKingMeMove
-   int i = 0;
-   char mLocsSize = -1;
-   pair<char, unsigned int> tempPair;
+//    // Must read the following data:
+//    //    mLocs
+//    //    mIsJumpMove
+//    //    mIsKingMeMove
+//    int i = 0;
+//    char mLocsSize = -1;
+//    pair<char, unsigned int> tempPair;
+// 
+//    // Read in mLocs's size and mLocs itself
+//    is.read((char *)&mLocsSize, sizeof(mLocsSize));
+//    assert(mLocsSize != -1);  // sanity check to ensure mLocsSize was read().
+//    mLocs.resize(mLocsSize);
+//    for (i = 0; i < mLocsSize; ++i) {
+// 
+//       is.read((char *)&mLocs[i].first, sizeof(mLocs[i].first));
+//       mLocs[i].first = EndianXfer(mLocs[i].first);
+//       is.read((char *)&mLocs[i].second, sizeof(mLocs[i].second));
+//       mLocs[i].second = EndianXfer(mLocs[i].second);
+//    }
+// 
+//    // Read in boolean flags
+//    // TODO: Remove this -- spec says I can't write these out.  Refactoring
+//    // these out involves making my ApplyMove() and UndoMove() logic use some
+//    // new helper methods called  CanJumpInAtLeastOneDirection() and 
+//    // IsKingMeMove(), as opposed to using boolean flags.
+//    is.read((char *)&mIsJumpMove, sizeof(mIsJumpMove));
+//    is.read((char *)&mIsKingMeMove, sizeof(mIsKingMeMove));
+// 
+//    return is;
 
-   // Read in mLocs's size and mLocs itself
-   is.read((char *)&mLocsSize, sizeof(mLocsSize));
-   assert(mLocsSize != -1);  // sanity check to ensure mLocsSize was read().
-   mLocs.resize(mLocsSize);
-   for (i = 0; i < mLocsSize; ++i) {
+   int size;
+   char row;
+   unsigned int col;
+   is.read((char *) &size, sizeof(int));
 
-      is.read((char *)&mLocs[i].first, sizeof(mLocs[i].first));
-      mLocs[i].first = EndianXfer(mLocs[i].first);
-      is.read((char *)&mLocs[i].second, sizeof(mLocs[i].second));
-      mLocs[i].second = EndianXfer(mLocs[i].second);
+   mLocs.clear();
+   for (int i = 0; i < size; i++) {
+      is.read((char *) &row, sizeof(char));
+      is.read((char *) &col, sizeof(unsigned int));
+      mLocs.push_back(std::make_pair(row, col));
    }
-
-   // Read in boolean flags
-   // TODO: Remove this -- spec says I can't write these out.  Refactoring
-   // these out involves making my ApplyMove() and UndoMove() logic use some
-   // new helper methods called  CanJumpInAtLeastOneDirection() and 
-   // IsKingMeMove(), as opposed to using boolean flags.
-   is.read((char *)&mIsJumpMove, sizeof(mIsJumpMove));
-   is.read((char *)&mIsKingMeMove, sizeof(mIsKingMeMove));
 
    return is;
 }

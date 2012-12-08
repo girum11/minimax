@@ -35,7 +35,7 @@ public:
    };
 
    CheckersBoard();
-   ~CheckersBoard() { Delete(); }
+   ~CheckersBoard() { Reset(); }
 
    long GetValue() const;
    void ApplyMove(Move *);
@@ -127,7 +127,7 @@ protected:
    void ResetBoard();
 
    // Frees all CheckersBoard storage.
-   void Delete();
+   void Reset();
    
    // Helper function to add a piece on the board.
    // ApplyMove() and UndoLastMove() should use Put() instead of this method.

@@ -85,17 +85,17 @@ CheckersBoard::CheckersBoard() : mWhoseMove(kBlack),
 
    // Call the "Delete()" method, which really is just a housecleaning method
    // that fills up the CheckersBoard with the right initial pieces.
-   Delete();
+   Reset();
 }
 
-void CheckersBoard::Delete() {
+void CheckersBoard::Reset() {
    
    // Reset the member datum to their default values.
    mBlackSet = mWhiteSet = mKingSet = 0x0;
    mWhoseMove = kBlack;
    mBlackPieceCount = mWhitePieceCount = kStartingPieces;
    mBlackKingCount = mWhiteKingCount = 0;
-   mBlackBackCount = mWhiteBackCount = 0;
+   mBlackBackCount = mWhiteBackCount = kStartingBackPieces;
 
    // Fill up mBlackSet and mWhiteSet
    for (char row = 'A'; row <= 'H'; row++) {
@@ -199,7 +199,8 @@ void CheckersBoard::ApplyMove(Move *move) {
 
    // If this move is a "jump move", then you need to do perform some extra
    // logic to remove cells that you've jumped over.
-   if (castedMove->mIsJumpMove) {
+   // if (castedMove->mIsJumpMove) {
+   if (CheckersMove::IsJump(castedMove->mLocs[0], castedMove->mLocs[1])) {
       for (unsigned int i = 1; i < (*locs).size(); ++i) {
          Cell *jumpedOverCell = NULL;
          Cell *toCell = GetCell((*locs)[i]);
@@ -312,7 +313,8 @@ void CheckersBoard::UndoLastMove() {
    
    // If you're undoing a jump move, then Put each of the moves that you 
    // captured back in.
-   if (moveToUndo->mIsJumpMove) {
+   // if (moveToUndo->mIsJumpMove) {
+   if (CheckersMove::IsJump(moveToUndo->mLocs[0], moveToUndo->mLocs[1])) {
       int numberOfPiecesToPutBack = moveToUndo->mLocs.size() - 1;
 
       for (int i = 0; i < numberOfPiecesToPutBack; i++) {
@@ -511,23 +513,22 @@ void CheckersBoard::SetOptions(const void *opts) {
 
 istream &CheckersBoard::Read(istream &is) {
 
-   int moveCount = -1;
+   int mvCount;
 
-   // Clear out the Default board's existing data
-   Delete();
+   Reset();
 
-   // Read in the Rules that the board should use.
-   is.read((char *)&CheckersBoard::mRules, sizeof(CheckersBoard::mRules));
-   CheckersBoard::mRules.EndSwap();
+   is.read((char *) &mRules.kingWgt, sizeof(int));
+   is.read((char *) &mRules.backRowWgt, sizeof(int));
+   is.read((char *) &mRules.moveWgt, sizeof(int));
+   mRules.EndSwap();
 
-   is.read((char *)&moveCount, sizeof(moveCount));
-   assert(moveCount != -1);  // sanity check to ensure that the read() happened
-   for (int i = 0; i < moveCount; i++) {
-      CheckersMove *newMove = new CheckersMove(CheckersMove::LocVector(), false);
-      is >> *newMove;
+   is.read((char *) &mvCount, sizeof(int));
+   mvCount = EndianXfer(mvCount);
 
-      assert(newMove->mLocs.size() != 0);
-
+   Board::Move *newMove = NULL;
+   for (int i = 0; i < mvCount; i++) {
+      newMove = CreateMove();
+      is >> *dynamic_cast<CheckersMove *>(newMove);
       ApplyMove(newMove);
    }
 
@@ -535,14 +536,16 @@ istream &CheckersBoard::Read(istream &is) {
 }
 
 ostream &CheckersBoard::Write(ostream &os) const { 
-   Rules rules = mRules;
-   list<Move *>::const_iterator iter;
-   int moveCount = EndianXfer((int)mMoveHist.size());
+Rules rls = mRules;
+   int mvCount = EndianXfer((int) mMoveHist.size());
+   std::list<Board::Move *>::const_iterator iter;
 
-   rules.EndSwap();
-   os.write((char *)&rules, sizeof(rules));
+   rls.EndSwap();
+   os.write((char *) &rls.kingWgt, sizeof(int));
+   os.write((char *) &rls.backRowWgt, sizeof(int));
+   os.write((char *) &rls.moveWgt, sizeof(int));
 
-   os.write((char *)&moveCount, sizeof(moveCount));
+   os.write((char *) &mvCount, sizeof(int));
    for (iter = mMoveHist.begin(); iter != mMoveHist.end(); iter++)
       os << **iter;
 
