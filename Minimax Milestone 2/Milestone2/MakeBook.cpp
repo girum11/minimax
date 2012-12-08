@@ -5,7 +5,6 @@
 
 using namespace std;
 
-void ConstructBookFile(int bookDepth);
 
 
 // [Staley] Write a program “MakeBook” that works like the sample executable 
@@ -17,7 +16,7 @@ void ConstructBookFile(int bookDepth);
 // [Staley] MinimaxLevel is the minimax lookahead to use when determining a 
 // [Staley] best move for each board key.  BookDepth indicates how many boards 
 // [Staley] to generate.  Specifically, it tells how many halfmoves from the 
-// [Staley] starting board should be covered by the book file.  A minimaxLevel 
+// [Staley] starting board should be covered by the bookFile file.  A minimaxLevel 
 // [Staley] of 5 and a bookDepth of 2 indicate that you should generate a best 
 // [Staley] move for the initial board and all boards reachable from it in two 
 // [Staley] halfmoves (something like 257 boards for Pylos), and that for each 
@@ -29,8 +28,8 @@ void ConstructBookFile(int bookDepth);
 // [Staley] calling Minimax with the lookahead specified, so in fact MakeBook 
 // [Staley] uses double-recursion. 
 // [Staley] 
-// [Staley] When the book is complete, write it to a binary "book file" having 
-// [Staley] the specified fileName.  In milestone 3  you’ll use this book file 
+// [Staley] When the bookFile is complete, write it to a binary "bookFile file" having 
+// [Staley] the specified fileName.  In milestone 3  you’ll use this bookFile file 
 // [Staley] to avoid minimax computations for common board positions early in 
 // [Staley] the game as described above. 
 // [Staley] 
@@ -53,15 +52,15 @@ void ConstructBookFile(int bookDepth);
 // [Staley] minimax,
 // [Staley] 
 // [Staley] You will find it necessary to track all the Keys you've generated 
-// [Staley] thus far as you fill in the book, so as to avoid entering the same 
-// [Staley] Key twice in the book (two different sequences of moves might 
-// [Staley] generate the same board).  Note the "Duplicate. No book entry." 
+// [Staley] thus far as you fill in the bookFile, so as to avoid entering the same 
+// [Staley] Key twice in the bookFile (two different sequences of moves might 
+// [Staley] generate the same board).  Note the "Duplicate. No bookFile entry." 
 // [Staley] announcements in my output.  You must have these in yours as well.
 // [Staley] 
 // [Staley] A hint on how to duplicate my key count:  When I analyze a board, I 
 // [Staley] first get a key for it.  Then I output the current move/key count, 
 // [Staley] and then I analyze the board using the key.
-int main() {
+int main(int argc, char **argv) {
    // Restrictions:
    // 1. Your entire MakeBook.cpp can be at most 90 lines  (mine is 75).
    // Use the 'smartcount' bin in your CPE305 folder to measure this.
@@ -79,44 +78,38 @@ int main() {
    // Views, etc. are created using Class and BoardClass.
    // 
    // 5. Your MakeBook executable must run in at most twice the time mine takes
-   // for a given book generation.
+   // for a given bookFile generation.
    // TODO: Pylos and Checkers need to incrementally increment the board value.
-   BoardClass *boardClass = NULL;
+   const BoardClass *boardClass = NULL;
    Board *board = NULL;
    int minimaxLevel = -1, bookDepth = -1;
-   string fileName("");
-   Book *transpositionTable = NULL, *bookFile = NULL;
+   string boardType(""), filename("");
+   Book bookFile;
    
-
-   // First, prompt the user for a SINGLE LINE OF INPUT of the following usage:
-   //             BoardClass minimaxLevel bookDepth fileName
-
+   // First, prompt the user for commands of the following usage:
+   cout << "Enter boardType, level, depth, and filename: ";
+   cin >> boardType >> minimaxLevel, bookDepth, filename;
 
    // Use reflection to instantiate the correct board, or give an error
    // message if that BoardClass type doesn't exist.
+   if ((boardClass = BoardClass::ForName(argv[1])) == NULL
+    || (board = dynamic_cast<Board *>(boardClass->NewInstance())) == NULL) {
+      cout << "Unknown type " << argv[1] << endl;
+      return -1;
+   }
 
-   // Figure out if the board that you were given can benefit from using a
-   // transposition table.  Use the UseTranspositionTable() method from
-   // BoardClass.
+   // Create the "bookFile file."
+   ConstructBookFileDFS(board, &bookFile, boardClass->UseTransposition(), 
+    0, bookDepth);
 
-   // If this board benefits from using a transposition table, then instantiate
-   // transpositionTable to be a new empty Book.  Otherwise, leave it NULL.
-
-   // Create the "book file."
-   ConstructBookFile(bookDepth);
-
-
-   // When the book is complete (after you finish running the DFS), write it
-   // to a binary "book file" having the specified fileName.
-
-
-
-
+   // When the bookFile is complete (after you finish running the DFS), write it
+   // to a binary "bookFile file" having the specified fileName.
+   
 
 
    // More hints for this are given in the spec.  E.g: Be sure to keep track of 
    // all the Keys you've collected thus far to avoid entering the same Key 
-   // twice into the book.
+   // twice into the bookFile.
    
 
 
@@ -124,19 +117,46 @@ int main() {
 }
 
 
-void ConstructBookFile(int bookDepth) {
+// A DFS on the initial Board configuration, where each node 
+// is a Board configuration, and "exploring" the node consists of calling 
+// the Minimax() method on that node to fill in what that configuration's 
+// bestMove is, using the lookahead specified from the user in our prompt 
+// from the beginning.
+void ConstructBookFileDFS(Board *board,
+                          Book *bookFile,
+                          bool useX, // True if this BoardClass uses an XTable.
+                          int currentDepth, 
+                          int bookDepth) 
+{
+   // Get all of the children nodes.
+   list<Board::Move *> allMoves;
+   board->GetAllMoves(&allMoves);
    
+   
+   for (list<Board::Move *>::iterator moveIter = allMoves.begin();
+    moveIter != allMoves.end(); moveIter++) {
+      // The DFS should call itself until (currentDepth > bookDepth), not calling 
+      // Minimax() until this is true.
+      if (currentDepth < bookDepth) {
 
-   // To do so, run a DFS on the initial Board configuration, where each node 
-   // is a Board configuration, and "exploring" the node consists of calling 
-   // the Minimax() method on that node to fill in what that configuration's 
-   // bestMove is, using the lookahead specified from the user in our prompt 
-   // from the beginning.  Run the DFS of Board configs down to depth of 
-   // 'bookDepth' (also specified by the user from before).
+      }
+      else {
+         // Once you're ready to call Minimax(), create a new tTable for that
+         // particular Minimax call (quoted from "Transposition Table" email).
+
+      }
+   }
+   
+   
+   
+   // TODO: Should it call Minimax() at leaf nodes?  That is, should I be
+   // using GetAllMoves() to calculate if a node is a leaf node here in the DFS?
+   // Probably not, but be sure about it first.
 
 
-// [Staley] On each minimax call, we consult the transposition table for any 
-// [Staley] lookahead level above 0 (which is always done by directly calling 
-// [Staley] GetValue, as in the code skeleton I supplied).
-
+   // Clean up memory after your GetAllMoves() call.
+   for (list<Board::Move *>::iterator moveIter = allMoves.begin(); 
+    moveIter != allMoves.end(); moveIter++) {
+      delete *moveIter;
+   }
 }
