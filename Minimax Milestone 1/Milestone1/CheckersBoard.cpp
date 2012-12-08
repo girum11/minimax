@@ -173,6 +173,11 @@ void CheckersBoard::ApplyMove(Move *move) {
    int jumpedPieces = 0; // The number of pieces that move "jumps"
    Piece *pieceToMove = NULL;
 
+   // Remove the piece from its original location.  Do it immediately so that
+   // your assert() of the destination pieces doesn't bug in the case where
+   // you land back into your original spot.
+   pieceToMove = Take(originCell, mWhoseMove);
+
    // Assertions on each destination piece.
    for (unsigned int index = 1; index < (*locs).size(); ++index) {
       Cell *cell = GetCell((*locs)[index].first, (*locs)[index].second);
@@ -193,9 +198,6 @@ void CheckersBoard::ApplyMove(Move *move) {
          }
       }
    }
-
-   // Remove the piece from its original location.
-   pieceToMove = Take(originCell, mWhoseMove);
 
    // If this move is a "jump move", then you need to do perform some extra
    // logic to remove cells that you've jumped over.

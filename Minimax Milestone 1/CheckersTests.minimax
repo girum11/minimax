@@ -1,12 +1,95 @@
-testRun 64 40
-saveBoard CheckersBoardIbssa1
-showBoard
-undoLastMove 1000
-showBoard
-loadBoard CheckersBoardIbssa1
-showBoard
-compareKeys CheckersBoardIbssa1
-testRun 20 20
-compareKeys CheckersBoardIbssa1
+--1.) Checking for the case where a King jumps around and lands back into the same spot.
+--2.) In a multiple jump, the jumping piece or king can change directions, jumping first in one direction and then in another direction.
+doMove C3 -> D2       
+doMove F4 -> E3       
+doMove D2 -> F4       
+doMove G3 -> E5       
+doMove C5 -> D4       
+doMove E5 -> C3       
+doMove B4 -> D2       
+doMove H2 -> G3       
+doMove A5 -> B4       
+doMove F6 -> E5       
+doMove D2 -> E3       
+doMove F2 -> D4       
+doMove B4 -> C5       
+doMove G1 -> F2       
+doMove C5 -> E3 -> G1 
+doMove E5 -> D6       
+doMove C7 -> E5       
+doMove G7 -> F6       
+doMove E5 -> G7       
+doMove H8 -> F6       
+doMove B6 -> C7       
+doMove F6 -> E5       
+doMove C7 -> D6       
+doMove E5 -> C7       
+doMove B8 -> D6       
+doMove G5 -> F4       
+doMove A7 -> B6       
+doMove H4 -> G5       
+doMove B2 -> C3       
+doMove F4 -> E5  
+doMove d6->f4->h2
+doMove g5->f6
+doMove b6->c7
+doMove f6->e5
+doMove c7->d8
+doMove e5->d6
+doMove c1->d2
+doMove d6->c7
+doMove c3->d4
+doMove c7->b8
+doMove a1->b2
+doMove b8->a7
+doMove a3->b4
+doMove a7->b6
+-- doMove h2->g3
+-- doMove b6->a7
+-- doMove g3->f4
+-- doMove a7->b6
+-- doMove d8->e7
+-- doMove f8->d6
+-- doMove f4->g3
+-- doMove d6->c7
+-- doMove g3->h2
+-- doMove c7->b8
+-- doMove h2->g3
+-- doMove b8->a7
+-- doMove g3->h2
+-- doMove a7->b8
+-- doMove h2->g3
+-- doMove b8->c7
+-- doMove g3->h2
+-- doMove c7->d6
+-- doMove b6->c5
+-- doMove h2->g3
+-- doMove b6->c5
+-- doMove g3->h2
+-- doMove c5->a3->c1->e3->c5
+-- doMove c5->a3->c1->e3->c5
+-- doMove c5->a3
 
-quit
+15.) You cannot jump the same piece twice in the same move
+-- undoLastMove 1
+-- doMove c5->a3->c1->e3->c5->a3
+
+13.) (when jumping pieces, you remove the jumped pieces from the board).
+-- doMove b4->a3
+-- doMove b2->a3
+-- doMove d2->e3
+-- doMove b4->c3
+
+-- showBoard
+-- showMove
+-- showVal
+-- showMoveHist
+-- keyMoveCount
+-- testPlay 7 777
+-- showBoard
+
+3.) Players alternate moves in Checkers
+-- doMove c1->d2 doMove c3->d4
+-- doMove c1->d2
+-- doMove c3->d4
+-- undoLastMove 100
