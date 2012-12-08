@@ -1,71 +1,26 @@
-
-undoLastMove 100
-showBoard
-applyMove
+-- 32.) Two CheckersBoard::Keys are equal if all squares have same color of piece (or are both empty).
+undoLastMove 1000
+saveBoard CheckersBoardIbssa0
+compareKeys CheckersBoardIbssa0
 doMove c1->d2
-doMove f4->e3
-//ignore the have to capture and play normally
+compareKeys CheckersBoardIbssa0
+
+-- 33.) Two CheckersBoard::Keys are equal if all squares have the same type of piece (king or nonKing).
+testPlay 64 40
+doMove f2->e1
 doMove c3->d4
-undoLastMove 1
-doMove f2->e3
-doMove d2->e1
-doMove e3->d2
-//eat the white even though black is ahead of it?
-doMove c3->e1
-//oob
-doMove c7->e8
-doMove c7->d8
+doMove e1->d2
+doMove d4->e3
 doMove d2->c1
-doMove c3->d2
-showBoard
-doMove f2->e3
-doMove f2->e3
-
-
-//  do a draughts move of capture backwards
-doMove c1->e3
-doMove f6->e7
-doMove f6->e7
-showBoard
-doMove d8->f6
-showBoard
-doMove g5->e7
-
-
-
-*** MyBoardTest bug appears after here ***
-
-//junk
-doMove b8->c7
-doMove f4->e3
-doMove d2->f4
-showBoard
-doMove g5->e3
-doMove g3->e5
-undoLastMove 3
-doMove h4->g5
-showBoard
-showMoveHist
-keyMoveCount
-saveBoard wowow.pls
-compareKeys wowow.pls
-keyMoveCount
-doMove e1->f2
-doMove g1->e3
-doMove d2->e1
-doMove g7->f6
-showBoard
-doMove a7->b8
-doMove h8->g7
-showBoard
-showMoveHist
-
-undoLastMove 9
---BugManifestsHere
-
-*** myexecm: CheckersBoard.h:137: void CheckersBoard::HalfPut(CheckersBoard::Piece*, CheckersBoard::Cell*) const: Assertion `(mBlackSet & mWhiteSet) == 0' failed.
-
-undoLastMove 1
---BugManifestsHere
+doMove e3->f2
+doMove c1->b2
+doMove f2->g1
+saveBoard CheckersBoardIbssa1
+compareKeys CheckersBoardIbssa1
+doMove b2->a1
+doMove g1->h2
+doMove a1->b2
+doMove h2->g1
+compareKeys CheckersBoardIbssa1
 
 quit

@@ -97,9 +97,6 @@ int main(int argc, char **argv) {
    list<Board::Move *> allMoves;
    const Board::Key *key = NULL, *cmpKey = NULL;
 
-   // TODO: WARNING: This should be 80... but Clint insists that I have
-   // something messed up on my end -- he thinks that I might not be using the 
-   // max length of the strings.  Schedule office hours for this if necessary.
    const unsigned int LINE_LENGTH = 80;
 
 	// Sample of some Class code
@@ -204,16 +201,6 @@ int main(int argc, char **argv) {
 			} else if (command.compare("showMove") == 0) {
 				cout << (string) *move << endl;
 			} else if (command.compare("applyMove") == 0) {
-
-            // TODO: Make your BoardTest check your GetAllMoves() list before
-            // trying to applyMove, to ensure that you don't have bad test
-            // cases.  Print out the c_str() that you tried to apply and
-            // put it in all caps.  Be sure to comment it out before you handin
-            // though, since checking "GetAllMoves()" every time you applyMove
-            // is slow as balls.
-
-            // This version of applyMove gives a clone of the default
-            // move to the board.
             ApplyMove(board, move);
 			} else if (command.compare("saveBoard") == 0) {
 				cin >> cArg;
@@ -267,9 +254,6 @@ int main(int argc, char **argv) {
             void *options = boardClass->GetOptions();
             dialog->Run(cin, cout, options);
             boardClass->SetOptions(options);
-
-            // TODO: delete options
-            //free(options);
 
          } else if (command.compare("showVal") == 0) {
             cout << "Value: " << board->GetValue() << endl;

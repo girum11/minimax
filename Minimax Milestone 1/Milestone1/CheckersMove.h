@@ -18,8 +18,6 @@ public:
    typedef std::pair<char, unsigned int> Location;
    typedef std::vector<Location> LocVector;
 
-   // TODO: Inner classes go here if you need them.
-
    friend class CheckersBoard;
 
    CheckersMove(const LocVector &locs, bool isJump)
@@ -27,10 +25,6 @@ public:
       AssertMe();
    }
    virtual ~CheckersMove() {}
-
-
-   // TODO: Extra member functions go here if you need them.
-
 
    bool operator==(const Board::Move &rhs) const; 
    bool operator<(const Board::Move &rhs) const;
@@ -59,7 +53,6 @@ protected:
       loc->first = toupper(loc->first);
 
       // Verify that none of the Locations are out of bounds
-      // TODO: Magic number
       if (!InRange<char>('A', loc->first, 'I') ||
        !InRange<unsigned int>(1, loc->second, 9)) {
           throw BaseException(FString("Out of bounds Checkers move: %s", 

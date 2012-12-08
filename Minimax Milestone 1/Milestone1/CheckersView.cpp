@@ -18,13 +18,12 @@ bool IsValidCell(char row, unsigned int col) {
 
 void CheckersView::Draw(ostream &out) {
 
-   // TODO: Next up is a basic view of the CheckersBoard
    string rtn("");
    char row = 'A';
    unsigned int col = 1;
    const CheckersBoard *cb = dynamic_cast<const CheckersBoard *>(mModel);
-   assert(cb != NULL);  // TODO: Yank this.
-   cb->AssertMe();  // TODO: Yank this.
+   assert(cb != NULL); 
+   cb->AssertMe();
 
    // Print the header
    out << setw(16) << "White" << endl << endl;
