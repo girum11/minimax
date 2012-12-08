@@ -1,4 +1,8 @@
 
+#include "Class.h"
+#include "Board.h"
+
+using namespace std;
 
 // [Staley] Write a program “MakeBook” that works like the sample executable 
 // [Staley] provided.  MakeBook prompts for and accepts a single line of input 
@@ -54,8 +58,63 @@
 // [Staley] first get a key for it.  Then I output the current move/key count, 
 // [Staley] and then I analyze the board using the key.
 int main() {
+   // Restrictions:
+   // 1. Your entire MakeBook.cpp can be at most 90 lines  (mine is 75).
+   // Use the 'smartcount' bin in your CPE305 folder to measure this.
+   // 
+   // 2. No game name may appear in any of your source except for files with 
+   // that game in their name.
+   // 
+   // TODO:
+   // 3. Your MakeBook must work correctly with my Othello classes, object 
+   // files for which are supplied.  I will require an exact match with my 
+   // binary file only for Othello, not for the other games.  Exact match 
+   // of my text output is required for all games.
+   // 
+   // 4. MakeBook.cpp may only use "new" for creating a Book object.  Boards, 
+   // Views, etc. are created using Class and BoardClass.
+   // 
+   // 5. Your MakeBook executable must run in at most twice the time mine takes
+   // for a given book generation.
+   // TODO: Pylos and Checkers need to incrementally increment the board value.
+   BoardClass *boardClass = NULL;
+   Board *board = NULL;
+   int minimaxLevel = -1, bookDepth = -1;
+   string fileName("");
+
+   // First, prompt the user for a SINGLE LINE OF INPUT of the following usage:
+   //       BoardClass minimaxLevel bookDepth fileName
 
 
+   // Use reflection to figure out which Board you have, or give an error
+   // message if that BoardClass type doesn't exist.
+
+   // Then, figure out if the board that you were given can benefit from using a
+   // transposition table.  Use the UseTranspositionTable() method from
+   // BoardClass.
+
+   // Create the "book file."  This file is simply the initial 'dictionary' of
+   // good initial moves to play.
+   // To construct it, you should do a DFS on the initial Board configuration,
+   // where each node is a Board configuration, and "exploring" the node
+   // consists of calling the Minimax() method on that node to fill in what
+   // that configuration's bestMove is, using the lookahead specified from the
+   // user in our prompt from the beginning.  Run the DFS of Board configs 
+   // down to depth of 'bookDepth' (also specified by the user from before).
+
+
+   // When the book is complete (after you finish running the DFS), write it
+   // to a binary "book file" having the specified fileName.
+
+
+
+
+
+
+   // More hints for this are given in the spec.  E.g: Be sure to keep track of 
+   // all the Keys you've collected thus far to avoid entering the same Key 
+   // twice into the book.
+   
 
 
    return 0;

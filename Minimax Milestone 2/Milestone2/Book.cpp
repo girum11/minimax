@@ -1,16 +1,22 @@
 
 #include "Book.h"
+#include "MyLib.h"
 #include <iostream>
 
 using namespace std;
 
 
-// [Staley] You’ll find the TCmpPtr template from MyLib.h useful here. 
+/* 
+Hint:
+   The Book class works just like an STL map (think derivation), mapping 
+   const Key pointers (like those you get back from GetKey) to BestMoves.  
+   You’ll find the TCmpPtr template from MyLib.h useful here.  
+*/
 
 
-// Read/write book to and from a file in binary format.  
-// 
-// In Read, assume the Keys and Moves in the file are those for boardClass.
+
+// [Staley] Read/write book to and from a file in binary format.  
+// [Staley] In Read, assume the Keys and Moves in the file are those for boardClass.
 std::istream &Book::Read(std::istream &is, const Class *boardClass) {
 
 
@@ -18,11 +24,9 @@ std::istream &Book::Read(std::istream &is, const Class *boardClass) {
 }
 
 
-// Read/write book to and from a file in binary format.
+// [Staley] Read/write book to and from a file in binary format.
 std::ostream &Book::Write(std::ostream &os) {
 
-
-
-
+   
    return os;
 }

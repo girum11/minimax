@@ -89,7 +89,7 @@ public:
    // the static mWhiteBackRow and mBlackBackRow
    static void StaticInit();
 
-   const Class *GetClass() const { return &mClass; };
+   const BoardClass *GetClass() const { return &mClass; };
 
 protected:
    
