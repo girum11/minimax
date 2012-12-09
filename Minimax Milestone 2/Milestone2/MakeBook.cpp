@@ -156,6 +156,7 @@ void ConstructBookFileDFS(Board *board,
    list<Board::Move *>::iterator moveIter = allMoves.begin();
    const Board::Key *key = NULL;
    BestMove bestMove;
+   Book *tTable = new Book();
 
    // Output the current key/move count.
    key = board->GetKey();
@@ -174,7 +175,14 @@ void ConstructBookFileDFS(Board *board,
    // particular Minimax call (quoted from "Transposition Table" email).
    // TODO: Should this really be LONG_MIN and LONG_MAX?
    SimpleAIPlayer::Minimax(board, minimaxDepth, LONG_MIN, LONG_MAX, 
-    &bestMove, useX ? &Book() : NULL);
+    &bestMove, useX ? tTable : NULL);
+
+   // Report current stats to the user.
+   cout << "Best move: " << (string) *bestMove.move << " with reply ";
+   cout << (bestMove.replyMove ? (string) *bestMove.replyMove : "unknown") 
+    << endl;
+   cout << " Boards examined: " << bestMove.numBoards;
+   cout << " Value: " << bestMove.value << endl;
 
    // Once you finish running the Minimax for that node, add the
    // bestMove that you got into your bookFile.
@@ -200,6 +208,7 @@ void ConstructBookFileDFS(Board *board,
    else if (bookDepth == 0) {
       // TODO: Unneeded now..
    } else assert(false);
-
-   // Note: Don't delete the key, since the bookFile needs a reference to it.
+   
+   // Clean up afterwards
+   delete tTable;
 }
