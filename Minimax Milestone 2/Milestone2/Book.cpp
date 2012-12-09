@@ -67,9 +67,10 @@ std::ostream &Book::Write(std::ostream &os) {
     bookIter != this->end(); bookIter++) {
       
       // Write the key
-      os.write((char *)&bookIter->first, sizeof(bookIter->first));
+      os << *(bookIter->first);
 
       // Write the BestMove
+      // TODO: Can this also use the ostream operator like the Key above does?
       os.write((char *)&bookIter->second, sizeof(bookIter->second));
 
       // TODO: If it exists, write the "replyMove exists" flag.  1 if it exists,
