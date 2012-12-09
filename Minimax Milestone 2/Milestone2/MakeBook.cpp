@@ -124,6 +124,9 @@ int main() {
    out.open(filename);
    bookFile.Write(out);
    
+
+
+
    // Clean up dynamic memory before you go
    delete view;
    delete board;
@@ -151,6 +154,7 @@ void ConstructBookFileDFS(Board *board,
    list<Board::Move *> allMoves;
    list<Board::Move *>::iterator moveIter = allMoves.begin();
    const Board::Key *key = NULL;
+   BestMove bestMove;
 
    // Output the current key/move count.
    key = board->GetKey();
@@ -173,7 +177,6 @@ void ConstructBookFileDFS(Board *board,
          ConstructBookFileDFS(board, view, bookFile, useX, minimaxDepth, bookDepth-1);
       }
       else if (bookDepth == 1) {
-         BestMove bestMove;
 
          // Once you're ready to call Minimax(), create a new tTable for that
          // particular Minimax call (quoted from "Transposition Table" email).
