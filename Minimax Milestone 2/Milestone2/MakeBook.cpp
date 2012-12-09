@@ -189,10 +189,8 @@ void ConstructBookFileDFS(Board *board,
       board->UndoLastMove();
    }
 
-//    // Clean up after your GetAllMoves() call.
-//    for (moveIter = allMoves.begin(); moveIter != allMoves.end(); moveIter++) {
-//       delete *moveIter;
-//    }
+   // TODO? Clean up after your GetAllMoves() call by iterating and deleting?
+   // The last time I tried that though, my code broke down on me.
    allMoves.clear();
 
    // Note: Don't delete the key, since the bookFile needs a reference to it.
