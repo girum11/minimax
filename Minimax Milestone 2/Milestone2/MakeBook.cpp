@@ -123,9 +123,6 @@ int main() {
    // to a binary "bookFile file" having the specified fileName.
    out.open(filename);
    bookFile.Write(out);
-   
-
-
 
    // Clean up dynamic memory before you go
    delete view;
@@ -162,7 +159,6 @@ void ConstructBookFileDFS(Board *board,
    cout << "Moves/Keys: " << Board::Move::GetOutstanding() << "/" <<
     Board::Key::GetOutstanding() << endl;
 
-
    // Sanity check on pre-existing book -- won't do DFS in this case.
    if (bookFile->find(key) != bookFile->end()) {
       cout << "Duplicate. No book entry." << endl;
@@ -191,7 +187,6 @@ void ConstructBookFileDFS(Board *board,
          // it reaches its desired bookDepth level.
          ConstructBookFileDFS(board, view, bookFile, useX, minimaxDepth, bookDepth-1);
 
-         // Undo the move from the board.
          board->UndoLastMove();
       }  
 
@@ -199,7 +194,7 @@ void ConstructBookFileDFS(Board *board,
       // The last time I tried that though, my code broke down on me.
    }
    else if (bookDepth == 0) {
-
+      // TODO: Unneeded now..
    } else assert(false);
 
    // Note: Don't delete the key, since the bookFile needs a reference to it.

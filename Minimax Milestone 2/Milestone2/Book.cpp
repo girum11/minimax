@@ -86,7 +86,7 @@ std::ostream &Book::Write(std::ostream &os) {
       // If it exists, write each  "replyMove exists" flag.  Write the
       // number 1 if it exists, or 0 if it does not.
       tempFlag = bookIter->second.replyMove ? 1 : 0;
-      os.write(&tempFlag, sizeof(tempFlag));
+      os.write((char *)&tempFlag, sizeof(tempFlag));
 
       // If the aforementioned flag is set, write the replyMove
       if (tempFlag)
