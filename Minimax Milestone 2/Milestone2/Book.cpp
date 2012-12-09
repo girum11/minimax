@@ -2,34 +2,11 @@
 #include "Book.h"
 #include "MyLib.h"
 #include <iostream>
+#include <assert.h>
 
 /* Hint: You’ll find the TCmpPtr template from MyLib.h useful here. */
 
 using namespace std;
-
-// The book file binary format is as follows, with all values BigEndian:
-// 
-// Minimax level at which book was calculated – 1 byte
-//
-// For each Key/BestMove pair:
-// 
-// Key (BigEndian binary write of all the BasicKey ulongs)
-// 
-// BestMove
-// 
-// ReplyMove exists flag 1 if there’s a Reply, 0 if not – 1 byte
-//
-// ReplyMove if one exists
-// 
-// Computed minimax value – 4 bytes
-// 
-// Do not write out depth of the BestMove, nor the number of boards explored.  
-// When you read the book, assume  these two values are the “level” of the book 
-// file, and 0, respectively.
-// 
-// I will require an exact match with my binary file only for Othello, not for 
-// the other games.  Exact match of my text output is required for all games.
-
 
 Book::~Book() {
    // TODO: Do I need to do anything here, or do I inherit from the 
@@ -43,15 +20,40 @@ Book::~Book() {
 // [Staley] the "level" of the book file.
 // [Staley] Also, assume that the number of boards explored is 0.
 std::istream &Book::Read(std::istream &is, const Class *boardClass) {
-   char temp = '\0';
    Board *board = dynamic_cast<Board *>(boardClass->NewInstance());
    Board::Key *key = NULL;
+   Board::Move *move = board->CreateMove(), 
+    *replyMove = board->CreateMove();
+   char tempFlag = 0;
+   long tempValue = 0;
 
-   is.read(&temp, sizeof(mLevel));
-   mLevel = temp;
+   is.read((char *)&mLevel, sizeof(mLevel));
+   
+   while (!is.eof()) {
+      // FIXME: TODO: I smell a memory leak here.  Let's try it anyways though.
+      const Board::Key *tempKey = board->GetKey();
+      key = dynamic_cast<Board::Key *>(tempKey->GetClass()->NewInstance());
+      assert(key != NULL);
+      delete tempKey;
 
+      is >> *key;
+      is >> *move;
+      
+      // Read in the "has reply move" flag, and accordingly make an attempt to
+      // read the replyMove or not.
+      is.read((char *)&tempFlag, sizeof(tempFlag));
+      if (tempFlag) {
+         is >> *replyMove;
+      }
+      else
+         replyMove = NULL;
 
-
+      // Read 
+      is.read((char *)&tempValue, sizeof(tempValue));
+      
+      insert(pair<const Board::Key *, BestMove>(
+       key, BestMove(move, replyMove, EndianXfer(tempValue), mLevel, 0)));
+   }
 
    // Don't forget to clean up after you finish
    delete board;
