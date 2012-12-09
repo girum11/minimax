@@ -52,6 +52,7 @@ std::istream &Book::Read(std::istream &is, const Class *boardClass) {
 
 
 
+
    // Don't forget to clean up after you finish
    delete board;
 
