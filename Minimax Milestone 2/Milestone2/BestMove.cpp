@@ -9,7 +9,7 @@ using namespace std;
    specify its copy constructor, operator=(), and destructor.  */
 
 BestMove::BestMove(const BestMove &src) {
-   move = src.move ? move->Clone() : NULL;
+   move = src.move ? src.move->Clone() : NULL;
 
    value = src.value;
    depth = src.depth;

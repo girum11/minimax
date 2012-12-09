@@ -194,7 +194,7 @@ void ConstructBookFileDFS(Board *board,
 
    // TODO? Clean up after your GetAllMoves() call by iterating and deleting?
    // The last time I tried that though, my code broke down on me.
-   allMoves.clear();
+   // allMoves.clear();
 
    // Note: Don't delete the key, since the bookFile needs a reference to it.
 }

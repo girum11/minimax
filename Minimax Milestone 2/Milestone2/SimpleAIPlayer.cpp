@@ -113,17 +113,29 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
 
          // TODO: Ensure that each of my Milestone 1 Board's GetWhoseMove() 
          // calls comply with this code.  They don't right now.
-         // [Filled blank] White pulls the floor up.
+         // [Filled blank] Conditional: White pulls the floor up.
          if (board->GetWhoseMove() == 1 && subBestMove.value > min) {
             bestMove->value = min = subBestMove.value;
+            
+            // [Filled blank] Set the best move to be this move.
             bestMove->SetBestMove((*moveIter)->Clone());
+
+            // [Filled blank] Set the reply move to be the subBestMove,
+            // and nil out subBestMove's move.
             bestMove->SetReplyMove(subBestMove.move);
+            subBestMove.move = NULL;
          }
-         // [Filled blank] Black pushes the ceiling down.
+         // [Filled blank] Conditional: Black pushes the ceiling down.
          else if (board->GetWhoseMove() == 0 && subBestMove.value < max) {
             bestMove->value = max = subBestMove.value;
+
+            // [Filled blank] Set the reply move to be the subBestMove
             bestMove->SetBestMove((*moveIter)->Clone());
+
+            // [Filled blank] Set the reply move to be the subBestMove,
+            // and nil out subBestMove's move.
             bestMove->SetReplyMove(subBestMove.move);
+            subBestMove.move = NULL;
          }
 
          if (debugFlag > 0) {
