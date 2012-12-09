@@ -140,7 +140,6 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
       for (; moveIter != moves.end(); moveIter++)
          delete *moveIter;
 
-
       // [Filled blank] From the loop before, a min/max limits collision doesn't
       // return, but breaks instead (to provide time to clean up the 
       // GetAllMoves() call.  Thus, you have to ensure that the tTable isn't

@@ -5,7 +5,7 @@
 #include "Class.h"
 #include "Book.h"
 #include "Board.h"
-#include "SimpleAIPlayer.h";
+#include "SimpleAIPlayer.h"
 #include "View.h"
 
 using namespace std;
@@ -120,8 +120,6 @@ int main() {
    // TODO: When the bookFile is complete (after you finish running the DFS), write it
    // to a binary "bookFile file" having the specified fileName.
    
-
-
    
 
 
