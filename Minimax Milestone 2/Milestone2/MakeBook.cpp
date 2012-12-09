@@ -121,8 +121,13 @@ int main() {
 
    // When the bookFile is complete (after you finish running the DFS), write it
    // to a binary "bookFile file" having the specified fileName.
+   cout << "Writing book... ";
    out.open(filename.c_str());
    bookFile.Write(out);
+   cout << "done" << endl;
+
+   cout << "Final count, moves/keys: " << Board::Move::GetOutstanding() << "/"
+    << Board::Key::GetOutstanding() << endl;
 
    // Clean up dynamic memory before you go
    delete view;
