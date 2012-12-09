@@ -708,37 +708,8 @@ void PylosBoard::Rules::EndSwap() {
    this->marbleWgt = EndianXfer(this->marbleWgt);
 }
 
-// TODO: Refactor this to not use loops here.
-// "Compute the values for Pylos and Checkers incrementally, updating when 
-// moves are made.  You should have no loops in GetValue.  This will be much 
-// faster than recomputing the value, and will affect the speed of your minimax 
-// algorithm later."
 long PylosBoard::GetValue() const {
-   int movesLeft = 0;
-
-   // Prep to handle the case where the game is over due to noone being able
-   // to move.
-   // TODO: If my code runs too slow, here's where I can optimize by not
-   // looking up all of the moves every time I showVal.
-   list<Move *> allMoves;
-   GetAllMoves(&allMoves);
-   movesLeft = allMoves.size();
-
-   // Clean up after your GetAllMoves() call.
-   for (list<Move *>::iterator listIter = allMoves.begin();
-    listIter != allMoves.end(); listIter++) {
-       delete *listIter;
-   }
-
-   // First, check if anyone can even move.  The player who's stuck on his moves
-   // with no moves left is the one who allowed the other player to exhaust
-   // his reserve marbles (GetAllMoves() short-circuits if a player has no more
-   // marbles).
-   // TODO: Does this line of code actually do anything?  Since a player who
-   // can't move is always...
-   if (movesLeft == 0)
-      return kWinVal * mWhoseMove;
-   else if (mWhiteReserve == 0)
+   if (mWhiteReserve == 0)
       return -kWinVal;
    else if (mBlackReserve == 0)
       return kWinVal;
