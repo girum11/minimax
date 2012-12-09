@@ -79,7 +79,6 @@ int main() {
    // 2. No game name may appear in any of your source except for files with 
    // that game in their name.
    // 
-   // TODO:
    // 3. Your MakeBook must work correctly with my Othello classes, object 
    // files for which are supplied.  I will require an exact match with my 
    // binary file only for Othello, not for the other games.  Exact match 
@@ -90,7 +89,6 @@ int main() {
    // 
    // 5. Your MakeBook executable must run in at most twice the time mine takes
    // for a given bookFile generation.
-   // TODO: Pylos and Checkers need to incrementally increment the board value.
    const BoardClass *boardClass = NULL;
    View *view = NULL;
    Board *board = NULL;
@@ -148,10 +146,6 @@ void ConstructBookFileDFS(Board *board,
                           int minimaxDepth,
                           int bookDepth) 
 {
-// [Staley] TODO: A hint on how to duplicate my key count:  When I analyze a 
-// [Staley] board, I first get a key for it.  Then I output the current 
-// [Staley] move/key count, and then I analyze the board using the key.
-
    list<Board::Move *> allMoves;
    list<Board::Move *>::iterator moveIter = allMoves.begin();
    const Board::Key *key = NULL;
@@ -159,6 +153,9 @@ void ConstructBookFileDFS(Board *board,
    Book *tTable = new Book();
 
    // Output the current key/move count.
+   // [Staley] A hint on how to duplicate my key count:  When I analyze a 
+   // [Staley] board, I first get a key for it.  Then I output the current 
+   // [Staley] move/key count, and then I analyze the board using the key.
    key = board->GetKey();
    view->Draw(cout);
    cout << "Moves/Keys: " << Board::Move::GetOutstanding() << "/" <<
@@ -201,14 +198,13 @@ void ConstructBookFileDFS(Board *board,
 
          board->UndoLastMove();
       }  
-
-      // TODO? Clean up after your GetAllMoves() call by iterating and deleting?
-      // The last time I tried that though, my code broke down on me.
    }
-   else if (bookDepth == 0) {
-      // TODO: Unneeded now..
-   } else assert(false);
    
    // Clean up afterwards
+   // TODO? Clean up after your GetAllMoves() call by iterating and deleting?
+   // The last time I tried that though, my code broke down on me.
+//    for (moveIter = allMoves.begin(); moveIter != allMoves.end(); moveIter++) {
+//       delete *moveIter;
+//    }
    delete tTable;
 }

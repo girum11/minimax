@@ -31,7 +31,6 @@ std::istream &Book::Read(std::istream &is, const Class *boardClass) {
    is.read((char *)&mLevel, sizeof(mLevel));
    
    while (!is.eof()) {
-      // FIXME: TODO: I smell a memory leak here.  Let's try it anyways though.
       const Board::Key *tempKey = board->GetKey();
       key = dynamic_cast<Board::Key *>(tempKey->GetClass()->NewInstance());
       assert(key != NULL);
