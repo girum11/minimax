@@ -6,14 +6,15 @@
 #include "Book.h"
 #include "Board.h"
 #include "SimpleAIPlayer.h";
+#include "View.h"
 
 using namespace std;
 
 void ConstructBookFileDFS(Board *board,
+                          View *view,
                           Book *bookFile,
                           bool useX, // True if this BoardClass uses an XTable.
                           int minimaxDepth,
-                          int currentDepth, 
                           int bookDepth);
 
 // [Staley] Write a program “MakeBook” that works like the sample executable 
@@ -90,6 +91,7 @@ int main() {
    // for a given bookFile generation.
    // TODO: Pylos and Checkers need to incrementally increment the board value.
    const BoardClass *boardClass = NULL;
+   View *view = NULL;
    Board *board = NULL;
    int minimaxDepth = -1, bookDepth = -1;
    string boardType(""), filename("");
@@ -97,19 +99,23 @@ int main() {
    
    // First, prompt the user for commands of the following usage:
    cout << "Enter boardType, level, depth, and filename: ";
-   cin >> boardType >> minimaxDepth, bookDepth, filename;
+   cin >> boardType >> minimaxDepth >> bookDepth >> filename;
 
    // Use reflection to instantiate the correct board, or give an error
    // message if that BoardClass type doesn't exist.
    if ((boardClass = BoardClass::ForName(boardType)) == NULL
-    || (board = dynamic_cast<Board *>(boardClass->NewInstance())) == NULL) {
+    || (board = dynamic_cast<Board *>(boardClass->NewInstance())) == NULL
+    || (view = dynamic_cast<View *>(
+    boardClass->GetViewClass()->NewInstance())) == NULL) {
       cout << "Unknown type " << boardType << endl;
       return -1;
    }
 
+   view->SetModel(board);
+
    // Create the "bookFile file."
-   ConstructBookFileDFS(board, &bookFile, boardClass->UseTransposition(), 
-    minimaxDepth, 0, bookDepth);
+   ConstructBookFileDFS(board, view, &bookFile, boardClass->UseTransposition(), 
+    minimaxDepth, bookDepth);
 
    // TODO: When the bookFile is complete (after you finish running the DFS), write it
    // to a binary "bookFile file" having the specified fileName.
@@ -129,19 +135,30 @@ int main() {
 // bestMove is, using the lookahead specified from the user in our prompt 
 // from the beginning.
 void ConstructBookFileDFS(Board *board,
+                          View *view,
                           Book *bookFile,
                           bool useX, // True if this BoardClass uses an XTable.
                           int minimaxDepth,
-                          int currentDepth, 
                           int bookDepth) 
 {
-   // Grab all of the possible moves (each move corresponds to a child node)
-   list<Board::Move *> allMoves;
-   board->GetAllMoves(&allMoves);
-   
+// [Staley] TODO: A hint on how to duplicate my key count:  When I analyze a 
+// [Staley] board, I first get a key for it.  Then I output the current 
+// [Staley] move/key count, and then I analyze the board using the key.
 
-   for (list<Board::Move *>::iterator moveIter = allMoves.begin();
-    moveIter != allMoves.end(); moveIter++) {
+   list<Board::Move *> allMoves;
+   list<Board::Move *>::iterator moveIter = allMoves.begin();
+   const Board::Key *key = NULL;
+
+   // TODO: Output the current key/move count.
+   key = board->GetKey();
+   view->Draw(cout);
+   cout << "Moves/Keys: " << Board::Move::GetOutstanding() << "/" <<
+    Board::Key::GetOutstanding() << endl;
+
+   // Grab all of the possible moves (each move corresponds to a child node)
+   board->GetAllMoves(&allMoves);
+
+   for (moveIter = allMoves.begin(); moveIter != allMoves.end(); moveIter++) {
 
       // Apply the move to the board.
       board->ApplyMove(*moveIter);
@@ -149,22 +166,21 @@ void ConstructBookFileDFS(Board *board,
       // The DFS should step down the tree in a depth-first manner until 
       // it reaches its desired bookDepth level.  It shouldn't call Minimax() 
       // until this is true.
-      if (currentDepth < bookDepth) {
-         ConstructBookFileDFS(board, bookFile, useX, minimaxDepth, 
-          currentDepth+1, bookDepth);
+      if (bookDepth > 1) {
+         ConstructBookFileDFS(board, view, bookFile, useX, minimaxDepth, bookDepth-1);
       }
-      else if (currentDepth == bookDepth) {
-         // Once you're ready to call Minimax(), create a new tTable for that
-         // particular Minimax call (quoted from "Transposition Table" email).
+      else if (bookDepth == 1) {
          BestMove bestMove;
 
+         // Once you're ready to call Minimax(), create a new tTable for that
+         // particular Minimax call (quoted from "Transposition Table" email).
          SimpleAIPlayer::Minimax(board, minimaxDepth, LONG_MIN, LONG_MAX, 
           &bestMove, useX ? &Book() : NULL);
 
          // Once you finish running the Minimax for that node, add the
          // bestMove that you got into your bookFile.
          if (!bookFile->insert(pair<const Board::Key *, BestMove>(
-          board->GetKey(), bestMove)).second) {
+          key, bestMove)).second) {
              cout << "Duplicate. No book entry." << endl;
          }
       } else assert(false);
@@ -172,15 +188,12 @@ void ConstructBookFileDFS(Board *board,
       // Undo the move from the board.
       board->UndoLastMove();
    }
-   
-   // TODO: Should it call Minimax() at leaf nodes?  That is, should I be
-   // using GetAllMoves() to calculate if a node is a leaf node here in the DFS?
-   // Probably not, but be sure about it first.
 
-
-   // Clean up memory after your GetAllMoves() call.
-   for (list<Board::Move *>::iterator moveIter = allMoves.begin(); 
-    moveIter != allMoves.end(); moveIter++) {
+   // Clean up after your GetAllMoves() call.
+   for (moveIter = allMoves.begin(); moveIter != allMoves.end(); moveIter++) {
       delete *moveIter;
    }
+   allMoves.clear();
+
+   // Note: Don't delete the key, since the bookFile needs a reference to it.
 }
