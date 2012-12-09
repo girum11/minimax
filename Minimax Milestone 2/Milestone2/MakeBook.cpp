@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <climits>
 #include <iostream>
+#include <fstream>
 #include "Class.h"
 #include "Book.h"
 #include "Board.h"
@@ -96,6 +97,7 @@ int main() {
    int minimaxDepth = -1, bookDepth = -1;
    string boardType(""), filename("");
    Book bookFile;
+   ofstream out;
    
    // First, prompt the user for commands of the following usage:
    cout << "Enter boardType, level, depth, and filename: ";
@@ -117,10 +119,15 @@ int main() {
    ConstructBookFileDFS(board, view, &bookFile, boardClass->UseTransposition(), 
     minimaxDepth, bookDepth);
 
-   // TODO: When the bookFile is complete (after you finish running the DFS), write it
+   // When the bookFile is complete (after you finish running the DFS), write it
    // to a binary "bookFile file" having the specified fileName.
+   out.open(filename);
+   bookFile.Write(out);
    
-   
+   // Clean up dynamic memory before you go
+   delete view;
+   delete board;
+
    return 0;
 }
 
