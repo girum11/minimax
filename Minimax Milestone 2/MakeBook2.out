@@ -1,0 +1,7011 @@
+Enter boardType, level, depth, and filename:            White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 0/1
+Best move: C1 -> D2 with reply F2 -> E1
+ Boards examined: 7214 Value: 20
+Added as board 1
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 11/2
+Best move: F2 -> E1 with reply B2 -> C1
+ Boards examined: 11661 Value: -20
+Added as board 2
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 22/3
+Best move: B2 -> C1 with reply F4 -> E3
+ Boards examined: 7908 Value: 20
+Added as board 3
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 33/4
+Best move: F4 -> E3 with reply D2 -> F4
+ Boards examined: 19268 Value: -20
+Added as board 4
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 34/5
+Best move: E1 -> C3 with reply B4 -> D2
+ Boards examined: 4237 Value: -20
+Added as board 5
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 35/6
+Best move: F4 -> E3 with reply D2 -> F4
+ Boards examined: 11966 Value: -20
+Added as board 6
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 36/7
+Best move: F4 -> E5 with reply D6 -> F4
+ Boards examined: 4498 Value: -120
+Added as board 7
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 37/8
+Best move: F4 -> E5 with reply D6 -> F4
+ Boards examined: 4299 Value: -120
+Added as board 8
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 38/9
+Best move: F4 -> E3 with reply D2 -> F4
+ Boards examined: 12728 Value: -20
+Added as board 9
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  b  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 39/10
+Best move: F4 -> D2 with reply C3 -> D4
+ Boards examined: 3004 Value: -120
+Added as board 10
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 37/11
+Best move: B2 -> C1 with reply F4 -> E5
+ Boards examined: 5380 Value: 20
+Added as board 11
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 48/12
+Best move: F4 -> E5 with reply D2 -> F4
+ Boards examined: 9752 Value: -20
+Added as board 12
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 49/13
+Best move: E3 -> C1 with reply B2 -> C3
+ Boards examined: 3357 Value: -120
+Added as board 13
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 50/14
+Best move: E3 -> C1 with reply B4 -> C5
+ Boards examined: 4313 Value: -120
+Added as board 14
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 51/15
+Best move: E3 -> C1 with reply B4 -> C5
+ Boards examined: 3565 Value: -120
+Added as board 15
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 52/16
+Best move: E3 -> C1 with reply B6 -> C7
+ Boards examined: 3066 Value: -120
+Added as board 16
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 53/17
+Best move: E3 -> C1 with reply B6 -> C7
+ Boards examined: 4230 Value: -120
+Added as board 17
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  b  .  w  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 54/18
+Best move: E3 -> D2 with reply B2 -> C1
+ Boards examined: 11408 Value: -20
+Added as board 18
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 52/19
+Best move: D2 -> F4 with reply G3 -> E5
+ Boards examined: 2823 Value: 20
+Added as board 19
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  b  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 57/20
+Best move: G3 -> E5 with reply C3 -> D2
+ Boards examined: 6807 Value: -20
+Added as board 20
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 55/21
+Best move: C3 -> D4 with reply E5 -> C3
+ Boards examined: 6000 Value: 20
+Added as board 21
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 67/22
+Best move: E5 -> D6 with reply C5 -> E7
+ Boards examined: 7062 Value: -120
+Added as board 22
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 68/23
+Best move: E5 -> C3 with reply B2 -> D4
+ Boards examined: 4440 Value: -20
+Added as board 23
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 69/24
+Best move: F2 -> E1 with reply B2 -> C1
+ Boards examined: 12086 Value: -20
+Added as board 24
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 70/25
+Best move: F2 -> E1 with reply D6 -> F4
+ Boards examined: 4850 Value: -120
+Added as board 25
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 71/26
+Best move: E5 -> C7 with reply B6 -> D8
+ Boards examined: 4686 Value: -20
+Added as board 26
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 72/27
+Best move: E5 -> D6 with reply C5 -> E7
+ Boards examined: 11067 Value: -20
+Added as board 27
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  b  .  .  .  w  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 73/28
+Best move: F2 -> E3 with reply C3 -> D4
+ Boards examined: 8402 Value: -20
+Added as board 28
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  b  .  w  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 74/29
+Best move: F2 -> D4 with reply C5 -> E3
+ Boards examined: 1561 Value: -20
+Added as board 29
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 72/30
+Best move: B2 -> C1 with reply E5 -> D6
+ Boards examined: 5657 Value: 20
+Added as board 30
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 84/31
+Best move: F2 -> E1 with reply C5 -> D4
+ Boards examined: 14788 Value: -20
+Added as board 31
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 85/32
+Best move: E5 -> C3 with reply B2 -> D4
+ Boards examined: 1876 Value: -120
+Added as board 32
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 86/33
+Best move: F2 -> E3 with reply D4 -> F2
+ Boards examined: 4647 Value: -120
+Added as board 33
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 87/34
+Best move: F2 -> E1 with reply B2 -> C1
+ Boards examined: 8647 Value: -20
+Added as board 34
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 88/35
+Best move: E5 -> C7 with reply B6 -> D8
+ Boards examined: 4341 Value: -20
+Added as board 35
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 89/36
+Best move: F2 -> E1 with reply B2 -> C1
+ Boards examined: 11589 Value: -20
+Added as board 36
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  b  .  .  .  w  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 90/37
+Best move: F2 -> E3 with reply B2 -> C1
+ Boards examined: 9090 Value: -20
+Added as board 37
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  b  .  w  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 91/38
+Best move: F2 -> D4 with reply C5 -> E3
+ Boards examined: 2349 Value: -20
+Added as board 38
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 89/39
+Best move: B2 -> C1 with reply E7 -> D6
+ Boards examined: 8957 Value: 20
+Added as board 39
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 101/40
+Best move: E7 -> D8 with reply C3 -> D4
+ Boards examined: 21431 Value: -20
+Added as board 40
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 102/41
+Best move: F2 -> E3 with reply D4 -> F2
+ Boards examined: 8316 Value: -120
+Added as board 41
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 103/42
+Best move: F2 -> E3 with reply D4 -> F2
+ Boards examined: 8371 Value: -120
+Added as board 42
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 104/43
+Best move: E7 -> C5 with reply B4 -> D6
+ Boards examined: 3133 Value: -120
+Added as board 43
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 105/44
+Best move: F4 -> E5 with reply D6 -> F4
+ Boards examined: 10973 Value: -120
+Added as board 44
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 106/45
+Best move: F2 -> E3 with reply D8 -> F6
+ Boards examined: 4586 Value: -120
+Added as board 45
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  b  .  .  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 107/46
+Best move: E7 -> D8 with reply B2 -> C1
+ Boards examined: 13017 Value: -20
+Added as board 46
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  b  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 108/47
+Best move: F2 -> D4 with reply C3 -> E5
+ Boards examined: 1923 Value: -20
+Added as board 47
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 106/48
+Best move: B2 -> C1 with reply E7 -> D6
+ Boards examined: 9620 Value: 20
+Added as board 48
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 118/49
+Best move: E7 -> D6 with reply C5 -> E7
+ Boards examined: 21220 Value: -20
+Added as board 49
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 119/50
+Best move: F2 -> E3 with reply D4 -> F2
+ Boards examined: 7245 Value: -120
+Added as board 50
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 120/51
+Best move: F2 -> E3 with reply D4 -> F2
+ Boards examined: 8356 Value: -120
+Added as board 51
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 121/52
+Best move: E7 -> C5 with reply B4 -> D6
+ Boards examined: 3119 Value: -120
+Added as board 52
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 122/53
+Best move: E7 -> D8 with reply B2 -> C1
+ Boards examined: 10129 Value: -20
+Added as board 53
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 123/54
+Best move: F2 -> E1 with reply B2 -> C1
+ Boards examined: 12182 Value: -20
+Added as board 54
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  b  .  .  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 124/55
+Best move: E7 -> D6 with reply C5 -> E7
+ Boards examined: 11928 Value: -20
+Added as board 55
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  b  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  .  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 125/56
+Best move: F2 -> D4 with reply C3 -> E5
+ Boards examined: 2141 Value: -20
+Added as board 56
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 120/57
+Best move: F2 -> E1 with reply B2 -> C3
+ Boards examined: 12496 Value: -20
+Added as board 57
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 131/58
+Best move: B2 -> C3 with reply F4 -> E3
+ Boards examined: 7665 Value: 20
+Added as board 58
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 142/59
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 141/59
+Best move: F4 -> E3 with reply D2 -> F4
+ Boards examined: 14901 Value: -20
+Added as board 59
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 142/60
+Best move: E1 -> C3 with reply B4 -> D2
+ Boards examined: 3609 Value: -20
+Added as board 60
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 143/61
+Best move: E1 -> C3 with reply B2 -> D4
+ Boards examined: 2362 Value: -20
+Added as board 61
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 144/62
+Best move: E1 -> C3 with reply B2 -> D4
+ Boards examined: 2732 Value: -20
+Added as board 62
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 145/63
+Best move: E1 -> C3 with reply B2 -> D4
+ Boards examined: 3400 Value: -20
+Added as board 63
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  b  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 146/64
+Best move: F4 -> D2 with reply C1 -> E3
+ Boards examined: 2102 Value: -20
+Added as board 64
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 144/65
+Best move: B2 -> C3 with reply F4 -> E5
+ Boards examined: 6068 Value: 20
+Added as board 65
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 155/66
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 154/66
+Best move: F4 -> E5 with reply D2 -> F4
+ Boards examined: 10798 Value: -20
+Added as board 66
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 155/67
+Best move: E3 -> C5 with reply B4 -> D6
+ Boards examined: 2322 Value: -20
+Added as board 67
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 156/68
+Best move: E3 -> D4 with reply B4 -> C3
+ Boards examined: 7316 Value: -20
+Added as board 68
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 157/69
+Best move: F6 -> E5 with reply B2 -> C3
+ Boards examined: 8362 Value: -20
+Added as board 69
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 158/70
+Best move: F4 -> E5 with reply D2 -> F4
+ Boards examined: 8465 Value: -20
+Added as board 70
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  b  .  w  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 159/71
+Best move: E3 -> D2 with reply C1 -> E3
+ Boards examined: 11315 Value: -20
+Added as board 71
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 157/72
+Best move: D2 -> F4 with reply G3 -> E5
+ Boards examined: 3262 Value: 20
+Added as board 72
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  b  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 162/73
+Best move: G3 -> E5 with reply B4 -> C3
+ Boards examined: 8627 Value: -20
+Added as board 73
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 160/74
+Best move: B4 -> C3 with reply E5 -> D4
+ Boards examined: 8668 Value: 20
+Added as board 74
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 172/75
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 171/75
+Best move: E5 -> D4 with reply C3 -> E5
+ Boards examined: 12768 Value: -20
+Added as board 75
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 172/76
+Best move: E5 -> C3 with reply B2 -> D4
+ Boards examined: 4697 Value: -20
+Added as board 76
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 173/77
+Best move: E5 -> D4 with reply B4 -> C3
+ Boards examined: 8679 Value: -20
+Added as board 77
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 174/78
+Best move: E5 -> C7 with reply B6 -> D8
+ Boards examined: 4446 Value: -20
+Added as board 78
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 175/79
+Best move: E5 -> D4 with reply C5 -> E3
+ Boards examined: 11416 Value: -20
+Added as board 79
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  b  .  .  .  w  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 176/80
+Best move: F2 -> E3 with reply B4 -> C3
+ Boards examined: 10822 Value: -20
+Added as board 80
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  b  .  w  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 177/81
+Best move: F2 -> D4 with reply C5 -> E3
+ Boards examined: 2021 Value: -20
+Added as board 81
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 175/82
+Best move: B2 -> C3 with reply E5 -> D6
+ Boards examined: 5848 Value: 20
+Added as board 82
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 187/83
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 186/83
+Best move: E5 -> D6 with reply C5 -> E7
+ Boards examined: 10389 Value: -20
+Added as board 83
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 187/84
+Best move: E5 -> C3 with reply B2 -> D4
+ Boards examined: 3479 Value: -20
+Added as board 84
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 188/85
+Best move: E5 -> D4 with reply B4 -> C3
+ Boards examined: 9629 Value: -20
+Added as board 85
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 189/86
+Best move: E5 -> C7 with reply B6 -> D8
+ Boards examined: 4037 Value: -20
+Added as board 86
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 190/87
+Best move: E5 -> D4 with reply C5 -> E3
+ Boards examined: 9838 Value: -20
+Added as board 87
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  b  .  .  .  w  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 191/88
+Best move: E5 -> D4 with reply C5 -> E3
+ Boards examined: 8905 Value: -20
+Added as board 88
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  b  .  w  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 192/89
+Best move: F2 -> D4 with reply C5 -> E3
+ Boards examined: 351 Value: -20
+Added as board 89
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 190/90
+Best move: B2 -> C3 with reply E7 -> D6
+ Boards examined: 8894 Value: 20
+Added as board 90
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 202/91
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 201/91
+Best move: E7 -> D6 with reply C5 -> E7
+ Boards examined: 18076 Value: -20
+Added as board 91
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 202/92
+Best move: E7 -> D8 with reply B2 -> C3
+ Boards examined: 12220 Value: -20
+Added as board 92
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 203/93
+Best move: E7 -> C5 with reply B4 -> D6
+ Boards examined: 2958 Value: -20
+Added as board 93
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 204/94
+Best move: E7 -> D8 with reply B2 -> C3
+ Boards examined: 13706 Value: -20
+Added as board 94
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 205/95
+Best move: F2 -> E1 with reply D8 -> F6
+ Boards examined: 6828 Value: -20
+Added as board 95
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  b  .  .  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 206/96
+Best move: E7 -> D8 with reply B2 -> C3
+ Boards examined: 13366 Value: -20
+Added as board 96
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  b  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 207/97
+Best move: F2 -> D4 with reply C5 -> E3
+ Boards examined: 233 Value: -20
+Added as board 97
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 205/98
+Best move: B2 -> C3 with reply E7 -> D6
+ Boards examined: 11022 Value: 20
+Added as board 98
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 217/99
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 216/99
+Best move: E7 -> D6 with reply C5 -> E7
+ Boards examined: 17593 Value: -20
+Added as board 99
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 217/100
+Best move: E7 -> D6 with reply C7 -> E5
+ Boards examined: 12078 Value: -20
+Added as board 100
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 218/101
+Best move: E7 -> C5 with reply B4 -> D6
+ Boards examined: 3096 Value: -20
+Added as board 101
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 219/102
+Best move: E7 -> D8 with reply B2 -> C3
+ Boards examined: 8745 Value: -20
+Added as board 102
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 220/103
+Best move: F2 -> E1 with reply B2 -> C3
+ Boards examined: 10990 Value: -20
+Added as board 103
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  b  .  .  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 221/104
+Best move: E7 -> D6 with reply C5 -> E7
+ Boards examined: 12787 Value: -20
+Added as board 104
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  b  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 222/105
+Best move: F2 -> D4 with reply C5 -> E3
+ Boards examined: 157 Value: -20
+Added as board 105
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 217/106
+Best move: F2 -> E1 with reply B2 -> C3
+ Boards examined: 12074 Value: -20
+Added as board 106
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 228/107
+Best move: B2 -> C3 with reply F4 -> E3
+ Boards examined: 6864 Value: 20
+Added as board 107
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 240/108
+Best move: F4 -> E3 with reply D4 -> F2
+ Boards examined: 13501 Value: -20
+Added as board 108
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 241/109
+Best move: F4 -> E3 with reply D4 -> F2
+ Boards examined: 20677 Value: -20
+Added as board 109
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 242/110
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 241/110
+Best move: E1 -> D2 with reply C1 -> E3
+ Boards examined: 6153 Value: -20
+Added as board 110
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 242/111
+Best move: E1 -> D2 with reply C1 -> E3
+ Boards examined: 8414 Value: -20
+Added as board 111
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 243/112
+Best move: E1 -> D2 with reply C1 -> E3
+ Boards examined: 10356 Value: -20
+Added as board 112
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  b  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 244/113
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  b  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 243/113
+Best move: F4 -> D6 with reply C7 -> E5
+ Boards examined: 1466 Value: -20
+Added as board 113
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 241/114
+Best move: D4 -> F2 with reply G1 -> E3
+ Boards examined: 3068 Value: 20
+Added as board 114
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  b  .  w  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 246/115
+Best move: G1 -> E3 with reply B2 -> C3
+ Boards examined: 9272 Value: -20
+Added as board 115
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 244/116
+Best move: B2 -> C3 with reply F2 -> E1
+ Boards examined: 7365 Value: 20
+Added as board 116
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 255/117
+Best move: F2 -> E1 with reply D4 -> F2
+ Boards examined: 10373 Value: -20
+Added as board 117
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 256/118
+Best move: F2 -> E1 with reply D4 -> F2
+ Boards examined: 13106 Value: -20
+Added as board 118
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 257/119
+Best move: E3 -> C1 with reply B2 -> C3
+ Boards examined: 4900 Value: -120
+Added as board 119
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 258/120
+Best move: E3 -> C5 with reply B6 -> D4
+ Boards examined: 3191 Value: -20
+Added as board 120
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 259/121
+Best move: F2 -> E1 with reply D4 -> F2
+ Boards examined: 7350 Value: -20
+Added as board 121
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 260/122
+Best move: F2 -> E1 with reply D4 -> F2
+ Boards examined: 6656 Value: -20
+Added as board 122
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  b  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 261/123
+Best move: F6 -> D4 with reply C1 -> D2
+ Boards examined: 3242 Value: -120
+Added as board 123
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 259/124
+Best move: B2 -> C3 with reply E5 -> D6
+ Boards examined: 6656 Value: 20
+Added as board 124
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 270/125
+Best move: E5 -> D6 with reply C5 -> E7
+ Boards examined: 11361 Value: -20
+Added as board 125
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 271/126
+Best move: F2 -> E1 with reply C1 -> D2
+ Boards examined: 15628 Value: -20
+Added as board 126
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 272/127
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 271/127
+Best move: E5 -> C3 with reply B2 -> D4
+ Boards examined: 3802 Value: -20
+Added as board 127
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 272/128
+Best move: E5 -> C3 with reply B2 -> D4
+ Boards examined: 7883 Value: -20
+Added as board 128
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 273/129
+Best move: E5 -> C3 with reply B2 -> D4
+ Boards examined: 4489 Value: -20
+Added as board 129
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  b  .  w  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 274/130
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 270/130
+Best move: D4 -> F6 with reply G5 -> E7
+ Boards examined: 3253 Value: 20
+Added as board 130
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  b  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 275/131
+Best move: G5 -> E7 with reply B2 -> C3
+ Boards examined: 9730 Value: -20
+Added as board 131
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 273/132
+Best move: B2 -> C3 with reply E7 -> D6
+ Boards examined: 8794 Value: 20
+Added as board 132
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 285/133
+Best move: E7 -> D8 with reply C3 -> D2
+ Boards examined: 19129 Value: -20
+Added as board 133
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 286/134
+Best move: E7 -> D6 with reply C5 -> E7
+ Boards examined: 21389 Value: -20
+Added as board 134
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 287/135
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 286/135
+Best move: E7 -> C5 with reply B4 -> D6
+ Boards examined: 2746 Value: -20
+Added as board 135
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 287/136
+Best move: E7 -> D8 with reply B2 -> C3
+ Boards examined: 13872 Value: -20
+Added as board 136
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 288/137
+Best move: E7 -> D6 with reply C5 -> E7
+ Boards examined: 6280 Value: -20
+Added as board 137
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  b  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 289/138
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  b  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 288/138
+Best move: F4 -> D6 with reply C7 -> E5
+ Boards examined: 1918 Value: -20
+Added as board 138
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 286/139
+Best move: B2 -> C3 with reply E7 -> D6
+ Boards examined: 8414 Value: 20
+Added as board 139
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  .  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 298/140
+Best move: E7 -> D6 with reply C5 -> E7
+ Boards examined: 16254 Value: -20
+Added as board 140
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 299/141
+Best move: E7 -> D6 with reply C5 -> E7
+ Boards examined: 19846 Value: -20
+Added as board 141
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 300/142
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 299/142
+Best move: E7 -> C5 with reply B4 -> D6
+ Boards examined: 1973 Value: -20
+Added as board 142
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 300/143
+Best move: E7 -> D8 with reply B2 -> C3
+ Boards examined: 8063 Value: -20
+Added as board 143
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 301/144
+Best move: F2 -> E1 with reply B2 -> C3
+ Boards examined: 11884 Value: -20
+Added as board 144
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  b  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 302/145
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  b  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  .  .  b  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 301/145
+Best move: F6 -> D4 with reply C5 -> E3
+ Boards examined: 713 Value: -120
+Added as board 145
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 296/146
+Best move: F2 -> E1 with reply B4 -> C5
+ Boards examined: 14278 Value: -20
+Added as board 146
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 307/147
+Best move: B4 -> C5 with reply F4 -> E3
+ Boards examined: 8509 Value: 20
+Added as board 147
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 319/148
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 318/148
+Best move: F4 -> E3 with reply D4 -> F2
+ Boards examined: 16400 Value: -20
+Added as board 148
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 319/149
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 318/149
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 317/149
+Best move: F4 -> E3 with reply D4 -> F2
+ Boards examined: 8694 Value: -20
+Added as board 149
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 318/150
+Best move: F4 -> E3 with reply D4 -> F2
+ Boards examined: 10610 Value: -20
+Added as board 150
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  b  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 319/151
+Best move: F4 -> D2 with reply C1 -> E3
+ Boards examined: 2177 Value: -20
+Added as board 151
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  b  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 320/152
+Best move: F4 -> D6 with reply C7 -> E5
+ Boards examined: 269 Value: -20
+Added as board 152
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 318/153
+Best move: D4 -> F2 with reply G1 -> E3
+ Boards examined: 3625 Value: 20
+Added as board 153
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  b  .  w  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 323/154
+Best move: G1 -> E3 with reply B6 -> C5
+ Boards examined: 10103 Value: -20
+Added as board 154
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 321/155
+Best move: B4 -> C5 with reply F2 -> E1
+ Boards examined: 7273 Value: 20
+Added as board 155
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 332/156
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 331/156
+Best move: F2 -> E1 with reply D4 -> F2
+ Boards examined: 14790 Value: -20
+Added as board 156
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 332/157
+Best move: E3 -> C1 with reply B4 -> C5
+ Boards examined: 6165 Value: -120
+Added as board 157
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 333/158
+Best move: E3 -> C5 with reply B4 -> D6
+ Boards examined: 2668 Value: -20
+Added as board 158
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 334/159
+Best move: E3 -> C5 with reply B6 -> D4
+ Boards examined: 3609 Value: -20
+Added as board 159
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 335/160
+Best move: E3 -> C5 with reply B4 -> D6
+ Boards examined: 4046 Value: -20
+Added as board 160
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  b  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 336/161
+Best move: F6 -> D4 with reply C3 -> E5
+ Boards examined: 2124 Value: -20
+Added as board 161
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 334/162
+Best move: B4 -> C5 with reply F2 -> E1
+ Boards examined: 8554 Value: 20
+Added as board 162
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 345/163
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 344/163
+Best move: E5 -> D6 with reply C5 -> E7
+ Boards examined: 4749 Value: -120
+Added as board 163
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 345/164
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  b  .  .  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 344/164
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 343/164
+Best move: E5 -> C7 with reply B6 -> D8
+ Boards examined: 4208 Value: -20
+Added as board 164
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 344/165
+Best move: E5 -> D6 with reply B6 -> C5
+ Boards examined: 12301 Value: -20
+Added as board 165
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  b  .  w  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 345/166
+Best move: F2 -> D4 with reply C1 -> D2
+ Boards examined: 3789 Value: -120
+Added as board 166
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 343/167
+Best move: D4 -> F6 with reply G5 -> E7
+ Boards examined: 3509 Value: 20
+Added as board 167
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  b  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 348/168
+Best move: G5 -> E7 with reply B4 -> C5
+ Boards examined: 10698 Value: -20
+Added as board 168
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 346/169
+Best move: B4 -> C5 with reply E7 -> D6
+ Boards examined: 10324 Value: 20
+Added as board 169
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 358/170
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 357/170
+Best move: E7 -> D6 with reply C5 -> E7
+ Boards examined: 20215 Value: -20
+Added as board 170
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 358/171
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 357/171
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 356/171
+Best move: E7 -> C5 with reply B4 -> D6
+ Boards examined: 3690 Value: -20
+Added as board 171
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 357/172
+Best move: E7 -> D6 with reply B6 -> C5
+ Boards examined: 8355 Value: -20
+Added as board 172
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  b  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 358/173
+Best move: F2 -> D4 with reply C3 -> E5
+ Boards examined: 433 Value: -20
+Added as board 173
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  b  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 359/174
+Best move: F4 -> D6 with reply C7 -> E5
+ Boards examined: 2142 Value: -20
+Added as board 174
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 357/175
+Best move: B4 -> C5 with reply E7 -> D6
+ Boards examined: 8785 Value: 20
+Added as board 175
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 369/176
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 368/176
+Best move: E7 -> D6 with reply C7 -> E5
+ Boards examined: 15604 Value: -20
+Added as board 176
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 369/177
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  b  .  .  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 368/177
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 367/177
+Best move: E7 -> C5 with reply B4 -> D6
+ Boards examined: 2619 Value: -20
+Added as board 177
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 368/178
+Best move: E7 -> D6 with reply B6 -> C5
+ Boards examined: 12297 Value: -20
+Added as board 178
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  b  .  .  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 369/179
+Best move: F2 -> D4 with reply C3 -> E5
+ Boards examined: 713 Value: -120
+Added as board 179
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  b  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 370/180
+Best move: F4 -> D6 with reply C7 -> E5
+ Boards examined: 399 Value: -20
+Added as board 180
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 365/181
+Best move: F2 -> E1 with reply B4 -> C5
+ Boards examined: 13244 Value: -20
+Added as board 181
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 376/182
+Best move: B4 -> C5 with reply F4 -> E3
+ Boards examined: 7450 Value: 20
+Added as board 182
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 388/183
+Best move: F4 -> E3 with reply C3 -> D2
+ Boards examined: 17030 Value: -20
+Added as board 183
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 389/184
+Best move: F4 -> E3 with reply C3 -> D2
+ Boards examined: 15996 Value: -20
+Added as board 184
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 390/185
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 389/185
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 388/185
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  .  .  b  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 387/185
+Best move: F4 -> E3 with reply B4 -> C5
+ Boards examined: 11584 Value: -20
+Added as board 185
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  b  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 388/186
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 387/186
+Best move: F6 -> D8 with reply B4 -> C5
+ Boards examined: 7536 Value: -120
+Added as board 186
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 385/187
+Best move: B4 -> C5 with reply F4 -> E5
+ Boards examined: 8019 Value: 20
+Added as board 187
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 397/188
+Best move: F4 -> E5 with reply D6 -> F4
+ Boards examined: 17273 Value: -20
+Added as board 188
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 398/189
+Best move: F4 -> E5 with reply D6 -> F4
+ Boards examined: 13745 Value: -20
+Added as board 189
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 399/190
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 398/190
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 397/190
+Best move: E3 -> C5 with reply B6 -> D4
+ Boards examined: 1985 Value: -20
+Added as board 190
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 398/191
+Best move: E3 -> D4 with reply C3 -> E5
+ Boards examined: 6084 Value: -20
+Added as board 191
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  b  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 399/192
+Best move: F4 -> D6 with reply C7 -> E5
+ Boards examined: 336 Value: -20
+Added as board 192
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 400/193
+Best move: F6 -> D8 with reply C3 -> D2
+ Boards examined: 5776 Value: -120
+Added as board 193
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 398/194
+Best move: B4 -> C5 with reply E3 -> D4
+ Boards examined: 7153 Value: 20
+Added as board 194
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 410/195
+Best move: E3 -> D4 with reply C3 -> E5
+ Boards examined: 12107 Value: -20
+Added as board 195
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 411/196
+Best move: E3 -> D4 with reply C5 -> E3
+ Boards examined: 14633 Value: -20
+Added as board 196
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 412/197
+Best move: E3 -> C1 with reply B4 -> C5
+ Boards examined: 4097 Value: -120
+Added as board 197
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 413/198
+Best move: E3 -> D4 with reply B4 -> C3
+ Boards examined: 7883 Value: -20
+Added as board 198
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 414/199
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 413/199
+Best move: F2 -> E1 with reply B4 -> C5
+ Boards examined: 10504 Value: -20
+Added as board 199
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  b  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 414/200
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 413/200
+Best move: F6 -> D8 with reply B4 -> C5
+ Boards examined: 7338 Value: -120
+Added as board 200
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 411/201
+Best move: D6 -> F4 with reply G3 -> E5
+ Boards examined: 3048 Value: 20
+Added as board 201
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  b  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 416/202
+Best move: G3 -> E5 with reply B4 -> C5
+ Boards examined: 8191 Value: -20
+Added as board 202
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 414/203
+Best move: B4 -> C5 with reply E5 -> D4
+ Boards examined: 7322 Value: 20
+Added as board 203
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 425/204
+Best move: E5 -> D4 with reply C3 -> E5
+ Boards examined: 13959 Value: -20
+Added as board 204
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 426/205
+Best move: F2 -> E1 with reply C1 -> D2
+ Boards examined: 15303 Value: -20
+Added as board 205
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 427/206
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 426/206
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 425/206
+Best move: E5 -> C3 with reply B2 -> D4
+ Boards examined: 2824 Value: -20
+Added as board 206
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  b  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 426/207
+Best move: E5 -> C7 with reply B8 -> D6
+ Boards examined: 3877 Value: -20
+Added as board 207
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 427/208
+Best move: F8 -> D6 with reply C1 -> D2
+ Boards examined: 4699 Value: -120
+Added as board 208
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 425/209
+Best move: B4 -> C5 with reply E7 -> D8
+ Boards examined: 9366 Value: 20
+Added as board 209
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  .  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 436/210
+Best move: E7 -> D8 with reply C3 -> D2
+ Boards examined: 22407 Value: -20
+Added as board 210
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 437/211
+Best move: E7 -> D8 with reply A5 -> B6
+ Boards examined: 7301 Value: -120
+Added as board 211
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 438/212
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 437/212
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 436/212
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  b  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 435/212
+Best move: E7 -> C5 with reply B4 -> D6
+ Boards examined: 5380 Value: -20
+Added as board 212
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  b  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 436/213
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 432/213
+Best move: D6 -> F8 with reply F2 -> E1
+ Boards examined: 6938 Value: 120
+Added as board 213
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  b  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  .  .  b  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 437/214
+Best move: F2 -> E1 with reply B4 -> C5
+ Boards examined: 20007 Value: 80
+Added as board 214
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 432/215
+Best move: F2 -> E1 with reply B6 -> C7
+ Boards examined: 11971 Value: -20
+Added as board 215
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 443/216
+Best move: B6 -> C7 with reply F4 -> E3
+ Boards examined: 7601 Value: 20
+Added as board 216
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 455/217
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  .  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 454/217
+Best move: F4 -> E3 with reply C3 -> D2
+ Boards examined: 10288 Value: -20
+Added as board 217
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 455/218
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 454/218
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 453/218
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 452/218
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  b  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 451/218
+Best move: F4 -> D6 with reply C5 -> E7
+ Boards examined: 1519 Value: -120
+Added as board 218
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 452/219
+Best move: F6 -> D8 with reply B8 -> C7
+ Boards examined: 7981 Value: -120
+Added as board 219
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 450/220
+Best move: B6 -> C7 with reply F4 -> E5
+ Boards examined: 6144 Value: 20
+Added as board 220
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 462/221
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  .  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 461/221
+Best move: F4 -> E5 with reply D6 -> F4
+ Boards examined: 10904 Value: -20
+Added as board 221
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 462/222
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 461/222
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 460/222
+Best move: E3 -> D2 with reply C1 -> E3
+ Boards examined: 4054 Value: -20
+Added as board 222
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 461/223
+Best move: E3 -> C5 with reply B6 -> D4
+ Boards examined: 2481 Value: -20
+Added as board 223
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  b  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 462/224
+Best move: F4 -> D6 with reply C5 -> E7
+ Boards examined: 1617 Value: -120
+Added as board 224
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 463/225
+Best move: F6 -> D8 with reply B8 -> C7
+ Boards examined: 7696 Value: -120
+Added as board 225
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 461/226
+Best move: B6 -> C7 with reply E3 -> D4
+ Boards examined: 7976 Value: 20
+Added as board 226
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 473/227
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  .  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 472/227
+Best move: F2 -> E1 with reply C3 -> D2
+ Boards examined: 10048 Value: -20
+Added as board 227
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 473/228
+Best move: E3 -> C1 with reply B6 -> C7
+ Boards examined: 3787 Value: -120
+Added as board 228
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 474/229
+Best move: E3 -> D4 with reply C5 -> E3
+ Boards examined: 5932 Value: -20
+Added as board 229
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 475/230
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 474/230
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  b  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 473/230
+Best move: F6 -> D4 with reply C3 -> E5
+ Boards examined: 2349 Value: -20
+Added as board 230
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 474/231
+Best move: F6 -> D8 with reply B8 -> C7
+ Boards examined: 8092 Value: -120
+Added as board 231
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 472/232
+Best move: D6 -> F4 with reply G3 -> E5
+ Boards examined: 3014 Value: 20
+Added as board 232
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  b  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 477/233
+Best move: G3 -> E5 with reply B8 -> C7
+ Boards examined: 7189 Value: -20
+Added as board 233
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 475/234
+Best move: B6 -> C7 with reply F2 -> E1
+ Boards examined: 6305 Value: 20
+Added as board 234
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 486/235
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  .  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 485/235
+Best move: E5 -> D4 with reply C3 -> E5
+ Boards examined: 10747 Value: -20
+Added as board 235
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 486/236
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 485/236
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 484/236
+Best move: E5 -> C3 with reply B2 -> D4
+ Boards examined: 6862 Value: -20
+Added as board 236
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 485/237
+Best move: E5 -> C7 with reply B6 -> D8
+ Boards examined: 3490 Value: -20
+Added as board 237
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 486/238
+Best move: F8 -> D6 with reply C5 -> E7
+ Boards examined: 3701 Value: -20
+Added as board 238
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 484/239
+Best move: B8 -> C7 with reply E7 -> D8
+ Boards examined: 9632 Value: 20
+Added as board 239
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 495/240
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  .  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 494/240
+Best move: E7 -> D8 with reply C3 -> D2
+ Boards examined: 15755 Value: -20
+Added as board 240
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 495/241
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 494/241
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 493/241
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  b  .  .  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 492/241
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  b  .  w  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 491/241
+Best move: F4 -> D6 with reply C1 -> D2
+ Boards examined: 4396 Value: -120
+Added as board 241
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  b  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 489/242
+Best move: D6 -> F8 with reply F2 -> E1
+ Boards examined: 6352 Value: 120
+Added as board 242
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  b  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 494/243
+Best move: F2 -> E1 with reply B6 -> C7
+ Boards examined: 18165 Value: 80
+Added as board 243
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 489/244
+Best move: F2 -> E1 with reply B6 -> C7
+ Boards examined: 16950 Value: -20
+Added as board 244
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 500/245
+Best move: B6 -> C7 with reply F4 -> E3
+ Boards examined: 9734 Value: 20
+Added as board 245
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 512/246
+Best move: F4 -> E3 with reply C3 -> D2
+ Boards examined: 23847 Value: -20
+Added as board 246
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  .  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 513/247
+Best move: F4 -> E3 with reply C3 -> D2
+ Boards examined: 15606 Value: -20
+Added as board 247
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 514/248
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 513/248
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 512/248
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 511/248
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  .  .  
+D  .  .  .  .  .  b  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 510/248
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  w  .  .  .  .  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 509/248
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 505/248
+Best move: B6 -> C7 with reply F4 -> E5
+ Boards examined: 10015 Value: 20
+Added as board 248
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 517/249
+Best move: F4 -> E5 with reply C3 -> D4
+ Boards examined: 18050 Value: -20
+Added as board 249
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  .  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 518/250
+Best move: F4 -> E5 with reply C3 -> D2
+ Boards examined: 15250 Value: -20
+Added as board 250
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 519/251
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 518/251
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 517/251
+Best move: E3 -> D2 with reply C1 -> E3
+ Boards examined: 5085 Value: -20
+Added as board 251
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 518/252
+Best move: E3 -> C5 with reply B4 -> D6
+ Boards examined: 3517 Value: -20
+Added as board 252
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 519/253
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  .  .  w  .  w  .  w  
+E  .  .  w  .  .  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 518/253
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 514/253
+Best move: B6 -> C7 with reply E3 -> D4
+ Boards examined: 8560 Value: 20
+Added as board 253
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 526/254
+Best move: E3 -> D4 with reply C5 -> E3
+ Boards examined: 18110 Value: -20
+Added as board 254
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  .  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 527/255
+Best move: F2 -> E1 with reply C3 -> D2
+ Boards examined: 12430 Value: -20
+Added as board 255
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 528/256
+Best move: E3 -> C1 with reply B6 -> C7
+ Boards examined: 4560 Value: -120
+Added as board 256
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 529/257
+Best move: E3 -> D4 with reply C5 -> E3
+ Boards examined: 6104 Value: -20
+Added as board 257
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 530/258
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 529/258
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  .  .  
+D  .  .  .  .  .  b  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 528/258
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  w  .  .  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 527/258
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 523/258
+Best move: B6 -> C7 with reply E5 -> D4
+ Boards examined: 7061 Value: 20
+Added as board 258
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 535/259
+Best move: E5 -> D4 with reply C5 -> E3
+ Boards examined: 16902 Value: -20
+Added as board 259
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  .  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 536/260
+Best move: F2 -> E1 with reply C1 -> D2
+ Boards examined: 14011 Value: -20
+Added as board 260
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 537/261
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 536/261
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 535/261
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 534/261
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  b  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 533/261
+Best move: E5 -> C7 with reply B8 -> D6
+ Boards examined: 2885 Value: -20
+Added as board 261
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  .  .  w  .  w  
+E  .  .  .  .  w  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 534/262
+Best move: F6 -> D8 with reply B8 -> C7
+ Boards examined: 8101 Value: -120
+Added as board 262
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 532/263
+Best move: B6 -> C7 with reply E5 -> D6
+ Boards examined: 7627 Value: 20
+Added as board 263
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 544/264
+Best move: E5 -> D6 with reply C5 -> E7
+ Boards examined: 15790 Value: -20
+Added as board 264
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  .  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 545/265
+Best move: E5 -> D4 with reply C3 -> E5
+ Boards examined: 5842 Value: -120
+Added as board 265
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 546/266
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 545/266
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 544/266
+Best move: E5 -> C3 with reply B2 -> D4
+ Boards examined: 3774 Value: -20
+Added as board 266
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 545/267
+Best move: E5 -> D6 with reply B6 -> C5
+ Boards examined: 9511 Value: -20
+Added as board 267
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  .  .  
+D  .  .  .  .  .  b  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 546/268
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  w  .  b  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 545/268
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  .  .  w  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 541/268
+Best move: D8 -> F6 with reply G5 -> E7
+ Boards examined: 3241 Value: 20
+Added as board 268
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  b  .  w  
+E  .  .  .  .  .  .  .  .  
+D  .  .  .  .  .  .  .  .  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 546/269
+Best move: G5 -> E7 with reply B6 -> C7
+ Boards examined: 10374 Value: -20
+Added as board 269
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+Black's move
+Moves/Keys: 544/270
+Best move: B6 -> C7 with reply F2 -> E1
+ Boards examined: 12242 Value: 20
+Added as board 270
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  .  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 555/271
+Best move: F2 -> E1 with reply C1 -> D2
+ Boards examined: 21415 Value: -20
+Added as board 271
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  .  .  b  
+C  b  .  b  .  b  .  b  .  
+B  .  b  .  b  .  b  .  .  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 556/272
+Best move: F2 -> E1 with reply C1 -> D2
+ Boards examined: 16761 Value: -20
+Added as board 272
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  b  
+C  .  .  b  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 557/273
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  b  .  .  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 556/273
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  .  .  b  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 555/273
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  b  .  .  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 554/273
+Duplicate. No book entry.
+
+           White
+
+H  .  w  .  w  .  w  .  w  
+G  w  .  w  .  w  .  w  .  
+F  .  w  .  w  .  w  .  .  
+E  .  .  .  .  .  .  w  .  
+D  .  .  .  .  .  b  .  b  
+C  b  .  b  .  .  .  .  .  
+B  .  b  .  b  .  b  .  b  
+A  b  .  b  .  b  .  b  .  
+   1  2  3  4  5  6  7  8
+
+           Black
+
+White's move
+Moves/Keys: 553/273
+Best move: E7 -> C5 with reply B4 -> D6
+ Boards examined: 4236 Value: -20
+Added as board 273
+
+Writing book... done
+Before clearing book, moves/keys: 546/273
+Final count, moves/keys: 0/0
