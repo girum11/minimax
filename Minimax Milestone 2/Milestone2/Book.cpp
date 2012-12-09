@@ -23,8 +23,8 @@ Book::~Book() {
 std::istream &Book::Read(std::istream &is, const Class *boardClass) {
    Board *board = dynamic_cast<Board *>(boardClass->NewInstance());
    Board::Key *key = NULL;
-   Board::Move *move = board->CreateMove(), 
-    *replyMove = board->CreateMove();
+   Board::Move *move = board->CreateMove();
+   //  *replyMove = board->CreateMove();
    char tempFlag = 0;
    long tempValue = 0;
 
@@ -42,12 +42,12 @@ std::istream &Book::Read(std::istream &is, const Class *boardClass) {
       
       // Read in the "has reply move" flag, and accordingly make an attempt to
       // read the replyMove or not.
-      is.read((char *)&tempFlag, sizeof(tempFlag));
-      if (tempFlag) {
-         is >> *replyMove;
-      }
-      else
-         replyMove = NULL;
+//       is.read((char *)&tempFlag, sizeof(tempFlag));
+//       if (tempFlag) {
+//          is >> *replyMove;
+//       }
+//       else
+//          replyMove = NULL;
 
       // Read 
       is.read((char *)&tempValue, sizeof(tempValue));
@@ -55,7 +55,10 @@ std::istream &Book::Read(std::istream &is, const Class *boardClass) {
       tempValue = EndianXfer(tempValue);
 
       insert(pair<const Board::Key *, BestMove>(
-       key, BestMove(move, replyMove, tempValue, mLevel, 0)));
+       key, BestMove(move, 
+       // replyMove, 
+       NULL,
+       tempValue, mLevel, 0)));
    }
 
    // Don't forget to clean up after you finish

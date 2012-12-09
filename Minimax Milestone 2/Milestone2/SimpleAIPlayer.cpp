@@ -122,8 +122,8 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
 
             // [Filled blank] Set the reply move to be the subBestMove,
             // and nil out subBestMove's move.
-//             bestMove->SetReplyMove(subBestMove.move);
-//             subBestMove.move = NULL;
+            bestMove->SetReplyMove(subBestMove.move);
+            subBestMove.move = NULL;
          }
          // [Filled blank] Conditional: Black pushes the ceiling down.
          else if (board->GetWhoseMove() == 0 && subBestMove.value < max) {
@@ -134,8 +134,8 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
 
             // [Filled blank] Set the reply move to be the subBestMove,
             // and nil out subBestMove's move.
-//             bestMove->SetReplyMove(subBestMove.move);
-//             subBestMove.move = NULL;
+            bestMove->SetReplyMove(subBestMove.move);
+            subBestMove.move = NULL;
          }
 
          if (debugFlag > 0) {
