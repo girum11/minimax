@@ -149,7 +149,7 @@ void ConstructBookFileDFS(Board *board,
    list<Board::Move *>::iterator moveIter = allMoves.begin();
    const Board::Key *key = NULL;
 
-   // TODO: Output the current key/move count.
+   // Output the current key/move count.
    key = board->GetKey();
    view->Draw(cout);
    cout << "Moves/Keys: " << Board::Move::GetOutstanding() << "/" <<
@@ -189,10 +189,10 @@ void ConstructBookFileDFS(Board *board,
       board->UndoLastMove();
    }
 
-   // Clean up after your GetAllMoves() call.
-   for (moveIter = allMoves.begin(); moveIter != allMoves.end(); moveIter++) {
-      delete *moveIter;
-   }
+//    // Clean up after your GetAllMoves() call.
+//    for (moveIter = allMoves.begin(); moveIter != allMoves.end(); moveIter++) {
+//       delete *moveIter;
+//    }
    allMoves.clear();
 
    // Note: Don't delete the key, since the bookFile needs a reference to it.
