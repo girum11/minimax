@@ -59,8 +59,6 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
  BestMove *bestMove, Book *tTable, int debugFlag) {
    list<Board::Move *> moves;
    list<Board::Move *>::iterator moveIter;
-
-   // A BestMove object containing the BestMove for the node below you
    BestMove subBestMove(NULL, 0, minimaxLevel, 1);
    const Board::Key *key = 0;
    Book::iterator bookIter;
@@ -94,8 +92,9 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
 
       // Edge case: If this node is an end-game node, then set this bestMove's 
       // value to be the appropriate kWinVal.
-      // [Filled blank] Otherwise, bestMove->value should just stay the same.
-      bestMove->value = moves.size() == 0 ? bestMove->value :
+      // [Filled blank] Otherwise, bestMove->value should just be the current
+      // value of the board.
+      bestMove->value = moves.size() == 0 ? board->GetValue() :
        (board->GetWhoseMove() ? Board::kWinVal - 1 : -Board::kWinVal + 1);
 
       // Iterate through each of the possible moves, [Filled blank] provided
