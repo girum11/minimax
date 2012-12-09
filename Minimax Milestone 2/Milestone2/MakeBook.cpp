@@ -162,42 +162,45 @@ void ConstructBookFileDFS(Board *board,
    cout << "Moves/Keys: " << Board::Move::GetOutstanding() << "/" <<
     Board::Key::GetOutstanding() << endl;
 
-   // Grab all of the possible moves (each move corresponds to a child node)
-   board->GetAllMoves(&allMoves);
 
-   for (moveIter = allMoves.begin(); moveIter != allMoves.end(); moveIter++) {
-
-      // Apply the move to the board.
-      board->ApplyMove(*moveIter);
-
-      // The DFS should step down the tree in a depth-first manner until 
-      // it reaches its desired bookDepth level.  It shouldn't call Minimax() 
-      // until this is true.
-      if (bookDepth > 1) {
-         ConstructBookFileDFS(board, view, bookFile, useX, minimaxDepth, bookDepth-1);
-      }
-      else if (bookDepth == 1) {
-
-         // Once you're ready to call Minimax(), create a new tTable for that
-         // particular Minimax call (quoted from "Transposition Table" email).
-         SimpleAIPlayer::Minimax(board, minimaxDepth, LONG_MIN, LONG_MAX, 
-          &bestMove, useX ? &Book() : NULL);
-
-         // Once you finish running the Minimax for that node, add the
-         // bestMove that you got into your bookFile.
-         if (!bookFile->insert(pair<const Board::Key *, BestMove>(
-          key, bestMove)).second) {
-             cout << "Duplicate. No book entry." << endl;
-         }
-      } else assert(false);
-
-      // Undo the move from the board.
-      board->UndoLastMove();
+   // Sanity check on pre-existing book -- won't do DFS in this case.
+   if (bookFile->find(key) != bookFile->end()) {
+      cout << "Duplicate. No book entry." << endl;
+      delete key;
+      return;
    }
 
-   // TODO? Clean up after your GetAllMoves() call by iterating and deleting?
-   // The last time I tried that though, my code broke down on me.
-   // allMoves.clear();
+   // Once you're ready to call Minimax(), create a new tTable for that
+   // particular Minimax call (quoted from "Transposition Table" email).
+   // TODO: Should this really be LONG_MIN and LONG_MAX?
+   SimpleAIPlayer::Minimax(board, minimaxDepth, LONG_MIN, LONG_MAX, 
+    &bestMove, useX ? &Book() : NULL);
+
+   // Once you finish running the Minimax for that node, add the
+   // bestMove that you got into your bookFile.
+   bookFile->insert(pair<const Board::Key *, BestMove>(key, bestMove)).second;
+
+   if (bookDepth > 0) {
+      // Grab all of the possible moves (each move corresponds to a child node)
+      board->GetAllMoves(&allMoves);
+
+      for (moveIter = allMoves.begin(); moveIter != allMoves.end(); moveIter++) {
+         board->ApplyMove(*moveIter);
+
+         // The DFS should step down the tree in a depth-first manner until 
+         // it reaches its desired bookDepth level.
+         ConstructBookFileDFS(board, view, bookFile, useX, minimaxDepth, bookDepth-1);
+
+         // Undo the move from the board.
+         board->UndoLastMove();
+      }  
+
+      // TODO? Clean up after your GetAllMoves() call by iterating and deleting?
+      // The last time I tried that though, my code broke down on me.
+   }
+   else if (bookDepth == 0) {
+
+   } else assert(false);
 
    // Note: Don't delete the key, since the bookFile needs a reference to it.
 }
