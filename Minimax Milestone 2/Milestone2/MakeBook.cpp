@@ -113,6 +113,7 @@ int main() {
       return -1;
    }
 
+   bookFile->SetLevel(minimaxDepth);
    view->SetModel(board);
 
    // Create the "bookFile file."

@@ -9,11 +9,9 @@
 using namespace std;
 
 Book::~Book() {
-   // TODO: Is this necessary?
-//    for (Book::iterator bookIter = begin(); bookIter != end(); bookIter++) {
-//       delete bookIter->first;
-//       delete bookIter->second.move;
-//    }
+   for (Book::iterator bookIter = begin(); bookIter != end(); bookIter++) {
+      delete bookIter->first;
+   }
 }
 
 // [Staley] Read/write book to and from a file in binary format.  
