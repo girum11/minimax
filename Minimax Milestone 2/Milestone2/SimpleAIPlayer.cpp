@@ -141,20 +141,27 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
          delete *moveIter;
 
 
-// [Staley] TODO: Likewise, save the result of any minimax computations of minimaxLevel 1 
-// [Staley] or greater in the tTable . And, very importantly, we update the table 
-// [Staley] even if it already has a key for the board you’re computing, if 
-// [Staley] your new computation is for a deeper lookahead minimaxLevel than the one 
-// [Staley] in the tTable.
-//       if (tTable && minimaxLevel >= SAVE_LEVEL && _________________ && bestMove->move) {
-//          insRes = tTable->insert(_____________________________);
-//          if (insRes.second)
-//             key = 0;
-//          else if (_______________________________________) {
-//             (*insRes.first).second = *bestMove;
-//          } 
-//       }
-//    }
+      // [Filled blank] From the loop before, a min/max limits collision doesn't
+      // return, but breaks instead (to provide time to clean up the 
+      // GetAllMoves() call.  Thus, you have to ensure that the tTable isn't
+      // added if you had a min/max collision.
+      if (tTable && minimaxLevel >= SAVE_LEVEL && min < max && bestMove->move) {
+         // [Filled blank] Insert the key->bestMove mapping into the map.
+         insRes = tTable->insert(pair<const Board::Key *, BestMove>(key, *bestMove));
+         
+         // If you successfully inserted the key, then nil out the pointer to
+         // it before you accidentally delete it after this else{} finishes.
+         if (insRes.second)
+            key = 0;
+         // [Filled blank] "And, very importantly, we update the table 
+         // even if it already has a key for the board you’re computing, if 
+         // your new computation is for a deeper lookahead minimaxLevel than 
+         // the one in the tTable."
+         else if ((*insRes.first).second.depth < minimaxLevel) {
+            (*insRes.first).second = *bestMove;
+         } 
+      }
+   }
    delete key;
 }
 
