@@ -112,11 +112,10 @@ int main() {
       cout << "Unknown type " << boardType << endl;
       return -1;
    }
-
    bookFile->SetLevel(minimaxDepth);
    view->SetModel(board);
 
-   // Create the "bookFile file."
+   // Create the "bookFile file".  This is where all the work happens.
    ConstructBookFileDFS(board, view, bookFile, boardClass->UseTransposition(), 
     minimaxDepth, bookDepth);
 
@@ -129,15 +128,9 @@ int main() {
 
    cout << "Before clearing book, moves/keys: " << Board::Move::GetOutstanding()
     << "/" << Board::Key::GetOutstanding() << endl;
-
    delete bookFile;
-
    cout << "Final count, moves/keys: " << Board::Move::GetOutstanding() << "/"
     << Board::Key::GetOutstanding() << endl;
-
-   // Clean up the rest of your dynamic memory before you go
-   delete view;
-   delete board;
 
    return 0;
 }
