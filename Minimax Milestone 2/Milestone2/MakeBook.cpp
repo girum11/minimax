@@ -121,7 +121,7 @@ int main() {
 
    // When the bookFile is complete (after you finish running the DFS), write it
    // to a binary "bookFile file" having the specified fileName.
-   out.open(filename);
+   out.open(filename.c_str());
    bookFile.Write(out);
 
    // Clean up dynamic memory before you go
