@@ -13,6 +13,9 @@ Hint:
    You’ll find the TCmpPtr template from MyLib.h useful here.  
 */
 
+Book::~Book() {
+   // TODO
+}
 
 
 // [Staley] Read/write book to and from a file in binary format.  
