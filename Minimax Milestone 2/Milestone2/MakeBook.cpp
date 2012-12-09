@@ -22,13 +22,13 @@ void ConstructBookFileDFS(Board *board,
 // [Staley] provided.  MakeBook prompts for and accepts a single line of input 
 // [Staley] of the form:
 // [Staley] 
-// [Staley] BoardClass minimaxDepth bookDepth fileName
+// [Staley] BoardClass level depth fileName
 // [Staley] 
 // [Staley] MinimaxLevel is the minimax lookahead to use when determining a 
 // [Staley] best move for each board key.  BookDepth indicates how many boards 
 // [Staley] to generate.  Specifically, it tells how many halfmoves from the 
-// [Staley] starting board should be covered by the bookFile file.  A minimaxDepth 
-// [Staley] of 5 and a bookDepth of 2 indicate that you should generate a best 
+// [Staley] starting board should be covered by the bookFile file.  A level 
+// [Staley] of 5 and a depth of 2 indicate that you should generate a best 
 // [Staley] move for the initial board and all boards reachable from it in two 
 // [Staley] halfmoves (something like 257 boards for Pylos), and that for each 
 // [Staley] such board you should do a lookahead-5 minimax exploration to 
@@ -92,14 +92,14 @@ int main() {
    const BoardClass *boardClass = NULL;
    View *view = NULL;
    Board *board = NULL;
-   int minimaxDepth = -1, bookDepth = -1;
+   int level = -1, depth = -1;
    string boardType(""), filename("");
    Book *bookFile = new Book();
    ofstream out;
    
    // First, prompt the user for commands of the following usage:
    cout << "Enter boardType, level, depth, and filename: ";
-   cin >> boardType >> minimaxDepth >> bookDepth >> filename;
+   cin >> boardType >> level >> depth >> filename;
 
    // Use reflection to instantiate the correct board, or give an error
    // message if that BoardClass type doesn't exist.
@@ -110,12 +110,12 @@ int main() {
       cout << "Unknown type " << boardType << endl;
       return -1;
    }
-   bookFile->SetLevel(minimaxDepth);
+   bookFile->SetLevel(level);
    view->SetModel(board);
 
    // Create the "bookFile file".  This is where all the work happens.
    ConstructBookFileDFS(board, view, bookFile, boardClass->UseTransposition(), 
-    minimaxDepth, bookDepth);
+    level, depth);
 
    // When the bookFile is complete (after you finish running the DFS), write it
    // to a binary "bookFile file" having the specified fileName.
@@ -143,8 +143,8 @@ void ConstructBookFileDFS(Board *board,
                           View *view,
                           Book *bookFile,
                           bool useX, // True if this BoardClass uses an XTable.
-                          int minimaxDepth,
-                          int bookDepth) 
+                          int level,
+                          int depth) 
 {
    list<Board::Move *> allMoves;
    list<Board::Move *>::iterator moveIter = allMoves.begin();
@@ -171,7 +171,7 @@ void ConstructBookFileDFS(Board *board,
    // Once you're ready to call Minimax(), create a new tTable for that
    // particular Minimax call (quoted from "Transposition Table" email).
    // TODO: Should this really be LONG_MIN and LONG_MAX?
-   SimpleAIPlayer::Minimax(board, minimaxDepth, LONG_MIN, LONG_MAX, 
+   SimpleAIPlayer::Minimax(board, level, -Board::kWinVal-1, Board::kWinVal+1, 
     &bestMove, useX ? tTable : NULL);
 
    // Report current stats to the user.
@@ -185,7 +185,7 @@ void ConstructBookFileDFS(Board *board,
    // bestMove that you got into your bookFile.
    bookFile->insert(pair<const Board::Key *, BestMove>(key, bestMove)).second;
 
-   if (bookDepth > 0) {
+   if (depth > 0) {
       // Grab all of the possible moves (each move corresponds to a child node)
       board->GetAllMoves(&allMoves);
 
@@ -193,8 +193,8 @@ void ConstructBookFileDFS(Board *board,
          board->ApplyMove(*moveIter);
 
          // The DFS should step down the tree in a depth-first manner until 
-         // it reaches its desired bookDepth level.
-         ConstructBookFileDFS(board, view, bookFile, useX, minimaxDepth, bookDepth-1);
+         // it reaches its desired depth level.
+         ConstructBookFileDFS(board, view, bookFile, useX, level, depth-1);
 
          board->UndoLastMove();
       }  
