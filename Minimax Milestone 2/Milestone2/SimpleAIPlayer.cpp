@@ -137,7 +137,7 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
          bestMove->numBoards += subBestMove.numBoards;
       }
 
-      // [Filled blank] Clean up after your GetAllMoves() call.
+      // [Filled blank] Delete Move pointers contained in any unused nodes.
       for (; moveIter != moves.end(); moveIter++)
          delete *moveIter;
 

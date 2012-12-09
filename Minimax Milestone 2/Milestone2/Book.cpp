@@ -9,8 +9,11 @@
 using namespace std;
 
 Book::~Book() {
-   // TODO: Do I need to do anything here, or do I inherit from the 
-   // std::map superclass?
+   // TODO: Is this necessary?
+//    for (Book::iterator bookIter = begin(); bookIter != end(); bookIter++) {
+//       delete bookIter->first;
+//       delete bookIter->second.move;
+//    }
 }
 
 // [Staley] Read/write book to and from a file in binary format.  
