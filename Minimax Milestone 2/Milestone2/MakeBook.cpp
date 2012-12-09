@@ -96,7 +96,7 @@ int main() {
    Board *board = NULL;
    int minimaxDepth = -1, bookDepth = -1;
    string boardType(""), filename("");
-   Book bookFile;
+   Book *bookFile = new Book();
    ofstream out;
    
    // First, prompt the user for commands of the following usage:
@@ -116,20 +116,25 @@ int main() {
    view->SetModel(board);
 
    // Create the "bookFile file."
-   ConstructBookFileDFS(board, view, &bookFile, boardClass->UseTransposition(), 
+   ConstructBookFileDFS(board, view, bookFile, boardClass->UseTransposition(), 
     minimaxDepth, bookDepth);
 
    // When the bookFile is complete (after you finish running the DFS), write it
    // to a binary "bookFile file" having the specified fileName.
    cout << "Writing book... ";
    out.open(filename.c_str());
-   bookFile.Write(out);
+   bookFile->Write(out);
    cout << "done" << endl;
+
+   cout << "Before clearing book, moves/keys: " << Board::Move::GetOutstanding()
+    << "/" << Board::Key::GetOutstanding() << endl;
+
+   delete bookFile;
 
    cout << "Final count, moves/keys: " << Board::Move::GetOutstanding() << "/"
     << Board::Key::GetOutstanding() << endl;
 
-   // Clean up dynamic memory before you go
+   // Clean up the rest of your dynamic memory before you go
    delete view;
    delete board;
 
