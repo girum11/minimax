@@ -60,15 +60,17 @@ std::istream &Book::Read(std::istream &is, const Class *boardClass) {
 
 // [Staley] Read/write book to and from a file in binary format.
 std::ostream &Book::Write(std::ostream &os) {
-
+   long tempValue = 0;
    os.write((char *)&mLevel, sizeof(mLevel));
 
    for (Book::const_iterator bookIter = this->begin();
     bookIter != this->end(); bookIter++) {
       
       // Write the key
+      os.write((char *)&bookIter->first, sizeof(bookIter->first));
 
       // Write the BestMove
+      os.write((char *)&bookIter->second, sizeof(bookIter->second));
 
       // TODO: If it exists, write the "replyMove exists" flag.  1 if it exists,
       // 0 if it does not.
@@ -76,9 +78,8 @@ std::ostream &Book::Write(std::ostream &os) {
       // TODO: If the aforementioned flag is set, write the replyMove
 
       // Write the computed minimax value for this BestMove
-
-
-
+      tempValue = EndianXfer(bookIter->second.value);
+      os.write((char *)&tempValue, sizeof(bookIter->second.value));
    }
 
    
