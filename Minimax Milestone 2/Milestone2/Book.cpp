@@ -54,8 +54,10 @@ std::istream &Book::Read(std::istream &is, const Class *boardClass) {
       // Read 
       is.read((char *)&tempValue, sizeof(tempValue));
       
+      tempValue = EndianXfer(tempValue);
+
       insert(pair<const Board::Key *, BestMove>(
-       key, BestMove(move, replyMove, EndianXfer(tempValue), mLevel, 0)));
+       key, BestMove(move, replyMove, tempValue, mLevel, 0)));
    }
 
    // Don't forget to clean up after you finish
@@ -83,14 +85,14 @@ std::ostream &Book::Write(std::ostream &os) {
       os << *(bookIter->second.move);
       // os.write((char *)&bookIter->second, sizeof(bookIter->second));
 
-      // If it exists, write each  "replyMove exists" flag.  Write the
-      // number 1 if it exists, or 0 if it does not.
-      tempFlag = bookIter->second.replyMove ? 1 : 0;
-      os.write((char *)&tempFlag, sizeof(tempFlag));
+//       // If it exists, write each  "replyMove exists" flag.  Write the
+//       // number 1 if it exists, or 0 if it does not.
+//       tempFlag = bookIter->second.replyMove ? 1 : 0;
+//       os.write((char *)&tempFlag, sizeof(tempFlag));
 
-      // If the aforementioned flag is set, write the replyMove
-      if (tempFlag)
-         os << *(bookIter->second.replyMove);
+//       // If the aforementioned flag is set, write the replyMove
+//       if (tempFlag)
+//          os << *(bookIter->second.replyMove);
 
       // Write the computed minimax value for this BestMove
       tempValue = EndianXfer(bookIter->second.value);
