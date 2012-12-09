@@ -59,7 +59,7 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
  BestMove *bestMove, Book *tTable, int debugFlag) {
    list<Board::Move *> moves;
    list<Board::Move *>::iterator moveIter;
-   BestMove subBestMove(NULL, 0, minimaxLevel, 1);
+   BestMove subBestMove(NULL, NULL, 0, minimaxLevel, 1);
    const Board::Key *key = 0;
    Book::iterator bookIter;
    pair<Book::iterator, bool> insRes;
@@ -116,12 +116,14 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
          // [Filled blank] White pulls the floor up.
          if (board->GetWhoseMove() == 1 && subBestMove.value > min) {
             bestMove->value = min = subBestMove.value;
-            bestMove->SetBestMove(subBestMove.move);
+            bestMove->SetBestMove((*moveIter)->Clone());
+            bestMove->SetReplyMove(subBestMove.move);
          }
          // [Filled blank] Black pushes the ceiling down.
          else if (board->GetWhoseMove() == 0 && subBestMove.value < max) {
             bestMove->value = max = subBestMove.value;
-            bestMove->SetBestMove(subBestMove.move);
+            bestMove->SetBestMove((*moveIter)->Clone());
+            bestMove->SetReplyMove(subBestMove.move);
          }
 
          if (debugFlag > 0) {

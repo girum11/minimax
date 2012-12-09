@@ -23,6 +23,7 @@ struct BestMove {
    ~BestMove();
    
    void SetBestMove(Board::Move *mv) {delete move; move = mv;}
+   void SetReplyMove(Board::Move *mv) {delete replyMove; replyMove = mv;}
 };
 
 #endif
