@@ -105,8 +105,7 @@ int main() {
    // message if that BoardClass type doesn't exist.
    if ((boardClass = dynamic_cast<const BoardClass *>(BoardClass::ForName(boardType))) == NULL
     || (board = dynamic_cast<Board *>(boardClass->NewInstance())) == NULL
-    || (view = dynamic_cast<View *>(
-    boardClass->GetViewClass()->NewInstance())) == NULL) {
+    || (view = dynamic_cast<View *>(boardClass->GetViewClass()->NewInstance())) == NULL) {
       cout << "Unknown type " << boardType << endl;
       return -1;
    }
@@ -174,6 +173,9 @@ void ConstructBookFileDFS(Board *board,
    SimpleAIPlayer::Minimax(board, level, -Board::kWinVal-1, Board::kWinVal+1, 
     &bestMove, useX ? tTable : NULL);
 
+   // Clean up afterwards.
+   delete tTable;
+
    // Report current stats to the user.
    cout << "Best move: " << (string) *bestMove.move << " with reply ";
    cout << (bestMove.replyMove ? (string) *bestMove.replyMove : "unknown") 
@@ -183,7 +185,7 @@ void ConstructBookFileDFS(Board *board,
 
    // Once you finish running the Minimax for that node, add the
    // bestMove that you got into your bookFile.
-   bookFile->insert(pair<const Board::Key *, BestMove>(key, bestMove)).second;   
+   bookFile->insert(pair<const Board::Key *, BestMove>(key, bestMove));   
    cout << "Added as board " << bookFile->size() << endl << endl;
 
    if (depth > 0) {
@@ -207,5 +209,5 @@ void ConstructBookFileDFS(Board *board,
 //    for (moveIter = allMoves.begin(); moveIter != allMoves.end(); moveIter++) {
 //       delete *moveIter;
 //    }
-   delete tTable;
+   
 }
