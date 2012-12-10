@@ -183,7 +183,8 @@ void ConstructBookFileDFS(Board *board,
 
    // Once you finish running the Minimax for that node, add the
    // bestMove that you got into your bookFile.
-   bookFile->insert(pair<const Board::Key *, BestMove>(key, bestMove)).second;
+   bookFile->insert(pair<const Board::Key *, BestMove>(key, bestMove)).second;   
+   cout << "Added as board " << bookFile->size() << endl << endl;
 
    if (depth > 0) {
       // Grab all of the possible moves (each move corresponds to a child node)
