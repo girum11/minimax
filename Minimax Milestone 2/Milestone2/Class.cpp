@@ -45,12 +45,3 @@ void *BoardClass::GetOptions() const {
 void BoardClass::SetOptions(void *options) const {
    (*optionSetter)(options);
 }
-
-const BoardClass *BoardClass::ForName(const string &name) {
-   BoardClass *cursor = BoardClass::mBrdClsHead;
-
-   while (cursor != NULL && cursor->mName.compare(name) != 0)
-      cursor = cursor->mNext;  
-   
-   return cursor;
-}
