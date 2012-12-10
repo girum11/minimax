@@ -39,7 +39,7 @@ istream &Book::Read(istream &is, const Class *boardClass) {
       is.read((char*)&tempValue, sizeof(tempValue));
       
       insert(value_type(key, BestMove(move->Clone(), tempChar == 1 ?
-       replyMove->Clone() : 0, EndianXfer(tempValue), mLevel, 0)));
+       replyMove->Clone() : NULL, EndianXfer(tempValue), mLevel, 0)));
    }
    
    delete board;

@@ -104,8 +104,8 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
 
          board->ApplyMove(*moveIter);
 
-         // Base case.  If the minimax recursion can't possibly go up another
-         // level because you're at Level 1, then stop recursing up.
+         // Base case.  If the minimax recursion can't possibly go down another
+         // level because you're at your target Level, then stop recursing down.
          if (minimaxLevel == 1)
             subBestMove.value = board->GetValue();
          else
