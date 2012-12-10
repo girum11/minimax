@@ -72,8 +72,7 @@ bool PylosMove::operator<(const Board::Move &rhs) const
    return false;
 }
 
-PylosMove::operator string() const
-{
+PylosMove::operator string() const {
    string str;
    LocVector::const_iterator itr;
    
@@ -258,21 +257,4 @@ istream &PylosMove::Read(istream &is) {
    }
 
    return is;
-}
-
-void PylosMove::AssertMe() {  
-   // Assert that the "doMove ... taking [a,b] and [c,d] cases ensure
-   // that [a,b] < [c,d]
-   
-   if (mType == kReserve) 
-      assert(mLocs.size() <= 3);
-   if (mType == kPromote) 
-      assert(mLocs.size() <= 4);
-   
-   // I can't leave these logical PylosMove asserts in here -- it diffs
-   // in Milestone 1
-//    if (mType == kReserve && mLocs.size() == 3) 
-//       assert(mLocs[1] <= mLocs[2]);
-//    if (mType == kPromote && mLocs.size() == 4) 
-//       assert(mLocs[2] <= mLocs[3]);
 }
