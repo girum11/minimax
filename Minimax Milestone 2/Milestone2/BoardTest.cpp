@@ -110,7 +110,7 @@ int main(int argc, char **argv) {
    }
 
    // Attempt to instantiate the boardClass object
-   boardClass = BoardClass::ForName(argv[1]);
+   boardClass = dynamic_cast<const BoardClass *>(Class::ForName(argv[1]));
    if (boardClass == NULL) {
       cout << "Failed to create classes or objects" << endl;
       return -1;
