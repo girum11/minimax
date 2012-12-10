@@ -103,7 +103,7 @@ int main() {
 
    // Use reflection to instantiate the correct board, or give an error
    // message if that BoardClass type doesn't exist.
-   if ((boardClass = BoardClass::ForName(boardType)) == NULL
+   if ((boardClass = dynamic_cast<const BoardClass *>(BoardClass::ForName(boardType))) == NULL
     || (board = dynamic_cast<Board *>(boardClass->NewInstance())) == NULL
     || (view = dynamic_cast<View *>(
     boardClass->GetViewClass()->NewInstance())) == NULL) {

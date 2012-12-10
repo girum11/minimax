@@ -94,9 +94,6 @@ public:
    virtual int  GetMinPlayers() const {return mMinPlayers;}
    static std::vector<const BoardClass *> GetAllClasses();
 
-   // Return the Class object for the given type name.
-   static const BoardClass *ForName(const std::string &name);
-
 protected:
    std::string mFriendlyName;
    const Class *mViewClass;
