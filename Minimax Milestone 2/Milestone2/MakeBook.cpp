@@ -162,7 +162,7 @@ void ConstructBookFileDFS(Board *board,
 
    // Sanity check on pre-existing book -- won't do DFS in this case.
    if (bookFile->find(key) != bookFile->end()) {
-      cout << "Duplicate. No book entry." << endl;
+      cout << "Duplicate. No book entry." << endl << endl;
       delete key;
       return;
    }
