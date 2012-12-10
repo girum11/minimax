@@ -589,6 +589,7 @@ void PylosBoard::Delete() {
 Board::Key *PylosBoard::GetKey() const {
    BasicKey<2> *rtn = new BasicKey<2>();
 
+   rtn->vals[0] = rtn->vals[1] = 0;
    rtn->vals[0] = (mWhoseMove == kWhite) << kNumCells | mWhite;
    rtn->vals[1] = mBlack;
 
