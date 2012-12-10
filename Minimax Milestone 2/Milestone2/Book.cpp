@@ -1,67 +1,72 @@
 #include "Book.h"
 #include "Board.h"
+#include <assert.h>
 
 using namespace std;
 
-Book::~Book()
-{
-   Book::iterator itr;
-   for (itr = begin(); itr != end(); ++itr) {
-      delete itr->first;
+Book::~Book() {
+   Book::iterator bookIter;
+   for (bookIter = begin(); bookIter != end(); ++bookIter) {
+      delete bookIter->first;
    }
 }
 
-istream &Book::Read(istream &is, const Class *brdCls)
-{
-   Board *brd = dynamic_cast<Board*>(brdCls->NewInstance());
+// [Staley] Read/write book to and from a file in binary format.  
+// [Staley] In Read, assume the Keys and Moves in the file are those for boardClass.
+// [Staley]
+// [Staley] When you read the book, assume that the depth of the BestMove is
+// [Staley] the "level" of the book file.
+// [Staley] Also, assume that the number of boards explored is 0.
+istream &Book::Read(istream &is, const Class *boardClass) {
+   Board *board = dynamic_cast<Board*>(boardClass->NewInstance());
+   Board::Move *move = board->CreateMove(), *replyMove = board->CreateMove();
    Board::Key *key;
-   Board::Move *move = brd->CreateMove(), *replyMove = brd->CreateMove();
-   long value = 0;
-   char temp;
+   char tempChar;
+   long tempValue = 0;
    
-   is.read(&temp, sizeof(char));
-   mLevel = temp;
+   is.read(&tempChar, sizeof(tempChar));
+   mLevel = tempChar;
    
    while (!is.eof()) {
-      key = const_cast<Board::Key *> (brd->GetKey());
+      // Hack here, but eff it at this point  ~_~.
+      key = const_cast<Board::Key *> (board->GetKey());
       is >> *key;
       is >> *move;
-      is.read(&temp, sizeof(char));
-      if (temp == 1){
+      is.read(&tempChar, sizeof(char));
+      if (tempChar == 1){
          is >> *replyMove;
       }
-      is.read((char*)&value, sizeof(long));
+      is.read((char*)&tempValue, sizeof(tempValue));
       
-      insert(value_type(key, BestMove(move->Clone(), temp == 1 ?
-       replyMove->Clone() : 0, EndianXfer(value), mLevel, 0)));
+      insert(value_type(key, BestMove(move->Clone(), tempChar == 1 ?
+       replyMove->Clone() : 0, EndianXfer(tempValue), mLevel, 0)));
    }
    
-   delete brd;
+   delete board;
    delete move;
    
    return is;
 }
 
-ostream &Book::Write(ostream &os)
-{
-   Book::iterator itr;
-   char temp = mLevel;
-   long value;
+// Same thing as Read(), but with less assumptions.
+ostream &Book::Write(ostream &os) {
+   Book::iterator bookIter;
+   char tempChar = mLevel;
+   long tempValue;
    
-   os.write(&temp, sizeof(char));
+   os.write(&tempChar, sizeof(tempChar));
    
-   for (itr = begin(); itr != end(); ++itr) {
-      os << *(itr->first);
-      os << *(itr->second.move);
-      temp = itr->second.replyMove ? 1 : 0;
-      os.write(&temp, sizeof(char));
-      if (temp == 1){
-         os << *(itr->second.replyMove);
+   for (bookIter = begin(); bookIter != end(); ++bookIter) {
+      os << *(bookIter->first);
+      os << *(bookIter->second.move);
+      tempChar = bookIter->second.replyMove ? 1 : 0;
+      os.write(&tempChar, sizeof(tempChar));
+      if (tempChar == 1){
+         os << *(bookIter->second.replyMove);
       }
       
-      value = EndianXfer(itr->second.value);
-      
-      os.write((char*)&value, sizeof(long));
+      tempValue = EndianXfer(bookIter->second.value);
+      os.write((char*)&tempValue, sizeof(tempValue));
    }
    
    return os;
