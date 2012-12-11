@@ -1,7 +1,7 @@
 #include "MyLib.h"
 #include "CheckersMove.h"
-#include <iostream>
 #include <cctype>
+#include <assert.h>
 #include <algorithm>
 
 using namespace std;

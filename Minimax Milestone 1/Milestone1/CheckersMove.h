@@ -3,11 +3,6 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <cctype>
-#include <list>
-#include <vector>
-#include "MyLib.h"
-#include <assert.h>
 #include "Board.h"
 
 class CheckersMove : public Board::Move {
