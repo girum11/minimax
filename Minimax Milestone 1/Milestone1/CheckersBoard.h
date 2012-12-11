@@ -9,8 +9,6 @@ class CheckersMove;
 
 class CheckersBoard : public Board {
 public:
-   static const int kWidth = 8;
-
    friend class CheckersMove;
 
    // Game logic relies on kWhite being -1 and kBlack being 1
@@ -21,14 +19,11 @@ public:
 
    // Running Clint's version of this says the following:
    // "(Piece weight is always 100)"
-   static const int pieceWgt = 100;
+   static const int pieceWgt = 100, kWidth = 8;
+
    struct Rules {
-      int kingWgt; // Weight of each King
-      int backRowWgt; // Weight of any back row pieces
-      int moveWgt; // Weight of it being your turn
-
+      int kingWgt, backRowWgt, moveWgt;
       Rules() : kingWgt(300), backRowWgt(100), moveWgt(20) {}
-
       void EndSwap();
    };
 
@@ -97,42 +92,8 @@ protected:
    // Frees all CheckersBoard storage.
    void Delete();
    
-   // Helper function to add a piece on the board.
-   // ApplyMove() and UndoLastMove() should use Put() instead of this method.
-   inline void HalfPut(Piece *piece, Cell *cell) const {
-      if (piece->color == kBlack) {
-         mBlackSet |= cell->mask;
-      } else if (piece->color == kWhite) {
-         mWhiteSet |= cell->mask;
-      } else assert(false);
-
-      assert((mBlackSet & mWhiteSet) == 0);
-
-      // If the piece to put down is a king, add the piece to mKingSet
-      if (piece->isKing)
-         mKingSet |= cell->mask;
-   }
-
-   // Helper function to remove a piece of a specific color.  
-   // Returns the Piece that was removed.
-   // ApplyMove() and UndoLastMove() should use Take() instead of this method.
-   inline Piece *HalfTake(Cell *cell, int color) const {     
-      // Assert that the bitmasks don't overlap, so that you can safely
-      // clear the mask from BOTH bitmasks.
-      assert((mBlackSet & mWhiteSet) == 0);
-
-      mBlackSet &= ~(cell->mask);
-      mWhiteSet &= ~(cell->mask);
-
-      // Figure out if this was a King or not.
-      bool wasKing = (cell->mask & mKingSet);
-
-      // Remove the cell from mKingSet before you finish
-      mKingSet &= ~(cell->mask);
-
-      // TODO: Does this have to dynamically allocate?
-      return new Piece(wasKing, color, cell->loc);
-   }
+   inline void HalfPut(Piece *piece, Cell *cell) const;
+   inline Piece *HalfTake(Cell *cell, int color) const;
 
    void RefreshBoardValuation();
 
@@ -147,29 +108,7 @@ protected:
    static inline bool IsEven(char num) { return num % 2; }
    static inline bool IsOdd(char num) { return !IsEven(num); }
 
-   // Returns NULL if parameters are invalid
-   static inline Cell *GetCell(char row, unsigned col) {
-      // Out of bounds
-      if (row < 'A' || row > 'H' || col < 1 || col > 8) {
-         return NULL;
-      }
-
-      // Reduce the inputted characters to their numerical form
-      // (I drew up a diagram of this in my binder)
-      row -= 'A';
-      col -= 1;
-
-      row = kWidth - row - 1;
-      
-      // Invalid square.  Row and Col must either be odd/even or even/odd,
-      // respectively.
-      if (!((IsEven(row) && IsOdd(col)) || (IsOdd(row) && IsEven(col)))) {
-         return NULL;
-      }
-
-      return mCells + (row*kDim) + (col/2);
-   }
-
+   static inline Cell *GetCell(char row, unsigned col);
    static inline Cell *GetCell(const std::pair<char, unsigned int> &loc) {
       return GetCell(loc.first, loc.second);
    }
