@@ -170,7 +170,7 @@ void ConstructBookFileDFS(Board *board,
    // Once you're ready to call Minimax(), create a new tTable for that
    // particular Minimax call (quoted from "Transposition Table" email).
    SimpleAIPlayer::Minimax(board, level, -Board::kWinVal-1, Board::kWinVal+1, 
-    &bestMove, useX ? tTable : NULL, 1);
+    &bestMove, useX ? tTable : NULL);
 
    // Clean up afterwards.
    delete tTable;
