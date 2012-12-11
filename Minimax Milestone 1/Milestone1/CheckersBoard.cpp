@@ -22,12 +22,12 @@ using namespace std;
 /************************************************************************/
 CheckersBoard::Rules CheckersBoard::mRules;
 CheckersBoard::Cell CheckersBoard::mCells[kNumCells];
-ulong CheckersBoard::mBlackBackSet;
-ulong CheckersBoard::mWhiteBackSet;
+ulong CheckersBoard::mBlackBackSet, CheckersBoard::mWhiteBackSet;
 
 BoardClass CheckersBoard::mClass("CheckersBoard", &CreateCheckersBoard,
  "Checkers", &CheckersView::mClass, &CheckersDlg::mClass,
  &CheckersBoard::SetOptions, &CheckersBoard::GetOptions);
+
 // The C++ definition here isn't required in C++11, which I'm using.
 // Put it there anyways to force the "static block" to run.
 CheckersBoard::CheckersBoardInitializer CheckersBoard::mInitializer;
@@ -36,8 +36,7 @@ CheckersBoard::CheckersBoardInitializer CheckersBoard::mInitializer;
 void CheckersBoard::StaticInit() {
    Cell *cell;
    char row = 'A';
-   unsigned col = 1;
-   int nextCell = 0;
+   unsigned int col = 1, nextCell = 0;
 
    // Initialize mCells, mBlackBackRow and mWhiteBackRow
    for (row = 'H'; row >= 'A'; row--) {
@@ -91,7 +90,6 @@ CheckersBoard::CheckersBoard() : mWhoseMove(kBlack),
 }
 
 void CheckersBoard::Delete() {
-   
    // Reset the member datum to their default values.
    mBlackSet = mWhiteSet = mKingSet = 0x0;
    mWhoseMove = kBlack;
@@ -114,17 +112,11 @@ void CheckersBoard::Delete() {
       }
    }
 
-   // Clear out mMoveHistory
+   // Clear out mMoveHistory and mCapturedPieces.
    list<Move *>::iterator moveIter;
    for (moveIter = mMoveHist.begin(); moveIter != mMoveHist.end(); moveIter++)
       delete *moveIter;
    mMoveHist.clear();
-
-   // Clear out mCapturedPieces.
-   for (list<Piece *>::iterator pieceIter = mCapturedPieces.begin(); 
-    pieceIter != mCapturedPieces.end(); pieceIter++) {
-       delete *pieceIter;
-   }
    mCapturedPieces.clear();
 }
 
@@ -158,12 +150,11 @@ long CheckersBoard::GetValue() const {
       return kWinVal;
    else if ((mBlackPieceCount + mBlackKingCount) == 0)
       return -kWinVal;
-   else {
+   else
       return pieceWgt * (mBlackPieceCount - mWhitePieceCount) + 
        mRules.kingWgt * (mBlackKingCount - mWhiteKingCount) +
        mRules.backRowWgt * (mBlackBackCount - mWhiteBackCount) +
        mRules.moveWgt * mWhoseMove;
-   }
 }
 
 void CheckersBoard::ApplyMove(Move *move) {
@@ -175,26 +166,28 @@ void CheckersBoard::ApplyMove(Move *move) {
    int jumpedPieces = 0; // The number of pieces that move "jumps"
    Piece *pieceToMove = NULL;
 
-   // Assertions on each destination piece.
-   for (unsigned int index = 1; index < (*locs).size(); ++index) {
-      Cell *cell = GetCell((*locs)[index].first, (*locs)[index].second);
-      
-      // Assert that this cell (where this move wants to go to) isn't already
-      // taken.
-      assert((allPieces & cell->mask) == 0);
-      
-      // Assert that non-king pieces aren't moving backwards.
-      if ((originCell->mask & mKingSet) == 0) {
-         // Black non-kings should be moving upwards
-         if (mWhoseMove == kBlack) {
-            assert((*locs)[index].first > (*locs)[index-1].first);
-         }
-         // White non-kings should be moving downwards
-         else if (mWhoseMove == kWhite) {
-            assert((*locs)[index].first < (*locs)[index-1].first);
-         }
-      }
-   }
+   // TODO: Don't use this code unless you have a bug.  This is just a series 
+   // of assert statements.
+//    Assertions on each destination piece.
+//       for (unsigned int index = 1; index < (*locs).size(); ++index) {
+//          Cell *cell = GetCell((*locs)[index].first, (*locs)[index].second);
+//          
+//          // Assert that this cell (where this move wants to go to) isn't already
+//          // taken.
+//          assert((allPieces & cell->mask) == 0);
+//          
+//          // Assert that non-king pieces aren't moving backwards.
+//          if ((originCell->mask & mKingSet) == 0) {
+//             // Black non-kings should be moving upwards
+//             if (mWhoseMove == kBlack) {
+//                assert((*locs)[index].first > (*locs)[index-1].first);
+//             }
+//             // White non-kings should be moving downwards
+//             else if (mWhoseMove == kWhite) {
+//                assert((*locs)[index].first < (*locs)[index-1].first);
+//             }
+//          }
+//       }
 
    // Remove the piece from its original location.
    pieceToMove = HalfTake(originCell, mWhoseMove);
