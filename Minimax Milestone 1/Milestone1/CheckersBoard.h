@@ -115,9 +115,7 @@ protected:
 
    // Static member datum goes here
    struct CheckersBoardInitializer {
-      CheckersBoardInitializer() {
-         CheckersBoard::StaticInit();
-      }
+      CheckersBoardInitializer() { CheckersBoard::StaticInit(); }
    };
    static CheckersBoardInitializer mInitializer;
 
