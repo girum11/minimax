@@ -52,7 +52,7 @@ public:
    static void *GetOptions();
    static void SetOptions(const void *opts);
 
-   // TODO: Arrange for this to be called at static initialization time, to set up
+   // Arrange for this to be called at static initialization time, to set up
    // the static mWhiteBackRow and mBlackBackRow
    static void StaticInit();
 

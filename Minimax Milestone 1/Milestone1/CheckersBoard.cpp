@@ -172,8 +172,8 @@ void CheckersBoard::ApplyMove(Move *move) {
 //       for (unsigned int index = 1; index < (*locs).size(); ++index) {
 //          Cell *cell = GetCell((*locs)[index].first, (*locs)[index].second);
 //          
-//          // Assert that this cell (where this move wants to go to) isn't already
-//          // taken.
+//          // Assert that this cell (where this move wants to go to) isn't 
+//          // already taken.
 //          assert((allPieces & cell->mask) == 0);
 //          
 //          // Assert that non-king pieces aren't moving backwards.
@@ -196,7 +196,7 @@ void CheckersBoard::ApplyMove(Move *move) {
    // logic to remove cells that you've jumped over.
    if (castedMove->mIsJumpMove) {
       for (unsigned int i = 1; i < (*locs).size(); ++i) {
-         Cell *jumpedOverCell = NULL;
+         Cell *jumpedCell = NULL;
          Cell *toCell = GetCell((*locs)[i]);
 
          // Assert that this location actually jumps over a piece
@@ -216,19 +216,19 @@ void CheckersBoard::ApplyMove(Move *move) {
          // North-west jump
          if ((*locs)[i].first > (*locs)[i-1].first
           && (*locs)[i].second < (*locs)[i-1].second)
-            jumpedOverCell = GetCell((*locs)[i].first - 1, (*locs)[i].second + 1);
+            jumpedCell = GetCell((*locs)[i].first - 1, (*locs)[i].second + 1);
          // North-east jump
          else if ((*locs)[i].first > (*locs)[i-1].first
           && (*locs)[i].second > (*locs)[i-1].second)
-            jumpedOverCell = GetCell((*locs)[i].first - 1, (*locs)[i].second - 1);
+            jumpedCell = GetCell((*locs)[i].first - 1, (*locs)[i].second - 1);
          // South-west jump
          else if ((*locs)[i].first < (*locs)[i-1].first
           && (*locs)[i].second < (*locs)[i-1].second)
-            jumpedOverCell = GetCell((*locs)[i].first + 1, (*locs)[i].second + 1);
+            jumpedCell = GetCell((*locs)[i].first + 1, (*locs)[i].second + 1);
          // South-east jump
          else if ((*locs)[i].first < (*locs)[i-1].first
           && (*locs)[i].second > (*locs)[i-1].second)
-            jumpedOverCell = GetCell((*locs)[i].first + 1, (*locs)[i].second - 1);
+            jumpedCell = GetCell((*locs)[i].first + 1, (*locs)[i].second - 1);
 
          // TODO: Only use this code if you have a bug and you need to turn
          // on assert statements.
@@ -241,27 +241,27 @@ void CheckersBoard::ApplyMove(Move *move) {
 //                   } else assert(false);
 
          // Remove the piece that you jumped over, and save it.
-         Piece *removedPiece = HalfTake(jumpedOverCell, -mWhoseMove);
+         Piece *removedPiece = HalfTake(jumpedCell, -mWhoseMove);
          mCapturedPieces.push_back(removedPiece);
       }
    }
 
    // Add the piece to its final destination
-   Cell *destinationCell =
+   Cell *destCell =
     GetCell((*locs)[locs->size()-1].first, (*locs)[locs->size()-1].second);
    
    // If the piece that you're about to Put() is going to be put into the
    // opponent's back row, then this is a "king me" move.
    // Set the flags for it, and add this cell to the mKingSet bitmask.
-   if ((mWhoseMove == kBlack && ((destinationCell->mask & mWhiteBackSet) != 0))
-    || (mWhoseMove == kWhite && ((destinationCell->mask & mBlackBackSet) != 0))) {
-      mKingSet |= destinationCell->mask;
+   if ((mWhoseMove == kBlack && ((destCell->mask & mWhiteBackSet) != 0))
+    || (mWhoseMove == kWhite && ((destCell->mask & mBlackBackSet) != 0))) {
+      mKingSet |= destCell->mask;
       castedMove->mIsKingMeMove = true;
       pieceToMove->isKing = true;
    }
 
    // Add the piece to its final destination.
-   HalfPut(pieceToMove, destinationCell);
+   HalfPut(pieceToMove, destCell);
 
    // Assert that the two bitmasks don't have any pieces in common.
    assert((mBlackSet & mWhiteSet) == 0);
@@ -326,13 +326,14 @@ void CheckersBoard::UndoLastMove() {
    RefreshBoardValuation();
 }
 
-void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
-   list<CheckersMove *> *castedMoves = reinterpret_cast<list<CheckersMove *>*>(uncastMoves);
+void CheckersBoard::GetAllMoves(list<Move *> *ucMoves) const {
+   list<CheckersMove *> *moves = 
+    reinterpret_cast<list<CheckersMove *>*>(ucMoves);
    char row;
    unsigned int col;
    bool canJumpAtLeastOnce = false;
 
-   assert(uncastMoves->size() == 0 && castedMoves->size() == 0);
+   assert(ucMoves->size() == 0 && moves->size() == 0);
 
    // If the game is over, don't construct a list
    if ((mBlackPieceCount+mBlackKingCount) == 0 || 
@@ -353,7 +354,7 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
                locs.push_back(cell->loc);
                locs.push_back(cell->neighborCells[dir]->loc);
                CheckersMove *newMove = new CheckersMove(locs, false);
-               castedMoves->push_back(newMove);
+               moves->push_back(newMove);
             }
             else if (CanJump(cell, dir)) {
                // If you can jump any piece, then stop what you're doing,
@@ -362,11 +363,11 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
                // on each Cell.
                
                // Clear the board.
-               for (list<CheckersMove *>::iterator listIter = castedMoves->begin();
-                listIter != castedMoves->end(); listIter++) {
+               for (list<CheckersMove *>::iterator listIter = moves->begin();
+                listIter != moves->end(); listIter++) {
                    delete *listIter;
                }
-               castedMoves->clear();
+               moves->clear();
 
                // Step through the rest of the board
                for (char newRow = row; newRow <= 'H'; newRow++) {
@@ -378,7 +379,7 @@ void CheckersBoard::GetAllMoves(list<Move *> *uncastMoves) const {
                      // they all would start from this location.
                      CheckersMove::LocVector locs;
                      locs.push_back(newCell->loc);
-                     MultipleJumpDFS(castedMoves, locs, newCell);
+                     MultipleJumpDFS(moves, locs, newCell);
                   }
                }
 
@@ -464,8 +465,8 @@ Board::Move *CheckersBoard::CreateMove() const {
 
 
 Board *CheckersBoard::Clone() const {
-   // [Staley] Think carefully about this one.  You should be able to do it in just
-   // [Staley] 5-10 lines.  Don't do needless work
+   // [Staley] Think carefully about this one.  You should be able to do it in 
+   // just 5-10 lines.  Don't do needless work.
    CheckersBoard *boardCopy = new CheckersBoard(*this);
 
    list<Move *>::iterator moveHistIter;
@@ -515,12 +516,12 @@ istream &CheckersBoard::Read(istream &is) {
    is.read((char *)&moveCount, sizeof(moveCount));
    assert(moveCount != -1);  // sanity check to ensure that the read() happened
    for (int i = 0; i < moveCount; i++) {
-      CheckersMove *newMove = new CheckersMove(CheckersMove::LocVector(), false);
-      is >> *newMove;
+      CheckersMove *move = new CheckersMove(CheckersMove::LocVector(), false);
+      is >> *move;
 
-      assert(newMove->mLocs.size() != 0);
+      assert(move->mLocs.size() != 0);
 
-      ApplyMove(newMove);
+      ApplyMove(move);
    }
 
    return is;
@@ -584,8 +585,8 @@ void CheckersBoard::RefreshBoardValuation() {
 // TODO: Refactor this to use a Piece instead of a Cell.
 inline bool CheckersBoard::CanMove(Cell *cell, int direction) const {
    // Validate that this piece can move in the direction that you
-   // want to move in, and ensure that the piece that you want to move towards is inbounds
-   // and isn't already occupied.
+   // want to move in, and ensure that the piece that you want to move towards 
+   // is inbounds and isn't already occupied.
    return IsValidDirection(cell, direction) && cell->neighborCells[direction]
     && !(cell->neighborCells[direction]->mask & (mBlackSet|mWhiteSet));
 }

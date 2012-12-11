@@ -7,7 +7,7 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
  int *val, int lo, int hi, std::string prompt) {
    std::string inputString("");
    int inputValue = 0, res = 0;
-   char trailingChar = '\0';
+   char garbage = '\0';
    bool inputSuccessfullyRead = false;
 
    // TODO: This method is hacked to hell and back to make it diff.
@@ -26,18 +26,18 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
             }
          } while (inputString.empty());
 
-         res = sscanf(inputString.c_str(), " %d %c", &inputValue, &trailingChar);
+         res = sscanf(inputString.c_str(), " %d %c", &inputValue, &garbage);
          
          if (res == 0) {
             out << "Badly formatted input\n";
             // Clear out trailingChar
-            trailingChar = '\0';
+            garbage = '\0';
             continue;
          }
-         else if (trailingChar != '\0') {
+         else if (garbage != '\0') {
             out << "Unexpected garbage after value.\n";
             // Clear out trailingChar
-            trailingChar = '\0';
+            garbage = '\0';
             continue;
          }
 
@@ -45,7 +45,8 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
          if (inputValue >= lo && inputValue <= hi) {
             *val = inputValue;
          } else {
-            out << "Please enter a value between " << lo << " and " << hi << std::endl;
+            out << "Please enter a value between " 
+             << lo << " and " << hi << std::endl;
             continue;
          }
 
