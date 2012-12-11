@@ -1,1 +1,1 @@
-OthelloBoard 3 2 blah
+CheckersBoard 2 2 blah

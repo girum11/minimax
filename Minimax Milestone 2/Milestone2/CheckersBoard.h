@@ -33,14 +33,13 @@ public:
    void UndoLastMove();
    void GetAllMoves(std::list<Move *> *) const;
    Move *CreateMove() const;
-   int GetWhoseMove() const {return mWhoseMove;}
+   int GetWhoseMove() const {return mWhoseMove == kWhite;}
    const std::list<const Move *> &GetMoveHist() const 
     {return *(std::list<const Move *> *)&mMoveHist;}
 
    Board *Clone() const;
    Key *GetKey() const;
 
-   
    bool CellOccupied(int row, int col, int byWhom) const;
    bool CellContainsKing(int row, int col) const;
 
@@ -53,6 +52,8 @@ public:
    // Arrange for this to be called at static initialization time, to set up
    // the static mWhiteBackRow and mBlackBackRow
    static void StaticInit();
+
+   int mWhoseMove; // Whose move it is.  Can be kBlack or kWhite.
 
    const Class *GetClass() const { return &mClass; };
 
@@ -127,8 +128,6 @@ protected:
    // and Kings.  No-marble cells are 0 in both masks.  Bits are assigned to
    // cells in alphanumeric order, from LSB to MSB.  All 32 bits are used.
    mutable Set mBlackSet, mWhiteSet, mKingSet;
-
-   int mWhoseMove; // Whose move it is.  Can be kBlack or kWhite.
 
    // Piece counts
    int mBlackPieceCount, mBlackKingCount, mBlackBackCount, mWhitePieceCount,
