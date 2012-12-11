@@ -522,6 +522,36 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
    }
 }
 
+// WARNING: Preventing duplicates is hard.  Right now, I'm preventing
+// them by simply only calling FindFreeMarbles on rows/cols that are PAST
+// the current free marble.  If there's a Bender error, here's where
+// you can start.
+//
+// BUG: Instead of truly finding free marbles that are PAST the current
+// free marble, I'm only finding marbles with row AND col values that are
+// greater than or equal to startRow.  Instead, iterate through the rest
+// of this row, and then step down to the next row and iterate through
+// to the end as normal.
+void PylosBoard::FindFreeMarbles(std::set<std::pair<short,short> > *freeMarbles, 
+    Set *playerMarbles, unsigned short startRow = 0, unsigned short startCol = 0) const {
+   // Quick sanity check
+   assert(freeMarbles && freeMarbles->size() == 0);
+
+   // First, iterate through the rest of this starting row.
+   for (int row = startRow; row < kDim; row++) {
+      for (int col = startCol; col < kDim; col++) {
+         InsertIfFree(freeMarbles, playerMarbles, row, col);
+      }
+   }
+
+   // Then, iterate through the rest of the board as usual
+   for (int row = startRow + 1; row < kDim; row++) {
+      for (int col = 0; col < kDim; col++) {
+         InsertIfFree(freeMarbles, playerMarbles, row, col);
+      }
+   }
+}
+
 Board::Move *PylosBoard::CreateMove() const {
    return new PylosMove(PylosMove::LocVector(1), PylosMove::kReserve);
 }
