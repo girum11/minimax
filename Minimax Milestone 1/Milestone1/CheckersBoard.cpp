@@ -651,12 +651,10 @@ inline bool CheckersBoard::IsValidDirection(Cell *cell, int direction) const {
 //
 // "byWhom" expects either kWhite or kBlack.
 bool CheckersBoard::CellOccupied(int row, int col, int byWhom) const {
-   assert(GetCell(row, col) != NULL);
-      
    if (byWhom == kWhite)
-      return (!(GetCell(row, col)->mask & this->mWhiteSet));
+      return GetCell(row, col) && (GetCell(row, col)->mask & this->mWhiteSet);
    else if (byWhom == kBlack)
-      return (!(GetCell(row, col)->mask & this->mBlackSet));
+      return GetCell(row, col) && (GetCell(row, col)->mask & this->mBlackSet);
 }
 
 bool CheckersBoard::CellContainsKing(int row, int col) const {

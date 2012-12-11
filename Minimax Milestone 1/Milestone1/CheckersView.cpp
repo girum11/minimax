@@ -14,12 +14,12 @@ void CheckersView::Draw(std::ostream &out) {
       out << row << "  ";
       for (unsigned int col = 1; col <= CheckersBoard::kWidth; col++) {
 
-         if (IsValidCell(row, col) && cb->CellOccupied(row, col, CheckersBoard::kBlack))
+         if (cb->CellOccupied(row, col, CheckersBoard::kBlack))
             if (cb->CellContainsKing(row,col))
                out << "B  ";
             else
                out << "b  ";
-         else if (IsValidCell(row, col) && cb->CellOccupied(row, col, CheckersBoard::kWhite))
+         else if (cb->CellOccupied(row, col, CheckersBoard::kWhite))
             if (cb->CellContainsKing(row,col))
                out << "W  ";
             else
