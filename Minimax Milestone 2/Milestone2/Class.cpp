@@ -7,11 +7,20 @@ using namespace std;
 Class *Class::mClsHead = NULL;
 BoardClass *BoardClass::mBrdClsHead = NULL;
 
-Class::Class(const string &n, Object *(*mCreate)()) 
- : mName(n), mCreate(mCreate) {
-   // Add this Class * to the linked list of Class *'s
-   this->mNext = Class::mClsHead;
-   Class::mClsHead = this;
+Class::Class(const string &n, Object *(*c)()) : mName(n), mCreate(c) {
+   Class *cursor = NULL;
+   
+   if (mClsHead == NULL)
+      mClsHead = this;
+   else {
+      cursor = mClsHead;
+
+      while (cursor->mNext != NULL)
+         cursor = cursor->mNext;
+
+      cursor->mNext = this;
+      mNext = NULL;
+   }
 }
 
 Object *Class::NewInstance() const {
