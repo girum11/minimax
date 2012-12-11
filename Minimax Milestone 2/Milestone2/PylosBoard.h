@@ -13,8 +13,11 @@
 class PylosMove;
 
 class PylosBoard : public Board {
-public:
+public:   
    const static int kDim = 4;
+   const static int kLevelWeight = 20;
+   const static int kFreeWeight = 6;
+   const static int kMarbleWeight = 100;
 
    friend class PylosMove;
 
@@ -23,7 +26,8 @@ public:
       int marbleWgt; // Weight of each marble in reserve
       int freeWgt;   // Weight for each uncovered marble
       
-      Rules() : levelWgt(20), marbleWgt(100), freeWgt(6) {}
+      Rules() : levelWgt(kLevelWeight), freeWgt(kFreeWeight),
+       marbleWgt(kMarbleWeight) {}
       
       int GetLevel()  {return levelWgt;}
       int GetMarble() {return marbleWgt;}
@@ -44,32 +48,26 @@ public:
    void UndoLastMove();
    void GetAllMoves(std::list<Move *> *) const;
    Move *CreateMove() const;
-   int GetWhoseMove() const   {return mWhoseMove != kWhite;}
+   int GetWhoseMove() const {return mWhoseMove == kBlack;}
    
    const std::list<const Move *> &GetMoveHist() const 
     {return *(std::list<const Move *> *)&mMoveHist;}
 
    Board *Clone() const;
    Key *GetKey() const;
-   
+
    // [Staley] May add a public method for use by PylosView.
    // Public helper function that returns true if a cell is occupied
    // by a certain color.
    //
    // "byWhom" expects either kWhite or kBlack.
    bool CellOccupied(int row, int col, int level, int byWhom) const {
-      Set mask = this->GetCell(row, col, level)->mask;
-
-      if (byWhom == kWhite) {
-         return mask & this->mWhite;
-      } else if (byWhom == kBlack) {
-         return mask & this->mBlack;
-      } else {
-         assert(false);
-         return false;
-      }
+      if (byWhom == kWhite)
+         return GetCell(row, col, level)->mask & this->mWhite;
+      else if (byWhom == kBlack) 
+         return GetCell(row, col, level)->mask & this->mBlack;
    }
-
+   
    // [Staley] Add a static method to support the Class system, plus a static
    // [Staley] private member datum below
 
@@ -84,7 +82,7 @@ public:
    static void StaticInit();
    
    const Class *GetClass() const { return &mClass; };
-
+      
 protected:
    enum {kBitsPerCell = 2, kCellMask = 0x3, kBlack = -1, kWhite = 1};
    enum {kNumCells = 30, kSetsPerCell = 6, kNumSets = 28, kStones = 15};
@@ -110,7 +108,7 @@ protected:
       
       void addSet(Set set) {sets[setCount++] = set;}
    };
-    
+   
    // [Staley] Describes the situation at one row/col "spot", which is a column of
    // [Staley] cells having the same row/col value within their level (visualize a Spot
    // [Staley] as a diagonal column extending upward and to the SE within the Pylos 
@@ -126,7 +124,7 @@ protected:
    
    std::istream &Read(std::istream &);
    std::ostream &Write(std::ostream &) const;
-
+   
    // [Staley] Put (or take back) a marble to (or from) the top of the Spot given
    void PutMarble(Spot *);
    void TakeMarble(Spot *);
@@ -137,7 +135,7 @@ protected:
 
    // [Staley] Free all PylosBoard storage
    void Delete();
-      
+
    // [Staley] Is row, col in bounds assuming we are on level "lvl"?
    static inline bool InBounds(int row, int col, int lvl = 0) {
       return InRange<int>(0, row, kDim - lvl) && InRange<int>(0, col, kDim - lvl);
@@ -198,8 +196,7 @@ protected:
       }
    };
    static PylosBoardInitializer mInitializer;
-
-
+   
    // [Staley] Rules object for PylosBoard
    static Rules mRules;
    
@@ -232,14 +229,10 @@ protected:
    int mLevelLead;    // [Staley] Amount by which white leads in terms of marble level
    int mFreeLead;     // [Staley] Amount of promoteable marbles white has over black.
 
-
    // [Staley] History of moves leading to this point.
    std::list<Move *> mMoveHist;
-   
+
 private:
-   // Stolen helper function from StackOverflow, used to assert() 
-   // alignment bits being set correctly
-   static int NumberOfSetBits(int i);
 
    // My own helper function for AddTakebacks().
    void CalculateAllTakebacks(std::list<PylosMove *> *moves, 
@@ -256,9 +249,8 @@ private:
    void UpdateBoardValuation();
 
    static BoardClass mClass;
-   static Object *CreatePylosBoard() { return new PylosBoard; };
+   static Object *CreatePylosBoard() { return new PylosBoard; }
+
 };
 
-
 #endif
-

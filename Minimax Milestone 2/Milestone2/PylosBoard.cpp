@@ -5,33 +5,29 @@
 #include "PylosDlg.h"
 #include "PylosBoard.h"
 #include "PylosMove.h"
-#include "MyLib.h"
-#include "BasicKey.h"
 #include "PylosView.h"
+#include "BasicKey.h"
 
 using namespace std;
 
+// Static initialization stuff
 PylosBoard::Set PylosBoard::mSets[kNumSets];
 PylosBoard::Cell PylosBoard::mCells[kNumCells];
-int PylosBoard::mOffs[kDim];
+int PylosBoard::mOffs[PylosBoard::kDim] = {0, 16, 25, 29};
 PylosBoard::Rules PylosBoard::mRules;
 
-BoardClass PylosBoard::mClass("PylosBoard",
-                   &CreatePylosBoard,
-                   "Pylos",
-                   &PylosView::mClass,
-                   &PylosDlg::mClass,
-                   &PylosBoard::SetOptions,
-                   &PylosBoard::GetOptions);
+BoardClass PylosBoard::mClass =  BoardClass("PylosBoard", &CreatePylosBoard,
+ "Pylos", &PylosView::mClass, &PylosDlg::mClass, PylosBoard::SetOptions,
+ PylosBoard::GetOptions, true);
 
 // The C++ definition here isn't required in C++11, which I'm using.
 // Put it there anyways to force the "static block" to run.
 PylosBoard::PylosBoardInitializer PylosBoard::mInitializer;
 
 PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
-   mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0) {
-      // Initialize mSpots
-      ClearMSpots();
+ mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0) {
+   // Initialize mSpots
+   ClearMSpots();
 }
 
 void PylosBoard::ClearMSpots() {
@@ -43,147 +39,98 @@ void PylosBoard::ClearMSpots() {
    }
 }
 
-// TODO: Don't use this code unless you need to debug, since it has magic
-// numbers in it.
-// Stolen helper function from StackOverflow, used to assert() 
-// alignment bits being set correctly
-// int PylosBoard::NumberOfSetBits(int i) {
-//    i = i - ((i >> 1) & 0x55555555);
-//    i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
-//    return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
-// }
-
 void PylosBoard::StaticInit() {
-   Cell *cell;
-   int level = 0, row = 0, col = 0, ndx = 0, nextCell = 0;
-
-   // Hold a set for the different alignments you can have
-   Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
-
-   // Initialize mOffs
-   mOffs[0] = 0;
-   for (int i = 1; i < kDim; ++i) {
-      mOffs[i] = mOffs[i-1] + (kDim - (i-1)) * (kDim - (i-1));
-   }
-
+   Cell *cell = NULL;
+   int level = 0, row = 0, col = 0, index = 0, nextCell = 0, setCounter = 0;
+   
    // Initialize mCells
    for (level = 0; level < kDim; level++) {
       for (row = 0; row < kDim - level; row++) {
          for (col = 0; col < kDim - level; col++, nextCell++) {
-
+            
             cell = mCells + nextCell;
             cell->level = level;
             cell->mask = 1 << nextCell;
 
             // [Staley] Set up below and above pointers.
             if (level > 0) {
-               cell->below[kNW] = GetCell(row, col, level-1);
-               cell->below[kNE] = GetCell(row, col+1, level-1);
-               cell->below[kSE] = GetCell(row+1, col+1, level-1);
-               cell->below[kSW] = GetCell(row+1, col, level-1);
-
+               // Tie adjacent above/below pointers
+               cell->below[kNW] = GetCell(row, col, level - 1);
+               cell->below[kNE] = GetCell(row, col + 1, level - 1);
+               cell->below[kSE] = GetCell(row + 1, col + 1, level - 1);
+               cell->below[kSW] = GetCell(row + 1, col, level - 1);
                cell->below[kNW]->above = cell;
-
-               for (ndx = 0; ndx < kSqr; ndx++) {
-                  cell->below[ndx]->sups |= cell->mask;
-                  cell->subs |= cell->below[ndx]->mask;
-               }
-            }
-            // Initialize below[] pointers to be NULL for cells at bottom level.
-            // This is so that my HalfTake() logic can work.
-            else if (level == 0) {
-               for (int dir = 0; dir < kSqr; dir++) {
-                  cell->below[dir] = NULL;
+               
+               // Special case: Topmost cell doesn't have an above/below pointer
+               if (level == (kDim - 1))
+                  cell->above = NULL;
+               
+               for (index = 0; index < kSqr; index++) {
+                  cell->below[index]->sups |= cell->mask;
+                  cell->subs |= cell->below[index]->mask; 
                }
             }
          }
       }
    }
-
-   // Clean out mSets to assert that it was properly filled later
-   for (int level = 0; level < kNumSets; level++)
-      mSets[level] = 0x0;
-
-   // Initialize mSets
-   // [Staley] Add cell mask to horizontal/vertical alignments if relevant
-   int setNum = 0;
-   // There cannot be horizontal/vertical alignments on the top two levels
-   for (level = 0; level < kDim - 2; level++) {
-      // Step across this level's grid diagonally
-      for (int rowcol = 0; rowcol < kDim - level; rowcol++) {
-         // Clean off the alignments
-         horizontalAlignment = verticalAlignment = 0x0;
-
-         // Create the horizontal and vertical alignment for this node
-         for (int i = 0; i < kDim - level; i++) {
-            horizontalAlignment |= GetMask(rowcol, i, level);
-            verticalAlignment |= GetMask(i, rowcol, level);
-         }
-
-         // Throw the newly generated alignments into mSets
-         mSets[setNum++] = horizontalAlignment;
-         mSets[setNum++] = verticalAlignment;
-      }
-   }
-
-   // [Staley] Add cell masks to square alignments.  All levels can potentially
-   // have square alignments, except for the very top level.
-   for (level = 0; level < kDim - 1; level++) {
+   
+   // Set up square alignments
+   for (level = 0; level < kDim; level++) {
       for (row = 0; row < kDim - level; row++) {
-         for (col = 0; col < kDim - level; col++) {
-            if (InBounds(row+1,col+1,level)) {
-               // Reset the square alignment
-               squareAlignment = 0x0;
+         for (col = 0; col < kDim - level; col++, nextCell++) {
+            if (level < kDim - 1 && row < kDim - level -1
+             && col < kDim - level - 1) { 
 
-               squareAlignment |= GetMask(row  , col  , level);
-               squareAlignment |= GetMask(row  , col+1, level);
-               squareAlignment |= GetMask(row+1, col  , level);
-               squareAlignment |= GetMask(row+1, col+1, level);
+               // Nil out the bitmask before you set it.
+               mSets[setCounter] = 0;
 
-               // Add the square alignment to mSets
-               mSets[setNum++] = squareAlignment;
+               // Set up square alignments
+               mSets[setCounter] |= GetCell(row, col, level)->mask;
+               mSets[setCounter] |= GetCell(row, col + 1, level)->mask;
+               mSets[setCounter] |= GetCell(row + 1, col, level)->mask;
+               mSets[setCounter++] |= GetCell(row +1 , col + 1, level)->mask;
             }
          }
       }
    }
+   
+   // Set up horizontal/vertical alignments
+   for (level = 0; level < kDim - 2; level++) {
+      // Horizontal alignments
+      for (row = 0; row < kDim - level; row++, setCounter++) {
+         // Nil out the bitmask before you set it.
+         mSets[setCounter] = 0;
 
+         // OR in the horizontal alignment
+         for (col = 0; col < kDim - level; col++)
+            mSets[setCounter] |= GetCell(row, col, level)->mask;
+      }
 
-   // TODO: Don't use this code unless you need to debug, since it relies
-   // on a helper function from StackOverflow with magic numbers in it.
-//    Sanity checks before we go back and copy set data
-//       // back into cell set collection.
-//       assert(setNum == kNumSets);
-//       for (int level = 0; level < kNumSets; level++) {
-//          // Assert that each alignment was properly set
-//          assert(mSets[level] != 0x0);
-//    
-//          // Verify level 0 horizontal/vertical alignments
-//          if (level >= 0 && level < 8)
-//             assert(NumberOfSetBits(mSets[level]) == 4);
-//          // Verify level 1 horizontal/vertical alignments
-//          else if (level >= 8 && level < 14)
-//             assert(NumberOfSetBits(mSets[level]) == 3);
-//          // Verify square alignments
-//          else if (level >= 14 && level < 28)
-//             assert(NumberOfSetBits(mSets[level]) == 4);
-//       }
+      // Vertical alignments
+      for (col = 0; col < kDim - level; col++, setCounter++) {
+         
+         // Nil out the bitmask before you set it.
+         mSets[setCounter] = 0;
 
+         // OR in the vertical alignment
+         for (row = 0; row < kDim - level; row++)
+            mSets[setCounter] |= GetCell(row, col, level)->mask;
+      }
+   }
+   
    // [Staley] Copy set data back into cell set collections.
    // For each cell, check all of the alignments to see if
    // the cell belongs to that alignment.
-   for (level = 0; level < kDim; level++) {
-      for (row = 0; row < kDim - level; row++) {
-         for (col = 0; col < kDim - level; col++) {
-            int setCounter = 0;
-            for (int i = 0; i < kNumSets; i++) {
-               // If this cell is part of this alignment, then add
-               // this alignment to that cell's set of alignments
-               if (mSets[i] & GetMask(row, col, level)) {
-                  // Make sure we're not indexing the array out of bounds
-                  assert(setCounter < kSetsPerCell);
-                  GetCell(row, col, level)->sets[setCounter++] = mSets[i];
-               }
-            }
+   for(nextCell = 0; nextCell < kNumCells; nextCell++) {
+      for (setCounter = 0; setCounter < kNumSets; setCounter++) {
+         if((mCells[nextCell].mask & mSets[setCounter])) {
+            index = mCells[nextCell].setCount;
+
+            // Nil out the existing bitmask, then OR in what you have.
+            mCells[nextCell].sets[index] = 0;
+            mCells[nextCell].sets[index] |= mSets[setCounter];
+
+            mCells[nextCell].setCount++;
          }
       }
    }
@@ -562,7 +509,6 @@ Board::Move *PylosBoard::CreateMove() const {
    return new PylosMove(PylosMove::LocVector(1), PylosMove::kReserve);
 }
 
-// mMoveHist bug isn't in Clone() for sure.
 Board *PylosBoard::Clone() const {
    // [Staley] Think carefully about this one.  You should be able to do it in 
    // just 5-10 lines.  Don't do needless work.
@@ -586,7 +532,6 @@ Board *PylosBoard::Clone() const {
 
    return boardCopy;
 }
-
 
 void PylosBoard::Delete() {
    // [Staley] As with Clone, think carefully and don't do needless work.
@@ -614,13 +559,14 @@ void PylosBoard::Delete() {
 
 Board::Key *PylosBoard::GetKey() const {
    BasicKey<2> *rtn = new BasicKey<2>();
-
+   
+   // Don't forget to nil out existing bitmasks before you play with them.
+   rtn->vals[0] = rtn->vals[1] = 0;
    rtn->vals[0] = (mWhoseMove == kWhite) << kNumCells | mWhite;
    rtn->vals[1] = mBlack;
-
+   
    return rtn;
 }
-
 
 istream &PylosBoard::Read(istream &is) {
    // [Staley] Fill in (conform to Write() method below)
@@ -743,4 +689,3 @@ long PylosBoard::GetValue() const {
       return mRules.marbleWgt*(mWhiteReserve - mBlackReserve)
       + mRules.levelWgt * mLevelLead + mRules.freeWgt * mFreeLead;
 }
-
