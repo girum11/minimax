@@ -33,7 +33,7 @@ istream &Book::Read(istream &is, const Class *boardClass) {
       is >> *key;
       is >> *move;
       is.read(&tempChar, sizeof(char));
-      if (tempChar == 1){
+      if (tempChar == 1) {
          is >> *replyMove;
       }
       is.read((char*)&tempValue, sizeof(tempValue));
@@ -61,7 +61,7 @@ ostream &Book::Write(ostream &os) {
       os << *(bookIter->second.move);
       tempChar = bookIter->second.replyMove ? 1 : 0;
       os.write(&tempChar, sizeof(tempChar));
-      if (tempChar == 1){
+      if (tempChar == 1) {
          os << *(bookIter->second.replyMove);
       }
       

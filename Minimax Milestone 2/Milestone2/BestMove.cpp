@@ -17,7 +17,7 @@ const BestMove &BestMove::operator=(const BestMove &src) {
    return *this;
 }
 
-BestMove::BestMove(const BestMove &src){
+BestMove::BestMove(const BestMove &src) {
    value = src.value;
    depth = src.depth;
    numBoards = src.numBoards;
