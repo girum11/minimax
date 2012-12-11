@@ -1,31 +1,17 @@
-#include <iomanip>
-#include <assert.h>
 #include "CheckersView.h"
 #include "CheckersBoard.h"
 
-
-using namespace std;
-
 Class CheckersView::mClass("CheckersView", &CreateCheckersView);
 
-bool IsValidCell(char row, unsigned int col) {
-   row -= 'A';
-   col -= 1;
+void CheckersView::Draw(std::ostream &out) {
 
-   return ((row % 2 == 0) && (col % 2 == 0))
-    || ((row % 2 != 0) && (col % 2 != 0));
-}
-
-void CheckersView::Draw(ostream &out) {
-
-   string rtn("");
+   std::string rtn("");
    char row = 'A';
    unsigned int col = 1;
    const CheckersBoard *cb = dynamic_cast<const CheckersBoard *>(mModel);
-   assert(cb != NULL); 
 
    // Print the header
-   out << setw(16) << "White" << endl << endl;
+   out << "           White\n\n";
 
    // Print out the board itself.
    for (row = 'H'; row >= 'A'; row--) {
@@ -51,7 +37,7 @@ void CheckersView::Draw(ostream &out) {
             out << ".  ";
          }
       }
-      out << endl;
+      out << std::endl;
    }
 
    // Print out the column labels at the bottom
@@ -61,12 +47,11 @@ void CheckersView::Draw(ostream &out) {
    }
 
    // Print out the footer
-   out << endl << endl << setw(16) << "Black" << endl << endl;
+   out << "\n\n           Black\n\n";
 
    // Print out whose turn it is.
-   if (mModel->GetWhoseMove() == CheckersBoard::kWhite) {
-      out << "White's move" << endl;
-   } else if (mModel->GetWhoseMove() == CheckersBoard::kBlack) {
-      out << "Black's move" << endl;
-   }
+   if (mModel->GetWhoseMove() == CheckersBoard::kWhite)
+      out << "White's move" << std::endl;
+   else if (mModel->GetWhoseMove() == CheckersBoard::kBlack)
+      out << "Black's move" << std::endl;
 }
