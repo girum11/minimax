@@ -34,36 +34,26 @@ public:
    operator std::string() const;
    void operator=(const std::string &src);
    Board::Move *Clone() const;
-   
+
    // Mutual friendship between PylosBoard and PylosMove is allowed.
    friend class PylosBoard;
-
 protected:
    std::istream &Read(std::istream &is);
    std::ostream &Write(std::ostream &) const;
-   
+
    // Enum to mark what type of move we are.  Can be either kReserve or
    // kPromote.
    char mType;
-   
+
    // Vector containing the locations that this move involves.
    LocVector mLocs;
    
    void operator delete(void *p);
    void *operator new(size_t sz);
 
-   // [Staley] Static member datum to record freelist.  Use STL!
-   static std::vector<PylosMove *> mFreeList;
-
-   void AssertMe() {  
-   // Assert that the "doMove ... taking [a,b] and [c,d] cases ensure
-   // that [a,b] < [c,d]
-   
-   if (mType == kReserve) 
-      assert(mLocs.size() <= 3);
-   if (mType == kPromote) 
-      assert(mLocs.size() <= 4);
-   }
+    // [Staley] Static member datum to record freelist.  Use STL!
+	static std::vector<PylosMove *> mFreeList;
+   void AssertMe();
 };
 
 #endif

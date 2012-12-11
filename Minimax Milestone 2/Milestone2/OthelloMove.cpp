@@ -39,11 +39,13 @@ bool OthelloMove::operator<(const Board::Move &rhs) const {
 }
 
 OthelloMove::operator string() const {
-   return mRow == -1 && mCol == -1 ? string("Pass") : FString("[%d, %d]", mRow, mCol);
+   return mRow == -1 && mCol == -1 ? 
+    string("Pass") : FString("[%d, %d]", mRow, mCol);
 }
 
 void OthelloMove::operator=(const string &src) {
-   unsigned start = src.find_first_not_of(" \t"), end = src.find_last_not_of(" \t");
+   unsigned start = src.find_first_not_of(" \t"), 
+    end = src.find_last_not_of(" \t");
    char tkn, tkn2;
    short tRow, tCol;
 

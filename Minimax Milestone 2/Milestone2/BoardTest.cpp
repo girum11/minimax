@@ -110,7 +110,7 @@ int main(int argc, char **argv) {
    }
 
    // Attempt to instantiate the boardClass object
-   boardClass = dynamic_cast<const BoardClass *>(Class::ForName(argv[1]));
+   boardClass = BoardClass::ForName(argv[1]);
    if (boardClass == NULL) {
       cout << "Failed to create classes or objects" << endl;
       return -1;
@@ -136,9 +136,9 @@ int main(int argc, char **argv) {
       return -1;
    }
 
-	// Just a sampling of the main scaffold-loop.  You'll make yours a lot longer,
-	// will need to use a try/catch block, and are welcome to violate the function
-	// line limit rule for this one method.
+	// Just a sampling of the main scaffold-loop.  You'll make yours a lot 
+   // longer, will need to use a try/catch block, and are welcome to violate 
+   // the function line limit rule for this one method.
    while (cin >> command) {
 		try {
 			if (command.compare("undoLastMove") == 0) {

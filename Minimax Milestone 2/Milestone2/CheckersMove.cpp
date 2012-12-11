@@ -1,12 +1,13 @@
 #include "MyLib.h"
 #include "CheckersMove.h"
-#include <iostream>
 #include <cctype>
+#include <assert.h>
 #include <algorithm>
 
 using namespace std;
 
 vector<CheckersMove *> CheckersMove::mFreeList;
+static const int kUpperLimit = 9;
 
 void *CheckersMove::operator new(size_t sz) {
    void *temp;
@@ -137,7 +138,7 @@ void CheckersMove::operator=(const string &src) {
    // At the end (if you made it there without exception), copy the private
    // locs variable over into the mLocs of this object.
    mLocs = locs;
-   AssertMe();
+
 
    // Set whether or not this is a jump move
    if (IsJump(mLocs[0], mLocs[1]))
@@ -203,4 +204,16 @@ istream &CheckersMove::Read(istream &is) {
    is.read((char *)&mIsKingMeMove, sizeof(mIsKingMeMove));
 
    return is;
+}
+
+inline void CheckersMove::CastToUpperAndVerify(Location *loc, std::string src) {
+   // Cast to upper
+   loc->first = toupper(loc->first);
+
+   // Verify that none of the Locations are out of bounds
+   if (!InRange<char>('A', loc->first, 'I') ||
+      !InRange<unsigned int>(1, loc->second, kUpperLimit)) {
+         throw BaseException(FString("Out of bounds Checkers move: %s", 
+         src.c_str()));
+   }
 }

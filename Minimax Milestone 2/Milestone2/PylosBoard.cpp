@@ -30,12 +30,6 @@ PylosBoard::PylosBoardInitializer PylosBoard::mInitializer;
 
 PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
    mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0) {
-      // [Staley] More work needed here.
-      // [Ian] This is where you construct member data.  Try going through with a 
-      // highlighter, marking red for static member data that has been initialized
-      // in StaticInit(), and yellow for non-static member data that has been
-      // initialized in this constructor.
-
       // Initialize mSpots
       ClearMSpots();
 }
@@ -49,6 +43,16 @@ void PylosBoard::ClearMSpots() {
    }
 }
 
+// TODO: Don't use this code unless you need to debug, since it has magic
+// numbers in it.
+// Stolen helper function from StackOverflow, used to assert() 
+// alignment bits being set correctly
+// int PylosBoard::NumberOfSetBits(int i) {
+//    i = i - ((i >> 1) & 0x55555555);
+//    i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+//    return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
+// }
+
 void PylosBoard::StaticInit() {
    Cell *cell;
    int level = 0, row = 0, col = 0, ndx = 0, nextCell = 0;
@@ -56,11 +60,7 @@ void PylosBoard::StaticInit() {
    // Hold a set for the different alignments you can have
    Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
 
-   // Initialize mOffs.  Logically equivalent to:
-   /*    mOffs[0] = 0;
-         mOffs[1] = 16;
-         mOffs[2] = 25;
-         mOffs[3] = 29;     */
+   // Initialize mOffs
    mOffs[0] = 0;
    for (int i = 1; i < kDim; ++i) {
       mOffs[i] = mOffs[i-1] + (kDim - (i-1)) * (kDim - (i-1));
@@ -148,23 +148,25 @@ void PylosBoard::StaticInit() {
    }
 
 
-   // Sanity checks before we go back and copy set data
-   // back into cell set collection.
-   assert(setNum == kNumSets);
-   for (int level = 0; level < kNumSets; level++) {
-      // Assert that each alignment was properly set
-      assert(mSets[level] != 0x0);
-
-      // Verify level 0 horizontal/vertical alignments
-      if (level >= 0 && level < 8)
-         assert(NumberOfSetBits(mSets[level]) == 4);
-      // Verify level 1 horizontal/vertical alignments
-      else if (level >= 8 && level < 14)
-         assert(NumberOfSetBits(mSets[level]) == 3);
-      // Verify square alignments
-      else if (level >= 14 && level < 28)
-         assert(NumberOfSetBits(mSets[level]) == 4);
-   }
+   // TODO: Don't use this code unless you need to debug, since it relies
+   // on a helper function from StackOverflow with magic numbers in it.
+//    Sanity checks before we go back and copy set data
+//       // back into cell set collection.
+//       assert(setNum == kNumSets);
+//       for (int level = 0; level < kNumSets; level++) {
+//          // Assert that each alignment was properly set
+//          assert(mSets[level] != 0x0);
+//    
+//          // Verify level 0 horizontal/vertical alignments
+//          if (level >= 0 && level < 8)
+//             assert(NumberOfSetBits(mSets[level]) == 4);
+//          // Verify level 1 horizontal/vertical alignments
+//          else if (level >= 8 && level < 14)
+//             assert(NumberOfSetBits(mSets[level]) == 3);
+//          // Verify square alignments
+//          else if (level >= 14 && level < 28)
+//             assert(NumberOfSetBits(mSets[level]) == 4);
+//       }
 
    // [Staley] Copy set data back into cell set collections.
    // For each cell, check all of the alignments to see if
@@ -253,9 +255,6 @@ void PylosBoard::UpdateBoardValuation() {
    }
 }
 
-// WARNING: If your code runs too slow, that's because ApplyMove() checks the list
-// of "GetAllMoves()" every time it tries to Apply a Move.  Maybe I should keep
-// a static list of Moves that are valid, and simply update that once per ApplyMove()?
 void PylosBoard::ApplyMove(Move *move) {
    PylosMove *tm = dynamic_cast<PylosMove *>(move);
 
@@ -331,10 +330,10 @@ void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const {
    Cell *trg, *src;
    PylosMove::LocVector locs;
    list<PylosMove *>::iterator itr;
-   list<PylosMove *> *castedMoves = reinterpret_cast<list<PylosMove *>*>(uncastMoves);
+   list<PylosMove *> *moves = reinterpret_cast<list<PylosMove *>*>(uncastMoves);
    ulong sideMask = mWhoseMove == kWhite ? mWhite : mBlack;
 
-   assert(uncastMoves->size() == 0 && castedMoves->size() == 0);
+   assert(uncastMoves->size() == 0 && moves->size() == 0);
 
    // Short-circuit out if one of the players has no more marbles.  The player
    // whose move it is currently should be the winner.
@@ -344,39 +343,33 @@ void PylosBoard::GetAllMoves(list<Move *> *uncastMoves) const {
    for (tRow = 0; tRow < kDim; tRow++)
       for (tCol = 0; tCol < kDim; tCol++) {
          trg = mSpots[tRow][tCol].empty;
-         if (trg && (trg->subs & (mWhite|mBlack)) == trg->subs) { // [Staley] found a target spot
+         if (trg && (trg->subs & (mWhite|mBlack)) == trg->subs) { 
             locs.clear();
             locs.push_back(pair<int, int>(tRow, tCol));
-            castedMoves->push_back(new PylosMove(locs, PylosMove::kReserve));
+            moves->push_back(new PylosMove(locs, PylosMove::kReserve));
 
-            for (sRow = 0; sRow < kDim; sRow++) // [Staley] search for promote moves
+            for (sRow = 0; sRow < kDim; sRow++)
                for (sCol = 0; sCol < kDim; sCol++) {
                   src = mSpots[sRow][sCol].top;
                   if (src && (src->sups & (mWhite|mBlack)) == 0
                    && (src->mask & sideMask) && src->level < trg->level
-                   && (sRow < tRow || sRow > tRow + 1    // [Staley] Not a support for trg
+                   && (sRow < tRow || sRow > tRow + 1    
                    || sCol < tCol || sCol > tCol + 1)) {
                      locs.push_back(pair<int, int>(sRow, sCol));
-                     castedMoves->push_back(new PylosMove(locs, PylosMove::kPromote));
+                     moves->push_back(new PylosMove(locs, PylosMove::kPromote));
                      locs.pop_back();
                   }
                }
          }
       }
 
-   AddTakeBacks(castedMoves);
+   AddTakeBacks(moves);
 
 }
 
 // [Staley] For each move in *moves that completes one or more sets, add all
 // [Staley] combination of spots to take back.
 void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
-   // [Staley] You'll find HalfPut and HalfTake useful here.  You need to be able
-   // [Staley] to temporarily put/take marbles in order to make this logic manageable,
-   // [Staley] and you want it fast, so you don't want all the overhead of board
-   // [Staley] value management, since you'll ultimately leave the board unchanged
-   // [Staley] once the function is done.
-
    // Hints:
    // The reason you want to HalfPut and HalfTake here is so that you
    // can verify that the possibility of adding in a new Cell creates possible
@@ -384,14 +377,6 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
    // The basic logic of verifying that a move creates an alignment is to simply
    // AND each of the Sets from sets[] of each cell against mWhite and mBlack.
 
-   // Hints from myself:
-   // Straightaway, just HalfPut() each possible move, since a possible move could
-   // only be added into a square that's empty.  If any one of the set's alignments 
-   // is then fulfilled by the new HalfPut()'d state of the board, then you've ID'd 
-   // a move that "completes one or more sets."
-   // From there, simply iterate through all the marbles (in the HalfPut()'d board)
-   // that don't actually support any other marbles.
-   // Don't forget to HalfTake() when you're done.
 
    // First, make a temporary copy of the original moves.
    // This is so that you don't add to the list as you loop through it.
@@ -400,79 +385,83 @@ void PylosBoard::AddTakeBacks(list<PylosMove *> *moves) const {
    for (list<PylosMove *>::const_iterator movesCopyIter = movesCopy.begin(); 
     movesCopyIter != movesCopy.end(); movesCopyIter++) {
       // Grab the cell that we're thinking about putting down
-      PylosMove *potentialMove = *movesCopyIter;
-      Spot *potentialMoveSpot = &mSpots[potentialMove->mLocs[0].first][potentialMove->mLocs[0].second];
-      Spot *potentialPromoteFromSpot = NULL;
-      Cell *potentialMoveCell = potentialMoveSpot->empty;
+      PylosMove *move = *movesCopyIter;
+      Spot *moveSpot = &mSpots[move->mLocs[0].first][move->mLocs[0].second];
+      Spot *promoteFromSpot = NULL;
+      Cell *moveCell = moveSpot->empty;
 
-      // Sanity check:  A possible move shouldn't be able to be applied to a filled Spot
-      assert(potentialMoveCell != NULL);
+      // Sanity check:  A possible move shouldn't be able to be applied to a 
+      // filled Spot.
+      assert(moveCell != NULL);
 
       // Straightaway, put down the marble to inspect the new state of the 
       // board (to check for possible alignments).  Also, don't forget to 
       // HalfTake() in case we're promoting a marble.
-      HalfPut(potentialMoveSpot);
-      if (potentialMove->mType == PylosMove::kPromote) {
-         potentialPromoteFromSpot = &mSpots[potentialMove->mLocs[1].first][potentialMove->mLocs[1].second];
-         HalfTake(potentialPromoteFromSpot);
+      HalfPut(moveSpot);
+      if (move->mType == PylosMove::kPromote) {
+         promoteFromSpot = &mSpots[move->mLocs[1].first][move->mLocs[1].second];
+         HalfTake(promoteFromSpot);
       }
 
       // Find the iterator that points to where you want to add moves to.
-      // WARNING:  THIS IS SLOW.  This one line of code causes AddTakeBacks to be O(n^2)
-      list<PylosMove *>::iterator movesIter = std::find(moves->begin(), moves->end(), *movesCopyIter);
+      // WARNING:  THIS IS SLOW.  This one line of code causes 
+      // AddTakeBacks to be O(n^2).
+      list<PylosMove *>::iterator movesIter = 
+       std::find(moves->begin(), moves->end(), *movesCopyIter);
 
       if (mWhoseMove == kWhite)
-         CalculateAllTakebacks(moves, movesIter, &mWhite, potentialMove, potentialMoveCell);
+         CalculateAllTakebacks(moves, movesIter, &mWhite, move, moveCell);
       else if (mWhoseMove == kBlack)
-         CalculateAllTakebacks(moves, movesIter, &mBlack, potentialMove, potentialMoveCell);
+         CalculateAllTakebacks(moves, movesIter, &mBlack, move, moveCell);
       else assert(false);
 
       // Don't forget to take away that "trial" attempt of putting down a
       // marble, along with putting back the one you may have taken away if
       // it was a Promote move.
-      HalfTake(potentialMoveSpot);
-      if (potentialMove->mType == PylosMove::kPromote) {
-         HalfPut(potentialPromoteFromSpot);
+      HalfTake(moveSpot);
+      if (move->mType == PylosMove::kPromote) {
+         HalfPut(promoteFromSpot);
       }
    }
 }
 
 void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
  list<PylosMove *>::iterator moveIter, Set *mSet,
- PylosMove *potentialMove, Cell *potentialMoveCell) const {
+ PylosMove *move, Cell *moveCell) const {
 
    // TODO: These sets can probably be lists instead, and insert at O(1)
    // instead of O(logn).
-   set<pair<short,short> > freeMarbles1;
-   set<pair<short,short> > freeMarbles2;
+   set<pair<short,short> > fMar1;
+   set<pair<short,short> > fMar2;
    bool alignmentFound = false;
 
    // For each of this cell's possible alignments,
    for (int i = 0; i < kSetsPerCell && !alignmentFound; i++) {
       // If putting down this cell creates a new alignment 
       // (checking against all possible alignments),
-      if (potentialMoveCell->sets[i] &&
-       (potentialMoveCell->sets[i] & *mSet) == potentialMoveCell->sets[i]) {
+      if (moveCell->sets[i] &&
+       (moveCell->sets[i] & *mSet) == moveCell->sets[i]) {
 
          // Then you've ID'd a move that "completes one or more sets."
          // From this point you should just go through and compile a list
          // of "freeMarbles" -- marbles that do not support other marbles.
-         FindFreeMarbles(&freeMarbles1, mSet);
+         FindFreeMarbles(&fMar1, mSet);
 
          // Once you've compiled a list of "free marbles," then add
          // all combinations of marbles you can take on this turn to
          // the list of Moves you can make
-         for (set<pair<short,short> >::const_iterator freeMarbleIter1 = freeMarbles1.begin();
-            freeMarbleIter1 != freeMarbles1.end(); freeMarbleIter1++) {
+         for (set<pair<short,short> >::const_iterator fmIter1 = 
+          fMar1.begin(); fmIter1 != fMar1.end(); fmIter1++) {
 
-            // Grab the Spot that corresponds to the free marble that we're about to yank 
-            Spot *freeMarble1 = &mSpots[(*freeMarbleIter1).first][(*freeMarbleIter1).second];
+            // Grab the Spot that corresponds to the free marble that we're 
+            // about to yank 
+            Spot *freeMarble1 = &mSpots[(*fmIter1).first][(*fmIter1).second];
             assert(freeMarble1->top != NULL);
 
-            // Construct the "takeback move" using the data from the potentialMove and
-            // the location of freeMarble1
-            PylosMove *takebackMove = new PylosMove(potentialMove->mLocs, potentialMove->mType);
-            takebackMove->mLocs.push_back(*freeMarbleIter1);
+            // Construct the "takeback move" using the data from the 
+            // potentialMove and the location of freeMarble1
+            PylosMove *takebackMove = new PylosMove(move->mLocs, move->mType);
+            takebackMove->mLocs.push_back(*fmIter1);
             takebackMove->AssertMe();
 
             // Throw the new takebackMove into the list of all moves
@@ -480,26 +469,28 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
             allMoves->insert(moveIter, takebackMove);
             moveIter--;
 
-            // Make sure to HalfTake() freeMarble1 to update state of the board, in preparation
-            // for finding all possible freeMarble2's
+            // Make sure to HalfTake() freeMarble1 to update state of the 
+            // board, in preparation for finding all possible freeMarble2's
             HalfTake(freeMarble1);
 
-            // At this point, taking away freeMarble1 might have freed up additional
-            // marbles.  Check those as well.
-            FindFreeMarbles(&freeMarbles2, mSet, (*freeMarbleIter1).first, (*freeMarbleIter1).second);
+            // At this point, taking away freeMarble1 might have freed up 
+            // additional marbles.  Check those as well.
+            FindFreeMarbles(&fMar2, mSet, (*fmIter1).first, (*fmIter1).second);
 
             // For each of freeMarbles2, 
-            for (set<pair<short,short> >::const_iterator freeMarbleIter2 = freeMarbles2.begin();
-             freeMarbleIter2 != freeMarbles2.end(); freeMarbleIter2++) {
-               // IT IS NOT TRUE THAT: assert(*freeMarbleIter1 != *freeMarbleIter2);
-               // That is, it IS possible to take the same spot twice, since taking a spot
-               // can potentially reveal another freeMarble with the same "spot number.
+            for (set<pair<short,short> >::const_iterator fmIter2 = 
+             fMar2.begin(); fmIter2 != fMar2.end(); fmIter2++) {
+               // IT IS NOT TRUE THAT: 
+               // assert(*freeMarbleIter1 != *freeMarbleIter2);
+               // That is, it IS possible to take the same spot twice, since 
+               // taking a spot can potentially reveal another freeMarble with 
+               // the same "spot number.
 
-               // Construct the "takeback move" using freeMarble1 AND freeMarble2.
-               // Ensure that they're ordered.
-               takebackMove = new PylosMove(potentialMove->mLocs, potentialMove->mType);
-               takebackMove->mLocs.push_back(*freeMarbleIter1);
-               takebackMove->mLocs.push_back(*freeMarbleIter2);
+               // Construct the "takeback move" using freeMarble1 AND 
+               // freeMarble2. Ensure that they're ordered.
+               takebackMove = new PylosMove(move->mLocs, move->mType);
+               takebackMove->mLocs.push_back(*fmIter1);
+               takebackMove->mLocs.push_back(*fmIter2);
 
                takebackMove->AssertMe();
 
@@ -508,9 +499,10 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
                --moveIter;
             }
 
-            // Don't forget to HalfPut() freeMarble1 back into the board for the next iteration
+            // Don't forget to HalfPut() freeMarble1 back into the board for 
+            // the next iteration.
             HalfPut(freeMarble1);
-            freeMarbles2.clear();
+            fMar2.clear();
          }
 
          // If you *did* find an alignment, then you should NOT check the rest
@@ -518,7 +510,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
          alignmentFound = true;
       }
 
-      freeMarbles1.clear();
+      fMar1.clear();
    }
 }
 
@@ -533,7 +525,7 @@ void PylosBoard::CalculateAllTakebacks(list<PylosMove *> *allMoves,
 // of this row, and then step down to the next row and iterate through
 // to the end as normal.
 void PylosBoard::FindFreeMarbles(std::set<std::pair<short,short> > *freeMarbles, 
-    Set *playerMarbles, unsigned short startRow = 0, unsigned short startCol = 0) const {
+   Set *playerMarbles, unsigned short startRow, unsigned short startCol) const {
    // Quick sanity check
    assert(freeMarbles && freeMarbles->size() == 0);
 
@@ -552,14 +544,28 @@ void PylosBoard::FindFreeMarbles(std::set<std::pair<short,short> > *freeMarbles,
    }
 }
 
+// A marble is "free" if it does not support any other marbles.
+// Bitwise, this means that all of the possible marbles it can 
+// sup[port] are NOT present in the current board -- black OR white.
+// Also, the freeMarble to take back must belong to that player.
+void PylosBoard::InsertIfFree(std::set<std::pair<short,short> > *freeMarbles,
+   Set *playerMarbles, int row, int col) const {
+      Cell *marble = mSpots[row][col].top;
+
+      if (marble && (marble->mask & *playerMarbles)
+            && (marble->sups & (mWhite|mBlack)) == 0) {
+      freeMarbles->insert(std::pair<short,short>(row,col));
+   }
+}
+
 Board::Move *PylosBoard::CreateMove() const {
    return new PylosMove(PylosMove::LocVector(1), PylosMove::kReserve);
 }
 
 // mMoveHist bug isn't in Clone() for sure.
 Board *PylosBoard::Clone() const {
-   // [Staley] Think carefully about this one.  You should be able to do it in just
-   // [Staley] 5-10 lines.  Don't do needless work
+   // [Staley] Think carefully about this one.  You should be able to do it in 
+   // just 5-10 lines.  Don't do needless work.
 
    PylosBoard *boardCopy = new PylosBoard(*this);
    list<Move *>::iterator moveHistIter;
@@ -587,16 +593,6 @@ void PylosBoard::Delete() {
 
    // Delete all NONSTATIC member datum.  Do NOT delete static member datum.
 
-   // [Ian] So Delete() is more of a "housekeeper" than an actual destructor.
-   // [Ian] Performs everything the destructor needs to do that the default destructor
-   // [Ian] doesn't.  Namely, freeing things that pointers point to, and clearing out
-   // [Ian] arrays/vectors that won't get destroyed by the default destructor do in fact
-   // [Ian] get cleared out (can't push to the back of a non-empty array). 
-   // [Ian] In this case, we're not guaranteed that the destructor will even be called,
-   // [Ian] so we need to clear things out ourselves.
-   // [Ian] Basically, since we're not sure that the destructor will be called, just null
-   // [Ian] everything out that's not static.
-
    ClearMSpots();
    mWhite = mBlack = 0x0;
    mWhoseMove = kWhite;
@@ -619,7 +615,6 @@ void PylosBoard::Delete() {
 Board::Key *PylosBoard::GetKey() const {
    BasicKey<2> *rtn = new BasicKey<2>();
 
-   rtn->vals[0] = rtn->vals[1] = 0;
    rtn->vals[0] = (mWhoseMove == kWhite) << kNumCells | mWhite;
    rtn->vals[1] = mBlack;
 
@@ -712,8 +707,8 @@ void PylosBoard::SetOptions(const void *opts) {
 
 void PylosBoard::Rules::SetMarble(int val) {
    if (val < 1 || val > 1000)
-      throw BaseException("Marble weight must be between 1 and 1000 inclusive\n");
-
+      throw BaseException(
+       "Marble weight must be between 1 and 1000 inclusive\n");
    this->marbleWgt = val;
 }
 

@@ -38,9 +38,12 @@ bool PylosDlg::Run(std::istream &in, std::ostream &out, void *data) {
 
    if (userResponse == 'y') {
       out << endl;
-      ReadMethodInt(in, out, "Enter marble weight: ", rules, &PylosBoard::Rules::SetMarble);
-      ReadMethodInt(in, out, "Enter level weight: ", rules, &PylosBoard::Rules::SetLevel);
-      ReadMethodInt(in, out, "Enter free weight: ", rules, &PylosBoard::Rules::SetFree);
+      ReadMethodInt(in, out, "Enter marble weight: ", rules, 
+       &PylosBoard::Rules::SetMarble);
+      ReadMethodInt(in, out, "Enter level weight: ", rules, 
+       &PylosBoard::Rules::SetLevel);
+      ReadMethodInt(in, out, "Enter free weight: ", rules, 
+       &PylosBoard::Rules::SetFree);
    }
    
    return userResponse == 'y';
@@ -56,7 +59,7 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
    string inputString("");
    unsigned inputValue = 0, res = 0;
    static const int kTrailingCharLength = 11;
-   char trailingChar[kTrailingCharLength] = {'\0'};
+   char garbage[kTrailingCharLength] = {'\0'};
    bool inputSuccessfullyRead = false;
 
    while (!inputSuccessfullyRead) {
@@ -64,27 +67,27 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
          out << prompt;
          
          // Here, sscanf() the whole line to ensure that no trailing garbage 
-         // was inputted. Can't really change this to a while() loop, since you 
+         // was inputted. Can't really change this to a while () loop, since you 
          // need to getline() first to change the value of inputString.
          do {
             getline(in, inputString);
          } while (inputString == "");
          
-         res = sscanf(inputString.c_str(), " %d %1s", &inputValue, trailingChar);
+         res = sscanf(inputString.c_str(), " %d %1s", &inputValue, garbage);
 
          if (res == 0) {
             out << "Badly formatted input\n";
 
             // Clear out trailingChar
             for (int i = 0; i < kTrailingCharLength; ++i) 
-               trailingChar[i] = '\0';
+               garbage[i] = '\0';
             continue;
          } else if (res == 2) {
             out << "Unexpected garbage after value." << endl;
             
             // Clear out trailingChar
             for (int i = 0; i < kTrailingCharLength; ++i) 
-               trailingChar[i] = '\0';
+               garbage[i] = '\0';
             continue;
          }
 

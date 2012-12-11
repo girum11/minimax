@@ -18,7 +18,8 @@ public:
 // about the OthelloBoard class itself.
 //
 // You will want to obtain the Class object for a particular Object subclass
-// based on its typename.  The ForName method provides this service.  For instance:
+// based on its typename.  The ForName method provides this service.  For
+// instance:
 //
 // Class::ForName("OthelloBoard")
 //
@@ -93,6 +94,9 @@ public:
    virtual bool UseTransposition() const {return mUseXPos;}
    virtual int  GetMinPlayers() const {return mMinPlayers;}
    static std::vector<const BoardClass *> GetAllClasses();
+
+   // Return the Class object for the given type name.
+   static const BoardClass *ForName(const std::string &name);
 
 protected:
    std::string mFriendlyName;

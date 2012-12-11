@@ -8,7 +8,7 @@
 
 #pragma warning(disable:4786)
 
-class Board : public Object {
+class Board  : public Object { 
 public:
    static const long kWinVal;
 

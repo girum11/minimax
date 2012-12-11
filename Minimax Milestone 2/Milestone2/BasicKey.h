@@ -25,7 +25,7 @@ public:
 	static void *operator new(size_t);
 	static void operator delete(void *p);
 
-   const Class *GetClass() const { return &mClass; };
+   const Class *GetClass() const { return &mClass; }
 
 protected:
 	std::istream &Read(std::istream &);
