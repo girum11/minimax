@@ -33,9 +33,19 @@ BoardClass::BoardClass(const string &n, Object *(*mCreate)(), const string &fn,
  : Class(n,mCreate), mFriendlyName(fn), mViewClass(mViewClass), 
  mDlgClass(mDlgClass), optionSetter(optionSetter), optionGetter(optionGetter),
  mUseXPos(mUseXPos), mMinPlayers(mMinPlayers) {
-   // Add this BoardClass * to the linked list of BoardClass *'s
-   this->mNext = BoardClass::mBrdClsHead;
-   BoardClass::mBrdClsHead = this;
+   BoardClass *cursor = NULL;
+   
+   if (!mBrdClsHead)
+      mBrdClsHead = this;
+   else {
+      cursor = mBrdClsHead;
+
+      while (cursor->mNext != NULL)
+         cursor = cursor->mNext;
+
+      cursor->mNext = this;
+      this->mNext = NULL;
+   }
 }
 
 void *BoardClass::GetOptions() const {
