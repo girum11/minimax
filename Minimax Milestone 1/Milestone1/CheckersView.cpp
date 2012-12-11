@@ -15,9 +15,9 @@ void CheckersView::Draw(std::ostream &out) {
       for (unsigned int col = 1; col <= CheckersBoard::kWidth; col++) {
 
          if (cb->CellOccupied(row, col, CheckersBoard::kBlack))
-            out << cb->CellContainsKing(row, col) ? "B " : "b ";
+            out << (cb->CellContainsKing(row, col) ? "B " : "b ");
          else if (cb->CellOccupied(row, col, CheckersBoard::kWhite))
-            out << cb->CellContainsKing(row, col) ? "W " : "w ";
+            out << (cb->CellContainsKing(row, col) ? "W " : "w ");
          else
             out << ".  ";
       }

@@ -661,10 +661,6 @@ bool CheckersBoard::CellContainsKing(int row, int col) const {
    return ((GetCell(row,col)->mask & this->mKingSet) != 0);
 }
 
-char CheckersBoard::GetChar(int row, int col) const {
-
-}
-
 // Helper function to add a piece on the board.
 // ApplyMove() and UndoLastMove() should use Put() instead of this method.
 inline void CheckersBoard::HalfPut(Piece *piece, Cell *cell) const {
