@@ -215,33 +215,30 @@ void CheckersBoard::ApplyMove(Move *move) {
          // TODO: Refactor this.
          // North-west jump
          if ((*locs)[i].first > (*locs)[i-1].first
-          && (*locs)[i].second < (*locs)[i-1].second) {
+          && (*locs)[i].second < (*locs)[i-1].second)
             jumpedOverCell = GetCell((*locs)[i].first - 1, (*locs)[i].second + 1);
-         }
          // North-east jump
          else if ((*locs)[i].first > (*locs)[i-1].first
-          && (*locs)[i].second > (*locs)[i-1].second) {
+          && (*locs)[i].second > (*locs)[i-1].second)
             jumpedOverCell = GetCell((*locs)[i].first - 1, (*locs)[i].second - 1);
-         }
          // South-west jump
          else if ((*locs)[i].first < (*locs)[i-1].first
-          && (*locs)[i].second < (*locs)[i-1].second) {
+          && (*locs)[i].second < (*locs)[i-1].second)
             jumpedOverCell = GetCell((*locs)[i].first + 1, (*locs)[i].second + 1);
-         } 
          // South-east jump
          else if ((*locs)[i].first < (*locs)[i-1].first
-          && (*locs)[i].second > (*locs)[i-1].second) {
+          && (*locs)[i].second > (*locs)[i-1].second)
             jumpedOverCell = GetCell((*locs)[i].first + 1, (*locs)[i].second - 1);
-         } else assert(false); 
 
-
-         // Assert that the piece that you jumped over is occupied by the other
-         // player and not yourself.
-         if (mWhoseMove == kBlack) {
-            assert((jumpedOverCell->mask & mWhiteSet) != 0);
-         } else if (mWhoseMove == kWhite) {
-            assert((jumpedOverCell->mask & mBlackSet) != 0);
-         } else assert(false);
+         // TODO: Only use this code if you have a bug and you need to turn
+         // on assert statements.
+//          Assert that the piece that you jumped over is occupied by the other
+//                   // player and not yourself.
+//                   if (mWhoseMove == kBlack) {
+//                      assert((jumpedOverCell->mask & mWhiteSet) != 0);
+//                   } else if (mWhoseMove == kWhite) {
+//                      assert((jumpedOverCell->mask & mBlackSet) != 0);
+//                   } else assert(false);
 
          // Remove the piece that you jumped over, and save it.
          Piece *removedPiece = HalfTake(jumpedOverCell, -mWhoseMove);
@@ -283,8 +280,8 @@ void CheckersBoard::ApplyMove(Move *move) {
 void CheckersBoard::UndoLastMove() {
    // Load up the last move in mMoveHist.
    CheckersMove *moveToUndo = dynamic_cast<CheckersMove *>(mMoveHist.back());
-   Cell *originCell = GetCell(moveToUndo->mLocs[0]);
-   Cell *destCell = GetCell(moveToUndo->mLocs[moveToUndo->mLocs.size()-1]);
+   Cell *originCell = GetCell(moveToUndo->mLocs[0]),
+    *destCell = GetCell(moveToUndo->mLocs[moveToUndo->mLocs.size()-1]);
    Piece *pieceToMove = NULL;
 
    // Switch whose move it is (early, so that you're taking away the turn
