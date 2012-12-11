@@ -18,7 +18,8 @@ public:
 // about the OthelloBoard class itself.
 //
 // You will want to obtain the Class object for a particular Object subclass
-// based on its typename.  The ForName method provides this service.  For instance:
+// based on its typename.  The ForName method provides this service.  For
+// instance:
 //
 // Class::ForName("OthelloBoard")
 //

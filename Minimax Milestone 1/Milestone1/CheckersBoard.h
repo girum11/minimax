@@ -92,8 +92,8 @@ protected:
    // Frees all CheckersBoard storage.
    void Delete();
    
-   inline void HalfPut(Piece *piece, Cell *cell) const;
-   inline Piece *HalfTake(Cell *cell, int color) const;
+   inline void Put(Piece *piece, Cell *cell) const;
+   inline Piece *Take(Cell *cell, int color) const;
 
    void RefreshBoardValuation();
 

@@ -19,9 +19,9 @@ public:
    friend class PylosMove;
 
    struct Rules {
-      int levelWgt;  // [Staley] Additional weight for each level higher per stone
-      int marbleWgt; // [Staley] Weight of each marble in reserve
-      int freeWgt;   // [Staley] Weight for each uncovered marble
+      int levelWgt;  // Additional weight for each level higher per stone
+      int marbleWgt; // Weight of each marble in reserve
+      int freeWgt;   // Weight for each uncovered marble
       
       Rules() : levelWgt(20), marbleWgt(100), freeWgt(6) {}
       
