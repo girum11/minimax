@@ -29,10 +29,9 @@ public:
 // head pointer.  Don't dynamically allocate Class objects just because you have 
 // a linked list of them and pointers to them.  The phrase 
 // "n e w   C l a s s..." should never appear in your code.
-
 class Class {
 public:
-   Class(const std::string &name, Object *(*mCreate)());
+   Class(const std::string &n, Object *(*c)());
 
    virtual Object *NewInstance() const;
    std::string GetName() const {return mName;}
@@ -65,10 +64,9 @@ protected:
 // 5. A count of the minimum number of players needed to run a game
 //
 // 6. A method to return a vector of all BoardClass objects in existence.
-
 class BoardClass : public Class {
 public:
-   
+
    // NOTE: Keep your added parameters and member data in the order shown!
    // NOTE: Do note place any methods inline except those already provided 
    // as inline.
@@ -95,21 +93,14 @@ public:
    virtual int  GetMinPlayers() const {return mMinPlayers;}
    static std::vector<const BoardClass *> GetAllClasses();
 
-   // Return the Class object for the given type name.
-   static const BoardClass *ForName(const std::string &name);
-
 protected:
    std::string mFriendlyName;
    const Class *mViewClass;
    const Class *mDlgClass;
-
-   // Function pointer for SetOptions
    void (*optionSetter)(const void *);
-   // Function pointer for GetOptions
    void *(*optionGetter)();
-
    bool mUseXPos;      
-   int mMinPlayers;             // Min number of players for game.      
+   int mMinPlayers;
    BoardClass *mNext;         
    
    static BoardClass *mBrdClsHead;
