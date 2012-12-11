@@ -654,9 +654,9 @@ bool CheckersBoard::CellOccupied(int row, int col, int byWhom) const {
    assert(GetCell(row, col) != NULL);
       
    if (byWhom == kWhite)
-      return ((GetCell(row, col)->mask & this->mWhiteSet) != 0);
+      return (!(GetCell(row, col)->mask & this->mWhiteSet));
    else if (byWhom == kBlack)
-      return ((GetCell(row, col)->mask & this->mBlackSet) != 0);
+      return (!(GetCell(row, col)->mask & this->mBlackSet));
 }
 
 bool CheckersBoard::CellContainsKing(int row, int col) const {
