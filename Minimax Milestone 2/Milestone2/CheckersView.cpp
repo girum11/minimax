@@ -33,8 +33,8 @@ void CheckersView::Draw(std::ostream &out) {
    out << "\n\n           Black\n\n";
 
    // Print out whose turn it is.
-   if (mModel->GetWhoseMove() == CheckersBoard::kWhite)
+   if (cb->mWhoseMove == CheckersBoard::kWhite)
       out << "White's move" << std::endl;
-   else if (mModel->GetWhoseMove() == CheckersBoard::kBlack)
+   else if (cb->mWhoseMove == CheckersBoard::kBlack)
       out << "Black's move" << std::endl;
 }
