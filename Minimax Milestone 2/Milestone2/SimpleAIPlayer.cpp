@@ -111,8 +111,6 @@ void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
          else
             Minimax(board, minimaxLevel-1, min, max, &subBestMove, tTable, debugFlag);
 
-         // TODO: Ensure that each of my Milestone 1 Board's GetWhoseMove() 
-         // calls comply with this code.  They don't right now.
          // [Filled blank] Conditional: White pulls the floor up.
          if (board->GetWhoseMove() == 1 && subBestMove.value > min) {
             bestMove->value = min = subBestMove.value;

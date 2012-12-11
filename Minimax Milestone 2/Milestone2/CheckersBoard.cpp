@@ -11,12 +11,6 @@
 
 using namespace std;
 
-
-// TODO: Ian had this great idea where you testRun for a large value
-// that runs in the background, diffing against Clint's version as you go.
-// Since you don't have to adhere to a 0.1 second limit, this can catch
-// a lot of SegFault type errors and the sort.
-
 /************************************************************************/
 /* Declare/initialize static member datum here                          */
 /************************************************************************/
@@ -695,7 +689,6 @@ inline CheckersBoard::Piece *CheckersBoard::Take(Cell *cell, int color) const {
    // Remove the cell from mKingSet before you finish
    mKingSet &= ~(cell->mask);
 
-   // TODO: Does this have to dynamically allocate?
    return new Piece(wasKing, color, cell->loc);
 }
 
