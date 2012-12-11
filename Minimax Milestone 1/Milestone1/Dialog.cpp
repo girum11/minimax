@@ -8,10 +8,9 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
    std::string inputString("");
    int inputValue = 0, res = 0;
    char garbage = '\0';
-   bool inputSuccessfullyRead = false;
 
    // TODO: This method is hacked to hell and back to make it diff.
-   while (!inputSuccessfullyRead) {
+   while (true) {
          out << prompt << " [" << lo << ", " << hi << "]: ";
 
          // Here, sscanf() the whole line to ensure that no trailing garbage 
@@ -41,15 +40,13 @@ void Dialog::ReadLimitInt(std::istream &in, std::ostream &out,
             continue;
          }
 
-         // Save the values.
+         // Save the values and break if you got a good value.
          if (inputValue >= lo && inputValue <= hi) {
             *val = inputValue;
-         } else {
-            out << "Please enter a value between " 
-             << lo << " and " << hi << std::endl;
-            continue;
-         }
-
-         inputSuccessfullyRead = true;
+            break;
+         } 
+            
+         out << "Please enter a value between " 
+          << lo << " and " << hi << std::endl;
    }
 }
