@@ -17,25 +17,19 @@ void CheckersView::Draw(std::ostream &out) {
    for (row = 'H'; row >= 'A'; row--) {
       out << row << "  ";
       for (col = 1; col <= CheckersBoard::kWidth; col++) {
-         
-         if (IsValidCell(row, col)
-          && cb->CellOccupied(row, col, CheckersBoard::kBlack)) {
-            if (cb->CellContainsKing(row,col)) {
+
+         if (IsValidCell(row, col) && cb->CellOccupied(row, col, CheckersBoard::kBlack))
+            if (cb->CellContainsKing(row,col))
                out << "B  ";
-            } else {
+            else
                out << "b  ";
-            }
-         }
-         else if (IsValidCell(row, col)
-          && cb->CellOccupied(row, col, CheckersBoard::kWhite)) {
-            if (cb->CellContainsKing(row,col)) {
+         else if (IsValidCell(row, col) && cb->CellOccupied(row, col, CheckersBoard::kWhite))
+            if (cb->CellContainsKing(row,col))
                out << "W  ";
-            } else {
+            else
                out << "w  ";
-            }
-         } else {
+         else
             out << ".  ";
-         }
       }
       out << std::endl;
    }
