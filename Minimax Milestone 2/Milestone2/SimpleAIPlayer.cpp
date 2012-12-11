@@ -43,18 +43,6 @@ using namespace std;
 // and will have updated any entries for which deeper results were computed 
 // during the call.
 
-/* 
-Hint: 
-   The conditional "min < max" probably appears twice in the code. 
-*/
-
-/*
-Hint:
-   If you are having trouble debugging, then recall that the MakeBook.cpp spec
-   comments describe how you can set up a "debug" flag to help you debug.  It's
-   not required, but it will help if you get stuck debugging.
-*/
-
 void SimpleAIPlayer::Minimax(Board *board, int minimaxLevel, long min, long max,
  BestMove *bestMove, Book *tTable, int debugFlag) {
    list<Board::Move *> moves;
