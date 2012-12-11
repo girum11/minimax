@@ -168,7 +168,6 @@ protected:
          mWhite |= spot->top->mask;
       else if (mWhoseMove == kBlack)
          mBlack |= spot->top->mask;
-      else assert(false);
       
       // WARNING: Here write a verifier that all the spots are correct.  That is,
       // do the "IAmSane()" function for Spot correction in the board's state.
@@ -184,7 +183,6 @@ protected:
          mWhite &= ~(spot->top->mask);
       else if (mWhoseMove == kBlack)
          mBlack &= ~(spot->top->mask);
-      else assert(false);
       
       // [Staley] Fill in
       // Reset the spot so that it reflects the removed piece.
@@ -241,11 +239,7 @@ protected:
 private:
    // Stolen helper function from StackOverflow, used to assert() 
    // alignment bits being set correctly
-   static int NumberOfSetBits(int i) {
-      i = i - ((i >> 1) & 0x55555555);
-      i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
-      return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
-   }
+   static int NumberOfSetBits(int i);
 
    // My own helper function for AddTakebacks().
    void CalculateAllTakebacks(std::list<PylosMove *> *moves, 
@@ -255,20 +249,8 @@ private:
    void FindFreeMarbles(std::set<std::pair<short,short> > *freeMarbles, 
    Set *playerMarbles, unsigned short startRow = 0, unsigned short startCol = 0) const;
 
-   // A marble is "free" if it does not support any other marbles.
-   // Bitwise, this means that all of the possible marbles it can 
-   // sup[port] are NOT present in the current board -- black OR white.
-   // Also, the freeMarble to take back must belong to that player.
    void InsertIfFree(std::set<std::pair<short,short> > *freeMarbles,
-    Set *playerMarbles, int row, int col) const {
-       Cell *marble = mSpots[row][col].top;
-
-       if (marble && (marble->mask & *playerMarbles)
-             && (marble->sups & (mWhite|mBlack)) == 0) {
-         freeMarbles->insert(std::pair<short,short>(row,col));
-      }
-   }
-
+    Set *playerMarbles, int row, int col) const;
 
    void ClearMSpots();
    void UpdateBoardValuation();

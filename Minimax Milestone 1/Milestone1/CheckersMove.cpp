@@ -137,7 +137,7 @@ void CheckersMove::operator=(const string &src) {
    // At the end (if you made it there without exception), copy the private
    // locs variable over into the mLocs of this object.
    mLocs = locs;
-   AssertMe();
+
 
    // Set whether or not this is a jump move
    if (IsJump(mLocs[0], mLocs[1]))

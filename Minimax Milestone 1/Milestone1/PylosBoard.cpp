@@ -49,6 +49,14 @@ void PylosBoard::ClearMSpots() {
    }
 }
 
+// Stolen helper function from StackOverflow, used to assert() 
+// alignment bits being set correctly
+int PylosBoard::NumberOfSetBits(int i) {
+   i = i - ((i >> 1) & 0x55555555);
+   i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+   return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
+}
+
 void PylosBoard::StaticInit() {
    Cell *cell;
    int level = 0, row = 0, col = 0, ndx = 0, nextCell = 0;
@@ -549,6 +557,20 @@ void PylosBoard::FindFreeMarbles(std::set<std::pair<short,short> > *freeMarbles,
       for (int col = 0; col < kDim; col++) {
          InsertIfFree(freeMarbles, playerMarbles, row, col);
       }
+   }
+}
+
+// A marble is "free" if it does not support any other marbles.
+// Bitwise, this means that all of the possible marbles it can 
+// sup[port] are NOT present in the current board -- black OR white.
+// Also, the freeMarble to take back must belong to that player.
+void PylosBoard::InsertIfFree(std::set<std::pair<short,short> > *freeMarbles,
+   Set *playerMarbles, int row, int col) const {
+      Cell *marble = mSpots[row][col].top;
+
+      if (marble && (marble->mask & *playerMarbles)
+            && (marble->sups & (mWhite|mBlack)) == 0) {
+      freeMarbles->insert(std::pair<short,short>(row,col));
    }
 }
 

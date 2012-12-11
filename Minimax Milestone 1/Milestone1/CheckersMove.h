@@ -23,9 +23,7 @@ public:
    friend class CheckersBoard;
 
    CheckersMove(const LocVector &locs, bool isJump)
-    : mLocs(locs), mIsJumpMove(isJump), mIsKingMeMove(false) {
-      AssertMe();
-   }
+    : mLocs(locs), mIsJumpMove(isJump), mIsKingMeMove(false) {}
    virtual ~CheckersMove() {}
 
 
@@ -64,15 +62,6 @@ protected:
        !InRange<unsigned int>(1, loc->second, 9)) {
           throw BaseException(FString("Out of bounds Checkers move: %s", 
            src.c_str()));
-      }
-   }
-
-   void AssertMe() {
-      // Ensure that each Location used in this move is inbounds.
-      for (LocVector::const_iterator locIter = mLocs.begin();
-       locIter != mLocs.end(); locIter++) {
-         assert(InRange<char>('A', locIter->first, 'I'));
-         assert(InRange<unsigned int>(1, locIter->second, 9));
       }
    }
 
