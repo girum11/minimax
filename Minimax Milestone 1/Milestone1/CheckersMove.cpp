@@ -204,3 +204,16 @@ istream &CheckersMove::Read(istream &is) {
 
    return is;
 }
+
+inline void CheckersMove::CastToUpperAndVerify(Location *loc, std::string src) {
+   // Cast to upper
+   loc->first = toupper(loc->first);
+
+   // Verify that none of the Locations are out of bounds
+   // TODO: Magic number
+   if (!InRange<char>('A', loc->first, 'I') ||
+      !InRange<unsigned int>(1, loc->second, 9)) {
+         throw BaseException(FString("Out of bounds Checkers move: %s", 
+         src.c_str()));
+   }
+}
