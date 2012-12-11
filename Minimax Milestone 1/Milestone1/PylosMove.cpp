@@ -6,7 +6,8 @@
 using namespace std;
 
 vector<PylosMove *> PylosMove::mFreeList;
-
+static const int kPlayOne = 3, kPlayTwo = 7, kPlayThree = 11;
+static const int kPromTwo = 5, kPromThree = 9, kPromFour = 13;
 
 void *PylosMove::operator new(size_t sz) {
    // [Staley] Return next node from freelist, or allocate one
@@ -112,10 +113,6 @@ PylosMove::operator string() const
 // [Staley] you'll need information on sscanf, which you can obtain from the 
 // [Staley] online documentation or from class discussion.
 void PylosMove::operator=(const string &src) {
-   // WARNING: These constants are ugly... is there a better way to avoid magic
-   // numbers?
-   static const int kPlayOne = 3, kPlayTwo = 7, kPlayThree = 11;
-   static const int kPromTwo = 5, kPromThree = 9, kPromFour = 13;
    
    char wd1[11]={'\0'}, wd2[11]={'\0'}, wd3[11]={'\0'}, brack1, brack2, brack3;
    pair<short, short> p1, p2, p3, p4;

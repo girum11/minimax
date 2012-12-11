@@ -13,8 +13,6 @@ public:
 
    // Game logic relies on kWhite being -1 and kBlack being 1
    // kHeight is equal to vertical height of the board, measured in Cells.
-   // kDim is equal to kHeight / 2 -- the number of actual Cells you can fit
-   // vertically in the board
    enum { kWhite = -1, kBlack = 1, kKing = 7, kNumCells = 32, kDim = 4 };
 
    // Running Clint's version of this says the following:

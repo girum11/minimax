@@ -67,7 +67,7 @@ void PylosDlg::ReadMethodInt(istream &in, ostream &out, string prompt,
          out << prompt;
          
          // Here, sscanf() the whole line to ensure that no trailing garbage 
-         // was inputted. Can't really change this to a while() loop, since you 
+         // was inputted. Can't really change this to a while () loop, since you 
          // need to getline() first to change the value of inputString.
          do {
             getline(in, inputString);

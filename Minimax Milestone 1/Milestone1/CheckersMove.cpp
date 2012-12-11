@@ -7,6 +7,7 @@
 using namespace std;
 
 vector<CheckersMove *> CheckersMove::mFreeList;
+static const int kUpperLimit = 9;
 
 void *CheckersMove::operator new(size_t sz) {
    void *temp;
@@ -210,9 +211,8 @@ inline void CheckersMove::CastToUpperAndVerify(Location *loc, std::string src) {
    loc->first = toupper(loc->first);
 
    // Verify that none of the Locations are out of bounds
-   // TODO: Magic number
    if (!InRange<char>('A', loc->first, 'I') ||
-      !InRange<unsigned int>(1, loc->second, 9)) {
+      !InRange<unsigned int>(1, loc->second, kUpperLimit)) {
          throw BaseException(FString("Out of bounds Checkers move: %s", 
          src.c_str()));
    }

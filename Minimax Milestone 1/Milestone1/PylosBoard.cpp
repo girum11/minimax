@@ -30,12 +30,6 @@ PylosBoard::PylosBoardInitializer PylosBoard::mInitializer;
 
 PylosBoard::PylosBoard() : mWhite(0), mBlack(0), mWhoseMove(kWhite),
    mWhiteReserve(kStones), mBlackReserve(kStones), mLevelLead(0), mFreeLead(0) {
-      // [Staley] More work needed here.
-      // [Ian] This is where you construct member data.  Try going through with
-      // a highlighter, marking red for static member data that has been 
-      // initialized in StaticInit(), and yellow for non-static member data 
-      // that has been initialized in this constructor.
-
       // Initialize mSpots
       ClearMSpots();
 }
@@ -49,13 +43,15 @@ void PylosBoard::ClearMSpots() {
    }
 }
 
+// TODO: Don't use this code unless you need to debug, since it has magic
+// numbers in it.
 // Stolen helper function from StackOverflow, used to assert() 
 // alignment bits being set correctly
-int PylosBoard::NumberOfSetBits(int i) {
-   i = i - ((i >> 1) & 0x55555555);
-   i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
-   return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
-}
+// int PylosBoard::NumberOfSetBits(int i) {
+//    i = i - ((i >> 1) & 0x55555555);
+//    i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+//    return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
+// }
 
 void PylosBoard::StaticInit() {
    Cell *cell;
@@ -64,11 +60,7 @@ void PylosBoard::StaticInit() {
    // Hold a set for the different alignments you can have
    Set horizontalAlignment = 0, verticalAlignment = 0, squareAlignment = 0;
 
-   // Initialize mOffs.  Logically equivalent to:
-   /*    mOffs[0] = 0;
-         mOffs[1] = 16;
-         mOffs[2] = 25;
-         mOffs[3] = 29;     */
+   // Initialize mOffs
    mOffs[0] = 0;
    for (int i = 1; i < kDim; ++i) {
       mOffs[i] = mOffs[i-1] + (kDim - (i-1)) * (kDim - (i-1));
@@ -156,23 +148,25 @@ void PylosBoard::StaticInit() {
    }
 
 
-   // Sanity checks before we go back and copy set data
-   // back into cell set collection.
-   assert(setNum == kNumSets);
-   for (int level = 0; level < kNumSets; level++) {
-      // Assert that each alignment was properly set
-      assert(mSets[level] != 0x0);
-
-      // Verify level 0 horizontal/vertical alignments
-      if (level >= 0 && level < 8)
-         assert(NumberOfSetBits(mSets[level]) == 4);
-      // Verify level 1 horizontal/vertical alignments
-      else if (level >= 8 && level < 14)
-         assert(NumberOfSetBits(mSets[level]) == 3);
-      // Verify square alignments
-      else if (level >= 14 && level < 28)
-         assert(NumberOfSetBits(mSets[level]) == 4);
-   }
+   // TODO: Don't use this code unless you need to debug, since it relies
+   // on a helper function from StackOverflow with magic numbers in it.
+//    Sanity checks before we go back and copy set data
+//       // back into cell set collection.
+//       assert(setNum == kNumSets);
+//       for (int level = 0; level < kNumSets; level++) {
+//          // Assert that each alignment was properly set
+//          assert(mSets[level] != 0x0);
+//    
+//          // Verify level 0 horizontal/vertical alignments
+//          if (level >= 0 && level < 8)
+//             assert(NumberOfSetBits(mSets[level]) == 4);
+//          // Verify level 1 horizontal/vertical alignments
+//          else if (level >= 8 && level < 14)
+//             assert(NumberOfSetBits(mSets[level]) == 3);
+//          // Verify square alignments
+//          else if (level >= 14 && level < 28)
+//             assert(NumberOfSetBits(mSets[level]) == 4);
+//       }
 
    // [Staley] Copy set data back into cell set collections.
    // For each cell, check all of the alignments to see if
