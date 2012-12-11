@@ -549,19 +549,17 @@ void CheckersBoard::Rules::EndSwap() {
 
 void CheckersBoard::RefreshBoardValuation() {
    // Clear out existing values
-   mBlackPieceCount = mWhitePieceCount = 0;
-   mBlackKingCount = mWhiteKingCount = 0;
-   mBlackBackCount = mWhiteBackCount = 0;
+   mBlackPieceCount = mWhitePieceCount = mBlackKingCount = mWhiteKingCount
+    = mBlackBackCount = mWhiteBackCount = 0;
 
    // Count up the values for each type
    for (char row = 'A'; row <= 'H'; row ++) {
       for (unsigned int col = ((row-'A')%2) + 1; col <= kWidth; col += 2) {
-         Cell *cell = GetCell(row, col);
          assert((mWhiteSet & mBlackSet) == 0);
 
          // If this cell is currently occupied by a Black piece...
-         if (cell->mask & mBlackSet) {
-            if (cell->mask & mKingSet)
+         if (GetCell(row, col)->mask & mBlackSet) {
+            if (GetCell(row, col)->mask & mKingSet)
                ++mBlackKingCount;
             else
                ++mBlackPieceCount;
@@ -570,8 +568,8 @@ void CheckersBoard::RefreshBoardValuation() {
                ++mBlackBackCount;
          } 
          // If this cell is currently occupied by a White piece...
-         else if (cell->mask & mWhiteSet) {
-            if (cell->mask & mKingSet) 
+         else if (GetCell(row, col)->mask & mWhiteSet) {
+            if (GetCell(row, col)->mask & mKingSet) 
                ++mWhiteKingCount;
             else
                ++mWhitePieceCount;
@@ -586,18 +584,10 @@ void CheckersBoard::RefreshBoardValuation() {
 // TODO: Refactor this to use a Piece instead of a Cell.
 inline bool CheckersBoard::CanMove(Cell *cell, int direction) const {
    // Validate that this piece can move in the direction that you
-   // want to move in.
-   if (!IsValidDirection(cell, direction))
-      return false;
-
-   // Ensure that the piece that you want to move towards is inbounds
+   // want to move in, and ensure that the piece that you want to move towards is inbounds
    // and isn't already occupied.
-   if (!cell->neighborCells[direction]
-      || (cell->neighborCells[direction]->mask & (mBlackSet|mWhiteSet)) != 0) {
-      return false;
-   }
-
-   return true;
+   return IsValidDirection(cell, direction) && cell->neighborCells[direction]
+    && !(cell->neighborCells[direction]->mask & (mBlackSet|mWhiteSet));
 }
 
 // TODO: Refactor this to use a Piece instead of a Cell.
@@ -663,23 +653,14 @@ inline bool CheckersBoard::IsValidDirection(Cell *cell, int direction) const {
 bool CheckersBoard::CellOccupied(int row, int col, int byWhom) const {
    assert(GetCell(row, col) != NULL);
       
-   Set mask = GetCell(row, col)->mask;
-
-   if (byWhom == kWhite) {
-      return ((mask & this->mWhiteSet) != 0);
-   } else if (byWhom == kBlack) {
-      return ((mask & this->mBlackSet) != 0);
-   } else {
-      assert(false);
-      return false;
-   }
+   if (byWhom == kWhite)
+      return ((GetCell(row, col)->mask & this->mWhiteSet) != 0);
+   else if (byWhom == kBlack)
+      return ((GetCell(row, col)->mask & this->mBlackSet) != 0);
 }
 
-
 bool CheckersBoard::CellContainsKing(int row, int col) const {
-   Set mask = GetCell(row,col)->mask;
-
-   return ((mask & this->mKingSet) != 0);
+   return ((GetCell(row,col)->mask & this->mKingSet) != 0);
 }
 
 // Helper function to add a piece on the board.
