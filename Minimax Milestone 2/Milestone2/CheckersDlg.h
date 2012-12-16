@@ -3,7 +3,6 @@
 
 #include "Dialog.h"
 
-
 class CheckersDlg : public Dialog {
 public:
    
@@ -16,7 +15,5 @@ private:
    static Object *CreateCheckersDlg() { return new CheckersDlg; }
 
 };
-
-
 
 #endif
