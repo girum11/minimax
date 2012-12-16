@@ -20,7 +20,7 @@ ulong CheckersBoard::mBlackBackSet, CheckersBoard::mWhiteBackSet;
 
 BoardClass CheckersBoard::mClass("CheckersBoard", &CreateCheckersBoard,
  "Checkers", &CheckersView::mClass, &CheckersDlg::mClass,
- &CheckersBoard::SetOptions, &CheckersBoard::GetOptions);
+ &CheckersBoard::SetOptions, &CheckersBoard::GetOptions, true);
 
 // The C++ definition here isn't required in C++11, which I'm using.
 // Put it there anyways to force the "static block" to run.
