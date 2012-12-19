@@ -46,19 +46,19 @@ BoardClass::BoardClass(const std::string &n, Object *(*c)(),
  int minPlayers) : Class(n,c), mFriendlyName(fn), mViewClass(viewClass),
  mDlgClass(dlgClass), optionSetter(setter), optionGetter(getter),
  mUseXPos(useXPos), mMinPlayers(minPlayers) {
-    BoardClass *cursor = NULL;
+   BoardClass *cursor = NULL;
     
-    if (mBrdClsHead == NULL)
-       mBrdClsHead = this;
-    else {
-       cursor = mBrdClsHead;
+   if (mBrdClsHead == NULL)
+      mBrdClsHead = this;
+   else {
+      cursor = mBrdClsHead;
+      
+      while (cursor->mNext != NULL)
+         cursor = cursor->mNext;
 
-       while (cursor->mNext != NULL)
-          cursor = cursor->mNext;
-
-       cursor->mNext = this;
-       this->mNext = NULL;
-    }
+      cursor->mNext = this;
+      this->mNext = NULL;
+   }
 }
 
 void *BoardClass::GetOptions() const {
