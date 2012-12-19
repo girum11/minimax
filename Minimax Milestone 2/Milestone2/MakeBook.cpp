@@ -1,4 +1,3 @@
-
 #include <assert.h>
 #include <climits>
 #include <iostream>
@@ -11,12 +10,8 @@
 
 using namespace std;
 
-void ConstructBookFileDFS(Board *board,
-                          View *view,
-                          Book *bookFile,
-                          bool useX, // True if this BoardClass uses an XTable.
-                          int minimaxDepth,
-                          int bookDepth);
+void ConstructBookFileDFS(Board *board, View *view, Book *bookFile, bool useX,
+ int minimaxDepth, int bookDepth);
 
 // [Staley] Write a program “MakeBook” that works like the sample executable 
 // [Staley] provided.  MakeBook prompts for and accepts a single line of input 
@@ -103,9 +98,10 @@ int main() {
 
    // Use reflection to instantiate the correct board, or give an error
    // message if that BoardClass type doesn't exist.
-   if ((boardClass = dynamic_cast<const BoardClass *>(BoardClass::ForName(boardType))) == NULL
-    || (board = dynamic_cast<Board *>(boardClass->NewInstance())) == NULL
-    || (view = dynamic_cast<View *>(boardClass->GetViewClass()->NewInstance())) == NULL) {
+   if ((boardClass = dynamic_cast<const BoardClass *>(BoardClass::ForName(
+    boardType))) == NULL || (board = dynamic_cast<Board *>(
+    boardClass->NewInstance())) == NULL || (view = dynamic_cast<View *>(
+    boardClass->GetViewClass()->NewInstance())) == NULL) {
       cout << "Unknown type " << boardType << endl;
       return -1;
    }
@@ -138,13 +134,8 @@ int main() {
 // the Minimax() method on that node to fill in what that configuration's 
 // bestMove is, using the lookahead specified from the user in our prompt 
 // from the beginning.
-void ConstructBookFileDFS(Board *board,
-                          View *view,
-                          Book *bookFile,
-                          bool useX, // True if this BoardClass uses an XTable.
-                          int level,
-                          int depth) 
-{
+void ConstructBookFileDFS(Board *board, View *view, Book *bookFile, bool useX,
+ int level, int depth) {
    list<Board::Move *> allMoves;
    list<Board::Move *>::iterator moveIter = allMoves.begin();
    const Board::Key *key = NULL;
@@ -192,7 +183,7 @@ void ConstructBookFileDFS(Board *board,
       board->GetAllMoves(&allMoves);
 
       for (moveIter = allMoves.begin(); moveIter != allMoves.end(); moveIter++) {
-         board->ApplyMove(*moveIter);
+       board->ApplyMove(*moveIter);
 
          // The DFS should step down the tree in a depth-first manner until 
          // it reaches its desired depth level.
@@ -201,12 +192,4 @@ void ConstructBookFileDFS(Board *board,
          board->UndoLastMove();
       }  
    }
-   
-   // Clean up afterwards
-   // TODO? Clean up after your GetAllMoves() call by iterating and deleting?
-   // The last time I tried that though, my code broke down on me.
-//    for (moveIter = allMoves.begin(); moveIter != allMoves.end(); moveIter++) {
-//       delete *moveIter;
-//    }
-   
 }
