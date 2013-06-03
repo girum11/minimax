@@ -2,7 +2,7 @@
 
 My work from Clint Staley's CPE 305 course.  A suite of minimax games including Othello, Pylos and Checkers.  
 
-Othello was given, Pylos was interfaced but not implemented, and Checkers was 100% student work.  
+There is how I learned C++. 
 
 #### Cool things done during this:
  - Wrote a reflection system for client classes to use.
