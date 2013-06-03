@@ -1,4 +1,4 @@
-# Minimax AI games
+# Minimax AI Games
 
 A suite of minimax games including Othello, Pylos and Checkers. This is where I learned C++.
 
