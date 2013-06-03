@@ -1,8 +1,6 @@
-# Minimax--CPE-305-
+# Minimax AI games
 
-My work from Clint Staley's CPE 305 course.  A suite of minimax games including Othello, Pylos and Checkers.  
-
-There is how I learned C++. 
+A suite of minimax games including Othello, Pylos and Checkers. This is where I learned C++.
 
 #### Cool things done during this:
  - Wrote a reflection system for client classes to use.
